@@ -5,8 +5,8 @@
                 <!-- Logo container-->
                 <div>
                     <a class="logo" href="index.html">
-                        <img src="images/logo-dark.png" class="l-dark" height="22" alt="">
-                        <img src="images/logo-light.png" class="l-light" height="22" alt="">
+                        <img src="../assets/images/logo-dark.png" class="l-dark" height="22" alt="">
+                        <img src="../assets/images/logo-light.png" class="l-light" height="22" alt="">
                     </a>
                 </div>                 
                 <div class="buy-button">
@@ -125,7 +125,7 @@
         <!-- Navbar End -->
 
         <!-- Start Hero -->
-        <section class="bg-half-260 d-table w-100" style="background: url('images/bg/bg-career.jpg') center center;">
+        <section class="bg-half-260 d-table w-100" style="background: url('../assets/images/bg/bg-career.jpg') center center;">
             <div class="bg-overlay"></div>
             <div class="container">
                 <div class="row justify-content-center mt-5">
@@ -311,7 +311,7 @@
                 <div class="row">
                     <div class="col-lg-2 col-md-4 col-12 mt-4 pt-2">
                         <a href="javascript:void(0)" class="feature-company rounded d-block text-center shadow p-4">
-                            <img src="images/brand/apple.svg" class="avatar avatar-md-md" alt="">
+                            <img src="../assets/images/brand/apple.svg" class="avatar avatar-md-md" alt="">
                             <div class="content mt-4">
                                 <h5 class="company-name text-dark mb-0">Apple</h5>
                                 <p class="text-muted mb-0"><i class="uil uil-map-marker mr-1"></i>New Mexico, USA</p>
@@ -322,7 +322,7 @@
                     
                     <div class="col-lg-2 col-md-4 col-12 mt-4 pt-2">
                         <a href="javascript:void(0)" class="feature-company rounded d-block text-center shadow p-4">
-                            <img src="images/brand/black-berry.svg" class="avatar avatar-md-md" alt="">
+                            <img src="../assets/images/brand/black-berry.svg" class="avatar avatar-md-md" alt="">
                             <div class="content mt-4">
                                 <h5 class="company-name text-dark mb-0">Black Berry</h5>
                                 <p class="text-muted mb-0"><i class="uil uil-map-marker mr-1"></i>New Mexico, USA</p>
@@ -333,7 +333,7 @@
                     
                     <div class="col-lg-2 col-md-4 col-12 mt-4 pt-2">
                         <a href="javascript:void(0)" class="feature-company rounded d-block text-center shadow p-4">
-                            <img src="images/brand/boomerang.svg" class="avatar avatar-md-md" alt="">
+                            <img src="../assets/images/brand/boomerang.svg" class="avatar avatar-md-md" alt="">
                             <div class="content mt-4">
                                 <h5 class="company-name text-dark mb-0">Boomerang</h5>
                                 <p class="text-muted mb-0"><i class="uil uil-map-marker mr-1"></i>New Mexico, USA</p>
@@ -344,7 +344,7 @@
                     
                     <div class="col-lg-2 col-md-4 col-12 mt-4 pt-2">
                         <a href="javascript:void(0)" class="feature-company rounded d-block text-center shadow p-4">
-                            <img src="images/brand/pingdom.svg" class="avatar avatar-md-md" alt="">
+                            <img src="../assets/images/brand/pingdom.svg" class="avatar avatar-md-md" alt="">
                             <div class="content mt-4">
                                 <h5 class="company-name text-dark mb-0">Pingdom</h5>
                                 <p class="text-muted mb-0"><i class="uil uil-map-marker mr-1"></i>New Mexico, USA</p>
@@ -355,7 +355,7 @@
                     
                     <div class="col-lg-2 col-md-4 col-12 mt-4 pt-2">
                         <a href="javascript:void(0)" class="feature-company rounded d-block text-center shadow p-4">
-                            <img src="images/brand/swiggy.svg" class="avatar avatar-md-md" alt="">
+                            <img src="../assets/images/brand/swiggy.svg" class="avatar avatar-md-md" alt="">
                             <div class="content mt-4">
                                 <h5 class="company-name text-dark mb-0">Swiggy</h5>
                                 <p class="text-muted mb-0"><i class="uil uil-map-marker mr-1"></i>New Mexico, USA</p>
@@ -366,7 +366,7 @@
                     
                     <div class="col-lg-2 col-md-4 col-12 mt-4 pt-2">
                         <a href="javascript:void(0)" class="feature-company rounded d-block text-center shadow p-4">
-                            <img src="images/brand/volkswagen.svg" class="avatar avatar-md-md" alt="">
+                            <img src="../assets/images/brand/volkswagen.svg" class="avatar avatar-md-md" alt="">
                             <div class="content mt-4">
                                 <h5 class="company-name text-dark mb-0">Valkswagon</h5>
                                 <p class="text-muted mb-0"><i class="uil uil-map-marker mr-1"></i>New Mexico, USA</p>
@@ -386,7 +386,7 @@
             <div class="container mt-100 mt-60">
                 <div class="row align-items-center">
                     <div class="col-md-6">
-                        <img src="images/job/1.jpg" class="img-fluid shadow rounded" alt="">
+                        <img src="../assets/images/job/1.jpg" class="img-fluid shadow rounded" alt="">
                     </div><!--end col-->
 
                     <div class="col-md-6 mt-4 pt-2 mt-sm-0 pt-sm-0">
@@ -559,7 +559,7 @@
             </div><!--end container-->
 
             <div class="container-fluid mt-100 mt-60">
-                <div class="py-5 rounded" style="background: url('images/bg/testi.jpg') center left;">
+                <div class="py-5 rounded" style="background: url('../assets/images/bg/testi.jpg') center left;">
                     <div class="container">
                         <div class="row py-md-5 py-4">
                             <div class="col-lg-4 col-md-6">
@@ -569,7 +569,7 @@
                                             <p class="text-muted font-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. "</p>
 
                                             <div class="media align-items-center mt-4">
-                                                <img src="images/client/01.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
+                                                <img src="../assets/images/client/01.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
                                                 <div class="media-body ml-3">
                                                     <h6 class="text-primary mb-0">Thomas Israel</h6>
                                                     <small class="text-muted">C.E.O</small>
@@ -580,7 +580,7 @@
                                         <div class="customer-testi">
                                             <p class="text-muted font-italic">" The advantage of its Latin origin and the relative meaninglessness of Lorum Ipsum is that the text does not attract attention to itself or distract the viewer's attention from the layout. "</p>
                                             <div class="media align-items-center mt-4">
-                                                <img src="images/client/02.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
+                                                <img src="../assets/images/client/02.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
                                                  <div class="media-body ml-3">
                                                     <h6 class="text-primary mb-0">Carl Oliver</h6>
                                                     <small class="text-muted">P.A</small>
@@ -591,7 +591,7 @@
                                         <div class="customer-testi">
                                             <p class="text-muted font-italic">" There is now an abundance of readable dummy texts. These are usually used when a text is required purely to fill a space. These alternatives to the classic Lorem Ipsum texts are often amusing and tell short, funny or nonsensical stories. "</p>
                                             <div class="media align-items-center mt-4">
-                                                <img src="images/client/03.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
+                                                <img src="../assets/images/client/03.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
                                                  <div class="media-body ml-3">
                                                     <h6 class="text-primary mb-0">Barbara McIntosh</h6>
                                                     <small class="text-muted">M.D</small>
@@ -602,7 +602,7 @@
                                         <div class="customer-testi">
                                             <p class="text-muted font-italic">" According to most sources, Lorum Ipsum can be traced back to a text composed by Cicero in 45 BC. Allegedly, a Latin scholar established the origin of the text by compiling all the instances of the unusual word 'consectetur' he could find "</p>
                                             <div class="media align-items-center mt-4">
-                                                <img src="images/client/04.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
+                                                <img src="../assets/images/client/04.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
                                                  <div class="media-body ml-3">
                                                     <h6 class="text-primary mb-0">Christa Smith</h6>
                                                     <small class="text-muted">Manager</small>
@@ -613,7 +613,7 @@
                                         <div class="customer-testi">
                                             <p class="text-muted font-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. "</p>
                                             <div class="media align-items-center mt-4">
-                                                <img src="images/client/05.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
+                                                <img src="../assets/images/client/05.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
                                                  <div class="media-body ml-3">
                                                     <h6 class="text-primary mb-0">Dean Tolle</h6>
                                                     <small class="text-muted">Developer</small>
@@ -624,7 +624,7 @@
                                         <div class="customer-testi">
                                             <p class="text-muted font-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. One may speculate that over the course of time certain letters were added or deleted at various positions within the text. "</p>
                                             <div class="media align-items-center mt-4">
-                                                <img src="images/client/06.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
+                                                <img src="../assets/images/client/06.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
                                                  <div class="media-body ml-3">
                                                     <h6 class="text-primary mb-0">Jill Webb</h6>
                                                     <small class="text-muted">Designer</small>
@@ -713,7 +713,7 @@
                     <div class="col-lg-4 col-md-6 mt-4 pt-2">
                         <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                             <div class="position-relative overflow-hidden">
-                                <img src="images/blog/1.jpg" class="img-fluid" alt="">
+                                <img src="../assets/images/blog/1.jpg" class="img-fluid" alt="">
                                 <a href="javascript:void(0)" class="tag py-1 px-4 d-inline-block h6 mb-0 text-white rounded-lg">Software</a>
                             </div>
                             <div class="card-body p-4">
@@ -733,7 +733,7 @@
                     <div class="col-lg-4 col-md-6 mt-4 pt-2">
                         <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                             <div class="position-relative overflow-hidden">
-                                <img src="images/blog/2.jpg" class="img-fluid" alt="">
+                                <img src="../assets/images/blog/2.jpg" class="img-fluid" alt="">
                                 <a href="javascript:void(0)" class="tag py-1 px-4 d-inline-block h6 mb-0 text-white rounded-lg">Designer</a>
                             </div>
                             <div class="card-body p-4">
@@ -753,7 +753,7 @@
                     <div class="col-lg-4 col-md-6 mt-4 pt-2">
                         <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                             <div class="position-relative overflow-hidden">
-                                <img src="images/blog/3.jpg" class="img-fluid" alt="">
+                                <img src="../assets/images/blog/3.jpg" class="img-fluid" alt="">
                                 <a href="javascript:void(0)" class="tag py-1 px-4 d-inline-block h6 mb-0 text-white rounded-lg">Developer</a>
                             </div>
                             <div class="card-body p-4">
@@ -806,7 +806,7 @@
                 <div class="row">
                     <div class="col-lg-3 mb-0 mb-md-4 pb-0 pb-md-2">
                         <a href="#" class="logo-footer">
-                            <img src="images/logo-footer.png" height="48" alt="">
+                            <img src="../assets/images/logo-footer.png" height="48" alt="">
                         </a>
                         <ul class="list-unstyled footer-list px-0 mt-4">
                             <li><i data-feather="map-pin" class="fea icon-sm mr-2"></i><a href="#" class="text-foot">Londan, England</a></li>

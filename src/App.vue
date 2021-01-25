@@ -5,6 +5,9 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import "../src/assets/js/app.js";
+import "../src/assets/js/scrollspy.min.js";
+
 
 export default {
   name: 'App',
@@ -23,4 +26,9 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+/* Main Css */
+@import "../src/assets/css/style.css";
+/* Slider */
+/* @import "../src/assets/css/owl.carousel.min.css";
+@import "../src/assets/css/owl.theme.default.min.css"; */
 </style>
