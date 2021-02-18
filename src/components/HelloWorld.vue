@@ -1,903 +1,934 @@
 <template>
   <div>
-    <header id="topnav" class="defaultscroll sticky">
-            <div class="container">
-                <!-- Logo container-->
-                <div>
-                    <a class="logo" href="index.html">
-                        <img src="../assets/images/logo-dark.png" class="l-dark" height="22" alt="">
-                        <img src="../assets/images/logo-light.png" class="l-light" height="22" alt="">
-                    </a>
-                </div>                 
-                <div class="buy-button">
-                    <a href="javascript:void(0)">
-                        <div class="btn btn-primary login-btn-primary">Buy Now</div>
-                        <div class="btn btn-light login-btn-light">Buy Now</div>
-                    </a>
-                </div><!--end login button-->
-                <!-- End Logo container-->
-                <div class="menu-extras">
-                    <div class="menu-item">
-                        <!-- Mobile menu toggle-->
-                        <a class="navbar-toggle">
-                            <div class="lines">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                        </a>
-                        <!-- End mobile menu toggle-->
-                    </div>
-                </div>
-        
-                <div id="navigation">
-                    <!-- Navigation Menu-->   
-                    <ul class="navigation-menu nav-left nav-light">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="has-submenu"><a href="javascript:void(0)">Landing</a><span class="menu-arrow"></span>
-                            <ul class="submenu megamenu">
-                                <li>
-                                    <ul>
-                                        <li><a href="index-app.html">Apps</a></li>
-                                        <li><a href="index-saas.html">Saas</a></li>
-                                        <li><a href="index-software.html">Software</a></li>
-                                        <li><a href="index-career.html">Career</a></li>
-                                        <li><a href="index-crypto.html">Crypto</a></li>
-                                        <li><a href="index-startup.html">Startup</a></li>
-                                        <li><a href="index-business.html">Business</a></li>
-                                    </ul>
-                                </li>
-
-                                <li>
-                                    <ul>
-                                        <li><a href="index-seo-agency.html">SEO Agency</a></li>
-                                        <li><a href="index-freelancer.html">Freelancer</a></li>
-                                        <li><a href="index-broker.html">Broker</a></li>
-                                        <li><a href="index-developer.html">Developer</a></li>
-                                        <li><a href="index-studio.html">Studio</a></li>
-                                        <li><a href="index-hosting.html">Hosting & Domain</a></li>
-                                        <li><a href="index-service.html">Service</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-        
-                        <li class="has-submenu"><a href="javascript:void(0)">Pages</a><span class="menu-arrow"></span>
-                            <ul class="submenu">
-                                <li><a href="page-about.html"> About Us</a></li>
-                                <li><a href="page-services.html">Services</a></li>
-                                <li><a href="page-team.html"> Team</a></li>
-                                <li><a href="page-pricing.html">Pricing</a></li>
-                                <li><a href="page-faqs.html">FAQs</a></li>
-                                <li><a href="career-detail.html">Job Detail</a></li>
-                                <li class="has-submenu"><a href="javascript:void(0)"> Profile </a><span class="submenu-arrow"></span>
-                                    <ul class="submenu">
-                                        <li><a href="profile.html">Profile</a></li>
-                                        <li><a href="profile-setting.html">Setting</a></li>
-                                        <li><a href="profile-payment.html">Payment</a></li>
-                                        <li><a href="billing-invoice.html">Invoice</a></li>
-                                    </ul>  
-                                </li>
-                                <li class="has-submenu"><a href="javascript:void(0)"> Blog </a><span class="submenu-arrow"></span>
-                                    <ul class="submenu">
-                                        <li><a href="blogs.html">Blogs & News</a></li>
-                                        <li><a href="blog-detail.html">Blog Detail</a></li>
-                                    </ul>  
-                                </li>
-                                <li class="has-submenu"><a href="javascript:void(0)"> Works</a><span class="submenu-arrow"></span>
-                                    <ul class="submenu">
-                                        <li><a href="works.html">Projects / Works</a></li>
-                                        <li><a href="work-detail.html">Work Detail</a></li>
-                                    </ul>  
-                                </li>
-                                <li class="has-submenu"><a href="javascript:void(0)"> Utility </a><span class="submenu-arrow"></span>
-                                    <ul class="submenu">
-                                        <li><a href="page-terms.html">Terms of Services</a></li>
-                                        <li><a href="page-privacy.html">Privacy Policy</a></li>
-                                    </ul>  
-                                </li>
-                                <li class="has-submenu"><a href="javascript:void(0)"> Special </a><span class="submenu-arrow"></span>
-                                    <ul class="submenu">
-                                        <li><a href="page-comingsoon.html">Coming Soon</a></li>
-                                        <li><a href="page-maintenance.html">Maintenance</a></li>
-                                        <li><a href="page-error.html">Error</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-submenu"><a href="javascript:void(0)"> Authentication </a><span class="submenu-arrow"></span>
-                                    <ul class="submenu">
-                                        <li><a href="login.html">Login</a></li>
-                                        <li><a href="signup.html">signup</a></li>
-                                        <li><a href="forgot-password.html">Forgot Password</a></li>
-                                        <li><a href="thankyou.html">Thank you</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="components.html">Components</a></li>
-                    </ul><!--end navigation menu-->
-                    <div class="buy-menu-btn d-none">
-                        <a href="javascript:void(0)" class="btn btn-primary">Buy Now</a>
-                    </div><!--end login button-->
-                </div><!--end navigation-->
-            </div><!--end container-->
-        </header><!--end header-->
-        <!-- Navbar End -->
-
-        <!-- Start Hero -->
-        <section class="bg-half-260 d-table w-100" style="background: url('../assets/images/bg/bg-career.jpg') center center;">
-            <div class="bg-overlay"></div>
-            <div class="container">
-                <div class="row justify-content-center mt-5">
-                    <div class="col-lg-10">
-                        <div class="heading-title text-center">
-                            <h4 class="heading text-light mb-3">Find Your Dream Job !</h4>
-                            <p class="para-desc mx-auto text-white-50">Explore and learn more about everything from machine learning and global payments to  scaling your team.</p>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-        </section><!--end section-->
-        <!-- End Hero -->
-
-        <!-- Form Start -->
-        <section class="section pb-0">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="features-absolute career-form bg-white p-4 rounded shadow">
-                            <form>
-                                <div class="row text-left">
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="form-group mb-0">
-                                            <input type="text" class="form-control" required placeholder="Keywords">
-                                        </div>
-                                    </div><!--end col-->
-                                    
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-4 mt-4 mt-sm-0">
-                                                <div class="form-group mb-0">
-                                                    <select class="form-control custom-select">
-                                                        <option selected="">Location</option>
-                                                        <option value="AF">Afghanistan</option>
-                                                        <option value="AX">&Aring;land Islands</option>
-                                                        <option value="AL">Albania</option>
-                                                        <option value="DZ">Algeria</option>
-                                                        <option value="AS">American Samoa</option>
-                                                        <option value="AD">Andorra</option>
-                                                        <option value="AO">Angola</option>
-                                                        <option value="AI">Anguilla</option>
-                                                        <option value="AQ">Antarctica</option>
-                                                    </select>
-                                                </div>
-                                            </div><!--end col-->
-                                            
-                                            <div class="col-md-4 mt-4 mt-sm-0">
-                                                <div class="form-group mb-0">
-                                                    <select class="form-control custom-select">
-                                                        <option selected="">Job Types</option>
-                                                        <option value="4">Accounting</option>
-                                                        <option value="1">IT & Software</option>
-                                                        <option value="3">Marketing</option>
-                                                        <option value="5">Banking</option>
-                                                    </select>
-                                                </div>
-                                            </div><!--end col-->
-
-                                            <div class="col-md-4 mt-4 mt-sm-0">
-                                                <input type="submit" id="search" name="search" class="searchbtn btn btn-primary btn-block p" value="Search">
-                                            </div><!--end col-->
-                                        </div><!--end row-->
-                                    </div><!--end col-->
-                                </div><!--end row-->
-                            </form><!--end form-->
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-        </section><!--end section-->
-        <!-- Form End -->
-
-        <!-- Start -->
-        <section class="section pt-md-4">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <div class="section-title text-center mb-4 pb-2">
-                            <h6 class="text-primary">New Openings</h6>
-                            <h4 class="title mb-4">Popular Categories</h4>
-                            <p class="text-muted para-desc mx-auto mb-0">Explore and learn more about everything from machine learning and global payments to  scaling your team.</p>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-                        <a href="javascript:void(0)" class="job-catagories bg-catagory-primary position-relative overflow-hidden rounded d-block shadow p-4">
-                            <h5 class="mb-0 title text-dark">Design & Art</h5>
-                            <small class="text-muted sub-title">7 Opening</small>
-                            <div class="icons text-dark h2 mb-0">
-                                <i class="uil uil-pen"></i>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-                        <a href="javascript:void(0)" class="job-catagories bg-catagory-primary position-relative overflow-hidden rounded d-block shadow p-4">
-                            <h5 class="mb-0 title text-dark">IT Engineer</h5>
-                            <small class="text-muted sub-title">1 Opening</small>
-                            <div class="icons text-dark h2 mb-0">
-                                <i class="uil uil-airplay"></i>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-                        <a href="javascript:void(0)" class="job-catagories bg-catagory-primary position-relative overflow-hidden rounded d-block shadow p-4">
-                            <h5 class="mb-0 title text-dark">Health Care</h5>
-                            <small class="text-muted sub-title">4 Opening</small>
-                            <div class="icons text-dark h2 mb-0">
-                                <i class="uil uil-hospital"></i>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-                        <a href="javascript:void(0)" class="job-catagories bg-catagory-primary position-relative overflow-hidden rounded d-block shadow p-4">
-                            <h5 class="mb-0 title text-dark">Teaching</h5>
-                            <small class="text-muted sub-title">2 Opening</small>
-                            <div class="icons text-dark h2 mb-0">
-                                <i class="uil uil-book-reader"></i>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-                        <a href="javascript:void(0)" class="job-catagories bg-catagory-primary position-relative overflow-hidden rounded d-block shadow p-4">
-                            <h5 class="mb-0 title text-dark">Management</h5>
-                            <small class="text-muted sub-title">8 Opening</small>
-                            <div class="icons text-dark h2 mb-0">
-                                <i class="uil uil-analytics"></i>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-                        <a href="javascript:void(0)" class="job-catagories bg-catagory-primary position-relative overflow-hidden rounded d-block shadow p-4">
-                            <h5 class="mb-0 title text-dark">Marketing</h5>
-                            <small class="text-muted sub-title">5 Opening</small>
-                            <div class="icons text-dark h2 mb-0">
-                                <i class="uil uil-bill"></i>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-                        <a href="javascript:void(0)" class="job-catagories bg-catagory-primary position-relative overflow-hidden rounded d-block shadow p-4">
-                            <h5 class="mb-0 title text-dark">Sales</h5>
-                            <small class="text-muted sub-title">2 Opening</small>
-                            <div class="icons text-dark h2 mb-0">
-                                <i class="uil uil-usd-circle"></i>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-                        <a href="javascript:void(0)" class="job-catagories bg-catagory-primary position-relative overflow-hidden rounded d-block shadow p-4">
-                            <h5 class="mb-0 title text-dark">Banking</h5>
-                            <small class="text-muted sub-title">6 Opening</small>
-                            <div class="icons text-dark h2 mb-0">
-                                <i class="uil uil-chart-growth"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div><!--end container-->
-
-            <div class="container mt-100 mt-60">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <div class="section-title text-center mb-4 pb-2">
-                            <h6 class="text-primary">Brands</h6>
-                            <h4 class="title mb-4">Featured Companies</h4>
-                            <p class="text-muted para-desc mx-auto mb-0">Explore and learn more about everything from machine learning and global payments to  scaling your team.</p>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-2 col-md-4 col-12 mt-4 pt-2">
-                        <a href="javascript:void(0)" class="feature-company rounded d-block text-center shadow p-4">
-                            <img src="../assets/images/brand/apple.svg" class="avatar avatar-md-md" alt="">
-                            <div class="content mt-4">
-                                <h5 class="company-name text-dark mb-0">Apple</h5>
-                                <p class="text-muted mb-0"><i class="uil uil-map-marker mr-1"></i>New Mexico, USA</p>
-                                <small class="text-muted sub-title">2 Vacancy</small>
-                            </div>
-                        </a>
-                    </div><!--end col-->
-                    
-                    <div class="col-lg-2 col-md-4 col-12 mt-4 pt-2">
-                        <a href="javascript:void(0)" class="feature-company rounded d-block text-center shadow p-4">
-                            <img src="../assets/images/brand/black-berry.svg" class="avatar avatar-md-md" alt="">
-                            <div class="content mt-4">
-                                <h5 class="company-name text-dark mb-0">Black Berry</h5>
-                                <p class="text-muted mb-0"><i class="uil uil-map-marker mr-1"></i>New Mexico, USA</p>
-                                <small class="text-muted sub-title">4 Vacancy</small>
-                            </div>
-                        </a>
-                    </div><!--end col-->
-                    
-                    <div class="col-lg-2 col-md-4 col-12 mt-4 pt-2">
-                        <a href="javascript:void(0)" class="feature-company rounded d-block text-center shadow p-4">
-                            <img src="../assets/images/brand/boomerang.svg" class="avatar avatar-md-md" alt="">
-                            <div class="content mt-4">
-                                <h5 class="company-name text-dark mb-0">Boomerang</h5>
-                                <p class="text-muted mb-0"><i class="uil uil-map-marker mr-1"></i>New Mexico, USA</p>
-                                <small class="text-muted sub-title">1 Vacancy</small>
-                            </div>
-                        </a>
-                    </div><!--end col-->
-                    
-                    <div class="col-lg-2 col-md-4 col-12 mt-4 pt-2">
-                        <a href="javascript:void(0)" class="feature-company rounded d-block text-center shadow p-4">
-                            <img src="../assets/images/brand/pingdom.svg" class="avatar avatar-md-md" alt="">
-                            <div class="content mt-4">
-                                <h5 class="company-name text-dark mb-0">Pingdom</h5>
-                                <p class="text-muted mb-0"><i class="uil uil-map-marker mr-1"></i>New Mexico, USA</p>
-                                <small class="text-muted sub-title">7 Vacancy</small>
-                            </div>
-                        </a>
-                    </div><!--end col-->
-                    
-                    <div class="col-lg-2 col-md-4 col-12 mt-4 pt-2">
-                        <a href="javascript:void(0)" class="feature-company rounded d-block text-center shadow p-4">
-                            <img src="../assets/images/brand/swiggy.svg" class="avatar avatar-md-md" alt="">
-                            <div class="content mt-4">
-                                <h5 class="company-name text-dark mb-0">Swiggy</h5>
-                                <p class="text-muted mb-0"><i class="uil uil-map-marker mr-1"></i>New Mexico, USA</p>
-                                <small class="text-muted sub-title">4 Vacancy</small>
-                            </div>
-                        </a>
-                    </div><!--end col-->
-                    
-                    <div class="col-lg-2 col-md-4 col-12 mt-4 pt-2">
-                        <a href="javascript:void(0)" class="feature-company rounded d-block text-center shadow p-4">
-                            <img src="../assets/images/brand/volkswagen.svg" class="avatar avatar-md-md" alt="">
-                            <div class="content mt-4">
-                                <h5 class="company-name text-dark mb-0">Valkswagon</h5>
-                                <p class="text-muted mb-0"><i class="uil uil-map-marker mr-1"></i>New Mexico, USA</p>
-                                <small class="text-muted sub-title">3 Vacancy</small>
-                            </div>
-                        </a>
-                    </div><!--end col-->
-                </div><!--end row-->
-
-                <div class="row mt-4 pt-2">
-                    <div class="col-12 text-center">
-                        <a href="javascript:void(0)" class="btn btn-primary">See All Companies <i data-feather="arrow-right" class="fea icon-sm"></i></a>
-                    </div>
-                </div>
-            </div><!--end container-->
-
-            <div class="container mt-100 mt-60">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <img src="../assets/images/job/1.jpg" class="img-fluid shadow rounded" alt="">
-                    </div><!--end col-->
-
-                    <div class="col-md-6 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                        <div class="section-title ml-lg-5">
-                            <h6 class="text-primary">Come Join us</h6>
-                            <h4 class="title mb-4">Why Work Here</h4>
-                            <p class="text-muted para-desc">Explore and learn more about everything from machine learning and global payments to  scaling your team.</p>
-                        
-                            <ul class="list-unstyled mb-0">
-                                <li class="list-inline-item mt-4 mr-lg-5 mr-4">
-                                    <div class="media">
-                                        <span class="text-primary h4 mr-2"><i class="uim uim-check-circle"></i></span>
-                                        <div class="media-body">
-                                            <h4 class="mb-0">3640</h4>
-                                            <h6 class="mb-0 text-muted">Visitor</h6>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="list-inline-item mt-4 mr-lg-5 mr-4">
-                                    <div class="media">
-                                        <span class="text-primary h4 mr-2"><i class="uim uim-check-circle"></i></span>
-                                        <div class="media-body">
-                                            <h4 class="mb-0">40</h4>
-                                            <h6 class="mb-0 text-muted">Startups</h6>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="list-inline-item mt-4 mr-lg-5 mr-4">
-                                    <div class="media">
-                                        <span class="text-primary h4 mr-2"><i class="uim uim-check-circle"></i></span>
-                                        <div class="media-body">
-                                            <h4 class="mb-0">56</h4>
-                                            <h6 class="mb-0 text-muted">Mentors</h6>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="list-inline-item mt-4 mr-lg-5 mr-4">
-                                    <div class="media">
-                                        <span class="text-primary h4 mr-2"><i class="uim uim-check-circle"></i></span>
-                                        <div class="media-body">
-                                            <h4 class="mb-0">12</h4>
-                                            <h6 class="mb-0 text-muted">Countries</h6>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="list-inline-item mt-4 mr-lg-5 mr-4">
-                                    <div class="media">
-                                        <span class="text-primary h4 mr-2"><i class="uim uim-check-circle"></i></span>
-                                        <div class="media-body">
-                                            <h4 class="mb-0">25</h4>
-                                            <h6 class="mb-0 text-muted">Stages</h6>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-
-            <div class="container mt-100 mt-60">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="row align-items-center mb-4 pb-2">
-                            <div class="col-lg-9 col-md-8">
-                                <div class="section-title">
-                                    <h6 class="text-primary">Vacancy</h6>
-                                    <h4 class="title mb-4">Latest Job or Vacancy list</h4>
-                                    <p class="text-muted para-desc mb-0">Explore and learn more about everything from machine learning and global payments to  scaling your team.</p>
-                                </div>
-                            </div><!--end col-->
-        
-                            <div class="col-lg-3 col-md-4 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                                <div class="form custom-form">
-                                    <div class="form-group mb-0">
-                                        <label>Types of jobs :</label>
-                                        <select class="form-control custom-select" id="Sortbylist-job">
-                                            <option>All Jobs</option>
-                                            <option>Full Time</option>
-                                            <option>Part Time</option>
-                                            <option>Remote</option>
-                                            <option>Work From Home</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-                        </div><!--end row-->
-                    </div>
-                </div>
-
-                <div class="row justify-content-center">
-                    <div class="col-lg-10 mt-4 pt-2">
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="career-detail.html" class="d-flex job-vacancy job-primary align-items-center justify-content-between p-4 shadow rounded">
-                                    <div class="content">
-                                        <h5 class="text-dark job-caragory">UX Designer</h5>
-                                        <p class="text-muted mb-0">New York</p>
-                                    </div>
-                                    <i data-feather="arrow-right" class="fea icon-ex-md text-dark icon"></i>
-                                </a>
-                            </li>
-
-                            <li class="mt-3">
-                                <a href="career-detail.html" class="d-flex job-vacancy job-primary align-items-center justify-content-between p-4 shadow rounded">
-                                    <div class="content">
-                                        <h5 class="text-dark job-caragory">Web Developer</h5>
-                                        <p class="text-muted mb-0">New York</p>
-                                    </div>
-                                    <i data-feather="arrow-right" class="fea icon-ex-md text-dark icon"></i>
-                                </a>
-                            </li>
-
-                            <li class="mt-3">
-                                <a href="career-detail.html" class="d-flex job-vacancy job-primary align-items-center justify-content-between p-4 shadow rounded">
-                                    <div class="content">
-                                        <h5 class="text-dark job-caragory">UI Designer</h5>
-                                        <p class="text-muted mb-0">New York</p>
-                                    </div>
-                                    <i data-feather="arrow-right" class="fea icon-ex-md text-dark icon"></i>
-                                </a>
-                            </li>
-
-                            <li class="mt-3">
-                                <a href="career-detail.html" class="d-flex job-vacancy job-primary align-items-center justify-content-between p-4 shadow rounded">
-                                    <div class="content">
-                                        <h5 class="text-dark job-caragory">Web Designer</h5>
-                                        <p class="text-muted mb-0">New York</p>
-                                    </div>
-                                    <i data-feather="arrow-right" class="fea icon-ex-md text-dark icon"></i>
-                                </a>
-                            </li>
-
-                            <li class="mt-3">
-                                <a href="career-detail.html" class="d-flex job-vacancy job-primary align-items-center justify-content-between p-4 shadow rounded">
-                                    <div class="content">
-                                        <h5 class="text-dark job-caragory">Android Developer</h5>
-                                        <p class="text-muted mb-0">New York</p>
-                                    </div>
-                                    <i data-feather="arrow-right" class="fea icon-ex-md text-dark icon"></i>
-                                </a>
-                            </li>
-
-                            <li class="mt-3">
-                                <a href="career-detail.html" class="d-flex job-vacancy job-primary align-items-center justify-content-between p-4 shadow rounded">
-                                    <div class="content">
-                                        <h5 class="text-dark job-caragory">Senior Back-end Developer</h5>
-                                        <p class="text-muted mb-0">New York</p>
-                                    </div>
-                                    <i data-feather="arrow-right" class="fea icon-ex-md text-dark icon"></i>
-                                </a>
-                            </li>
-
-                            <li class="mt-3">
-                                <a href="career-detail.html" class="d-flex job-vacancy job-primary align-items-center justify-content-between p-4 shadow rounded">
-                                    <div class="content">
-                                        <h5 class="text-dark job-caragory">Front-end Developer</h5>
-                                        <p class="text-muted mb-0">New York</p>
-                                    </div>
-                                    <i data-feather="arrow-right" class="fea icon-ex-md text-dark icon"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-
-            <div class="container-fluid mt-100 mt-60">
-                <div class="py-5 rounded" style="background: url('../assets/images/bg/testi.jpg') center left;">
-                    <div class="container">
-                        <div class="row py-md-5 py-4">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="bg-white rounded px-4 py-5">
-                                    <div id="owl-fade" class="owl-carousel owl-theme">
-                                        <div class="customer-testi">
-                                            <p class="text-muted font-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. "</p>
-
-                                            <div class="media align-items-center mt-4">
-                                                <img src="../assets/images/client/01.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
-                                                <div class="media-body ml-3">
-                                                    <h6 class="text-primary mb-0">Thomas Israel</h6>
-                                                    <small class="text-muted">C.E.O</small>
-                                                </div>
-                                            </div>
-                                        </div><!--end customer testi-->
-                                        
-                                        <div class="customer-testi">
-                                            <p class="text-muted font-italic">" The advantage of its Latin origin and the relative meaninglessness of Lorum Ipsum is that the text does not attract attention to itself or distract the viewer's attention from the layout. "</p>
-                                            <div class="media align-items-center mt-4">
-                                                <img src="../assets/images/client/02.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
-                                                 <div class="media-body ml-3">
-                                                    <h6 class="text-primary mb-0">Carl Oliver</h6>
-                                                    <small class="text-muted">P.A</small>
-                                                 </div>
-                                            </div>
-                                        </div><!--end customer testi-->
-                                        
-                                        <div class="customer-testi">
-                                            <p class="text-muted font-italic">" There is now an abundance of readable dummy texts. These are usually used when a text is required purely to fill a space. These alternatives to the classic Lorem Ipsum texts are often amusing and tell short, funny or nonsensical stories. "</p>
-                                            <div class="media align-items-center mt-4">
-                                                <img src="../assets/images/client/03.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
-                                                 <div class="media-body ml-3">
-                                                    <h6 class="text-primary mb-0">Barbara McIntosh</h6>
-                                                    <small class="text-muted">M.D</small>
-                                                 </div>
-                                            </div>
-                                        </div><!--end customer testi-->
-                                        
-                                        <div class="customer-testi">
-                                            <p class="text-muted font-italic">" According to most sources, Lorum Ipsum can be traced back to a text composed by Cicero in 45 BC. Allegedly, a Latin scholar established the origin of the text by compiling all the instances of the unusual word 'consectetur' he could find "</p>
-                                            <div class="media align-items-center mt-4">
-                                                <img src="../assets/images/client/04.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
-                                                 <div class="media-body ml-3">
-                                                    <h6 class="text-primary mb-0">Christa Smith</h6>
-                                                    <small class="text-muted">Manager</small>
-                                                 </div>
-                                            </div>
-                                        </div><!--end customer testi-->
-                                        
-                                        <div class="customer-testi">
-                                            <p class="text-muted font-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. "</p>
-                                            <div class="media align-items-center mt-4">
-                                                <img src="../assets/images/client/05.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
-                                                 <div class="media-body ml-3">
-                                                    <h6 class="text-primary mb-0">Dean Tolle</h6>
-                                                    <small class="text-muted">Developer</small>
-                                                 </div>
-                                            </div>
-                                        </div><!--end customer testi-->
-                                        
-                                        <div class="customer-testi">
-                                            <p class="text-muted font-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. One may speculate that over the course of time certain letters were added or deleted at various positions within the text. "</p>
-                                            <div class="media align-items-center mt-4">
-                                                <img src="../assets/images/client/06.jpg" class="img-fluid avatar avatar-small rounded-circle shadow" alt="">
-                                                 <div class="media-body ml-3">
-                                                    <h6 class="text-primary mb-0">Jill Webb</h6>
-                                                    <small class="text-muted">Designer</small>
-                                                 </div>
-                                            </div>
-                                        </div><!--end customer testi-->
-                                    </div><!--end owl carousel-->
-                                </div>
-                            </div><!--end col-->
-                        </div><!--end row-->
-                    </div><!--end container-->
-                </div>
-            </div><!--end container-->
-
-            <div class="container mt-100 mt-60">
-                <div class="row mt-lg-4 align-items-center">
-                    <div class="col-lg-5 col-md-12 text-center text-lg-left">
-                        <div class="section-title mb-4 mb-lg-0 pb-2 pb-lg-0">
-                            <h6 class="text-primary">Our Pricing</h6>
-                            <h4 class="title mb-4">Choose a package</h4>
-                            <p class="text-muted para-desc mx-auto mb-0">Explore and learn more about everything from machine learning and global payments to  scaling your team.</p>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-lg-7 col-md-12 mt-4 mt-lg-0 pt-2 pt-lg-0">
-                        <div class="row align-items-center">
-                            <div class="col-md-6 col-12">
-                                <div class="card pricing border-0 p-4 rounded-md shadow">
-                                    <div class="card-body p-0">
-                                        <span class="py-2 px-4 d-inline-block bg-soft-primary h6 mb-0 text-primary rounded-lg">Basic</span>
-                                        <h1 class="font-weight-bold mb-0 mt-3">$16.00</h1>
-                                        <p class="text-muted small">For personal projects</p>
-        
-                                        <ul class="list-unstyled">
-                                            <li class="text-muted mb-0"><span class="text-primary h5 mr-2"><i class="uil uil-user-check"></i></span>10 Listings</li>
-                                            <li class="text-muted mb-0"><span class="text-primary h5 mr-2"><i class="uil uil-file"></i></span>Visible for 30 days</li>
-                                            <li class="text-muted mb-0"><span class="text-primary h5 mr-2"><i class="uil uil-server"></i></span>24/7 Support</li>
-                                        </ul>
-        
-                                        <div class="mt-4">
-                                            <a href="javascript:void(0)" class="btn btn-block btn-primary">Buy Now</a>
-                                            <p class="text-muted mt-3 mb-0">*No credit card required</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-                            
-                            <div class="col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                                <div class="card pricing border-0 p-4 rounded-md shadow bg-primary">
-                                    <div class="card-body p-0">
-                                        <span class="py-2 px-4 d-inline-block bg-soft-success h6 mb-0 text-success rounded-lg">Premium</span>
-                                        <h1 class="font-weight-bold text-white mb-0 mt-3">$45.00</h1>
-                                        <p class="text-white-50 small">30-Day free trial</p>
-        
-                                        <ul class="list-unstyled">
-                                            <li class="text-light mb-0"><span class="text-success h5 mr-2"><i class="uil uil-user-check"></i></span>30 Listings</li>
-                                            <li class="text-light mb-0"><span class="text-success h5 mr-2"><i class="uil uil-file"></i></span>Visible for 90 days</li>
-                                            <li class="text-light mb-0"><span class="text-success h5 mr-2"><i class="uil uil-server"></i></span>1 Featured Job</li>
-                                            <li class="text-light mb-0"><span class="text-success h5 mr-2"><i class="uil uil-shield-plus"></i></span>24/7 Premium Support</li>
-                                        </ul>
-        
-                                        <div class="mt-4">
-                                            <a href="javascript:void(0)" class="btn btn-block btn-soft-success">Buy Now</a>
-                                            <p class="text-white-50 mt-3 mb-0">*No credit card required</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-                        </div><!--end row-->
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-
-            <div class="container mt-100 mt-60">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <div class="section-title text-center mb-4 pb-2">
-                            <h6 class="text-primary">News</h6>
-                            <h4 class="title mb-4">Latest News or Blogs</h4>
-                            <p class="text-muted para-desc mx-auto mb-0">Explore and learn more about everything from machine learning and global payments to  scaling your team.</p>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 mt-4 pt-2">
-                        <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                            <div class="position-relative overflow-hidden">
-                                <img src="../assets/images/blog/1.jpg" class="img-fluid" alt="">
-                                <a href="javascript:void(0)" class="tag py-1 px-4 d-inline-block h6 mb-0 text-white rounded-lg">Software</a>
-                            </div>
-                            <div class="card-body p-4">
-                                <ul class="list-unstyled mb-2">
-                                    <li class="list-inline-item text-muted small mr-3"><i class="uil uil-calendar-alt text-dark h6 mr-1"></i>20th September, 2020</li>
-                                    <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 mr-1"></i>5 min read</li>
-                                </ul>
-                                <a href="javascript:void(0)" class="text-dark title h5">A place where technology meets craftsmanship</a>
-                                
-                                <div class="mt-2">
-                                    <a href="javascript:void(0)" class="link">Read more <i data-feather="arrow-right" class="fea icon-sm"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    
-                    <div class="col-lg-4 col-md-6 mt-4 pt-2">
-                        <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                            <div class="position-relative overflow-hidden">
-                                <img src="../assets/images/blog/2.jpg" class="img-fluid" alt="">
-                                <a href="javascript:void(0)" class="tag py-1 px-4 d-inline-block h6 mb-0 text-white rounded-lg">Designer</a>
-                            </div>
-                            <div class="card-body p-4">
-                                <ul class="list-unstyled mb-2">
-                                    <li class="list-inline-item text-muted small mr-3"><i class="uil uil-calendar-alt text-dark h6 mr-1"></i>20th September, 2020</li>
-                                    <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 mr-1"></i>5 min read</li>
-                                </ul>
-                                <a href="javascript:void(0)" class="text-dark title h5">Talisker bay on the isle of skye in scotland</a>
-                                
-                                <div class="mt-2">
-                                    <a href="javascript:void(0)" class="link">Read more <i data-feather="arrow-right" class="fea icon-sm"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    
-                    <div class="col-lg-4 col-md-6 mt-4 pt-2">
-                        <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                            <div class="position-relative overflow-hidden">
-                                <img src="../assets/images/blog/3.jpg" class="img-fluid" alt="">
-                                <a href="javascript:void(0)" class="tag py-1 px-4 d-inline-block h6 mb-0 text-white rounded-lg">Developer</a>
-                            </div>
-                            <div class="card-body p-4">
-                                <ul class="list-unstyled mb-2">
-                                    <li class="list-inline-item text-muted small mr-3"><i class="uil uil-calendar-alt text-dark h6 mr-1"></i>20th September, 2020</li>
-                                    <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 mr-1"></i>5 min read</li>
-                                </ul>
-                                <a href="javascript:void(0)" class="text-dark title h5">A beginner’s guide to customer journey maps</a>
-                                
-                                <div class="mt-2">
-                                    <a href="javascript:void(0)" class="link">Read more <i data-feather="arrow-right" class="fea icon-sm"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-        </section><!--end section-->
-
-        <div class="container-fluid px-0">
-            <div class="py-5 bg-footer">
-                <div class="container">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-md-none"><a class="navbar-brand me-lg-5"
+      href="https://demo.themesberg.com/volt-pro/index.html"><img class="navbar-brand-dark"
+        src="https://demo.themesberg.com/volt-pro/assets/img/brand/light.svg" alt="Volt logo"> <img
+        class="navbar-brand-light" src="https://demo.themesberg.com/volt-pro/assets/img/brand/dark.svg"
+        alt="Volt logo"></a>
+    <div class="d-flex align-items-center"><button class="navbar-toggler d-md-none collapsed" type="button"
+        data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+        aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button></div>
+  </nav>
+  <nav id="sidebarMenu" class="sidebar d-md-block bg-dark text-white collapse" data-simplebar>
+    <div class="sidebar-inner px-4 pt-3">
+      <div class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
+        <div class="d-flex align-items-center">
+          <div class="user-avatar lg-avatar me-4"><img src="@/assets/img/team/profile-picture-3.jpg"
+              class="card-img-top rounded-circle border-white" alt="Bonnie Green"></div>
+          <div class="d-block">
+            <h2 class="h6">Hi, Jane</h2><a href="../examples/sign-in.html"
+              class="btn btn-secondary text-dark btn-xs"><span class="me-2"><span
+                  class="fas fa-sign-out-alt"></span></span>Sign Out</a>
+          </div>
+        </div>
+        <div class="collapse-close d-md-none"><a href="#sidebarMenu" class="fas fa-times" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="true"
+            aria-label="Toggle navigation"></a></div>
+      </div>
+      <ul class="nav flex-column pt-3 pt-md-0">
+        <li class="nav-item"><a href="https://demo.themesberg.com/volt-pro/index.html"
+            class="nav-link d-flex align-items-center"><span class="sidebar-icon"><img
+                src="https://demo.themesberg.com/volt-pro/assets/img/brand/light.svg" height="20" width="20"
+                alt="Volt Logo"> </span><span class="mt-1 sidebar-text">Volt Overview</span></a></li>
+        <li class="nav-item"><span class="nav-link d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" data-bs-target="#submenu-dashboard"><span><span class="sidebar-icon"><span
+                  class="fas fa-chart-pie"></span></span> <span class="sidebar-text">Dashboard</span> </span><span
+              class="link-arrow"><span class="fas fa-chevron-right"></span></span></span>
+          <div class="multi-level collapse show" role="list" id="submenu-dashboard" aria-expanded="false">
+            <ul class="flex-column nav">
+              <li class="nav-item active"><a href="dashboard.html" class="nav-link"><span
+                    class="sidebar-text-contracted">O</span> <span class="sidebar-text">Overview</span></a></li>
+              <li class="nav-item"><a href="traffic-sources.html" class="nav-link"><span
+                    class="sidebar-text-contracted">T</span> <span class="sidebar-text">All Traffic</span></a></li>
+              <li class="nav-item"><a href="app-analysis.html" class="nav-link"><span
+                    class="sidebar-text-contracted">P</span> <span class="sidebar-text">Product Analysis</span></a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item"><a href="../kanban.html"
+            class="nav-link d-flex align-items-center justify-content-between"><span><span class="sidebar-icon"><span
+                  class="fas fa-th"></span></span> <span class="sidebar-text">Kanban</span></span></a></li>
+        <li class="nav-item"><a href="../messages.html"
+            class="nav-link d-flex align-items-center justify-content-between"><span><span class="sidebar-icon"><span
+                  class="fas fa-inbox"></span></span> <span class="sidebar-text">Messages</span> </span><span
+              class="badge badge-md bg-danger badge-pill notification-count">4</span></a></li>
+        <li class="nav-item"><a href="../users.html" class="nav-link"><span class="sidebar-icon"><span
+                class="fas fa-user-check"></span></span> <span class="sidebar-text">Users List</span></a></li>
+        <li class="nav-item"><a href="../transactions.html" class="nav-link"><span class="sidebar-icon"><span
+                class="fas fa-hand-holding-usd"></span></span> <span class="sidebar-text">Transactions</span></a></li>
+        <li class="nav-item"><a href="../tasks.html" class="nav-link"><span class="sidebar-icon"><span
+                class="fas fa-clipboard-list"></span></span> <span class="sidebar-text">Task List</span></a></li>
+        <li class="nav-item"><a href="../settings.html" class="nav-link"><span class="sidebar-icon"><span
+                class="fas fa-cog"></span></span> <span class="sidebar-text">Settings</span></a></li>
+        <li class="nav-item"><a href="../calendar.html" class="nav-link"><span class="sidebar-icon"><span
+                class="far fa-calendar-alt"></span></span> <span class="sidebar-text">Calendar</span></a></li>
+        <li class="nav-item"><a href="../map.html" class="nav-link"><span class="sidebar-icon"><span
+                class="fas fa-map-marked-alt"></span></span> <span class="sidebar-text">Map</span></a></li>
+        <li class="nav-item"><span class="nav-link collapsed d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" data-bs-target="#submenu-app"><span><span class="sidebar-icon"><span
+                  class="fas fa-table"></span></span> <span class="sidebar-text">Tables</span> </span><span
+              class="link-arrow"><span class="fas fa-chevron-right"></span></span></span>
+          <div class="multi-level collapse" role="list" id="submenu-app" aria-expanded="false">
+            <ul class="flex-column nav">
+              <li class="nav-item"><a class="nav-link" href="../tables/datatables.html"><span
+                    class="sidebar-text-contracted">D</span> <span class="sidebar-text">DataTables</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../tables/bootstrap-tables.html"><span
+                    class="sidebar-text-contracted">B</span> <span class="sidebar-text">Bootstrap Tables</span></a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item"><span class="nav-link collapsed d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" data-bs-target="#submenu-pages"><span><span class="sidebar-icon"><span
+                  class="far fa-file-alt"></span></span> <span class="sidebar-text">Page examples</span> </span><span
+              class="link-arrow"><span class="fas fa-chevron-right"></span></span></span>
+          <div class="multi-level collapse" role="list" id="submenu-pages" aria-expanded="false">
+            <ul class="flex-column nav">
+              <li class="nav-item"><a class="nav-link" href="../examples/pricing.html"><span
+                    class="sidebar-text-contracted">P</span> <span class="sidebar-text">Pricing</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../examples/billing.html"><span
+                    class="sidebar-text-contracted">B</span> <span class="sidebar-text">Billing</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../examples/invoice.html"><span
+                    class="sidebar-text-contracted">I</span> <span class="sidebar-text">Invoice</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../examples/sign-in.html"><span
+                    class="sidebar-text-contracted">S</span> <span class="sidebar-text">Sign In</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../examples/sign-up.html"><span
+                    class="sidebar-text-contracted">S</span> <span class="sidebar-text">Sign Up</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../examples/forgot-password.html"><span
+                    class="sidebar-text-contracted">F</span> <span class="sidebar-text">Forgot password</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../examples/reset-password.html"><span
+                    class="sidebar-text-contracted">R</span> <span class="sidebar-text">Reset password</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../examples/lock.html"><span
+                    class="sidebar-text-contracted">L</span> <span class="sidebar-text">Lock</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../examples/404.html"><span
+                    class="sidebar-text-contracted">4</span> <span class="sidebar-text">404 Not Found</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../examples/500.html"><span
+                    class="sidebar-text-contracted">5</span> <span class="sidebar-text">500 Not Found</span></a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item"><span class="nav-link collapsed d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" data-bs-target="#submenu-components"><span><span class="sidebar-icon"><span
+                  class="fas fa-box-open"></span></span> <span class="sidebar-text">Components</span> </span><span
+              class="link-arrow"><span class="fas fa-chevron-right"></span></span></span>
+          <div class="multi-level collapse" role="list" id="submenu-components" aria-expanded="false">
+            <ul class="flex-column nav">
+              <li class="nav-item"><a class="nav-link" target="_blank"
+                  href="https://themesberg.com/docs/volt-bootstrap-5-dashboard/components/accordions/"><span
+                    class="sidebar-text-contracted">A</span> <span class="sidebar-text">All Components</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../components/buttons.html"><span
+                    class="sidebar-text-contracted">B</span> <span class="sidebar-text">Buttons</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../components/notifications.html"><span
+                    class="sidebar-text-contracted">N</span> <span class="sidebar-text">Notifications</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../components/forms.html"><span
+                    class="sidebar-text-contracted">F</span> <span class="sidebar-text">Forms</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../components/modals.html"><span
+                    class="sidebar-text-contracted">M</span> <span class="sidebar-text">Modals</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="../components/typography.html"><span
+                    class="sidebar-text-contracted">T</span> <span class="sidebar-text">Typography</span></a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item"><a href="../widgets.html" class="nav-link"><span class="sidebar-icon"><span
+                class="fas fa-th-large"></span></span> <span class="sidebar-text">Widgets</span></a></li>
+        <li role="separator" class="dropdown-divider mt-4 mb-3 border-black"></li>
+        <li class="nav-item"><a
+            href="https://themesberg.com/docs/volt-bootstrap-5-dashboard/getting-started/quick-start/" target="_blank"
+            class="nav-link d-flex align-items-center"><span class="sidebar-icon"><span
+                class="fas fa-book"></span></span> <span class="sidebar-text">Documentation <span
+                class="badge badge-md bg-secondary ms-1 text-dark">v1.3</span></span></a></li>
+        <li class="nav-item"><a href="https://themesberg.com/product/admin-dashboard/volt-premium-bootstrap-5-dashboard"
+            target="_blank" class="nav-link d-flex align-items-center"><span class="sidebar-icon"><span
+                class="fas fa-shopping-cart"></span></span> <span class="sidebar-text">Buy now</span></a></li>
+        <li class="nav-item"><a href="https://themesberg.com/" target="_blank"
+            class="nav-link d-flex align-items-center"><span class="sidebar-icon"><img
+                src="https://demo.themesberg.com/volt-pro/assets/img/themesberg.svg" height="20" width="20"
+                alt="Themesberg Logo"> </span><span class="sidebar-text">Themesberg</span></a></li>
+      </ul>
+    </div>
+  </nav>
+  <main class="content">
+    <nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-dark ps-0 pe-2 pb-0">
+      <div class="container-fluid px-0">
+        <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
+          <div class="d-flex align-items-center"><button id="sidebar-toggle"
+              class="sidebar-toggle me-3 btn btn-icon-only btn-lg btn-circle d-none d-md-inline-block"><span
+                class="fas fa-bars"></span></button>
+            <form class="navbar-search form-inline" id="navbar-search-main">
+              <div class="input-group input-group-merge search-bar"><span class="input-group-text"
+                  id="topbar-addon"><span class="fas fa-search"></span></span> <input type="text" class="form-control"
+                  id="topbarInputIconLeft" placeholder="Search" aria-label="Search" aria-describedby="topbar-addon">
+              </div>
+            </form>
+          </div>
+          <ul class="navbar-nav align-items-center">
+            <li class="nav-item dropdown"><a class="nav-link text-dark me-lg-3 icon-notifications dropdown-toggle"
+                data-unread-notifications="true" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"><span class="icon icon-sm"><span class="fas fa-bell bell-shake"></span> <span
+                    class="icon-badge rounded-circle unread-notifications"></span></span></a>
+              <div class="dropdown-menu dashboard-dropdown dropdown-menu-lg dropdown-menu-center mt-2 py-0">
+                <div class="list-group list-group-flush"><a href="#"
+                    class="text-center text-primary fw-bold border-bottom border-light py-3">Notifications</a> <a
+                    href="../calendar.html" class="list-group-item list-group-item-action border-bottom border-light">
                     <div class="row align-items-center">
-                        <div class="col-md-8">
-                            <div class="section-title">
-                                <div class="media">
-                                    <i class="uil uil-envelope-star display-4 text-white"></i>
-                                    <div class="media-body ml-md-4 ml-3">
-                                        <h4 class="font-weight-bold text-light mb-1">Subscribe to our newsletters</h4>
-                                        <p class="text-white-50 mb-0">Sign up and receive the latest tips via email.</p>
-                                    </div>
-                                </div>
-                            </div>
+                      <div class="col-auto"> <img alt="Image placeholder"
+                          src="@/assets/img/team/profile-picture-1.jpg"
+                          class="user-avatar lg-avatar rounded-circle"></div>
+                      <div class="col ps-0 ms-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h4 class="h6 mb-0 text-small">Jose Leos</h4>
+                          </div>
+                          <div class="text-end"><small class="text-danger">a few moments ago</small></div>
                         </div>
-
-                        <div class="col-md-4 mt-4 mt-sm-0">
-                            <div class="text-md-right ml-5 ml-sm-0">
-                                <a href="javascript:void(0)" class="btn btn-primary">Subscribe Now</a>
-                            </div>
-                        </div><!--end col-->
-                    </div><!--end row-->
-                </div><!--end container-->
-            </div><!--end div-->
-        </div><!--end container-->
-        <!-- End -->
-        
-        <!-- Footer Start -->
-        <footer class="bg-footer footer-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 mb-0 mb-md-4 pb-0 pb-md-2">
-                        <a href="#" class="logo-footer">
-                            <img src="../assets/images/logo-footer.png" height="48" alt="">
-                        </a>
-                        <ul class="list-unstyled footer-list px-0 mt-4">
-                            <li><i data-feather="map-pin" class="fea icon-sm mr-2"></i><a href="#" class="text-foot">Londan, England</a></li>
-                            <li><i data-feather="mail" class="fea icon-sm mr-2"></i><a href="mailto:contact@example.com" class="text-foot">test@yourdomain.com</a></li>
-                            <li><i data-feather="phone" class="fea icon-sm mr-2"></i><a href="tel:+152534-468-854" class="text-foot">+(125) 1254-5487</a></li>
-                        </ul>
-                    </div><!--end col-->
-
-                    <div class="col-lg-9 col-md-12">
-                        <div class="row">
-                            <div class="col-md-3 col-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                                <h5 class="text-light footer-head">Company</h5>
-                                <ul class="list-unstyled footer-list mt-4">
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> About us</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Services</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Team</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Project</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Blog</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Login</a></li>
-                                </ul>
-                            </div><!--end col-->
-                            
-                            <div class="col-md-3 col-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                                <h5 class="text-light footer-head">Features</h5>
-                                <ul class="list-unstyled footer-list mt-4">
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Release Notes</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Invoice</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Integrations</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> APIs</a></li>
-                                </ul>
-                            </div><!--end col-->
-                            
-                            <div class="col-md-3 col-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                                <h5 class="text-light footer-head">Documentation</h5>
-                                <ul class="list-unstyled footer-list mt-4">
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Support</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Docs</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Changelog</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Components</a></li>
-                                </ul>
-                            </div><!--end col-->
-                            
-                            <div class="col-md-3 col-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                                <h5 class="text-light footer-head">Usefull Links</h5>
-                                <ul class="list-unstyled footer-list mt-4">
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Terms Policy</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="mdi mdi-chevron-right mr-1"></i> Privacy Policy</a></li>
-                                </ul>
-                            </div><!--end col-->
-                        </div><!--end row-->
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-
-            <div class="container mt-5">
-                <div class="pt-4 footer-bar">
+                        <p class="font-small mt-1 mb-0">Added you to an event "Project stand-up" tomorrow at 12:30 AM.
+                        </p>
+                      </div>
+                    </div>
+                  </a><a href="../tasks.html" class="list-group-item list-group-item-action border-bottom border-light">
                     <div class="row align-items-center">
-                        <div class="col-sm-6">
-                            <div class="text-sm-left text-center">
-                                <ul class="list-unstyled social-icon social mb-0 mt-4">
-                                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="facebook" class="fea icon-sm fea-social"></i></a></li>
-                                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
-                                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="twitter" class="fea icon-sm fea-social"></i></a></li>
-                                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="linkedin" class="fea icon-sm fea-social"></i></a></li>
-                                </ul><!--end icon-->
-                            </div>
+                      <div class="col-auto"> <img alt="Image placeholder"
+                          src="@/assets/img/team/profile-picture-2.jpg"
+                          class="user-avatar lg-avatar rounded-circle"></div>
+                      <div class="col ps-0 ms-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h4 class="h6 mb-0 text-small">Neil Sims</h4>
+                          </div>
+                          <div class="text-end"><small class="text-danger">2 hrs ago</small></div>
                         </div>
-    
-                        <div class="col-sm-6 mt-4 mt-sm-0">
-                            <ul class="list-unstyled footer-list text-sm-right text-center mb-0">
-                                <li class="list-inline-item"><a href="javascript:void(0)" class="text-foot mr-2">Terms</a></li>
-                                <li class="list-inline-item"><a href="javascript:void(0)" class="text-foot mr-2">Privacy</a></li>
-                                <li class="list-inline-item"><a href="javascript:void(0)" class="text-foot mr-2">About</a></li>
-                                <li class="list-inline-item"><a href="javascript:void(0)" class="text-foot mr-2">Contact</a></li>
-                            </ul>
-                        </div>
+                        <p class="font-small mt-1 mb-0">You've been assigned a task for "Awesome new project".</p>
+                      </div>
                     </div>
-
-                    <div class="row justify-content-center mt-2">
-                        <div class="col-12 text-center">
-                            <p class="mb-0">© 2020 Landflow. Design with <i class="mdi mdi-heart text-danger"></i> by Uniquecrew.</p>
+                  </a><a href="../tasks.html" class="list-group-item list-group-item-action border-bottom border-light">
+                    <div class="row align-items-center">
+                      <div class="col-auto"> <img alt="Image placeholder"
+                          src="@/assets/img/team/profile-picture-3.jpg"
+                          class="user-avatar lg-avatar rounded-circle"></div>
+                      <div class="col ps-0 m-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h4 class="h6 mb-0 text-small">Roberta Casas</h4>
+                          </div>
+                          <div class="text-end"><small>5 hrs ago</small></div>
                         </div>
+                        <p class="font-small mt-1 mb-0">Tagged you in a document called "First quarter financial plans",
+                        </p>
+                      </div>
                     </div>
+                  </a><a href="../single-message.html"
+                    class="list-group-item list-group-item-action border-bottom border-light">
+                    <div class="row align-items-center">
+                      <div class="col-auto"> <img alt="Image placeholder"
+                          src="@/assets/img/team/profile-picture-4.jpg"
+                          class="user-avatar lg-avatar rounded-circle"></div>
+                      <div class="col ps-0 ms-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h4 class="h6 mb-0 text-small">Joseph Garth</h4>
+                          </div>
+                          <div class="text-end"><small>1 d ago</small></div>
+                        </div>
+                        <p class="font-small mt-1 mb-0">New message: "Hey, what's up? All set for the presentation?"</p>
+                      </div>
+                    </div>
+                  </a><a href="../single-message.html"
+                    class="list-group-item list-group-item-action border-bottom border-light">
+                    <div class="row align-items-center">
+                      <div class="col-auto"> <img alt="Image placeholder"
+                          src="@/assets/img/team/profile-picture-5.jpg"
+                          class="user-avatar lg-avatar rounded-circle"></div>
+                      <div class="col ps-0 ms-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h4 class="h6 mb-0 text-small">Bonnie Green</h4>
+                          </div>
+                          <div class="text-end"><small>2 hrs ago</small></div>
+                        </div>
+                        <p class="font-small mt-1 mb-0">New message: "We need to improve the UI/UX for the landing
+                          page."</p>
+                      </div>
+                    </div>
+                  </a><a href="#" class="dropdown-item text-center text-primary fw-bold rounded-bottom py-3">View
+                    all</a></div>
+              </div>
+            </li>
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="media d-flex align-items-center"><img class="user-avatar md-avatar rounded-circle"
+                    alt="Image placeholder" src="@/assets/img/team/profile-picture-3.jpg">
+                  <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block"><span
+                      class="mb-0 font-small fw-bold">Bonnie Green</span></div>
                 </div>
+              </a>
+              <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-0"><a
+                  class="dropdown-item rounded-top fw-bold" href="#"><span class="far fa-user-circle"></span>My
+                  Profile</a> <a class="dropdown-item fw-bold" href="#"><span class="fas fa-cog"></span>Settings</a> <a
+                  class="dropdown-item fw-bold" href="#"><span class="fas fa-envelope-open-text"></span>Messages</a> <a
+                  class="dropdown-item fw-bold" href="#"><span class="fas fa-user-shield"></span>Support</a>
+                <div role="separator" class="dropdown-divider my-0"></div><a
+                  class="dropdown-item rounded-bottom fw-bold" href="#"><span
+                    class="fas fa-sign-out-alt text-danger"></span>Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+      <div class="btn-toolbar dropdown"><button class="btn btn-dark btn-sm me-2 dropdown-toggle"
+          data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus me-2"></span>New
+          Task</button>
+        <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-0"><a
+            class="dropdown-item fw-normal rounded-top" href="#"><span class="fas fa-tasks"></span>New Task</a> <a
+            class="dropdown-item fw-normal" href="#"><span class="fas fa-cloud-upload-alt"></span>Upload Files</a> <a
+            class="dropdown-item fw-normal" href="#"><span class="fas fa-user-shield"></span>Preview Security</a>
+          <div role="separator" class="dropdown-divider my-0"></div><a class="dropdown-item fw-normal rounded-bottom"
+            href="#"><span class="fas fa-rocket text-danger"></span>Upgrade to Pro</a>
+        </div>
+      </div>
+      <div class="btn-group"><button type="button" class="btn btn-sm btn-outline-primary">Share</button> <button
+          type="button" class="btn btn-sm btn-outline-primary">Export</button></div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-12 mb-4">
+        <div class="card bg-secondary-alt shadow-sm">
+          <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+            <div class="d-block mb-3 mb-sm-0">
+              <div class="h5 fw-normal mb-2">Sales Value</div>
+              <h2 class="h3">$10,567</h2>
+              <div class="small mt-2"><span class="fw-bold me-2">Yesterday</span> <span
+                  class="fas fa-angle-up text-success"></span> <span class="text-success fw-bold">10.57%</span></div>
             </div>
-        </footer><!--end footer-->
-        <!-- Footer End -->
-
-        <!-- Back to top -->
-        <a href="#" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
-        <!-- Back to top -->
+            <div class="d-flex ms-auto"><a href="#" class="btn btn-secondary text-dark btn-sm me-2">Month</a> <a
+                href="#" class="btn btn-dark btn-sm me-3">Week</a></div>
+          </div>
+          <div class="card-body p-2">
+            <div class="ct-chart-sales-value ct-double-octave ct-series-g"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-xl-4 mb-4">
+        <div class="card border-light shadow-sm">
+          <div class="card-body">
+            <div class="row d-block d-xl-flex align-items-center">
+              <div
+                class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                <div class="icon icon-shape icon-md icon-shape-primary rounded me-4 me-sm-0"><span
+                    class="fas fa-chart-line"></span></div>
+                <div class="d-sm-none">
+                  <h2 class="h5">Customers</h2>
+                  <h3 class="mb-1">345,678</h3>
+                </div>
+              </div>
+              <div class="col-12 col-xl-7 px-xl-0">
+                <div class="d-none d-sm-block">
+                  <h2 class="h5">Customers</h2>
+                  <h3 class="mb-1">345k</h3>
+                </div><small>Feb 1 - Apr 1, <span class="icon icon-small"><span
+                      class="fas fa-globe-europe"></span></span> WorldWide</small>
+                <div class="small mt-2"><span class="fas fa-angle-up text-success"></span> <span
+                    class="text-success fw-bold">18.2%</span> Since last month</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-xl-4 mb-4">
+        <div class="card border-light shadow-sm">
+          <div class="card-body">
+            <div class="row d-block d-xl-flex align-items-center">
+              <div
+                class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                <div class="icon icon-shape icon-md icon-shape-secondary rounded me-4"><span
+                    class="fas fa-cash-register"></span></div>
+                <div class="d-sm-none">
+                  <h2 class="h5">Revenue</h2>
+                  <h3 class="mb-1">$43,594</h3>
+                </div>
+              </div>
+              <div class="col-12 col-xl-7 px-xl-0">
+                <div class="d-none d-sm-block">
+                  <h2 class="h5">Revenue</h2>
+                  <h3 class="mb-1">$43,594</h3>
+                </div><small>Feb 1 - Apr 1, <span class="icon icon-small"><span
+                      class="fas fa-globe-europe"></span></span> Worldwide</small>
+                <div class="small mt-2"><span class="fas fa-angle-up text-success"></span> <span
+                    class="text-success fw-bold">28.2%</span> Since last month</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-xl-4 mb-4">
+        <div class="card border-light shadow-sm">
+          <div class="card-body">
+            <div class="row d-block d-xl-flex align-items-center">
+              <div
+                class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                <div class="ct-chart-traffic-share ct-golden-section ct-series-a"></div>
+              </div>
+              <div class="col-12 col-xl-7 px-xl-0">
+                <h2 class="h5 mb-3">Traffic Share</h2>
+                <h6 class="fw-normal text-gray"><span class="icon w-20 icon-xs icon-secondary me-1"><span
+                      class="fas fa-desktop"></span></span> Desktop <a href="#" class="h6">60%</a></h6>
+                <h6 class="fw-normal text-gray"><span class="icon w-20 icon-xs icon-primary me-1"><span
+                      class="fas fa-mobile-alt"></span></span> Mobile Web <a href="#" class="h6">30%</a></h6>
+                <h6 class="fw-normal text-gray"><span class="icon w-20 icon-xs icon-tertiary me-1"><span
+                      class="fas fa-tablet-alt"></span></span> Tablet Web <a href="#" class="h6">10%</a></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-xl-4 mb-4">
+        <div class="card border-light shadow-sm">
+          <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+            <div class="d-block">
+              <div class="h6 fw-normal text-gray mb-2">Total orders</div>
+              <h2 class="h3">452</h2>
+              <div class="small mt-2"><span class="fas fa-angle-up text-success"></span> <span
+                  class="text-success fw-bold">18.2%</span></div>
+            </div>
+            <div class="d-block ms-auto">
+              <div class="d-flex align-items-center text-right mb-2"><span
+                  class="shape-xs rounded-circle bg-dark me-2"></span> <span class="fw-normal small">July</span></div>
+              <div class="d-flex align-items-center text-right"><span
+                  class="shape-xs rounded-circle bg-secondary me-2"></span> <span class="fw-normal small">August</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-2">
+            <div class="ct-chart-ranking ct-golden-section ct-series-a"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-4 mb-4">
+        <div class="card border-light shadow-sm">
+          <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+            <div class="d-block">
+              <div class="h6 fw-normal text-gray mb-2">Traffic by Source</div>
+              <h2 class="h4">Google</h2>
+              <div class="small mt-2"><span class="fas fa-angle-up text-success"></span> <span
+                  class="text-success fw-bold">10.57%</span></div>
+            </div>
+            <div class="d-block ms-auto">
+              <div class="d-flex align-items-center text-right mb-2"><span
+                  class="shape-xs rounded-circle bg-dark me-2"></span> <span class="fw-normal small">Google</span></div>
+              <div class="d-flex align-items-center text-right mb-2"><span
+                  class="shape-xs rounded-circle bg-secondary me-2"></span> <span class="fw-normal small">Yahoo</span>
+              </div>
+              <div class="d-flex align-items-center text-right mb-2"><span
+                  class="shape-xs rounded-circle bg-tertiary me-2"></span> <span class="fw-normal small">Yandex</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-2">
+            <div class="ct-chart-traffic-source ct-golden-section ct-series-a"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-4 mb-4">
+        <div class="card border-light shadow-sm">
+          <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+            <div class="d-block">
+              <div class="h6 fw-normal text-gray mb-2">Organic vs Paid Search</div>
+              <h2 class="h4">Trafic Distibution</h2>
+              <div class="small mt-2"><span class="fas fa-angle-up text-success"></span> <span
+                  class="text-success fw-bold">$10.57%</span></div>
+            </div>
+            <div class="d-block ms-auto">
+              <div class="d-flex align-items-center text-right mb-2"><span
+                  class="shape-xs rounded-circle bg-secondary me-2"></span> <span class="fw-normal small">Organic</span>
+              </div>
+              <div class="d-flex align-items-center text-right mb-2"><span
+                  class="shape-xs rounded-circle bg-tertiary me-2"></span> <span class="fw-normal small">Direct</span>
+              </div>
+              <div class="d-flex align-items-center text-right mb-2"><span
+                  class="shape-xs rounded-circle bg-dark me-2"></span> <span class="fw-normal small">Paid</span></div>
+            </div>
+          </div>
+          <div class="card-body p-2">
+            <div class="ct-chart-distribution ct-golden-section ct-series-a"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-xl-8 mb-4">
+        <div class="row">
+          <div class="col-12 mb-4">
+            <div class="card border-light shadow-sm">
+              <div class="card-header">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <h2 class="h5">Page visits</h2>
+                  </div>
+                  <div class="col text-right"><a href="traffic-sources.html" class="btn btn-sm btn-secondary">See
+                      all</a></div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Page name</th>
+                      <th scope="col">Page Views</th>
+                      <th scope="col">Page Value</th>
+                      <th scope="col">Bounce rate</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">/demo/admin/index.html</th>
+                      <td>3,225</td>
+                      <td>$20</td>
+                      <td><span class="fas fa-arrow-up text-danger me-3"></span> 42,55%</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">/demo/admin/forms.html</th>
+                      <td>2,987</td>
+                      <td>0</td>
+                      <td><span class="fas fa-arrow-down text-success me-3"></span> 43,52%</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">/demo/admin/util.html</th>
+                      <td>2,844</td>
+                      <td>294</td>
+                      <td><span class="fas fa-arrow-down text-success me-3"></span> 32,35%</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">/demo/admin/validation.html</th>
+                      <td>2,050</td>
+                      <td>$147</td>
+                      <td><span class="fas fa-arrow-up text-danger me-3"></span> 50,87%</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">/demo/admin/modals.html</th>
+                      <td>1,483</td>
+                      <td>$19</td>
+                      <td><span class="fas fa-arrow-down text-success me-3"></span> 32,24%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 mb-4">
+            <div class="card border-light shadow-sm">
+              <div class="card-header border-bottom border-light d-flex justify-content-between">
+                <h2 class="h5 mb-0">Team members</h2><a href="../users.html" class="btn btn-sm btn-secondary">See
+                  all</a>
+              </div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush list my--3">
+                  <li class="list-group-item px-0">
+                    <div class="row align-items-center">
+                      <div class="col-auto"> <a href="#" class="user-avatar"><img class="rounded-circle"
+                            alt="Image placeholder" src="@/assets/img/team/profile-picture-1.jpg"></a></div>
+                      <div class="col-auto ms--2">
+                        <h4 class="h6 mb-0"><a href="#!">Chris Wood</a></h4><span class="text-success">●</span>
+                        <small>Online</small>
+                      </div>
+                      <div class="col text-right"><a href="../calendar.html" class="btn btn-sm btn-tertiary"><i
+                            class="fas fa-calendar-check me-1"></i> Invite</a></div>
+                    </div>
+                  </li>
+                  <li class="list-group-item px-0">
+                    <div class="row align-items-center">
+                      <div class="col-auto"> <a href="../users.html" class="user-avatar"><img class="rounded-circle"
+                            alt="Image placeholder" src="@/assets/img/team/profile-picture-2.jpg"></a></div>
+                      <div class="col-auto ms--2">
+                        <h4 class="h6 mb-0"><a href="#!">Jose Leos</a></h4><span class="text-warning">●</span> <small>In
+                          a meeting</small>
+                      </div>
+                      <div class="col text-right"><a href="../single-message.html" class="btn btn-sm btn-tertiary"><i
+                            class="fas fa-comment me-1"></i> Message</a></div>
+                    </div>
+                  </li>
+                  <li class="list-group-item px-0">
+                    <div class="row align-items-center">
+                      <div class="col-auto"> <a href="#" class="user-avatar"><img class="rounded-circle"
+                            alt="Image placeholder" src="@/assets/img/team/profile-picture-3.jpg"></a></div>
+                      <div class="col-auto ms--2">
+                        <h4 class="h6 mb-0"><a href="#!">Bonnie Green</a></h4><span class="text-danger">●</span>
+                        <small>Offline</small>
+                      </div>
+                      <div class="col text-right"><a href="../calendar.html" class="btn btn-sm btn-tertiary"><i
+                            class="fas fa-calendar-check me-1"></i> Invite</a></div>
+                    </div>
+                  </li>
+                  <li class="list-group-item px-0">
+                    <div class="row align-items-center">
+                      <div class="col-auto"> <a href="#" class="user-avatar"><img class="rounded-circle"
+                            alt="Image placeholder" src="@/assets/img/team/profile-picture-4.jpg"></a></div>
+                      <div class="col-auto ms--2">
+                        <h4 class="h6 mb-0"><a href="#">Neil Sims</a></h4><span class="text-success">●</span>
+                        <small>Online</small>
+                      </div>
+                      <div class="col text-right"><a href="../single-message.html" class="btn btn-sm btn-tertiary"><i
+                            class="fas fa-comment me-1"></i> Message</a></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 mb-4">
+            <div class="card border-light shadow-sm">
+              <div class="card-header border-bottom border-light">
+                <h2 class="h5 mb-0">Progress track</h2>
+              </div>
+              <div class="card-body">
+                <div class="row align-items-center mb-4">
+                  <div class="col-auto"><span class="icon icon-md text-purple"><span
+                        class="fab fa-bootstrap"></span></span></div>
+                  <div class="col">
+                    <div class="progress-wrapper">
+                      <div class="progress-info">
+                        <div class="h6 mb-0">Rocket - SaaS Template</div>
+                        <div class="small fw-bold text-dark"><span>34 %</span></div>
+                      </div>
+                      <div class="progress mb-0">
+                        <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="34" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 34%;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row align-items-center mb-4">
+                  <div class="col-auto"><span class="icon icon-md text-danger"><span
+                        class="fab fa-angular"></span></span></div>
+                  <div class="col">
+                    <div class="progress-wrapper">
+                      <div class="progress-info">
+                        <div class="h6 mb-0">Pixel - Design System</div>
+                        <div class="small fw-bold text-dark"><span>60 %</span></div>
+                      </div>
+                      <div class="progress mb-0">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 60%;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row align-items-center mb-4">
+                  <div class="col-auto"><span class="icon icon-md text-success"><span
+                        class="fab fa-vuejs"></span></span></div>
+                  <div class="col">
+                    <div class="progress-wrapper">
+                      <div class="progress-info">
+                        <div class="h6 mb-0">Spaces - Listings Template</div>
+                        <div class="small fw-bold text-dark"><span>45 %</span></div>
+                      </div>
+                      <div class="progress mb-0">
+                        <div class="progress-bar bg-tertiary" role="progressbar" aria-valuenow="45" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 45%;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row align-items-center mb-4">
+                  <div class="col-auto"><span class="icon icon-md text-info"><span class="fab fa-react"></span></span>
+                  </div>
+                  <div class="col">
+                    <div class="progress-wrapper">
+                      <div class="progress-info">
+                        <div class="h6 mb-0">Stellar - Dashboard</div>
+                        <div class="small fw-bold text-dark"><span>35 %</span></div>
+                      </div>
+                      <div class="progress mb-0">
+                        <div class="progress-bar bg-info" role="progressbar" aria-valuenow="35" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 35%;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row align-items-center">
+                  <div class="col-auto"><span class="icon icon-md text-purple"><span
+                        class="fab fa-bootstrap"></span></span></div>
+                  <div class="col">
+                    <div class="progress-wrapper">
+                      <div class="progress-info">
+                        <div class="h6 mb-0">Volt - Dashboard</div>
+                        <div class="small fw-bold text-dark"><span>34 %</span></div>
+                      </div>
+                      <div class="progress mb-0">
+                        <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="34" aria-valuemin="0"
+                          aria-valuemax="100" style="width: 34%;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card border-light shadow-sm">
+              <div class="card-header border-bottom border-light">
+                <h2 class="h5 mb-0">Events</h2>
+              </div>
+              <div class="card-body">
+                <div class="row align-items-center d-block d-sm-flex border-bottom border-light pb-4 mb-4">
+                  <div class="col-auto mb-3 mb-sm-0">
+                    <div class="calendar d-flex"><span class="calendar-month">Aug</span><span
+                        class="calendar-day">10</span></div>
+                  </div>
+                  <div class="col"><a href="../calendar.html">
+                      <h3 class="h5">Newmarket Nights</h3>
+                    </a><span>Organized by <a href="#!" class="text-700">University of Oxford</a></span>
+                    <div class="small fw-bold mt-1">Time: 6:00AM</div><span class="small fw-bold">Place: Cambridge Boat
+                      Club, Cambridge</span>
+                  </div>
+                </div>
+                <div class="row align-items-center d-block d-sm-flex border-bottom border-light pb-4 mb-4">
+                  <div class="col-auto mb-3 mb-sm-0">
+                    <div class="calendar d-flex"><span class="calendar-month">Sep</span><span
+                        class="calendar-day">12</span></div>
+                  </div>
+                  <div class="col"><a href="../calendar.html">
+                      <h3 class="h5 mb-0">Noco Hemp Expo</h3>
+                    </a><span>Organized by <a href="#!" class="text-700">University of Oxford</a></span>
+                    <div class="small fw-bold mt-1">Thu, 12 Sep - Sat, 18 Sep 2020</div><span
+                      class="small fw-bold">Place: Denver Expo Club, USA</span>
+                  </div>
+                </div>
+                <div class="row d-block d-sm-flex align-items-center">
+                  <div class="col-auto mb-3 mb-sm-0">
+                    <div class="calendar d-flex"><span class="calendar-month">Sep</span><span
+                        class="calendar-day">20</span></div>
+                  </div>
+                  <div class="col"><a href="../calendar.html">
+                      <h3 class="h5 mb-0">Canadian National Exhibition (CNE)</h3>
+                    </a><span>Organized by <a href="#!" class="text-700">University of Oxford</a></span>
+                    <div class="small fw-bold mt-1">Fri, 20 Sep - Mon, 07 Oct 2020</div><span
+                      class="small fw-bold">Place: Toronto , Canada</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer border-top border-light text-center"><a class="fw-bold text-primary"
+                  href="../calendar.html">See all</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-xl-4 mb-4">
+        <div class="col-12 px-0 mb-4">
+          <div class="card border-light shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between border-bottom border-light pb-3">
+                <div>
+                  <h6 class="mb-0"><span class="icon icon-xs me-3"><span
+                        class="fas fa-globe-europe"></span></span>Global Rank</h6>
+                </div>
+                <div><a href="#" class="text-primary fw-bold">#755<span class="fas fa-chart-line ms-2"></span></a></div>
+              </div>
+              <div class="d-flex align-items-center justify-content-between border-bottom border-light py-3">
+                <div>
+                  <h6 class="mb-0"><span class="icon icon-xs me-3"><span class="fas fa-flag-usa"></span></span>Country
+                    Rank</h6>
+                  <div class="small card-stats">United States<span class="icon icon-xs text-success ms-2"><span
+                        class="fas fa-angle-up"></span></span></div>
+                </div>
+                <div><a href="#" class="text-primary fw-bold">#32<span class="fas fa-chart-line ms-2"></span></a></div>
+              </div>
+              <div class="d-flex align-items-center justify-content-between pt-3">
+                <div>
+                  <h6 class="mb-0"><span class="icon icon-xs me-3"><span
+                        class="fas fa-folder-open"></span></span>Category Rank</h6><a href="#"
+                    class="small card-stats">Travel > Accomodation</a>
+                </div>
+                <div><a href="#" class="text-primary fw-bold">#16<span class="fas fa-chart-line ms-2"></span></a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 px-0 mb-4">
+          <div class="card border-light shadow-sm">
+            <div class="card-body">
+              <h2 class="h5">Acquisition</h2>
+              <p>Tells you where your visitors originated from, such as search engines, social networks or website
+                referrals.</p>
+              <div class="d-block">
+                <div class="d-flex align-items-center pt-3 me-5">
+                  <div class="icon icon-shape icon-sm icon-shape-danger rounded me-3"><span
+                      class="fas fa-chart-bar"></span></div>
+                  <div class="d-block"><label class="mb-0">Bounce Rate</label>
+                    <h4 class="mb-0">33.50%</h4>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center pt-3">
+                  <div class="icon icon-shape icon-sm icon-shape-quaternary rounded me-3"><span
+                      class="fas fa-chart-area"></span></div>
+                  <div class="d-block"><label class="mb-0">Sessions</label>
+                    <h4 class="mb-0">9,567</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 px-0">
+          <div class="card border-light shadow-sm">
+            <div class="card-header pb-0">
+              <h2 class="h5">Visits past 30 days by country</h2>
+              <div id="map" style="width: 100%; height: 300px"></div>
+            </div>
+            <div class="card-body">
+              <div class="row align-items-center mb-4">
+                <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
+                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/united-states-of-america.svg"></a>
+                </div>
+                <div class="col">
+                  <div class="progress-wrapper">
+                    <div class="progress-info">
+                      <div class="h6 mb-0">United States <span class="text-gray font-small">(272.109)</span></div>
+                      <div class="small fw-bold text-dark"><span>34 %</span></div>
+                    </div>
+                    <div class="progress mb-0">
+                      <div class="progress-bar bg-dark" role="progressbar" aria-valuenow="34" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 34%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-items-center mb-4">
+                <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
+                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/canada.svg"></a></div>
+                <div class="col">
+                  <div class="progress-wrapper">
+                    <div class="progress-info">
+                      <div class="h6 mb-0">Canada <span class="text-gray font-small">(160.064)</span></div>
+                      <div class="small fw-bold text-dark"><span>20 %</span></div>
+                    </div>
+                    <div class="progress mb-0">
+                      <div class="progress-bar bg-secondary" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 24%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-items-center mb-4">
+                <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
+                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/germany.svg"></a></div>
+                <div class="col">
+                  <div class="progress-wrapper">
+                    <div class="progress-info">
+                      <div class="h6 mb-0">Germany <span class="text-gray font-small">(120.048)</span></div>
+                      <div class="small fw-bold text-dark"><span>15 %</span></div>
+                    </div>
+                    <div class="progress mb-0">
+                      <div class="progress-bar bg-tertiary" role="progressbar" aria-valuenow="15" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 15%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-items-center mb-4">
+                <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
+                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/france.svg"></a></div>
+                <div class="col">
+                  <div class="progress-wrapper">
+                    <div class="progress-info">
+                      <div class="h6 mb-0">France <span class="text-gray font-small">(100.048)</span></div>
+                      <div class="small fw-bold text-dark"><span>8 %</span></div>
+                    </div>
+                    <div class="progress mb-0">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="8" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 8%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-items-center mb-4">
+                <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
+                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/japan.svg"></a></div>
+                <div class="col">
+                  <div class="progress-wrapper">
+                    <div class="progress-info">
+                      <div class="h6 mb-0">Japan <span class="text-gray font-small">(56.022)</span></div>
+                      <div class="small fw-bold text-dark"><span>7 %</span></div>
+                    </div>
+                    <div class="progress mb-0">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="7" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 7%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-items-center mb-4">
+                <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
+                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/italy.svg"></a></div>
+                <div class="col">
+                  <div class="progress-wrapper">
+                    <div class="progress-info">
+                      <div class="h6 mb-0">Italy <span class="text-gray font-small">(48.019)</span></div>
+                      <div class="small fw-bold text-dark"><span>6 %</span></div>
+                    </div>
+                    <div class="progress mb-0">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="6" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 6%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-items-center mb-4">
+                <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
+                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/netherlands.svg"></a></div>
+                <div class="col">
+                  <div class="progress-wrapper">
+                    <div class="progress-info">
+                      <div class="h6 mb-0">Netherlands <span class="text-gray font-small">(40.016)</span></div>
+                      <div class="small fw-bold text-dark"><span>5 %</span></div>
+                    </div>
+                    <div class="progress mb-0">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="5" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 5%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
+                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/sweden.svg"></a></div>
+                <div class="col">
+                  <div class="progress-wrapper">
+                    <div class="progress-info">
+                      <div class="h6 mb-0">Sweden <span class="text-gray font-small">(26.016)</span></div>
+                      <div class="small fw-bold text-dark"><span>3 %</span></div>
+                    </div>
+                    <div class="progress mb-0">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="3" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 3%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer border-top border-light text-center"><a class="fw-bold text-primary"
+                href="../calendar.html">See all</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer section py-5">
+      <div class="row">
+        <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+          <p class="mb-0 text-center text-xl-left">Copyright © 2019-<span class="current-year"></span> <a
+              class="text-primary fw-normal" href="https://themesberg.com/" target="_blank">Themesberg</a></p>
+        </div>
+        <div class="col-12 col-lg-6">
+          <ul class="list-inline list-group-flush list-group-borderless text-center text-xl-right mb-0">
+            <li class="list-inline-item px-0 px-sm-2"><a href="https://themesberg.com/about">About</a></li>
+            <li class="list-inline-item px-0 px-sm-2"><a href="https://themesberg.com/themes">Themes</a></li>
+            <li class="list-inline-item px-0 px-sm-2"><a href="https://themesberg.com/blog">Blog</a></li>
+            <li class="list-inline-item px-0 px-sm-2"><a href="https://themesberg.com/contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </main>
   </div>
 </template>
 
@@ -910,7 +941,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 </style>

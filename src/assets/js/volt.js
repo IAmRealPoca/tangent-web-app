@@ -478,10 +478,10 @@ d.addEventListener("DOMContentLoaded", function(event) {
         });
     }
 
-    var scroll = new SmoothScroll('a[href*="#"]', {
-        speed: 500,
-        speedAsDuration: true
-    });
+    // var scroll = new SmoothScroll('a[href*="#"]', {
+    //     speed: 500,
+    //     speedAsDuration: true
+    // });
 
     // SVG Map
     if(d.querySelector('#map')) {
