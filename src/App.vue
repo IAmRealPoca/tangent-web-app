@@ -1,10 +1,15 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <Navbar />
+    <HelloWorld msg="Welcome to Your Vue.js App" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "@/views/Dashboard.vue";
+import Navbar from "@/components/navbar/LeftNavbar.vue";
+
 import "./assets/js/volt.js";
 
 import "@/assets/vendor/popperjs/core/dist/umd/popper.min.js";
@@ -28,13 +33,13 @@ import "@/assets/vendor/leaflet/dist/leaflet.js";
 import "@/assets/vendor/simplebar/dist/simplebar.min.js";
 import "@/assets/vendor/sortablejs/Sortable.min.js";
 
-
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    HelloWorld,
+    Navbar,
+  },
+};
 </script>
 
 <style scoped>
