@@ -121,7 +121,7 @@ export default {
     });
 
     selectedAccTypeString.value = "[Select type]";
-    watch(selectedAccTypeId, (newValue, oldValue) => {
+    watch((selectedAccTypeId) => {
       if (selectedAccTypeId.value === 0) {
         selectedAccTypeString.value = "Admin";
       }
@@ -139,20 +139,17 @@ export default {
       console.log("acc type: ", selectedAccTypeId.value);
 
       // if (!selectedSchoolId.value || !selectedAccTypeId.value) {
-      const alwaysTrueFuckYouTypescipt = 1 + 1;
-      if (alwaysTrueFuckYouTypescipt !== 2) {
-      } else {
-        loginService(selectedSchoolId.value, selectedAccTypeId.value)
-          .then((resp) => {
-            // console.log(resp.token);
-            sessionStorage.setItem("token", resp.token);
-            store.dispatch("setCurrentUserFlag", resp.flg);
-            router.push("/");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
+
+      loginService(selectedSchoolId.value, selectedAccTypeId.value)
+        .then((resp) => {
+          // console.log(resp.token);
+          sessionStorage.setItem("token", resp.token);
+          // store.dispatch("setCurrentUserFlag", resp.flg);
+          router.push("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
     const onChange = () => {
       console.log("Normal trigger");
@@ -164,8 +161,6 @@ export default {
     const onClickToOpenVidu = () => {
       return "/vc";
     };
-
-    const bgColour = `--ion-background-color: #f6f5f7`;
     return {
       //data
       listOfAccountType,
@@ -173,7 +168,6 @@ export default {
       selectedSchoolId,
       selectedAccTypeId,
       selectedAccTypeString,
-      bgColour,
       //methods
       onClick,
       onChange,
