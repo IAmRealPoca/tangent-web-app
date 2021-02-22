@@ -1,5 +1,5 @@
-import { axiosBase } from '../http/Client'
-import { axiosInstance } from '../http/Handler'
+import { axiosBase } from '../http/client'
+import { axiosInstance } from '../http/handler'
 
 const http = axiosInstance(axiosBase());
 
