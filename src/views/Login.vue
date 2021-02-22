@@ -31,7 +31,7 @@
                 </div>
                 <div class="btn-group me-2 mb-2">
                   <button type="button" class="btn btn-primary">
-                    {{ selectedAccTypeId }}
+                    {{ selectedAccTypeString }}
                   </button>
                   <button
                     type="button"
@@ -43,16 +43,27 @@
                     <i class="fas fa-angle-down dropdown-arrow"></i>
                     <span class="sr-only">\/</span>
                   </button>
-                  <div class="dropdown-menu" >
-                    <div class="dropdown-item" @click="selectedAccTypeId = accType.typeId" v-for="(accType, index) in listOfAccountType" :key="index">{{ accType.typeName }}</div>
+                  <div class="dropdown-menu">
+                    <div
+                      class="dropdown-item"
+                      @click="selectedAccTypeId = accType.typeId"
+                      v-for="(accType, index) in listOfAccountType"
+                      :key="index"
+                    >
+                      {{ accType.typeName }}
+                    </div>
                   </div>
                 </div>
                 <div class="d-flex justify-content-center my-4">
-                  <button class="btn btn-facebook me-3 mb-3" type="button" @click="onClick">
+                  <button
+                    class="btn btn-google me-3 mb-3"
+                    type="button"
+                    @click="onClick"
+                  >
                     <span class="me-1"
-                      ><span class="fab fa-facebook-f"></span
+                      ><span class="fab fa-google-f"></span
                     ></span>
-                    Login with Facebook
+                    Login with Google
                   </button>
                 </div>
               </div>
@@ -66,7 +77,7 @@
 
 <script>
 import { useRouter } from "vue-router";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { loginService } from "@/util/service/login";
 import * as schoolService from "@/util/service/schoolService";
 
@@ -92,11 +103,12 @@ export default {
       },
     ];
     const selectedAccTypeId = ref();
+    const selectedAccTypeString = ref();
     const user = sessionStorage.getItem("token");
     console.log("user", user);
 
     if (user) {
-      router.push("/home");
+      router.push("/");
     }
     onMounted(() => {
       console.log("Mason Mounted");
@@ -107,21 +119,35 @@ export default {
 
       // this._setUser(user ? JSON.parse(user) : null);
     });
+
+    selectedAccTypeString.value = "[Select type]";
+    watch(selectedAccTypeId, (newValue, oldValue) => {
+      if (selectedAccTypeId.value === 0) {
+        selectedAccTypeString.value = "Admin";
+      }
+      if (selectedAccTypeId.value === 2) {
+        selectedAccTypeString.value = "Employer";
+      }
+      if (selectedAccTypeId.value === 4) {
+        selectedAccTypeString.value = "School";
+      }
+    });
+
     function onClick() {
+      selectedSchoolId.value = 1;
       console.log("school: ", selectedSchoolId.value);
       console.log("acc type: ", selectedAccTypeId.value);
 
       // if (!selectedSchoolId.value || !selectedAccTypeId.value) {
       const alwaysTrueFuckYouTypescipt = 1 + 1;
       if (alwaysTrueFuckYouTypescipt !== 2) {
-        
       } else {
         loginService(selectedSchoolId.value, selectedAccTypeId.value)
           .then((resp) => {
             // console.log(resp.token);
             sessionStorage.setItem("token", resp.token);
             store.dispatch("setCurrentUserFlag", resp.flg);
-            router.push("/home");
+            router.push("/");
           })
           .catch((err) => {
             console.log(err);
@@ -146,6 +172,7 @@ export default {
       listOfSchools,
       selectedSchoolId,
       selectedAccTypeId,
+      selectedAccTypeString,
       bgColour,
       //methods
       onClick,
