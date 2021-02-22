@@ -16,7 +16,8 @@
     "dotenv": "^8.2.0",
     "jquery": "^3.5.1",
     "svgmap": "^2.0.4",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
