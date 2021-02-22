@@ -162,11 +162,15 @@ export default {
         subItem: [
           {
             title: "Job List",
-            url: "/employer/job-list",
+            url: "/employer/jobs",
           },
           {
             title: "Job Detail",
             url: "/employer/job-detail",
+          },
+          {
+            title: "Create Job",
+            url: "/employer/jobs/create",
           },
         ],
       },
