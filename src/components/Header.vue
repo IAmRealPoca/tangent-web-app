@@ -93,7 +93,7 @@
                       <div class="col ps-0 ms-2">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
-                            <h4 class="h6 mb-0 text-small">Bonnie Green</h4>
+                            <h4 class="h6 mb-0 text-small">{{ userName }}</h4>
                           </div>
                           <div class="text-end"><small>2 hrs ago</small></div>
                         </div>
@@ -110,7 +110,7 @@
                 <div class="media d-flex align-items-center"><img class="user-avatar md-avatar rounded-circle"
                     alt="Image placeholder" src="@/assets/img/team/profile-picture-3.jpg">
                   <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block"><span
-                      class="mb-0 font-small fw-bold">Bonnie Green</span></div>
+                      class="mb-0 font-small fw-bold">{{ userName }}</span></div>
                 </div>
               </a>
               <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-0"><a
@@ -131,8 +131,32 @@
 </template>
 
 <script>
+import { onMounted, ref } from "vue";
 export default {
   name: "Header",
+  setup() {
+function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+};
+
+    const userName = ref([]);
+        const user = sessionStorage.getItem("token");
+    onMounted(() => {
+      if (user) {
+        userName.value = parseJwt(user).email;
+        console.log(userName);
+      }
+    });
+    return {
+      userName,
+    }
+  },
 }
 </script>
 

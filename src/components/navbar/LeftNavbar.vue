@@ -90,356 +90,55 @@
               ><span class="mt-1 sidebar-text">Tangent App</span></a
             >
           </li>
-          <li class="nav-item">
-            <span
-              class="nav-link d-flex justify-content-between align-items-center"
-              data-bs-toggle="collapse"
-              data-bs-target="#submenu-dashboard"
-              ><span
-                ><span class="sidebar-icon"
-                  ><span class="fas fa-chart-pie"></span
-                ></span>
-                <span class="sidebar-text">Dashboard</span> </span
-              ><span class="link-arrow"
-                ><span class="fas fa-chevron-right"></span></span
-            ></span>
-            <div
-              class="multi-level collapse show"
-              role="list"
-              id="submenu-dashboard"
-              aria-expanded="false"
-            >
-              <ul class="flex-column nav">
-                <li class="nav-item active">
-                  <a href="dashboard.html" class="nav-link"
-                    ><span class="sidebar-text-contracted">O</span>
-                    <span class="sidebar-text">Overview</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a href="traffic-sources.html" class="nav-link"
-                    ><span class="sidebar-text-contracted">T</span>
-                    <span class="sidebar-text">All Traffic</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a href="app-analysis.html" class="nav-link"
-                    ><span class="sidebar-text-contracted">P</span>
-                    <span class="sidebar-text">Product Analysis</span></a
-                  >
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a
-              href="../kanban.html"
-              class="nav-link d-flex align-items-center justify-content-between"
-              ><span
-                ><span class="sidebar-icon"
-                  ><span class="fas fa-th"></span
-                ></span>
-                <span class="sidebar-text">Kanban</span></span
-              ></a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              href="../messages.html"
-              class="nav-link d-flex align-items-center justify-content-between"
-              ><span
-                ><span class="sidebar-icon"
-                  ><span class="fas fa-inbox"></span
-                ></span>
-                <span class="sidebar-text">Messages</span> </span
-              ><span
-                class="badge badge-md bg-danger badge-pill notification-count"
-                >4</span
-              ></a
-            >
-          </li>
-          <li class="nav-item">
-            <a href="../users.html" class="nav-link"
-              ><span class="sidebar-icon"
-                ><span class="fas fa-user-check"></span
+          <div v-for="(menuItem, index) in menuItems" :key="index">
+            <li class="nav-item" v-if="menuItem.subItem.length > 0">
+              <span
+                class="nav-link d-flex justify-content-between align-items-center"
+                data-bs-toggle="collapse"
+                data-bs-target="#submenu-dashboard"
+                ><span
+                  ><span class="sidebar-icon"
+                    ><span class="fas fa-chart-pie"></span
+                  ></span>
+                  <span class="sidebar-text">{{ menuItem.title }}</span> </span
+                ><span class="link-arrow"
+                  ><span class="fas fa-chevron-right"></span></span
               ></span>
-              <span class="sidebar-text">Users List</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a href="../transactions.html" class="nav-link"
-              ><span class="sidebar-icon"
-                ><span class="fas fa-hand-holding-usd"></span
-              ></span>
-              <span class="sidebar-text">Transactions</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a href="../tasks.html" class="nav-link"
-              ><span class="sidebar-icon"
-                ><span class="fas fa-clipboard-list"></span
-              ></span>
-              <span class="sidebar-text">Task List</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a href="../settings.html" class="nav-link"
-              ><span class="sidebar-icon"
-                ><span class="fas fa-cog"></span
-              ></span>
-              <span class="sidebar-text">Settings</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a href="../calendar.html" class="nav-link"
-              ><span class="sidebar-icon"
-                ><span class="far fa-calendar-alt"></span
-              ></span>
-              <span class="sidebar-text">Calendar</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a href="../map.html" class="nav-link"
-              ><span class="sidebar-icon"
-                ><span class="fas fa-map-marked-alt"></span
-              ></span>
-              <span class="sidebar-text">Map</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <span
-              class="nav-link collapsed d-flex justify-content-between align-items-center"
-              data-bs-toggle="collapse"
-              data-bs-target="#submenu-app"
-              ><span
-                ><span class="sidebar-icon"
-                  ><span class="fas fa-table"></span
-                ></span>
-                <span class="sidebar-text">Tables</span> </span
-              ><span class="link-arrow"
-                ><span class="fas fa-chevron-right"></span></span
-            ></span>
-            <div
-              class="multi-level collapse"
-              role="list"
-              id="submenu-app"
-              aria-expanded="false"
-            >
-              <ul class="flex-column nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="../tables/datatables.html"
-                    ><span class="sidebar-text-contracted">D</span>
-                    <span class="sidebar-text">DataTables</span></a
+              <div
+                class="multi-level collapse show"
+                role="list"
+                id="submenu-dashboard"
+                aria-expanded="false"
+              >
+                <ul class="flex-column nav">
+                  <li
+                    class="nav-item active"
+                    v-for="(subMenuItem, index2) in menuItem.subItem"
+                    :key="index2"
                   >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../tables/bootstrap-tables.html"
-                    ><span class="sidebar-text-contracted">B</span>
-                    <span class="sidebar-text">Bootstrap Tables</span></a
-                  >
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <span
-              class="nav-link collapsed d-flex justify-content-between align-items-center"
-              data-bs-toggle="collapse"
-              data-bs-target="#submenu-pages"
-              ><span
-                ><span class="sidebar-icon"
-                  ><span class="far fa-file-alt"></span
-                ></span>
-                <span class="sidebar-text">Page examples</span> </span
-              ><span class="link-arrow"
-                ><span class="fas fa-chevron-right"></span></span
-            ></span>
-            <div
-              class="multi-level collapse"
-              role="list"
-              id="submenu-pages"
-              aria-expanded="false"
-            >
-              <ul class="flex-column nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="../examples/pricing.html"
-                    ><span class="sidebar-text-contracted">P</span>
-                    <span class="sidebar-text">Pricing</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../examples/billing.html"
-                    ><span class="sidebar-text-contracted">B</span>
-                    <span class="sidebar-text">Billing</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../examples/invoice.html"
-                    ><span class="sidebar-text-contracted">I</span>
-                    <span class="sidebar-text">Invoice</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../examples/sign-in.html"
-                    ><span class="sidebar-text-contracted">S</span>
-                    <span class="sidebar-text">Sign In</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../examples/sign-up.html"
-                    ><span class="sidebar-text-contracted">S</span>
-                    <span class="sidebar-text">Sign Up</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../examples/forgot-password.html"
-                    ><span class="sidebar-text-contracted">F</span>
-                    <span class="sidebar-text">Forgot password</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../examples/reset-password.html"
-                    ><span class="sidebar-text-contracted">R</span>
-                    <span class="sidebar-text">Reset password</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../examples/lock.html"
-                    ><span class="sidebar-text-contracted">L</span>
-                    <span class="sidebar-text">Lock</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../examples/404.html"
-                    ><span class="sidebar-text-contracted">4</span>
-                    <span class="sidebar-text">404 Not Found</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../examples/500.html"
-                    ><span class="sidebar-text-contracted">5</span>
-                    <span class="sidebar-text">500 Not Found</span></a
-                  >
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <span
-              class="nav-link collapsed d-flex justify-content-between align-items-center"
-              data-bs-toggle="collapse"
-              data-bs-target="#submenu-components"
-              ><span
-                ><span class="sidebar-icon"
-                  ><span class="fas fa-box-open"></span
-                ></span>
-                <span class="sidebar-text">Components</span> </span
-              ><span class="link-arrow"
-                ><span class="fas fa-chevron-right"></span></span
-            ></span>
-            <div
-              class="multi-level collapse"
-              role="list"
-              id="submenu-components"
-              aria-expanded="false"
-            >
-              <ul class="flex-column nav">
-                <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    target="_blank"
-                    href="https://themesberg.com/docs/volt-bootstrap-5-dashboard/components/accordions/"
-                    ><span class="sidebar-text-contracted">A</span>
-                    <span class="sidebar-text">All Components</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../components/buttons.html"
-                    ><span class="sidebar-text-contracted">B</span>
-                    <span class="sidebar-text">Buttons</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../components/notifications.html"
-                    ><span class="sidebar-text-contracted">N</span>
-                    <span class="sidebar-text">Notifications</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../components/forms.html"
-                    ><span class="sidebar-text-contracted">F</span>
-                    <span class="sidebar-text">Forms</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../components/modals.html"
-                    ><span class="sidebar-text-contracted">M</span>
-                    <span class="sidebar-text">Modals</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../components/typography.html"
-                    ><span class="sidebar-text-contracted">T</span>
-                    <span class="sidebar-text">Typography</span></a
-                  >
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a href="../widgets.html" class="nav-link"
-              ><span class="sidebar-icon"
-                ><span class="fas fa-th-large"></span
-              ></span>
-              <span class="sidebar-text">Widgets</span></a
-            >
-          </li>
-          <li
-            role="separator"
-            class="dropdown-divider mt-4 mb-3 border-black"
-          ></li>
-          <li class="nav-item">
-            <a
-              href="https://themesberg.com/docs/volt-bootstrap-5-dashboard/getting-started/quick-start/"
-              target="_blank"
-              class="nav-link d-flex align-items-center"
-              ><span class="sidebar-icon"
-                ><span class="fas fa-book"></span
-              ></span>
-              <span class="sidebar-text"
-                >Documentation
-                <span class="badge badge-md bg-secondary ms-1 text-dark"
-                  >v1.3</span
-                ></span
-              ></a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              href="https://themesberg.com/product/admin-dashboard/volt-premium-bootstrap-5-dashboard"
-              target="_blank"
-              class="nav-link d-flex align-items-center"
-              ><span class="sidebar-icon"
-                ><span class="fas fa-shopping-cart"></span
-              ></span>
-              <span class="sidebar-text">Buy now</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              href="https://themesberg.com/"
-              target="_blank"
-              class="nav-link d-flex align-items-center"
-              ><span class="sidebar-icon"
-                ><img
-                  src="https://demo.themesberg.com/volt-pro/assets/img/themesberg.svg"
-                  height="20"
-                  width="20"
-                  alt="Themesberg Logo"
-                /> </span
-              ><span class="sidebar-text">Themesberg</span></a
-            >
-          </li>
+                    <a :href="subMenuItem.url" class="nav-link"
+                      ><span class="sidebar-text-contracted">O</span>
+                      <span class="sidebar-text">{{
+                        subMenuItem.title
+                      }}</span></a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item" v-else>
+              <a
+                :href="menuItem.url"
+                class="nav-link d-flex align-items-center justify-content-between"
+                ><span
+                  ><span class="sidebar-icon"
+                    ><span class="fas fa-th"></span
+                  ></span>
+                  <span class="sidebar-text">{{ menuItem.title }}</span></span
+                ></a
+              >
+            </li>
+          </div>
         </ul>
       </div>
     </nav>
@@ -448,9 +147,51 @@
 
 <script>
 export default {
-
   name: "LeftNavbar",
-  props: {},
+  data: () => ({
+    menuItems: [
+      {
+        title: "Dashboard",
+        url: "/",
+        subItem: [],
+      },
+
+      {
+        title: "Jobs",
+        url: "/job-list",
+        subItem: [
+          {
+            title: "Job List",
+            url: "/employer/job-list",
+          },
+          {
+            title: "Job Detail",
+            url: "/employer/job-detail",
+          },
+        ],
+      },
+
+      {
+        title: "School",
+        url: "/school-list",
+        subItem: [
+          {
+            title: "School List",
+            url: "/school-list",
+          },
+          {
+            title: "School Detail",
+            url: "/school-detail",
+          },
+        ],
+      },
+      {
+        title: "Job Fair",
+        url: "/job-fair",
+        subItem: [],
+      },
+    ],
+  }),
 };
 </script>
 
