@@ -758,6 +758,7 @@
 <script>
 import { onMounted, ref } from "vue";
 import * as employerService from "@/util/service/employerService.js";
+
 export default {
     name: "EmployerJobList",
     setup() {
