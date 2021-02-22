@@ -15,6 +15,10 @@
 
 */
 
+import Swal from "../vendor/sweetalert2/dist/sweetalert2.all.min.js";
+import Chartist from "../vendor/chartist/dist/chartist.min.js";
+import "../vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js";
+
 "use strict";
 const d = document;
 d.addEventListener("DOMContentLoaded", function(event) {
