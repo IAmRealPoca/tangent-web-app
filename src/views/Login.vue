@@ -30,7 +30,7 @@
                   <h1 class="mb-0 h3">Sign in to our platform</h1>
                 </div>
                 <div class="btn-group me-2 mb-2">
-                  <button type="button" class="btn btn-primary">
+                  <button type="button" class="btn btn-primary center">
                     {{ selectedAccTypeString }}
                   </button>
                   <button

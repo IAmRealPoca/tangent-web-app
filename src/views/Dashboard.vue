@@ -1,8 +1,7 @@
 <template>
   <div>
-    
-  <main class="content">
-    <Header/>
+    <MainContent>
+  <main>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
       <div class="btn-toolbar dropdown"><button class="btn btn-dark btn-sm me-2 dropdown-toggle"
           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus me-2"></span>New
@@ -641,18 +640,19 @@
     </div>
     
   </main>
+  </MainContent>
   </div>
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
+import MainContent from "@/components/MainContent.vue";
 export default {
   name: "Dashboard",
   props: {
     msg: String
   },
   components: {
-    Header
+    MainContent
   }
 }
 </script>

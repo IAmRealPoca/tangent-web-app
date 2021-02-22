@@ -1,14 +1,12 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <div>
-    <Navbar />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Dashboard from "@/views/Dashboard.vue";
-import Navbar from "@/components/navbar/LeftNavbar.vue";
+import MainContent from "@/components/MainContent.vue";
 
 import "./assets/js/volt.js";
 
@@ -36,8 +34,7 @@ import "@/assets/vendor/sortablejs/Sortable.min.js";
 export default {
   name: "App",
   components: {
-    Dashboard,
-    Navbar,
+    MainContent,
   },
 };
 </script>
