@@ -18,7 +18,7 @@
 import Swal from "../vendor/sweetalert2/dist/sweetalert2.all.min.js";
 import "../vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js";
 import svgMap from 'svgmap';
-import simpleDatatables from "../vendor/simple-datatables/dist/umd/simple-datatables.js";
+import { DataTable } from "simple-datatables";
 
 import Chartist from "chartist";
 
@@ -144,7 +144,7 @@ d.addEventListener("DOMContentLoaded", function(event) {
     
             columns: [{ select: 4, type: 'date', format: 'MM/DD/YYYY' }]
         };
-        const dataTable = new simpleDatatables.DataTable(dataTableEl, dataTableConfig);
+        const dataTable = new DataTable(dataTableEl, dataTableConfig);
     }
 
     if(d.querySelector('.input-slider-container')) {

@@ -756,8 +756,54 @@
 </template>
 
 <script>
+import { onMounted, ref } from "vue";
+import * as employerService from "@/util/service/employerService.js";
 export default {
     name: "EmployerJobList",
+    setup() {
+      const jobPostedList = ref([]);
+
+      const convertDateToString = (date) => {
+        return date.getDay() +
+        "/" +
+        date.getMonth() +
+        "/" +
+        date.getFullYear();
+      };
+
+      const transformResponseToJobList = (resp) => {
+        const fetchedJobList = resp;
+        const transformedResponse = [];
+        fetchedJobList.map((oneJob) => {
+          const createdDateString = convertDateToString(new Date(oneJob.created));
+          const dueDateString = convertDateToString(new Date(oneJob.dueDate));
+          const transformedOneJob = {
+            id: oneJob.postId,
+            location: oneJob.location,
+            name: oneJob.title,
+            applicants: oneJob.totalCVs,
+            created: createdDateString,
+            due: dueDateString,
+          };
+          transformedResponse.push(transformedOneJob);
+        });
+        return transformedResponse;
+      };
+
+      const fetchActiveJob = () => {
+        employerService.getCurrEmpJobs().then((resp) => {
+          jobPostedList.value = transformResponseToJobList(resp);
+        });
+      }
+      onMounted(() => {
+        fetchActiveJob();
+      });
+
+      return {
+        jobPostedList,
+        fetchActiveJob,
+      }
+    },
 }
 </script>
 

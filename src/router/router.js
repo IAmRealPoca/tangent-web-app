@@ -1,5 +1,6 @@
 import Dashboard from "@/views/Dashboard.vue";
 import EmployerJobList from "@/views/employer/jobs/EmployerJobList.vue";
+import Login from "@/views/Login.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -18,6 +19,11 @@ const routes = [
         path: "/employer/job-list",
         name: "EmployerJobList",
         component: EmployerJobList
+    },
+    {
+        path: "/login",
+        name: "Login",
+        component: Login
     },
 ];
 
