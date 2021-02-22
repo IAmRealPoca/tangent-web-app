@@ -7723,10 +7723,22 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
+svg-pan-zoom@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/svg-pan-zoom/-/svg-pan-zoom-3.6.1.tgz#f880a1bb32d18e9c625d7715350bebc269b450cf"
+  integrity sha512-JaKkGHHfGvRrcMPdJWkssLBeWqM+Isg/a09H7kgNNajT1cX5AztDTNs+C8UzpCxjCTRrG34WbquwaovZbmSk9g==
+
 svg-tags@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/svg-tags/-/svg-tags-1.0.0.tgz#58f71cee3bd519b59d4b2a843b6c7de64ac04764"
   integrity sha1-WPcc7jvVGbWdSyqEO2x95krAR2Q=
+
+svgmap@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/svgmap/-/svgmap-2.0.4.tgz#67c9aa8d11003343d049ddaa932c82833e2c416d"
+  integrity sha512-iFzYel1QVZ0c5b9Skf5xWbAMpJZhhuy/r5w0fd3Udw/so23uo6SF0ksCTSgfNRrcLzGI+SHsoXYBOb7BHVgZQQ==
+  dependencies:
+    svg-pan-zoom "^3.6.1"
 
 svgo@^1.0.0:
   version "1.3.2"

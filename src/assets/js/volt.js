@@ -16,8 +16,10 @@
 */
 
 import Swal from "../vendor/sweetalert2/dist/sweetalert2.all.min.js";
-import Chartist from "../vendor/chartist/dist/chartist.min.js";
 import "../vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js";
+import svgMap from 'svgmap';
+
+import Chartist from "chartist";
 
 "use strict";
 const d = document;
