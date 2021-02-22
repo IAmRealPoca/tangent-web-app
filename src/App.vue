@@ -57,4 +57,6 @@ export default {
 /* Slider */
 /* @import "../src/assets/css/owl.carousel.min.css";
 @import "../src/assets/css/owl.theme.default.min.css"; */
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+
 </style>
