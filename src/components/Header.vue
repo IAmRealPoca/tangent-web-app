@@ -143,7 +143,7 @@ function parseJwt (token) {
     }).join(''));
 
     return JSON.parse(jsonPayload);
-};
+}
 
     const userName = ref([]);
         const user = sessionStorage.getItem("token");

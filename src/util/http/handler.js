@@ -1,5 +1,3 @@
-import { AxiosInstance } from 'axios';
-
 const axiosInstance = (instance) => {
     const parseError = (messages) => {
         if (messages) {
