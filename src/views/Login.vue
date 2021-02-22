@@ -1,6 +1,6 @@
 <template>
   <div>
-      <noscript
+    <noscript
       ><iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7"
         height="0"
@@ -29,103 +29,31 @@
                 <div class="text-center text-md-center mb-4 mt-md-0">
                   <h1 class="mb-0 h3">Sign in to our platform</h1>
                 </div>
-                <form action="#" class="mt-4">
-                  <div class="form-group mb-4">
-                    <label for="email">Your Email</label>
-                    <div class="input-group">
-                      <span class="input-group-text" id="basic-addon1"
-                        ><span class="fas fa-envelope"></span
-                      ></span>
-                      <input
-                        type="email"
-                        class="form-control"
-                        placeholder="example@company.com"
-                        id="email"
-                        autofocus
-                        required
-                      />
-                    </div>
+                <div class="btn-group me-2 mb-2">
+                  <button type="button" class="btn btn-primary">
+                    {{ selectedAccTypeId }}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <i class="fas fa-angle-down dropdown-arrow"></i>
+                    <span class="sr-only">\/</span>
+                  </button>
+                  <div class="dropdown-menu" >
+                    <div class="dropdown-item" @click="selectedAccTypeId = accType.typeId" v-for="(accType, index) in listOfAccountType" :key="index">{{ accType.typeName }}</div>
                   </div>
-                  <div class="form-group">
-                    <div class="form-group mb-4">
-                      <label for="password">Your Password</label>
-                      <div class="input-group">
-                        <span class="input-group-text" id="basic-addon2"
-                          ><span class="fas fa-unlock-alt"></span
-                        ></span>
-                        <input
-                          type="password"
-                          placeholder="Password"
-                          class="form-control"
-                          id="password"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div
-                      class="d-flex justify-content-between align-items-top mb-4"
-                    >
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          value=""
-                          id="remember"
-                        />
-                        <label class="form-check-label mb-0" for="remember"
-                          >Remember me</label
-                        >
-                      </div>
-                      <div>
-                        <a href="forgot-password.html" class="small text-right"
-                          >Lost password?</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button type="submit" class="btn btn-dark">Sign in</button>
-                  </div>
-                </form>
-                <div class="mt-3 mb-4 text-center">
-                  <span class="fw-normal">or login with</span>
                 </div>
                 <div class="d-flex justify-content-center my-4">
-                  <a
-                    href="#"
-                    class="btn btn-icon-only btn-pill btn-outline-gray-400 text-facebook me-2"
-                    type="button"
-                    aria-label="facebook button"
-                    title="facebook button"
-                    ><span
-                      aria-hidden="true"
-                      class="fab fa-facebook-f"
-                    ></span> </a
-                  ><a
-                    href="#"
-                    class="btn btn-icon-only btn-pill btn-outline-gray-400 text-twitter me-2"
-                    type="button"
-                    aria-label="twitter button"
-                    title="twitter button"
-                    ><span aria-hidden="true" class="fab fa-twitter"></span> </a
-                  ><a
-                    href="#"
-                    class="btn btn-icon-only btn-pill btn-outline-gray-400 text-facebook"
-                    type="button"
-                    aria-label="github button"
-                    title="github button"
-                    ><span aria-hidden="true" class="fab fa-github"></span
-                  ></a>
-                </div>
-                <div
-                  class="d-flex justify-content-center align-items-center mt-4"
-                >
-                  <span class="fw-normal"
-                    >Not registered?
-                    <a href="sign-up.html" class="fw-bold"
-                      >Create account</a
-                    ></span
-                  >
+                  <button class="btn btn-facebook me-3 mb-3" type="button" @click="onClick">
+                    <span class="me-1"
+                      ><span class="fab fa-facebook-f"></span
+                    ></span>
+                    Login with Facebook
+                  </button>
                 </div>
               </div>
             </div>
@@ -137,14 +65,14 @@
 </template>
 
 <script>
-import {useRouter} from "vue-router";
+import { useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 import { loginService } from "@/util/service/login";
 import * as schoolService from "@/util/service/schoolService";
 
 export default {
-    name: "Login",
-    setup() {
+  name: "Login",
+  setup() {
     const router = useRouter();
     const listOfSchools = ref([]);
     const selectedSchoolId = ref();
@@ -153,10 +81,6 @@ export default {
       {
         typeId: 0,
         typeName: "Admin",
-      },
-      {
-        typeId: 1,
-        typeName: "Employee",
       },
       {
         typeId: 2,
@@ -188,12 +112,9 @@ export default {
       console.log("acc type: ", selectedAccTypeId.value);
 
       // if (!selectedSchoolId.value || !selectedAccTypeId.value) {
-        const alwaysTrueFuckYouTypescipt = 1 + 1;
+      const alwaysTrueFuckYouTypescipt = 1 + 1;
       if (alwaysTrueFuckYouTypescipt !== 2) {
-        noti.openToast(
-          "Please fill all required info (School, Account type)",
-          true
-        );
+        
       } else {
         loginService(selectedSchoolId.value, selectedAccTypeId.value)
           .then((resp) => {
@@ -201,11 +122,9 @@ export default {
             sessionStorage.setItem("token", resp.token);
             store.dispatch("setCurrentUserFlag", resp.flg);
             router.push("/home");
-            noti.openToast("Login successfully", false);
           })
           .catch((err) => {
             console.log(err);
-            noti.openToast("Login failed", true);
           });
       }
     }
@@ -234,9 +153,8 @@ export default {
       onClickToOpenVidu,
     };
   },
-}
+};
 </script>
 
 <style scoped>
-
 </style>
