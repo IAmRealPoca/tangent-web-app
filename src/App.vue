@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import HelloWorld from "@/views/Dashboard.vue";
+import Dashboard from "@/views/Dashboard.vue";
 import Navbar from "@/components/navbar/LeftNavbar.vue";
 
 import "./assets/js/volt.js";
@@ -36,7 +36,7 @@ import "@/assets/vendor/sortablejs/Sortable.min.js";
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    Dashboard,
     Navbar,
   },
 };

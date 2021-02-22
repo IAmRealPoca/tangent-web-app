@@ -18,6 +18,7 @@
 import Swal from "../vendor/sweetalert2/dist/sweetalert2.all.min.js";
 import "../vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js";
 import svgMap from 'svgmap';
+import simpleDatatables from "../vendor/simple-datatables/dist/umd/simple-datatables.js";
 
 import Chartist from "chartist";
 
