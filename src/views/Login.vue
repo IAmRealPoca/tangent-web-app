@@ -30,7 +30,7 @@
                   <h1 class="mb-0 h3">Sign in to our platform</h1>
                 </div>
                 <div class="btn-group me-2 mb-2">
-                  <button type="button" class="btn btn-primary center">
+                  <button type="button" class="btn btn-primary">
                     {{ selectedAccTypeString }}
                   </button>
                   <button
@@ -77,7 +77,7 @@
 
 <script>
 import { useRouter } from "vue-router";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watchEffect } from "vue";
 import { loginService } from "@/util/service/login";
 import * as schoolService from "@/util/service/schoolService";
 
@@ -121,7 +121,7 @@ export default {
     });
 
     selectedAccTypeString.value = "[Select type]";
-    watch((selectedAccTypeId) => {
+    watchEffect((selectedAccTypeId) => {
       if (selectedAccTypeId.value === 0) {
         selectedAccTypeString.value = "Admin";
       }
