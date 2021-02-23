@@ -23,8 +23,10 @@ import * as FullCalendar from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { Datepicker } from "vanillajs-datepicker";
 import { DataTable } from "simple-datatables";
-import noUiSlider from "nouislider";
-import { Choices } from "choices.js";
+import noUiSlider from "@/assets/vendor/nouislider/distribute/nouislider.min.js";
+// import '@/assets/vendor/nouislider/distribute/nouislider.min.js';
+import Choices from "choices.js";
+import '@/assets/vendor/choices.js/public/assets/styles/choices.min.css'
 
 import Chartist from "chartist";
 
