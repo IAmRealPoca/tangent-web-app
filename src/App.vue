@@ -10,27 +10,6 @@ import MainContent from "@/components/MainContent.vue";
 
 import "./assets/js/volt.js";
 
-import "@/assets/vendor/popperjs/core/dist/umd/popper.min.js";
-// import "@/assets/vendor/bootstrap/dist/js/bootstrap.min.js";
-import "@/assets/vendor/onscreen/dist/on-screen.umd.min.js";
-import "@/assets/vendor/nouislider/distribute/nouislider.min.js";
-import "@/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js";
-import "@/assets/vendor/countup.js/dist/countUp.umd.js";
-// import "@/assets/vendor/chartist/dist/chartist.min.js";
-// import "@/assets/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js";
-import "@/assets/vendor/vanillajs-datepicker/dist/js/datepicker.min.js";
-import "@/assets/vendor/simple-datatables/dist/umd/simple-datatables.js";
-import "@/assets/vendor/sweetalert2/dist/sweetalert2.all.min.js";
-import "@/assets/vendor/vanillajs-datepicker/dist/js/datepicker.min.js";
-import "@/assets/vendor/fullcalendar/main.min.js";
-import "@/assets/vendor/dropzone/dist/min/dropzone.min.js";
-import "@/assets/vendor/choices.js/public/assets/scripts/choices.min.js";
-import "@/assets/vendor/notyf/notyf.min.js";
-import "@/assets/vendor/leaflet/dist/leaflet.js";
-// import "@/assets/vendor/svgmap/dist/svgMap.min.js";
-import "@/assets/vendor/simplebar/dist/simplebar.min.js";
-import "@/assets/vendor/sortablejs/Sortable.min.js";
-
 export default {
   name: "App",
   components: {
