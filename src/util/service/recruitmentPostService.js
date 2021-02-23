@@ -6,19 +6,19 @@ const getListOfJobs = () => {
     return recruitmentPostRepo.get();
 };
 
-const getOneById = (jobId: number) => {
+const getOneById = (jobId) => {
     return recruitmentPostRepo.getOneById(jobId);
 };
 
-const getListOfExpiredJobs = (param: string) => {
+const getListOfExpiredJobs = (param) => {
     return recruitmentPostRepo.getWithParam(param);
 };
 
-const postNewJob = (newJob: any) => {
+const postNewJob = (newJob) => {
     return recruitmentPostRepo.postNewJob(newJob);
 };
 
-const updateJob = (jobId: number, updatedJob: any) => {
+const updateJob = (jobId, updatedJob) => {
     return recruitmentPostRepo.updateJob(jobId, updatedJob);
 }
 

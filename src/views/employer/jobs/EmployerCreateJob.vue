@@ -34,12 +34,25 @@
                 <div class="col-lg-6 col-sm-6">
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label"
+                      >Company Id</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleFormControlInput1"
+                      v-model="newJobData.companyId"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label"
                       >Job title</label
                     >
                     <input
                       type="text"
                       class="form-control"
                       id="exampleFormControlInput1"
+                      v-model="newJobData.title"
                     />
                   </div>
                   <div class="mb-3">
@@ -50,6 +63,7 @@
                       class="form-control"
                       id="exampleFormControlTextarea1"
                       rows="3"
+                      v-model="newJobData.jobDescription"
                     ></textarea>
                   </div>
                   <div class="mb-3">
@@ -60,6 +74,7 @@
                       class="form-control"
                       id="exampleFormControlTextarea1"
                       rows="3"
+                      v-model="newJobData.jobBenefit"
                     ></textarea>
                   </div>
                   <div class="mb-3">
@@ -70,17 +85,21 @@
                       class="form-control"
                       id="exampleFormControlTextarea1"
                       rows="3"
+                      v-model="newJobData.jobRequirement"
                     ></textarea>
                   </div>
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label"
-                      >Expected numbers</label
-                    >
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="exampleFormControlInput1"
-                    />
+                  <div class="row">
+                    <div class="col-4 mb-3">
+                      <label for="exampleFormControlInput1" class="form-label"
+                        >Expected numbers of applicants</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="exampleFormControlInput1"
+                        v-model="newJobData.expectedNumber"
+                      />
+                    </div>
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label"
@@ -90,6 +109,7 @@
                       type="text"
                       class="form-control"
                       id="exampleFormControlInput1"
+                      v-model="newJobData.addres"
                     />
                   </div>
                   <div class="mb-2">
@@ -104,6 +124,35 @@
                       </option>
                     </select>
                   </div>
+                  <div class="row">
+                    <div class="col-10 mb-4">
+                      <div class="row">
+                        <div class="col-lg-5 col-sm-6">
+                          <label for="exampleFormControlInput1" class="form-label"
+                            >Min salary</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="exampleFormControlInput1"
+                            v-model="newJobData.minSalary"
+                          /><p>.000đ</p>
+                        </div>
+                        <div class="col-lg-5 col-sm-6">
+                          <label for="exampleFormControlInput1" class="form-label"
+                            >Max salary</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="exampleFormControlInput1"
+                            v-model="newJobData.maxSalary"
+                          /><p>.000đ</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <label for="birthday">Due date</label>
                   <div class="mb-2 input-group">
                     <span class="input-group-text"
@@ -116,11 +165,14 @@
                       type="text"
                       placeholder="dd/mm/yyyy"
                       required
+                      v-model="newJobData.dueDate"
                     />
                   </div>
 
                   <div class="mb-3">
-                    <button class="btn w-100 btn-primary" type="button">Post</button>
+                    <button class="btn w-100 btn-primary" type="button" @click="handleAddButton">
+                      Post
+                    </button>
                   </div>
                 </div>
                 <div class="col-lg-3 col-sm-6"></div>
@@ -136,6 +188,7 @@
 <script>
 import { ref } from "vue";
 import MainContent from "@/components/MainContent.vue";
+import * as recruitmentPostService from "@/util/service/recruitmentPostService";
 export default {
   name: "EmployerCreateJob",
   components: {
@@ -159,9 +212,28 @@ export default {
         value: "MYTHO",
         title: "My Tho, Ben Tre",
       },
+      {
+        value: "THUDAUMOT",
+        title: "Thu Dau Mot, Binh Duong",
+      },
+      {
+        value: "RACHGIA",
+        title: "Rach Gia, Kien Giang",
+      },
     ]);
+
+    const newJobData = ref({});
+
+    const handleAddButton = () => {
+      recruitmentPostService.postNewJob(newJobData.value);
+      console.log(newJobData.value);
+    };
+
     return {
+      newJobData,
       vnLocation,
+
+      handleAddButton,
     };
   },
 };
