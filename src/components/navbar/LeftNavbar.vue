@@ -11,14 +11,14 @@
     <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-md-none">
       <a
         class="navbar-brand me-lg-5"
-        href="https://demo.themesberg.com/volt-pro/index.html"
+        href="/"
         ><img
           class="navbar-brand-dark"
           src="@/assets/img/logo.svg"
           alt="Volt logo" />
         <img
           class="navbar-brand-light"
-          src="https://demo.themesberg.com/volt-pro/assets/img/brand/dark.svg"
+          src="@/assets/img/logo.svg"
           alt="Volt logo"
       /></a>
       <div class="d-flex align-items-center">
@@ -78,7 +78,7 @@
         <ul class="nav flex-column pt-3 pt-md-0">
           <li class="nav-item">
             <a
-              href="https://demo.themesberg.com/volt-pro/index.html"
+              href="/"
               class="nav-link d-flex align-items-center"
               ><span class="sidebar-icon"
                 ><img

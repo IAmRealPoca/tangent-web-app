@@ -504,7 +504,7 @@
             <div class="card-body">
               <div class="row align-items-center mb-4">
                 <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
-                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/united-states-of-america.svg"></a>
+                      src="@/assets/img/logo.png"></a>
                 </div>
                 <div class="col">
                   <div class="progress-wrapper">
@@ -521,7 +521,7 @@
               </div>
               <div class="row align-items-center mb-4">
                 <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
-                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/canada.svg"></a></div>
+                      src="@/assets/img/logo.png"></a></div>
                 <div class="col">
                   <div class="progress-wrapper">
                     <div class="progress-info">
@@ -537,7 +537,7 @@
               </div>
               <div class="row align-items-center mb-4">
                 <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
-                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/germany.svg"></a></div>
+                      src="@/assets/img/logo.png"></a></div>
                 <div class="col">
                   <div class="progress-wrapper">
                     <div class="progress-info">
@@ -553,7 +553,7 @@
               </div>
               <div class="row align-items-center mb-4">
                 <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
-                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/france.svg"></a></div>
+                      src="@/assets/img/logo.png"></a></div>
                 <div class="col">
                   <div class="progress-wrapper">
                     <div class="progress-info">
@@ -569,7 +569,7 @@
               </div>
               <div class="row align-items-center mb-4">
                 <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
-                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/japan.svg"></a></div>
+                      src="@/assets/img/logo.png"></a></div>
                 <div class="col">
                   <div class="progress-wrapper">
                     <div class="progress-info">
@@ -585,7 +585,7 @@
               </div>
               <div class="row align-items-center mb-4">
                 <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
-                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/italy.svg"></a></div>
+                      src="@/assets/img/logo.png"></a></div>
                 <div class="col">
                   <div class="progress-wrapper">
                     <div class="progress-info">
@@ -601,7 +601,7 @@
               </div>
               <div class="row align-items-center mb-4">
                 <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
-                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/netherlands.svg"></a></div>
+                      src="@/assets/img/logo.png"></a></div>
                 <div class="col">
                   <div class="progress-wrapper">
                     <div class="progress-info">
@@ -617,7 +617,7 @@
               </div>
               <div class="row align-items-center">
                 <div class="col-auto"> <a href="#" class="image image-xs rounded-circle"><img alt="Image placeholder"
-                      src="https://demo.themesberg.com/volt-pro/assets/img/flags/sweden.svg"></a></div>
+                      src="@/assets/img/logo.png"></a></div>
                 <div class="col">
                   <div class="progress-wrapper">
                     <div class="progress-info">

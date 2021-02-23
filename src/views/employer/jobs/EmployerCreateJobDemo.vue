@@ -20,7 +20,7 @@
           </div>
           <div>
             <a
-              href="https://themesberg.com/docs/volt-bootstrap-5-dashboard/components/forms/"
+              href="#"
               class="btn btn-outline-gray"
               ><i class="far fa-question-circle me-1"></i> Forms Docs</a
             >

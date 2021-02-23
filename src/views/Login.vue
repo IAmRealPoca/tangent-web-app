@@ -18,7 +18,7 @@
           </p>
           <div
             class="row justify-content-center form-bg-image"
-            data-background-lg="https://demo.themesberg.com/volt-pro/assets/img/illustrations/signin.svg"
+            data-background-lg="@/assets/img/signin.svg"
           >
             <div
               class="col-12 d-flex align-items-center justify-content-center"
