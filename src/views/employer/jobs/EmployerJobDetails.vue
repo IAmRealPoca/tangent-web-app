@@ -47,6 +47,8 @@
                     <button class="btn btn-outline-gray-700 mt-0" type="button">
                       Review 3 applicants
                     </button>
+                    <br/>
+                    <span>View profile and application documents</span>
                   </div>
                 </div>
               </div>
@@ -98,10 +100,9 @@
                   <div class="col-lg-8 col-sm-8">
                     <div class="row">
                       <div class="col">
-                        <span
-                          >2 ASP.Net Core Developers for Maintainance
-                          Project</span
-                        >
+                        <h2 class="h5">
+                          2 ASP.Net Core Developers for Maintainance Project
+                        </h2>
                       </div>
                       <div class="w-100"></div>
                       <div class="col">
@@ -152,41 +153,41 @@
           </div>
 
           <div class="col-12 col-xl-4 pb-4">
-              <div class="col-12 mb-4">
-                <div class="card shadow-sm p-0 mb-4">
-                  <div class="card-header bg-primary text-white">
-                    <h5 class="h5">Posted to 0 school</h5>
-                  </div>
-                  <div class="card-body pb-3">
-                    <div class="row mb-0">
-                      <div class="col-lg-12 text-gray">
-                        <p>
-                          This job has not been to any schools, yet. Once you
-                          post this job to schools, a summary wil be shown here.
-                        </p>
-                      </div>
-                    </div>
-                    <div class="row mb-0">
-                        <button class="btn btn-outline-gray-700" type="button">
-                          Select target school
-                        </button>
-                    </div>
-                  </div>
+            <div class="col-12 mb-4">
+              <div class="card shadow-sm p-0 mb-4">
+                <div class="card-header bg-primary text-white">
+                  <h5 class="h5">Posted to 0 school</h5>
                 </div>
-
-                <div class="card shadow-sm p-0 mb-4">
-                  <div class="card-body">
-                    <div class="row">
-                      <h2>Labels</h2>
-                      <br/>
-                      <p>No labels have been selected.</p>
-                      <button class="btn btn-outline-gray-700" type="button">
-                          Add new labels
-                        </button>
+                <div class="card-body pb-3">
+                  <div class="row mb-0">
+                    <div class="col-lg-12 text-gray">
+                      <p>
+                        This job has not been to any schools, yet. Once you post
+                        this job to schools, a summary wil be shown here.
+                      </p>
                     </div>
+                  </div>
+                  <div class="row mb-0">
+                    <button class="btn btn-outline-gray-700" type="button">
+                      Select target school
+                    </button>
                   </div>
                 </div>
               </div>
+
+              <div class="card shadow-sm p-0 mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <h2>Labels</h2>
+                    <br />
+                    <p>No labels have been selected.</p>
+                    <button class="btn btn-outline-gray-700" type="button">
+                      Add new labels
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </main>
