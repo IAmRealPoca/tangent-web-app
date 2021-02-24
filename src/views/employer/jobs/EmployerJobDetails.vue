@@ -84,40 +84,109 @@
             </div>
 
             <div class="card border-light shadow-sm components-section mb-4">
-              <div class="card-body">
-                <div class="row mb-4">
-                  <div class="col-lg-4 col-sm-6">
-                    d
+              <div class="card-header bg-gray-300">
+                <div class="row mb-0 pb-2">
+                  <div class="col-lg-2 col-sm-2">
+                    <div class="mt-2">
+                      <img
+                        src="@/assets/img/team/profile-picture-3.jpg"
+                        class="border-white"
+                        alt="Company image"
+                      />
                     </div>
+                  </div>
+                  <div class="col-lg-8 col-sm-8">
+                    <div class="row">
+                      <div class="col">
+                        <span
+                          >2 ASP.Net Core Developers for Maintainance
+                          Project</span
+                        >
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="col">
+                        <a href="#" class="text-info me-3">Team CVideos</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 col-sm-2">
+                    <button class="btn btn-outline-gray-700 mt-0" type="button">
+                      Favorite job
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <h1 class="h4">Job description</h1>
+                    <p>
+                      Needing 2 ASP.net Core Developers to maintain old CVideo
+                      API project
+                    </p>
+                    <h1 class="h4">About company</h1>
+                    <p>Develop and deploy CVideos sysytem</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            </div>
+
+            <div class="card border-light shadow-sm components-section mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-2">Location</div>
+                  <div class="col-lg-10">Ho Chi Minh City, Vietnam</div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-lg-2">Salary</div>
+                  <div class="col-lg-10">$2,000.00</div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-lg-2">Job benefit</div>
+                  <div class="col-lg-10">Graduate from school</div>
+                </div>
+              </div>
             </div>
           </div>
+
           <div class="col-12 col-xl-4 pb-4">
-            <div class="row">
               <div class="col-12 mb-4">
-                <div class="card shadow-sm p-0">
+                <div class="card shadow-sm p-0 mb-4">
                   <div class="card-header bg-primary text-white">
                     <h5 class="h5">Posted to 0 school</h5>
                   </div>
-                  <div class="card-body pb-5">
-                    <div class="row mb-2">
+                  <div class="card-body pb-3">
+                    <div class="row mb-0">
                       <div class="col-lg-12 text-gray">
-                        <p>This job has not been to any schools, yet. Once you post this job to schools, a summary wil be shown here.</p>
+                        <p>
+                          This job has not been to any schools, yet. Once you
+                          post this job to schools, a summary wil be shown here.
+                        </p>
                       </div>
                     </div>
-                    <div class="row mb-2">
-                      <div class="col-lg-6">
+                    <div class="row mb-0">
                         <button class="btn btn-outline-gray-700" type="button">
                           Select target school
                         </button>
                     </div>
                   </div>
+                </div>
+
+                <div class="card shadow-sm p-0 mb-4">
+                  <div class="card-body">
+                    <div class="row">
+                      <h2>Labels</h2>
+                      <br/>
+                      <p>No labels have been selected.</p>
+                      <button class="btn btn-outline-gray-700" type="button">
+                          Add new labels
+                        </button>
+                    </div>
                   </div>
-                  
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </main>
