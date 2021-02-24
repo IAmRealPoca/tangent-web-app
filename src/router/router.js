@@ -5,6 +5,7 @@ import EmployerCreateJob from "@/views/employer/jobs/EmployerCreateJob.vue";
 import EmployerCalendar from "@/views/employer/EmployerCalendar.vue";
 import EmployerCreateJobDemo from "@/views/employer/jobs/EmployerCreateJobDemo.vue";
 import EmployerApplicantList from "@/views/employer/jobs/EmployerApplicantList.vue";
+import EmployerJobDetails from "@/views/employer/jobs/EmployerJobDetails.vue";
 import EmployerViewSchoolList from "@/views/employer/schoolfunctions/EmployerViewSchoolList.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
@@ -49,6 +50,11 @@ const routes = [
         path: "/employer/applicants",
         name: "EmployerApplicantList",
         component: EmployerApplicantList
+    },
+    {
+        path: "/employer/job-detail",
+        name: "EmployerJobDetails",
+        component: EmployerJobDetails
     },
     {
         path: "/employer/schools",
