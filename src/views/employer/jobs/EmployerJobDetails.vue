@@ -34,7 +34,7 @@
             <div class="card border-light shadow-sm components-section mb-4">
               <div class="card-body">
                 <div class="row mb-4">
-                  <div class="col-lg-4 col-sm-6">
+                  <div class="col-lg-6 col-sm-6">
                     <h2 class="h5">Job</h2>
                     <button class="btn btn-outline-gray-700 mt-0" type="button">
                       Edit Details
@@ -42,7 +42,7 @@
                     <br />
                     <a href="#" class="text-info">Duplicate job</a>
                   </div>
-                  <div class="col-lg-8 col-sm-6">
+                  <div class="col-lg-6 col-sm-6">
                     <h2 class="h5">Applicants</h2>
                     <button class="btn btn-outline-gray-700 mt-0" type="button">
                       Review 3 applicants
