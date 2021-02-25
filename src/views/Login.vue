@@ -54,6 +54,11 @@
                     </div>
                   </div>
                 </div>
+                <span
+                    class="fas text-danger ms-2"
+                    title=""
+                    data-bs-toggle="tooltip"
+                  ></span>
                 <div class="d-flex justify-content-center my-4">
                   <button
                     class="btn btn-google me-3 mb-3"

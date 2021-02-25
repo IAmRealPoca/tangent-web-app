@@ -177,11 +177,11 @@ export default {
 
       {
         title: "School",
-        url: "/school-list",
+        url: "/employer/schools",
         subItem: [
           {
             title: "School List",
-            url: "/school-list",
+            url: "/employer/schools",
           },
           {
             title: "School Detail",

@@ -44,8 +44,8 @@
                   </div>
                   <div class="col-lg-6 col-sm-6">
                     <h2 class="h5">Applicants</h2>
-                    <button class="btn btn-outline-gray-700 mt-0" type="button">
-                      Review 3 applicants
+                    <button class="btn btn-outline-gray-700 mt-0" type="button" @click="handleReviewApplicantClick">
+                      Review {{ jobDetails.totalCVs }} applicants
                     </button>
                     <br/>
                     <span>View profile and application documents</span>
@@ -75,7 +75,7 @@
                     </tr> -->
                     <tr>
                       <td>FPT University</td>
-                      <td>3</td>
+                      <td>{{ jobDetails.totalCVs }}</td>
                       <td>24/02/2021</td>
                       <td>Reviewed</td>
                       <td>High GPA</td>
@@ -100,13 +100,13 @@
                   <div class="col-lg-8 col-sm-8">
                     <div class="row">
                       <div class="col">
-                        <h2 class="h5">
-                          2 ASP.Net Core Developers for Maintainance Project
-                        </h2>
+                        <span class="h5">
+                          {{ jobDetails.title }}
+                        </span>
                       </div>
                       <div class="w-100"></div>
                       <div class="col">
-                        <a href="#" class="text-info me-3">Team CVideos</a>
+                        <a href="#" class="text-info me-3">Team CVideos (dummy)</a>
                       </div>
                     </div>
                   </div>
@@ -122,11 +122,10 @@
                   <div class="col-lg-12">
                     <h1 class="h4">Job description</h1>
                     <p>
-                      Needing 2 ASP.net Core Developers to maintain old CVideo
-                      API project
+                      {{ jobDetails.jobDescription }}
                     </p>
                     <h1 class="h4">About company</h1>
-                    <p>Develop and deploy CVideos sysytem</p>
+                    <p>Develop and deploy CVideos sysytem (dummy)</p>
                   </div>
                 </div>
               </div>
@@ -136,17 +135,17 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-lg-2">Location</div>
-                  <div class="col-lg-10">Ho Chi Minh City, Vietnam</div>
+                  <div class="col-lg-10">{{ jobDetails.location }}</div>
                 </div>
                 <hr />
                 <div class="row">
                   <div class="col-lg-2">Salary</div>
-                  <div class="col-lg-10">$2,000.00</div>
+                  <div class="col-lg-10">{{ jobDetails.minSalary }} - {{ jobDetails.maxSalary }}</div>
                 </div>
                 <hr />
                 <div class="row">
                   <div class="col-lg-2">Job benefit</div>
-                  <div class="col-lg-10">Graduate from school</div>
+                  <div class="col-lg-10">{{ jobDetails.jobBenefit }}</div>
                 </div>
               </div>
             </div>
@@ -196,12 +195,59 @@
 </template>
 
 <script>
+import { useRoute, useRouter } from "vue-router";
+import { ref, onMounted } from "vue";
 import MainContent from "@/components/MainContent.vue";
+import * as recruitmentPostService from "@/util/service/recruitmentPostService";
+import * as employerService from "@/util/service/employerService";
+
 export default {
   name: "EmployerJobDetails",
   components: {
     MainContent,
   },
+  setup() {
+    const route = useRoute();
+    const router = useRouter();
+    const jobDetails = ref({});
+    const jobPostId = Number(route.params.jobId);
+
+    const handleReviewApplicantClick = () => {
+      router.push(`/employer/jobs/${jobPostId}/applicants`)
+    }
+
+    //fetch data from the recruitment post API first, then feetch from employer API to get no of submitted CVs
+    //this is dumb, but this is how the API works
+    //damn
+    const fetchFromEmployerAPI = (jobId) => {
+      employerService.getOneByIdCurrEmployer(jobId).then((resp) => {
+        jobDetails.value = {
+          ...jobDetails.value,
+          totalCVs: resp.totalCVs,
+          newCVs: resp.newCVs,
+        };
+      });
+    };
+
+    const fetchOneJobPost = async (jobId) => { //fetch from recruitment API
+      recruitmentPostService.getOneById(jobId).then((resp) => {
+        jobDetails.value = resp;
+        //force fetch in order
+        fetchFromEmployerAPI(jobId);
+      });
+    };
+    //end double data fetch
+
+    onMounted(() => {
+      fetchOneJobPost(jobPostId);
+    });
+
+    return {
+      jobDetails,
+
+      handleReviewApplicantClick
+    }
+  }
 };
 </script>
 
