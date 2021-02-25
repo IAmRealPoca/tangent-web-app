@@ -23,9 +23,7 @@
               </p>
             </div>
             <div>
-              <a
-                href="#"
-                class="btn btn-outline-gray"
+              <a href="#" class="btn btn-outline-gray"
                 ><i class="far fa-question-circle me-1"></i> DataTables Docs</a
               >
             </div>
@@ -43,7 +41,11 @@
                 </tr>
               </thead>
               <tbody v-if="jobPostedList.length > 0">
-                <tr v-for="(aJob, index) in jobPostedList" :key="index">
+                <tr
+                  v-for="(aJob, index) in jobPostedList"
+                  :key="index"
+                  @click="handleJobDetailClick(aJob.id)"
+                >
                   <td>{{ aJob.name }}</td>
                   <td>{{ aJob.applicants }}</td>
                   <td>{{ aJob.created }}</td>
@@ -59,9 +61,10 @@
 </template>
 
 <script>
+import { useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 import MainContent from "@/components/MainContent.vue";
-import * as employerService from "@/util/service/employerService.js";
+import * as employerService from "@/util/service/employerService";
 
 export default {
   name: "EmployerJobList",
@@ -69,6 +72,7 @@ export default {
     MainContent,
   },
   setup() {
+    const router = useRouter();
     const jobPostedList = ref([]);
 
     const convertDateToString = (date) => {
@@ -99,13 +103,20 @@ export default {
         jobPostedList.value = transformResponseToJobList(resp);
       });
     };
+
+    const handleJobDetailClick = (jobId) => {
+      router.push(`/employer/jobs/${jobId}`);
+    };
+
     onMounted(() => {
       fetchActiveJob();
     });
 
     return {
       jobPostedList,
+
       fetchActiveJob,
+      handleJobDetailClick,
     };
   },
 };

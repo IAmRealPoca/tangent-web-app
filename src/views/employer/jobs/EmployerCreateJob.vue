@@ -109,7 +109,7 @@
                       type="text"
                       class="form-control"
                       id="exampleFormControlInput1"
-                      v-model="newJobData.addres"
+                      v-model="newJobData.location"
                     />
                   </div>
                   <div class="mb-2">
