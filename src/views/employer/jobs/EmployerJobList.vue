@@ -30,29 +30,73 @@
           </div>
         </div>
         <div class="card">
-          <div class="table-responsive py-4">
-            <table class="table table-flush">
-              <thead class="thead-light">
+          <div class="card card-body shadow-sm table-wrapper table-responsive">
+            <table class="table user-table table-hover align-items-center">
+              <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Applicants</th>
-                  <th>Created</th>
-                  <th>Due date</th>
+                  <th class="border-bottom">Name</th>
+                  <th class="border-bottom">Applicants</th>
+                  <th class="border-bottom">Created</th>
+                  <th class="border-bottom">Due date</th>
                 </tr>
               </thead>
               <tbody v-if="jobPostedList.length > 0">
-                <tr
-                  v-for="(aJob, index) in jobPostedList"
-                  :key="index"
-                  @click="handleJobDetailClick(aJob.id)"
-                >
-                  <td>{{ aJob.name }}</td>
-                  <td>{{ aJob.applicants }}</td>
-                  <td>{{ aJob.created }}</td>
-                  <td>{{ aJob.due }}</td>
+                <tr v-for="(aJob, index) in jobPostedList" :key="index">
+                  <td>
+                    <a href="#" class="d-flex align-items-center">
+                      <div
+                        class="d-block"
+                        @click="handleJobDetailClick(aJob.id)"
+                      >
+                        <span class="fw-bold">{{ aJob.name }}</span>
+                      </div></a
+                    >
+                  </td>
+                  <td>
+                    <a href="#"
+                      ><span class="fw-normal text-info" @click="handleApplicantClick(aJob.id)">{{
+                        aJob.applicants
+                      }}</span></a
+                    >
+                  </td>
+                  <td>
+                    <span class="fw-normal">{{ aJob.created }}</span>
+                  </td>
+                  <td>
+                    <span class="fw-normal">
+                      {{ aJob.due }}
+                    </span>
+                  </td>
                 </tr>
               </tbody>
+              <tbody v-if="jobPostedList.length <= 0">
+                <div>No entries found.</div>
+              </tbody>
             </table>
+            <div
+              class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between"
+            >
+              <nav aria-label="Page navigation example">
+                <ul class="pagination mb-0">
+                  <li class="page-item">
+                    <a class="page-link" href="#">Previous</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item active">
+                    <a class="page-link" href="#">2</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                </ul>
+              </nav>
+              <div class="fw-normal small mt-4 mt-lg-0">
+                Showing <b>5</b> out of <b>25</b> entries
+              </div>
+            </div>
           </div>
         </div>
       </main>
@@ -108,6 +152,10 @@ export default {
       router.push(`/employer/jobs/${jobId}`);
     };
 
+    const handleApplicantClick = (jobPostId) => { //same as handleReviewApplicantClick in EmployerJobDetails
+      router.push(`/employer/jobs/${jobPostId}/applicants`)
+    }
+
     onMounted(() => {
       fetchActiveJob();
     });
@@ -117,6 +165,7 @@ export default {
 
       fetchActiveJob,
       handleJobDetailClick,
+      handleApplicantClick,
     };
   },
 };

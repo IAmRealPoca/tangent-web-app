@@ -47,7 +47,7 @@ const routes = [
         component: EmployerCalendar
     },
     {
-        path: "/employer/applicants",
+        path: "/employer/jobs/:jobId/applicants",
         name: "EmployerApplicantList",
         component: EmployerApplicantList
     },

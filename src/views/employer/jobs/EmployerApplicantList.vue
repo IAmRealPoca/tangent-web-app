@@ -143,7 +143,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr
+                v-for="(appliedCV, index) in listAppliedCVs"
+                :key="index"
+                @click="handleCVClick(appliedCV.applicationId)"
+              >
                 <td>
                   <div class="form-check dashboard-check">
                     <input
@@ -158,12 +162,14 @@
                 <td>
                   <a href="#" class="d-flex align-items-center"
                     ><img
-                      src="@/assets/img/team/profile-picture-1.jpg"
+                      :src="appliedCV.cv.employee.avatar"
                       class="user-avatar rounded-circle me-3"
                       alt="Avatar"
                     />
                     <div class="d-block">
-                      <span class="fw-bold">Roy Fendley</span>
+                      <span class="fw-bold">{{
+                        appliedCV.cv.employee.fullName
+                      }}</span>
                       <div class="small text-gray">
                         <span
                           class="__cf_email__"
@@ -841,11 +847,42 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
 import MainContent from "@/components/MainContent.vue";
+import { useRoute, useRouter } from "vue-router";
+import * as EmployerService from "@/util/service/employerService";
+
 export default {
   name: "EmployerApplicantList",
   components: {
     MainContent,
+  },
+  setup() {
+    const route = useRoute();
+    const router = useRouter();
+    const jobId = Number(route.params.jobId);
+    const listAppliedCVs = ref([]);
+
+    const fetchAppliedCV = (jobId) => {
+      EmployerService.getAppliedCVFromJobId(jobId)
+        .then((resp) => {
+          listAppliedCVs.value = resp;
+        })
+        .catch((err) => {
+        });
+    };
+
+    onMounted(() => {
+      fetchAppliedCV(jobId);
+    });
+
+    const handleApplicantClick = (applicationId) => {
+      router.push(`/employer/jobs/${jobId}/appliedCVs/${applicationId}`);
+    };
+    return {
+      listAppliedCVs,
+      handleApplicantClick,
+    };
   },
 };
 </script>
