@@ -27,7 +27,9 @@
             <div class="card border-light shadow-sm components-section mb-4">
               <div class="card-body">
                 <h2 class="h5 mb-0 mt-2">Name</h2>
-                <span>Aubree Chapman</span>
+                <span v-if="appliedCV">
+                  <span>{{ appliedCV }}</span>
+                </span>
                 <h2 class="h5 mb-0 mt-2">Email Address</h2>
                 <span>[protected]</span>
                 <h2 class="h5 mb-0 mt-2">School Year</h2>
@@ -41,26 +43,26 @@
           <div class="col-12 col-xl-9">
             <div class="card border-light shadow-sm components-section mb-4">
               <!-- <div class="card-body"> -->
-                <div class="table-responsive py-4 pt-0">
-                  <table class="table table-flush">
-                    <thead class="thead-light">
-                      <tr>
-                        <th>Applied To</th>
-                        <th>Status</th>
-                        <th>Application Date</th>
-                        <th>Created By</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Spring Internship</td>
-                        <td>Reviewed</td>
-                        <td>June 6th 2018</td>
-                        <td>Aubree Chapman</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              <div class="table-responsive py-4 pt-0">
+                <table class="table table-flush">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>Applied To</th>
+                      <th>Status</th>
+                      <th>Application Date</th>
+                      <th>Created By</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Spring Internship</td>
+                      <td>Reviewed</td>
+                      <td>June 6th 2018</td>
+                      <td>Aubree Chapman</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <!-- </div> -->
             </div>
 
@@ -242,11 +244,39 @@
 </template>
 
 <script>
+import { useRoute } from "vue-router";
+import { onMounted, ref } from "vue";
 import MainContent from "@/components/MainContent.vue";
+import * as EmployerService from "@/util/service/employerService";
+
 export default {
   name: "EmployerApplicantDetails",
   components: {
     MainContent,
+  },
+  setup() {
+    const route = useRoute();
+
+    const appliedCV = ref({});
+    const jobId = Number(route.params.jobId);
+    const applicationId = Number(route.params.applicationId);
+    const fetchCVFromJobAndApplicationId = (jobId, applicationId) => {
+      EmployerService.getAppliedCVFromJobIdAndApplicationId(
+        jobId,
+        applicationId
+      ).then((resp) => {
+        appliedCV.value = resp;
+        console.log("Applied CV: ", resp);
+      });
+    }
+    onMounted(() => {
+      console.log("OnMounted Applicant Details");
+      fetchCVFromJobAndApplicationId(jobId, applicationId);
+      console.log("hello: ",appliedCV.value);
+    });
+    return {
+      appliedCV,
+    };
   },
 };
 </script>

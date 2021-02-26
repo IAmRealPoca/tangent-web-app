@@ -88,12 +88,12 @@
                     class="list-group-item list-group-item-action border-bottom border-light">
                     <div class="row align-items-center">
                       <div class="col-auto"> <img alt="Image placeholder"
-                          src="@/assets/img/team/profile-picture-5.jpg"
+                          :src="userName.avatar"
                           class="user-avatar lg-avatar rounded-circle"></div>
                       <div class="col ps-0 ms-2">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
-                            <h4 class="h6 mb-0 text-small">{{ userName }}</h4>
+                            <h4 class="h6 mb-0 text-small">{{ userName.name }}</h4>
                           </div>
                           <div class="text-end"><small>2 hrs ago</small></div>
                         </div>
@@ -108,9 +108,9 @@
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="media d-flex align-items-center"><img class="user-avatar md-avatar rounded-circle"
-                    alt="Image placeholder" src="@/assets/img/team/profile-picture-3.jpg">
+                    alt="Image placeholder" :src="userName.avatar">
                   <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block"><span
-                      class="mb-0 font-small fw-bold">{{ userName }}</span></div>
+                      class="mb-0 font-small fw-bold">{{ userName.name }}</span></div>
                 </div>
               </a>
               <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-0"><a
@@ -145,12 +145,14 @@ function parseJwt (token) {
     return JSON.parse(jsonPayload);
 }
 
-    const userName = ref([]);
-        const user = sessionStorage.getItem("token");
+    const userName = ref({});
+        const user = sessionStorage.getItem("userInfo");
     onMounted(() => {
       if (user) {
-        userName.value = parseJwt(user).email;
-        console.log(userName);
+        // userName.value = parseJwt(user).email;
+        userName.value = JSON.parse(user);
+        console.log("User: ", JSON.parse(user));
+        console.log("Username: ", userName.value.name);
       }
     });
     return {

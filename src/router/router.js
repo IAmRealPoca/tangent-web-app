@@ -53,6 +53,11 @@ const routes = [
         component: EmployerApplicantList
     },
     {
+        path: "/employer/jobs/:jobId/applicants/:applicationId",
+        name: "EmployerApplicantDetails",
+        component: EmployerApplicantDetails
+    },
+    {
         path: "/employer/jobs/:jobId",
         name: "EmployerJobDetails",
         component: EmployerJobDetails
@@ -62,11 +67,7 @@ const routes = [
         name: "EmployerViewSchoolList",
         component: EmployerViewSchoolList
     },
-    {
-        path: "/employer/applicant-detail",
-        name: "EmployerApplicantDetails",
-        component: EmployerApplicantDetails
-    },
+    
     
 ];
 

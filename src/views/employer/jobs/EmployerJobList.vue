@@ -43,7 +43,7 @@
               <tbody v-if="jobPostedList.length > 0">
                 <tr v-for="(aJob, index) in jobPostedList" :key="index">
                   <td>
-                    <a href="#" class="d-flex align-items-center">
+                    <a class="d-flex align-items-center">
                       <div
                         class="d-block"
                         @click="handleJobDetailClick(aJob.id)"
@@ -53,11 +53,13 @@
                     >
                   </td>
                   <td>
-                    <a href="#"
-                      ><span class="fw-normal text-info" @click="handleApplicantClick(aJob.id)">{{
-                        aJob.applicants
-                      }}</span></a
-                    >
+                    <a>
+                      <span
+                        class="fw-normal text-info"
+                        @click="handleApplicantClick(aJob.id)"
+                        >{{ aJob.applicants }}</span
+                      >
+                    </a>
                   </td>
                   <td>
                     <span class="fw-normal">{{ aJob.created }}</span>
@@ -152,9 +154,10 @@ export default {
       router.push(`/employer/jobs/${jobId}`);
     };
 
-    const handleApplicantClick = (jobPostId) => { //same as handleReviewApplicantClick in EmployerJobDetails
-      router.push(`/employer/jobs/${jobPostId}/applicants`)
-    }
+    const handleApplicantClick = (jobPostId) => {
+      //same as handleReviewApplicantClick in EmployerJobDetails
+      router.push(`/employer/jobs/${jobPostId}/applicants`);
+    };
 
     onMounted(() => {
       fetchActiveJob();

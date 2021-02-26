@@ -85,6 +85,7 @@ import { useRouter } from "vue-router";
 import { onMounted, ref, watchEffect } from "vue";
 import { loginService } from "@/util/service/login";
 import * as schoolService from "@/util/service/schoolService";
+import * as employerService from "@/util/service/employerService";
 
 export default {
   name: "Login",
@@ -99,6 +100,10 @@ export default {
         typeName: "Admin",
       },
       {
+        typeId: 1,
+        typeName: "Employee",
+      },
+      {
         typeId: 2,
         typeName: "Employer",
       },
@@ -109,15 +114,13 @@ export default {
     ];
     const selectedAccTypeId = ref();
     const selectedAccTypeString = ref();
-    const user = sessionStorage.getItem("token");
-    console.log("user", user);
+    const userToken = sessionStorage.getItem("token");
+    console.log("user", userToken);
 
-    if (user) {
+    if (userToken) {
       router.push("/");
     }
     onMounted(() => {
-      console.log("Mason Mounted");
-
       schoolService.getListOfSchools().then((resp) => {
         listOfSchools.value = resp;
       });
@@ -149,6 +152,7 @@ export default {
         .then((resp) => {
           // console.log(resp.token);
           sessionStorage.setItem("token", resp.token);
+          fetchUserData(selectedAccTypeId.value);
           // store.dispatch("setCurrentUserFlag", resp.flg);
           router.push("/");
         })
@@ -156,6 +160,21 @@ export default {
           console.log(err);
         });
     }
+
+    const fetchUserData = (usrFlag) => {
+      if (usrFlag === 0) {
+
+      } else if (usrFlag === 2) {
+        employerService.getCurrEmployerInfo()
+        .then((resp) => {
+          console.log(resp);
+          sessionStorage.setItem("userInfo", JSON.stringify(resp));
+        });
+      } else if (usrFlag === 4) {
+        // schoolService.
+      }
+    }
+
     const onChange = () => {
       console.log("Normal trigger");
       console.log("value ", selectedSchoolId.value);
