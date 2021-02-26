@@ -143,6 +143,7 @@ export default {
     selectedAccTypeString.value = "[Select type]";
 
     const selectType = (id) => {
+      selectedAccTypeId.value = id;
       console.log("id",id);
       if (id === 0 || id === 1 || id === 2 || id === 4) {
         if (id=== 0) {

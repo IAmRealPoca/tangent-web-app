@@ -17,33 +17,20 @@
             <p class="mb-0">Create new job</p>
           </div>
           <div>
-            <a
-              href="#"
-              class="btn btn-outline-gray"
+            <a href="#" class="btn btn-outline-gray"
               ><i class="far fa-question-circle me-1"></i> Forms Docs</a
             >
           </div>
         </div>
+        
       </div>
       <div class="row justify-content-between">
         <div class="col-12 mb-4">
-          <div class="card border-light shadow-sm components-section">
-            <div class="card-body">
-              <div class="row mb-4">
-                <div class="col-lg-3 col-sm-6"></div>
-                <div class="col-lg-6 col-sm-6">
-                  <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label"
-                      >Company Id</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleFormControlInput1"
-                      v-model="newJobData.companyId"
-                    />
-                  </div>
-
+          <div class="row mb-4">
+            <div class="col-lg-2 col-sm-6"></div>
+            <div class="col-lg-8 col-sm-6">
+            <div class="card border-light shadow-sm components-section px-5 py-3">
+              <div class="card-body">
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label"
                       >Job title</label
@@ -98,6 +85,8 @@
                         class="form-control"
                         id="exampleFormControlInput1"
                         v-model="newJobData.expectedNumber"
+                        min="0"
+                        @keyup="preventNegativeNumInputListener($event)"
                       />
                     </div>
                   </div>
@@ -128,7 +117,9 @@
                     <div class="col-10 mb-4">
                       <div class="row">
                         <div class="col-lg-5 col-sm-6">
-                          <label for="exampleFormControlInput1" class="form-label"
+                          <label
+                            for="exampleFormControlInput1"
+                            class="form-label"
                             >Min salary</label
                           >
                           <input
@@ -136,10 +127,14 @@
                             class="form-control"
                             id="exampleFormControlInput1"
                             v-model="newJobData.minSalary"
-                          /><p>.000đ</p>
+                            min="0"
+                          />
+                          <p>.000đ</p>
                         </div>
                         <div class="col-lg-5 col-sm-6">
-                          <label for="exampleFormControlInput1" class="form-label"
+                          <label
+                            for="exampleFormControlInput1"
+                            class="form-label"
                             >Max salary</label
                           >
                           <input
@@ -147,12 +142,13 @@
                             class="form-control"
                             id="exampleFormControlInput1"
                             v-model="newJobData.maxSalary"
-                          /><p>.000đ</p>
+                            min="0"
+                          />
+                          <p>.000đ</p>
                         </div>
                       </div>
                     </div>
                   </div>
-
                   <label for="birthday">Due date</label>
                   <div class="mb-2 input-group">
                     <span class="input-group-text"
@@ -168,16 +164,19 @@
                       v-model="newJobData.dueDate"
                     />
                   </div>
-
                   <div class="mb-3">
-                    <button class="btn w-100 btn-primary" type="button" @click="handleAddButton">
+                    <button
+                      class="btn w-100 btn-primary"
+                      type="button"
+                      @click="handleAddButton"
+                    >
                       Post
                     </button>
                   </div>
                 </div>
-                <div class="col-lg-3 col-sm-6"></div>
               </div>
             </div>
+            <div class="col-lg-2 col-sm-6"></div>
           </div>
         </div>
       </div>
@@ -195,6 +194,12 @@ export default {
     MainContent,
   },
   setup() {
+    const preventNegativeNumInputListener = (e) => {
+      if (!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8)) {
+        newJobData.value.expectedNumber = 0;
+      }
+    }
+
     const vnLocation = ref([
       {
         value: "HANOI",
@@ -234,6 +239,7 @@ export default {
       vnLocation,
 
       handleAddButton,
+      preventNegativeNumInputListener,
     };
   },
 };

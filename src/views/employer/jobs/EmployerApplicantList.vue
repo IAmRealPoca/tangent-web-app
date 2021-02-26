@@ -278,8 +278,7 @@ export default {
         .then((resp) => {
           listAppliedCVs.value = resp;
         })
-        .catch((err) => {
-        });
+        .catch((err) => {});
     };
 
     onMounted(() => {

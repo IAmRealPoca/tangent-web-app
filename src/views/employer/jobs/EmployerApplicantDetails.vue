@@ -28,7 +28,7 @@
               <div class="card-body">
                 <h2 class="h5 mb-0 mt-2">Name</h2>
                 <span v-if="appliedCV">
-                  <span>{{ appliedCV }}</span>
+                  <span>A Pon</span>
                 </span>
                 <h2 class="h5 mb-0 mt-2">Email Address</h2>
                 <span>[protected]</span>

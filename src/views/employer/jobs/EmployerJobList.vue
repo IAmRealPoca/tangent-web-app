@@ -2,31 +2,36 @@
   <div>
     <MainContent>
       <main>
-        <div class="py-4">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-              <li class="breadcrumb-item">
-                <a href="#"><span class="fas fa-home"></span></a>
-              </li>
-              <li class="breadcrumb-item"><a href="#">Tables</a></li>
-              <li class="breadcrumb-item active" aria-current="page">
-                DataTables
-              </li>
-            </ol>
-          </nav>
-          <div class="d-flex justify-content-between w-100 flex-wrap">
-            <div class="mb-3 mb-lg-0">
-              <h1 class="h4">DataTables (Vanilla JS)</h1>
-              <p class="mb-0">
-                Dozens of reusable components built to provide buttons, alerts,
-                popovers, and more.
-              </p>
-            </div>
-            <div>
-              <a href="#" class="btn btn-outline-gray"
-                ><i class="far fa-question-circle me-1"></i> DataTables Docs</a
-              >
-            </div>
+        <div
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
+        >
+          <div class="d-block mb-4 mb-md-0">
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+              <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                <li class="breadcrumb-item">
+                  <a href="#"><span class="fas fa-home"></span></a>
+                </li>
+                <li class="breadcrumb-item"><a href="#">Volt</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Jobs
+                </li>
+              </ol>
+            </nav>
+            <h2 class="h4">Jobs</h2>
+            <p class="mb-0">Your company's jobs are listed here.</p>
+          </div>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <a class="btn btn-sm btn-dark" @click="handleNewJobClick"
+              ><span class="fas fa-plus me-2"></span> New job</a
+            >
+            <!-- <div class="btn-group ms-2 ms-lg-3">
+              <button type="button" class="btn btn-sm btn-outline-primary">
+                Share
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-primary">
+                Export
+              </button>
+            </div> -->
           </div>
         </div>
         <div class="card">
@@ -65,9 +70,7 @@
                     <span class="fw-normal">{{ aJob.created }}</span>
                   </td>
                   <td>
-                    <span class="fw-normal">
-                      {{ aJob.due }}
-                    </span>
+                    <span class="fw-normal"> 1/6/2021 </span>
                   </td>
                 </tr>
               </tbody>
@@ -159,6 +162,10 @@ export default {
       router.push(`/employer/jobs/${jobPostId}/applicants`);
     };
 
+    const handleNewJobClick = () => {
+      router.push(`/employer/jobs/create`)
+    };
+
     onMounted(() => {
       fetchActiveJob();
     });
@@ -169,6 +176,7 @@ export default {
       fetchActiveJob,
       handleJobDetailClick,
       handleApplicantClick,
+      handleNewJobClick,
     };
   },
 };

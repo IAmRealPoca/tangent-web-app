@@ -9,9 +9,7 @@
       ></iframe
     ></noscript>
     <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-md-none">
-      <a
-        class="navbar-brand me-lg-5"
-        href="/"
+      <a class="navbar-brand me-lg-5" href="/"
         ><img
           class="navbar-brand-dark"
           src="@/assets/img/logo.svg"
@@ -77,9 +75,7 @@
         </div>
         <ul class="nav flex-column pt-3 pt-md-0">
           <li class="nav-item">
-            <a
-              href="/"
-              class="nav-link d-flex align-items-center"
+            <a href="/" class="nav-link d-flex align-items-center"
               ><span class="sidebar-icon"
                 ><img
                   src="@/assets/img/logo.svg"
@@ -151,6 +147,7 @@ export default {
   data: () => ({
     menuItems: [
       {
+        icon: "",
         title: "Dashboard",
         url: "/",
         subItem: [],
@@ -158,40 +155,22 @@ export default {
 
       {
         title: "Jobs",
-        url: "/job-list",
-        subItem: [
-          {
-            title: "Job List",
-            url: "/employer/jobs",
-          },
-          {
-            title: "Job Detail",
-            url: "/employer/job-detail",
-          },
-          {
-            title: "Create Job",
-            url: "/employer/jobs/create",
-          },
-        ],
+        url: "/employer/jobs",
+        subItem: [],
       },
-
       {
-        title: "School",
-        url: "/employer/schools",
-        subItem: [
-          {
-            title: "School List",
-            url: "/employer/schools",
-          },
-          {
-            title: "School Detail",
-            url: "/school-detail",
-          },
-        ],
+        title: "Applicants",
+        url: "/job-fair",
+        subItem: [],
       },
       {
         title: "Job Fair",
         url: "/job-fair",
+        subItem: [],
+      },
+      {
+        title: "School",
+        url: "/employer/schools",
         subItem: [],
       },
     ],
