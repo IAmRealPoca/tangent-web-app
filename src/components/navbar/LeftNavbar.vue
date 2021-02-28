@@ -160,7 +160,7 @@ export default {
       },
       {
         title: "Applicants",
-        url: "/job-fair",
+        url: "/employer/applicants",
         subItem: [],
       },
       {

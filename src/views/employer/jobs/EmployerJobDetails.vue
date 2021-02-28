@@ -54,8 +54,8 @@
               </div>
             </div>
 
-            <div class="card border-light shadow-sm components-section mb-4">
-              <div class="table-responsive py-4">
+            <div class="card border-light shadow-sm components-section mb-4 pt-0">
+              <div class="table-responsive py-4 pt-0">
                 <table class="table table-flush">
                   <thead class="thead-light">
                     <tr>

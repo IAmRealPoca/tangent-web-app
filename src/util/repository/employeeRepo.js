@@ -3,7 +3,7 @@ import { axiosInstance } from '../http/handler'
 
 const http = axiosInstance(axiosBase());
 
-const path = "/employee/current-employee";
+const path = "/employee";
 
 export default {
     getCurrEmployeeInfo() {

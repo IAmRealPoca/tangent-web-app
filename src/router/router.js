@@ -9,6 +9,8 @@ import EmployerApplicantDetails from "@/views/employer/jobs/EmployerApplicantDet
 import EmployerJobDetails from "@/views/employer/jobs/EmployerJobDetails.vue";
 import EmployerViewSchoolList from "@/views/employer/schoolfunctions/EmployerViewSchoolList.vue";
 
+import EmployerApplicantDashboard from "@/views/employer/EmployerApplicantDashboard.vue";
+
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
@@ -36,6 +38,11 @@ const routes = [
         path: "/employer/jobs/create",
         name: "EmployerCreateJob",
         component: EmployerCreateJob
+    },
+    {
+        path: "/employer/applicants",
+        name: "EmployerCreateJob",
+        component: EmployerApplicantDashboard
     },
     {
         path: "/employer/jobs/create-demo",
