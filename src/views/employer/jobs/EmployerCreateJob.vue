@@ -22,15 +22,16 @@
             >
           </div>
         </div>
-        
       </div>
       <div class="row justify-content-between">
         <div class="col-12 mb-4">
           <div class="row mb-4">
             <div class="col-lg-2 col-sm-6"></div>
             <div class="col-lg-8 col-sm-6">
-            <div class="card border-light shadow-sm components-section px-5 py-3">
-              <div class="card-body">
+              <div
+                class="card border-light shadow-sm components-section px-5 py-3"
+              >
+                <div class="card-body">
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label"
                       >Job title</label
@@ -75,6 +76,21 @@
                       v-model="newJobData.jobRequirement"
                     ></textarea>
                   </div>
+                  <div class="mb-2" v-if="skills.length > 0">
+                    <label class="my-1 me-2" for="state">Skill:</label>
+                    <select id="state" class="w-100" name="state" v-model="skillSelected">
+                      <option
+                        v-for="(location, index) in skills"
+                        :key="index"
+                        :value="{ skillId: location.skillId, skillName: location.skillName }"
+                      >
+                        {{ location.skillName }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="mb-2" v-if="skills.length <= 0">
+                    <label for="state" class="my-1 me-2">Skill:</label>
+                  </div>
                   <div class="row">
                     <div class="col-4 mb-3">
                       <label for="exampleFormControlInput1" class="form-label"
@@ -98,16 +114,16 @@
                       type="text"
                       class="form-control"
                       id="exampleFormControlInput1"
-                      v-model="newJobData.location"
+                      v-model="newJobData.address"
                     />
                   </div>
                   <div class="mb-2">
                     <label class="my-1 me-2" for="state">Location:</label>
-                    <select id="state" class="w-100" name="state">
+                    <select id="state" class="w-100" name="state" v-model="locationSelected">
                       <option
                         v-for="(location, index) in vnLocation"
                         :key="index"
-                        :value="location.value"
+                        :value="{ locValue: location.value, locTitle: location.title }"
                       >
                         {{ location.title }}
                       </option>
@@ -185,9 +201,11 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import MainContent from "@/components/MainContent.vue";
 import * as recruitmentPostService from "@/util/service/recruitmentPostService";
+import * as skillService from "@/util/service/skillService";
+
 export default {
   name: "EmployerCreateJob",
   components: {
@@ -195,11 +213,26 @@ export default {
   },
   setup() {
     const preventNegativeNumInputListener = (e) => {
-      if (!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8)) {
+      if (
+        !(
+          (e.keyCode > 95 && e.keyCode < 106) ||
+          (e.keyCode > 47 && e.keyCode < 58) ||
+          e.keyCode == 8
+        )
+      ) {
         newJobData.value.expectedNumber = 0;
       }
-    }
+    };
 
+    const locationSelected = ref({});
+    const skillSelected = ref({});
+
+    const skills = ref([]);
+    const fetchSkillList = () => {
+      skillService.getListOfSkills().then((resp) => {
+        skills.value = resp;
+      });
+    };
     const vnLocation = ref([
       {
         value: "HANOI",
@@ -230,13 +263,25 @@ export default {
     const newJobData = ref({});
 
     const handleAddButton = () => {
+      newJobData.value = {
+        ...newJobData.value,
+        "skillId": skillSelected.value.skillId,
+        "location": newJobData.value.address.concat(",", locationSelected.value.locTitle),
+      };
       recruitmentPostService.postNewJob(newJobData.value);
       console.log(newJobData.value);
     };
 
+    onMounted(() => {
+      fetchSkillList();
+    });
+
     return {
       newJobData,
       vnLocation,
+      skills,
+      locationSelected,
+      skillSelected,
 
       handleAddButton,
       preventNegativeNumInputListener,

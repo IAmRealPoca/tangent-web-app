@@ -41,7 +41,7 @@ const routes = [
     },
     {
         path: "/employer/applicants",
-        name: "EmployerCreateJob",
+        name: "EmployerApplicantDashboard",
         component: EmployerApplicantDashboard
     },
     {
