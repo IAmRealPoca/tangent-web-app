@@ -483,7 +483,7 @@
 <script>
 import MainContent from "@/components/MainContent.vue";
 export default {
-  name: "EmployerCreateJobDemo",
+  name: "EmployerCreateBooth",
   components: {
     MainContent,
   },

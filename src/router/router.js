@@ -1,15 +1,20 @@
 import Dashboard from "@/views/Dashboard.vue";
 import Login from "@/views/Login.vue";
+
+//Employers Jobs related
 import EmployerJobList from "@/views/employer/jobs/EmployerJobList.vue";
 import EmployerCreateJob from "@/views/employer/jobs/EmployerCreateJob.vue";
 import EmployerCalendar from "@/views/employer/jobfair/EmployerCalendar.vue";
-import EmployerCreateJobDemo from "@/views/employer/jobs/EmployerCreateJobDemo.vue";
 import EmployerApplicantList from "@/views/employer/jobs/EmployerApplicantList.vue";
 import EmployerApplicantDetails from "@/views/employer/jobs/EmployerApplicantDetails.vue";
 import EmployerJobDetails from "@/views/employer/jobs/EmployerJobDetails.vue";
 import EmployerViewSchoolList from "@/views/employer/schoolfunctions/EmployerViewSchoolList.vue";
-
+//Applicant Dashboard
 import EmployerApplicantDashboard from "@/views/employer/applicantfunctions/EmployerApplicantDashboard.vue";
+//Employer Job fair related
+import EmployerViewFairList from "@/views/employer/jobfair/EmployerViewFairList.vue";
+import EmployerBooth from "@/views/employer/jobfair/EmployerBooth.vue";
+import EmployerCreateBooth from "@/views/employer/jobfair/EmployerCreateBooth.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -45,11 +50,6 @@ const routes = [
         component: EmployerApplicantDashboard
     },
     {
-        path: "/employer/jobs/create-demo",
-        name: "EmployerCreateJobDemo",
-        component: EmployerCreateJobDemo
-    },
-    {
         path: "/employer/calendar",
         name: "EmployerCalendar",
         component: EmployerCalendar
@@ -73,6 +73,21 @@ const routes = [
         path: "/employer/schools",
         name: "EmployerViewSchoolList",
         component: EmployerViewSchoolList
+    },
+    {
+        path: "/employer/jobfair",
+        name: "EmployerViewFairList",
+        component: EmployerViewFairList
+    },
+    {
+        path: "/employer/jobfair/someId/booth",
+        name: "EmployerBooth",
+        component: EmployerBooth
+    },
+    {
+        path: "/employer/jobfair/someId/booth/create",
+        name: "EmployerCreateBooth",
+        component: EmployerCreateBooth
     },
     
     
