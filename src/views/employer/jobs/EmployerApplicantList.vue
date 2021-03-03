@@ -70,7 +70,7 @@
                 <div class="row">
                   <span class="h5">Exclude students that do not match</span>
                 </div>
-                <div class="row">
+                <div class="row form-check form-switch">
                   <div class="col">
                     <input
                       class="form-check-input"
