@@ -256,6 +256,7 @@
                     </th>
                     <th class="border-bottom">Name</th>
                     <th class="border-bottom">Date Created</th>
+                    <th class="border-bottom">School</th>
                     <th class="border-bottom">Verified</th>
                     <th class="border-bottom">Status</th>
                     <th class="border-bottom">Action</th>
