@@ -1,8 +1,7 @@
 <template>
   <div>
-      
     <div>
-        <Navbar />
+      <Navbar />
     </div>
     <div class="content">
       <Header />
@@ -26,5 +25,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

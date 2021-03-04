@@ -11,4 +11,4 @@ const getStudentListFromSchoolId = (schoolId) => {
     return schoolRepo.getListStudent(schoolId);
 }
 
-export {getListOfSchools, getStudentListFromSchoolId}
+export { getListOfSchools, getStudentListFromSchoolId }

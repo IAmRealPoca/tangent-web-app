@@ -18,8 +18,7 @@
             <div class="mb-3 mb-lg-0">
               <h1 class="h4">DataTables (Vanilla JS)</h1>
               <p class="mb-0">
-                Dozens of reusable components built to provide buttons, alerts,
-                popovers, and more.
+                Cái bảng gì vậy nè
               </p>
             </div>
             <div>
@@ -54,9 +53,11 @@
                   </td>
                   <td>
                     <a href="#"
-                      ><span class="fw-normal text-info" @click="handleApplicantClick(aJob.id)">{{
-                        aJob.applicants
-                      }}</span></a
+                      ><span
+                        class="fw-normal text-info"
+                        @click="handleApplicantClick(aJob.id)"
+                        >{{ aJob.applicants }}</span
+                      ></a
                     >
                   </td>
                   <td>
@@ -152,9 +153,10 @@ export default {
       router.push(`/employer/jobs/${jobId}`);
     };
 
-    const handleApplicantClick = (jobPostId) => { //same as handleReviewApplicantClick in EmployerJobDetails
-      router.push(`/employer/jobs/${jobPostId}/applicants`)
-    }
+    const handleApplicantClick = (jobPostId) => {
+      //same as handleReviewApplicantClick in EmployerJobDetails
+      router.push(`/employer/jobs/${jobPostId}/applicants`);
+    };
 
     onMounted(() => {
       fetchActiveJob();
@@ -171,5 +173,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

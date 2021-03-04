@@ -13,11 +13,11 @@
                 </li>
                 <li class="breadcrumb-item"><a href="#">Tangent</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  Schools List
+                  Companies
                 </li>
               </ol>
             </nav>
-            <h2 class="h4">Schools List</h2>
+            <h2 class="h4">Companies List</h2>
             <p class="mb-0"></p>
           </div>
         </div>
@@ -143,14 +143,17 @@
                   </div>
                 </td>
                 <td>
-                  <a href="#" class="d-flex align-items-center"
+                  <a
+                    href="#"
+                    class="d-flex align-items-center"
+                    @click="handleClick(`/school/company-detail/${userCheck1}`)"
                     ><img
                       src="@/assets/img/team/profile-picture-1.jpg"
                       class="user-avatar rounded-circle me-3"
                       alt="Avatar"
                     />
                     <div class="d-block">
-                      <span class="fw-bold">FPT University</span>
+                      <span class="fw-bold">FPT Software</span>
                       <div class="small text-gray">
                         <span
                           class="__cf_email__"
@@ -241,13 +244,21 @@
 </template>
 
 <script>
-import MainContent from "@/components/MainContent.vue";
+import MainContent from "@/components/MainContent";
+import { useRouter } from "vue-router";
+
 export default {
-  name: "EmployerViewSchoolList",
-  components: {
-    MainContent,
+  name: "SchoolViewCompanyList",
+  components: { MainContent },
+  setup() {
+    const router = useRouter();
+
+    const handleClick = (url) => {
+      router.push(url);
+    };
+    return {
+      handleClick,
+    };
   },
 };
 </script>
-
-<style></style>

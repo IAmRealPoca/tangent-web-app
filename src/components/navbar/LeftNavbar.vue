@@ -9,13 +9,11 @@
       ></iframe
     ></noscript>
     <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-md-none">
-      <a
-        class="navbar-brand me-lg-5"
-        href="/"
+      <a class="navbar-brand me-lg-5" href="/"
         ><img
           class="navbar-brand-dark"
           src="@/assets/img/logo.svg"
-          alt="Volt logo" />
+          alt="Volt logo"/>
         <img
           class="navbar-brand-light"
           src="@/assets/img/logo.svg"
@@ -77,9 +75,7 @@
         </div>
         <ul class="nav flex-column pt-3 pt-md-0">
           <li class="nav-item">
-            <a
-              href="/"
-              class="nav-link d-flex align-items-center"
+            <a href="/" class="nav-link d-flex align-items-center"
               ><span class="sidebar-icon"
                 ><img
                   src="@/assets/img/logo.svg"
@@ -177,15 +173,23 @@ export default {
 
       {
         title: "School",
-        url: "/employer/schools",
+        url: "/school",
         subItem: [
           {
             title: "School List",
             url: "/employer/schools",
           },
           {
-            title: "School Detail",
-            url: "/school-detail",
+            title: "Company List",
+            url: "/school/company-list",
+          },
+          {
+            title: "Major List",
+            url: "/school/major",
+          },
+          {
+            title: "Students",
+            url: "/student",
           },
         ],
       },
@@ -199,5 +203,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
