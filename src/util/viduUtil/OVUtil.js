@@ -1,8 +1,16 @@
 import { OpenVidu } from "openvidu-browser";
 import { useVCService } from "@/util/service/videoChatService";
 export const OVUtil = () => {
-
-  const joinSession = (data) => {
+  const data = {
+    OV: undefined,
+    session: undefined,
+    mainStreamManager: undefined,
+    publisher: undefined,
+    subscribers: [],
+    mySessionId: "NyamSed",
+    myUserName: "Participant" + Math.floor(Math.random() * 100),
+  };
+  const joinSession = async () => {
     // --- Get an OpenVidu object ---
     data.OV = new OpenVidu();
 
@@ -36,42 +44,47 @@ export const OVUtil = () => {
 
     // 'getToken' method is simulating what your server-side should do.
     // 'token' parameter should be retrieved and returned by your own backend
-    getToken2(data.mySessionId).then((token) => {
-      data.session
-        .connect(token, { clientData: data.myUserName })
-        .then(() => {
-          // --- Get your own camera stream with the desired properties ---
-          console.log("I am in here");
-          const publisher = data.OV.initPublisher(undefined, {
-            audioSource: undefined, // The source of audio. If undefined default microphone
-            videoSource: undefined, // The source of video. If undefined default webcam
-            publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
-            publishVideo: true, // Whether you want to start publishing with your video enabled or not
-            resolution: "640x480", // The resolution of your video
-            frameRate: 40, // The frame rate of your video
-            insertMode: "APPEND", // How the video is inserted in the target element 'video-container'
-            mirror: false, // Whether to mirror your local video or not
-          });
-
-          data.mainStreamManager = publisher;
-          data.publisher = publisher;
-
-          // --- Publish your stream ---
-
-          data.session.publish(data.publisher);
-        })
-        .catch((error) => {
-          console.log(
-            "There was an error connecting to the session:",
-            error.code,
-            error.message
-          );
-        });
+    const token = await getToken2(data.mySessionId);
+    const session = await data.session.connect(token, {
+      clientData: data.myUserName,
     });
+    try {
+      // --- Get your own camera stream with the desired properties ---
+      const publisher = data.OV.initPublisher(undefined, {
+        audioSource: undefined, // The source of audio. If undefined default microphone
+        videoSource: undefined, // The source of video. If undefined default webcam
+        publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
+        publishVideo: true, // Whether you want to start publishing with your video enabled or not
+        resolution: "640x480", // The resolution of your video
+        frameRate: 40, // The frame rate of your video
+        insertMode: "APPEND", // How the video is inserted in the target element 'video-container'
+        mirror: false, // Whether to mirror your local video or not
+      });
 
-    window.addEventListener("beforeunload", data.leaveSession);
+      console.log("publisher init: ", publisher);
 
-    console.log("Data frmom Util: ",data);
+      data.mainStreamManager = publisher;
+      data.publisher = publisher;
+
+      console.log("data publisher init: ", data.publisher);
+
+      // --- Publish your stream ---
+
+      data.session.publish(data.publisher);
+    } catch (error) {
+      console.log(
+        "There was an error connecting to the session:",
+        error.code,
+        error.message
+      );
+    }
+
+    window.addEventListener("beforeunload", leaveSession);
+
+    console.warn("Data frmom Util: ", data);
+    console.warn("Data publisher from Util: ", data.publisher);
+
+    return data;
   };
 
   const leaveSession = () => {
@@ -84,7 +97,9 @@ export const OVUtil = () => {
     data.subscribers = [];
     data.OV = undefined;
 
-    window.removeEventListener("beforeunload", data.leaveSession);
+    window.removeEventListener("beforeunload", leaveSession);
+
+    return data;
   };
 
   const updateMainVideoStreamManager = (stream) => {

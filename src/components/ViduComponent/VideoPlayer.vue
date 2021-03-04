@@ -1,12 +1,12 @@
 <template>
-  <video autoplay ref="vid" />
-  <div>
+  <div v-if="streamManager">
+    <video autoplay ref="vid" />
     <p>{{ clientData }}</p>
   </div>
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 
 export default {
   name: "VideoPlayer",
@@ -14,9 +14,9 @@ export default {
     streamManager: Object,
   },
   setup(props) {
-    const vid = ref();
-    console.log("hiThere");
-    console.log("hi ref", props.streamManager);
+    const vid = ref(null);
+    console.warn("hiThere: ",vid.value);
+    console.warn("hi ref", props.streamManager);
     const getConnectionData = () => {
       const { connection } = props.streamManager.stream;
       return JSON.parse(connection.data);
@@ -27,7 +27,7 @@ export default {
     onMounted(() => {
       props.streamManager.addVideoElement(vid.value);
     });
-    return { clientData };
+    return { clientData,vid };
   },
 };
 </script>

@@ -21,34 +21,33 @@
         </div>
       </div>
       <div class="row">
-        <input type="button" value="Call" @click="joinSession" />
-        <div v-if="data.session">
+        <div v-if="data && !data.session">
+          <input type="button" value="Call" @click="joinSession" />
+        </div>
+        <div v-if="data && data.session">
           <div class="col-12 mb-4">
             <div class="card border-light shadow-sm components-section">
               <div class="card-body">
                 <div class="row">
                   <div class="col-7">
                     <div v-if="data.publisher">
-                      <div>ABCD</div>
-                      <video-player :streamManager="data.mainStreamManager" />
+                      <video-player :stream-manager="data.mainStreamManager" />
                     </div>
                   </div>
-                  <div>ACD Under Pubs</div>
                   <div v-if="data.subscribers">
                     <div
                       class="col-5"
                       v-for="sub in data.subscribers"
                       :key="sub.stream.connection.connectionId"
                     >
-                      <div>ABCDEF</div>
                       <video-player
-                        :streamManager="data.mainStreamManager"
+                        :stream-manager="sub"
                         @click="OV.updateMainVideoStreamManager"
                       />
                     </div>
                   </div>
                 </div>
-                <input type="button" value="Bye bye" @click="OV.leaveSession" />
+                <input type="button" value="Bye bye" @click="leaveSession" />
               </div>
             </div>
           </div>
@@ -73,20 +72,20 @@ export default {
   },
   setup() {
     const OV = OVUtil();
-    const data = ref({
-      OV: undefined,
-      session: undefined,
-      mainStreamManager: undefined,
-      publisher: undefined,
-      subscribers: [],
-      mySessionId: "NyamSed",
-      myUserName: "Participant" + Math.floor(Math.random() * 100),
-    });
+    const data = ref({});
     const joinSession = () => {
-      data.value = OV.joinSession(data.value);
-      console.log("Data check: ", data.value);
+      OV.joinSession()
+        .then((OVData) => {
+          data.value = OVData;
+          console.warn("Data check: ", data.value.subscribers);
+        })
+        .catch((e) => console.log(e));
     };
-    return { data, joinSession, OV };
+    const leaveSession = () => {
+      OV.leaveSession();
+      data.value = {};
+    };
+    return { data, joinSession, leaveSession, OV };
   },
 };
 </script>
