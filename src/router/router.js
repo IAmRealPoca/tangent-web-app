@@ -13,8 +13,8 @@ import EmployerViewSchoolList from "@/views/employer/schoolfunctions/EmployerVie
 import EmployerApplicantDashboard from "@/views/employer/applicantfunctions/EmployerApplicantDashboard.vue";
 //Employer Job fair related
 import EmployerViewFairList from "@/views/employer/jobfair/EmployerViewFairList.vue";
+import EmployerFairDetail from "@/views/employer/jobfair/EmployerFairDetail.vue";
 import EmployerBooth from "@/views/employer/jobfair/EmployerBooth.vue";
-import EmployerCreateBooth from "@/views/employer/jobfair/EmployerCreateBooth.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -80,14 +80,14 @@ const routes = [
         component: EmployerViewFairList
     },
     {
+        path: "/employer/jobfair/someId/detail",
+        name: "EmployerFairDetail",
+        component: EmployerFairDetail
+    },
+    {
         path: "/employer/jobfair/someId/booth",
         name: "EmployerBooth",
         component: EmployerBooth
-    },
-    {
-        path: "/employer/jobfair/someId/booth/create",
-        name: "EmployerCreateBooth",
-        component: EmployerCreateBooth
     },
     
     

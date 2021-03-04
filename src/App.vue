@@ -29,6 +29,7 @@ export default {
 }
 /* Main Css */
 @import "./assets/css/volt.css";
+
 /* @import "./assets/vendor/bootstrap/dist/js/bootstrap.min.js"; */
 /* Slider */
 /* @import "../src/assets/css/owl.carousel.min.css";

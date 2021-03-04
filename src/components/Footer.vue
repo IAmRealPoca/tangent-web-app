@@ -4,12 +4,12 @@
       <div class="row">
         <div class="col-12 col-lg-6 mb-4 mb-lg-0">
           <p class="mb-0 text-center text-xl-left">
-            Copyright © 2021-<span class="current-year"></span>
+            Copyright © 2021- <span class="current-year"></span>
             <a
               class="text-primary fw-normal"
               href="/"
               target="_blank"
-              >Tangent</a
+              > Tangent</a
             >
           </p>
         </div>

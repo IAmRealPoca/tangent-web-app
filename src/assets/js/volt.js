@@ -21,7 +21,7 @@ import "../vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js";
 import svgMap from "svgmap";
 import * as FullCalendar from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import { Datepicker } from "vanillajs-datepicker";
+import { Datepicker,DateRangePicker } from "vanillajs-datepicker";
 import { DataTable } from "simple-datatables";
 import noUiSlider from "@/assets/vendor/nouislider/distribute/nouislider.min.js";
 // import '@/assets/vendor/nouislider/distribute/nouislider.min.js';
@@ -147,6 +147,13 @@ d.addEventListener("DOMContentLoaded", function(event) {
   var datepickers = [].slice.call(d.querySelectorAll("[data-datepicker]"));
   var datepickersList = datepickers.map(function(el) {
     return new Datepicker(el, {
+      buttonClass: "btn",
+    });
+  });
+  // DatepickerRange
+  var datepickerrange = [].slice.call(d.querySelectorAll("[data-datepickerange]"));
+  var datepickersRangeList = datepickerrange.map(function(el) {
+    return new DateRangePicker(el, {
       buttonClass: "btn",
     });
   });
