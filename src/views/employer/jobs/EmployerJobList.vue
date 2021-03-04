@@ -2,55 +2,106 @@
   <div>
     <MainContent>
       <main>
-        <div class="py-4">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-              <li class="breadcrumb-item">
-                <a href="#"><span class="fas fa-home"></span></a>
-              </li>
-              <li class="breadcrumb-item"><a href="#">Tables</a></li>
-              <li class="breadcrumb-item active" aria-current="page">
-                DataTables
-              </li>
-            </ol>
-          </nav>
-          <div class="d-flex justify-content-between w-100 flex-wrap">
-            <div class="mb-3 mb-lg-0">
-              <h1 class="h4">DataTables (Vanilla JS)</h1>
-              <p class="mb-0">
-                Dozens of reusable components built to provide buttons, alerts,
-                popovers, and more.
-              </p>
-            </div>
-            <div>
-              <a
-                href="https://themesberg.com/docs/volt-bootstrap-5-dashboard/plugins/datatables/"
-                class="btn btn-outline-gray"
-                ><i class="far fa-question-circle me-1"></i> DataTables Docs</a
-              >
-            </div>
+        <div
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
+        >
+          <div class="d-block mb-4 mb-md-0">
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+              <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                <li class="breadcrumb-item">
+                  <a href="#"><span class="fas fa-home"></span></a>
+                </li>
+                <li class="breadcrumb-item"><a href="#">Volt</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Jobs
+                </li>
+              </ol>
+            </nav>
+            <h2 class="h4">Jobs</h2>
+            <p class="mb-0">Your company's jobs are listed here.</p>
+          </div>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <a class="btn btn-sm btn-dark" @click="handleNewJobClick"
+              ><span class="fas fa-plus me-2"></span> New job</a
+            >
+            <!-- <div class="btn-group ms-2 ms-lg-3">
+              <button type="button" class="btn btn-sm btn-outline-primary">
+                Share
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-primary">
+                Export
+              </button>
+            </div> -->
           </div>
         </div>
         <div class="card">
-          <div class="table-responsive py-4">
-            <table class="table table-flush">
-              <thead class="thead-light">
+          <div class="card card-body shadow-sm table-wrapper table-responsive">
+            <table class="table user-table table-hover align-items-center">
+              <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Applicants</th>
-                  <th>Created</th>
-                  <th>Due date</th>
+                  <th class="border-bottom">Name</th>
+                  <th class="border-bottom">Applicants</th>
+                  <th class="border-bottom">Created</th>
+                  <th class="border-bottom">Due date</th>
                 </tr>
               </thead>
               <tbody v-if="jobPostedList.length > 0">
                 <tr v-for="(aJob, index) in jobPostedList" :key="index">
-                  <td>{{ aJob.name }}</td>
-                  <td>{{ aJob.applicants }}</td>
-                  <td>{{ aJob.created }}</td>
-                  <td>{{ aJob.due }}</td>
+                  <td>
+                    <a class="d-flex align-items-center">
+                      <div
+                        class="d-block"
+                        @click="handleJobDetailClick(aJob.id)"
+                      >
+                        <span class="fw-bold">{{ aJob.name }}</span>
+                      </div></a
+                    >
+                  </td>
+                  <td>
+                    <a>
+                      <span
+                        class="fw-normal text-info"
+                        @click="handleApplicantClick(aJob.id)"
+                        >{{ aJob.applicants }}</span
+                      >
+                    </a>
+                  </td>
+                  <td>
+                    <span class="fw-normal">{{ aJob.created }}</span>
+                  </td>
+                  <td>
+                    <span class="fw-normal"> 1/6/2021 </span>
+                  </td>
                 </tr>
               </tbody>
+              <tbody v-if="jobPostedList.length <= 0">
+                <div>No entries found.</div>
+              </tbody>
             </table>
+            <div
+              class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between"
+            >
+              <nav aria-label="Page navigation example">
+                <ul class="pagination mb-0">
+                  <li class="page-item">
+                    <a class="page-link" href="#">Previous</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item active">
+                    <a class="page-link" href="#">2</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                </ul>
+              </nav>
+              <div class="fw-normal small mt-4 mt-lg-0">
+                Showing <b>5</b> out of <b>25</b> entries
+              </div>
+            </div>
           </div>
         </div>
       </main>
@@ -59,9 +110,10 @@
 </template>
 
 <script>
+import { useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 import MainContent from "@/components/MainContent.vue";
-import * as employerService from "@/util/service/employerService.js";
+import * as employerService from "@/util/service/employerService";
 
 export default {
   name: "EmployerJobList",
@@ -69,6 +121,7 @@ export default {
     MainContent,
   },
   setup() {
+    const router = useRouter();
     const jobPostedList = ref([]);
 
     const convertDateToString = (date) => {
@@ -99,13 +152,31 @@ export default {
         jobPostedList.value = transformResponseToJobList(resp);
       });
     };
+
+    const handleJobDetailClick = (jobId) => {
+      router.push(`/employer/jobs/${jobId}`);
+    };
+
+    const handleApplicantClick = (jobPostId) => {
+      //same as handleReviewApplicantClick in EmployerJobDetails
+      router.push(`/employer/jobs/${jobPostId}/applicants`);
+    };
+
+    const handleNewJobClick = () => {
+      router.push(`/employer/jobs/create`)
+    };
+
     onMounted(() => {
       fetchActiveJob();
     });
 
     return {
       jobPostedList,
+
       fetchActiveJob,
+      handleJobDetailClick,
+      handleApplicantClick,
+      handleNewJobClick,
     };
   },
 };

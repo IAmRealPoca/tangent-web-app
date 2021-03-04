@@ -18,7 +18,7 @@
           </p>
           <div
             class="row justify-content-center form-bg-image"
-            data-background-lg="https://demo.themesberg.com/volt-pro/assets/img/illustrations/signin.svg"
+            data-background-lg="@/assets/img/signin.svg"
           >
             <div
               class="col-12 d-flex align-items-center justify-content-center"
@@ -29,34 +29,51 @@
                 <div class="text-center text-md-center mb-4 mt-md-0">
                   <h1 class="mb-0 h3">Sign in to our platform</h1>
                 </div>
-                <div class="btn-group me-2 mb-2">
-                  <button type="button" class="btn btn-primary center">
-                    {{ selectedAccTypeString }}
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <i class="fas fa-angle-down dropdown-arrow"></i>
-                    <span class="sr-only">\/</span>
-                  </button>
-                  <div class="dropdown-menu">
-                    <div
-                      class="dropdown-item"
-                      @click="selectedAccTypeId = accType.typeId"
-                      v-for="(accType, index) in listOfAccountType"
-                      :key="index"
+                <div class="d-flex justify-content-center my-4">
+                  <div class="btn-group mx-auto">
+                    <button
+                      type="button"
+                      class="btn btn-primary dropdown-toggle"
+                      data-bs-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
                     >
-                      {{ accType.typeName }}
+                      {{ selectedAccTypeString }}
+                      <i class="fas fa-angle-down dropdown-arrow"></i>
+                      <span class="sr-only">\/</span>
+                    </button>
+                    <!-- <button
+                      type="button"
+                      class="btn btn-primary dropdown-toggle"
+                      data-bs-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="fas fa-angle-down dropdown-arrow"></i>
+                      <span class="sr-only">\/</span>
+                    </button> -->
+                    <div class="dropdown-menu m-0">
+                      <div
+                        class="dropdown-item"
+                        v-for="(accType, index) in listOfAccountType"
+                        @click="selectType(accType.typeId)"
+                        data-bs-toggle="tooltip"
+                        :key="index"
+                      >
+                        {{ accType.typeName }}
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                <!-- <span
+                  class="fas text-danger ms-2"
+                  title=""
+                  data-bs-toggle="tooltip"
+                ></span> -->
                 <div class="d-flex justify-content-center my-4">
                   <button
-                    class="btn btn-google me-3 mb-3"
+                    class="btn btn-google mx-auto"
                     type="button"
                     @click="onClick"
                   >
@@ -77,9 +94,10 @@
 
 <script>
 import { useRouter } from "vue-router";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watchEffect } from "vue";
 import { loginService } from "@/util/service/login";
 import * as schoolService from "@/util/service/schoolService";
+import * as employerService from "@/util/service/employerService";
 
 export default {
   name: "Login",
@@ -94,6 +112,10 @@ export default {
         typeName: "Admin",
       },
       {
+        typeId: 1,
+        typeName: "Employee",
+      },
+      {
         typeId: 2,
         typeName: "Employer",
       },
@@ -104,15 +126,13 @@ export default {
     ];
     const selectedAccTypeId = ref();
     const selectedAccTypeString = ref();
-    const user = sessionStorage.getItem("token");
-    console.log("user", user);
+    const userToken = sessionStorage.getItem("token");
+    console.log("user", userToken);
 
-    if (user) {
+    if (userToken) {
       router.push("/");
     }
     onMounted(() => {
-      console.log("Mason Mounted");
-
       schoolService.getListOfSchools().then((resp) => {
         listOfSchools.value = resp;
       });
@@ -121,7 +141,27 @@ export default {
     });
 
     selectedAccTypeString.value = "[Select type]";
-    watch((selectedAccTypeId) => {
+
+    const selectType = (id) => {
+      selectedAccTypeId.value = id;
+      console.log("id",id);
+      if (id === 0 || id === 1 || id === 2 || id === 4) {
+        if (id=== 0) {
+          selectedAccTypeString.value = "Admin";
+        }
+        if (id=== 1) {
+          selectedAccTypeString.value = "Employee";
+        }
+        if (id=== 2) {
+          selectedAccTypeString.value = "Employer";
+        }
+        if (id=== 4) {
+          selectedAccTypeString.value = "School";
+        }
+      }
+    };
+
+    watchEffect((selectedAccTypeId) => {
       if (selectedAccTypeId.value === 0) {
         selectedAccTypeString.value = "Admin";
       }
@@ -144,6 +184,7 @@ export default {
         .then((resp) => {
           // console.log(resp.token);
           sessionStorage.setItem("token", resp.token);
+          fetchUserData(selectedAccTypeId.value);
           // store.dispatch("setCurrentUserFlag", resp.flg);
           router.push("/");
         })
@@ -151,6 +192,19 @@ export default {
           console.log(err);
         });
     }
+
+    const fetchUserData = (usrFlag) => {
+      if (usrFlag === 0) {
+      } else if (usrFlag === 2) {
+        employerService.getCurrEmployerInfo().then((resp) => {
+          console.log(resp);
+          sessionStorage.setItem("userInfo", JSON.stringify(resp));
+        });
+      } else if (usrFlag === 4) {
+        // schoolService.
+      }
+    };
+
     const onChange = () => {
       console.log("Normal trigger");
       console.log("value ", selectedSchoolId.value);
@@ -172,10 +226,10 @@ export default {
       onClick,
       onChange,
       onClickToOpenVidu,
+      selectType
     };
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

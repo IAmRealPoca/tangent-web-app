@@ -13,467 +13,186 @@
         </nav>
         <div class="d-flex justify-content-between w-100 flex-wrap">
           <div class="mb-3 mb-lg-0">
-            <h1 class="h4">Forms</h1>
-            <p class="mb-0">
-              Dozens of reusable components built to provide buttons, alerts,
-              popovers, and more.
-            </p>
+            <h1 class="h4">Create job</h1>
+            <p class="mb-0">Create new job</p>
           </div>
           <div>
-            <a
-              href="https://themesberg.com/docs/volt-bootstrap-5-dashboard/components/forms/"
-              class="btn btn-outline-gray"
+            <a href="#" class="btn btn-outline-gray"
               ><i class="far fa-question-circle me-1"></i> Forms Docs</a
             >
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row justify-content-between">
         <div class="col-12 mb-4">
-          <div class="card border-light shadow-sm components-section">
-            <div class="card-body">
-              <div class="row mb-4">
-                <div class="col-lg-4 col-sm-6">
-                  <div class="mb-4">
-                    <label for="email">Email address</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="email"
-                      aria-describedby="emailHelp"
-                    />
-                    <small id="emailHelp" class="form-text text-muted"
-                      >We'll never share your email with anyone else.</small
+          <div class="row mb-4">
+            <div class="col-lg-2 col-sm-6"></div>
+            <div class="col-lg-8 col-sm-6">
+              <div
+                class="card border-light shadow-sm components-section px-5 py-3"
+              >
+                <div class="card-body">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label"
+                      >Job title</label
                     >
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputIconLeft">Icon Left</label>
-                    <div class="input-group">
-                      <span class="input-group-text" id="basic-addon1"
-                        ><span class="fas fa-search"></span
-                      ></span>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="exampleInputIconLeft"
-                        placeholder="Search"
-                        aria-label="Search"
-                      />
-                    </div>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputIconRight">Icon Right</label>
-                    <div class="input-group">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="exampleInputIconRight"
-                        placeholder="Search"
-                        aria-label="Search"
-                      />
-                      <span class="input-group-text" id="basic-addon2"
-                        ><span class="fas fa-search"></span
-                      ></span>
-                    </div>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputIconPassword">Password</label>
-                    <div class="input-group">
-                      <input
-                        type="password"
-                        class="form-control"
-                        id="exampleInputIconPassword"
-                        placeholder="Password"
-                        aria-label="Password"
-                      />
-                      <span class="input-group-text" id="basic-addon3"
-                        ><span class="fas fa-unlock-alt"></span
-                      ></span>
-                    </div>
-                  </div>
-                  <div class="mb-3">
-                    <label for="firstName">First name</label>
                     <input
                       type="text"
-                      class="form-control is-valid"
-                      id="firstName"
-                      value="Mark"
-                      required
+                      class="form-control"
+                      id="exampleFormControlInput1"
+                      v-model="newJobData.title"
                     />
-                    <div class="valid-feedback">Looks good!</div>
                   </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                  <div class="mb-2">
-                    <label class="my-1 me-2" for="state">Select state:</label>
-                    <select id="state" class="w-100" name="state">
-                      <option value="AL">Alabama</option>
-                      <option value="AK">Alaska</option>
-                      <option value="AZ">Arizona</option>
-                      <option value="AR">Arkansas</option>
-                      <option value="CA">California</option>
-                      <option value="CO">Colorado</option>
-                      <option value="CT">Connecticut</option>
-                      <option value="DE">Delaware</option>
-                      <option value="DC">District Of Columbia</option>
-                      <option value="FL">Florida</option>
-                      <option value="GA">Georgia</option>
-                      <option value="HI">Hawaii</option>
-                      <option value="ID">Idaho</option>
-                      <option value="IL">Illinois</option>
-                      <option value="IN">Indiana</option>
-                      <option value="IA">Iowa</option>
-                      <option value="KS">Kansas</option>
-                      <option value="KY">Kentucky</option>
-                      <option value="LA">Louisiana</option>
-                      <option value="ME">Maine</option>
-                      <option value="MD">Maryland</option>
-                      <option value="MA">Massachusetts</option>
-                      <option value="MI">Michigan</option>
-                      <option value="MN">Minnesota</option>
-                      <option value="MS">Mississippi</option>
-                      <option value="MO">Missouri</option>
-                      <option value="MT">Montana</option>
-                      <option value="NE">Nebraska</option>
-                      <option value="NV">Nevada</option>
-                      <option value="NH">New Hampshire</option>
-                      <option value="NJ">New Jersey</option>
-                      <option value="NM">New Mexico</option>
-                      <option value="NY">New York</option>
-                      <option value="NC">North Carolina</option>
-                      <option value="ND">North Dakota</option>
-                      <option value="OH">Ohio</option>
-                      <option value="OK">Oklahoma</option>
-                      <option value="OR">Oregon</option>
-                      <option value="PA">Pennsylvania</option>
-                      <option value="RI">Rhode Island</option>
-                      <option value="SC">South Carolina</option>
-                      <option value="SD">South Dakota</option>
-                      <option value="TN">Tennessee</option>
-                      <option value="TX">Texas</option>
-                      <option value="UT">Utah</option>
-                      <option value="VT">Vermont</option>
-                      <option value="VA">Virginia</option>
-                      <option value="WA">Washington</option>
-                      <option value="WV">West Virginia</option>
-                      <option value="WI">Wisconsin</option>
-                      <option value="WY">Wyoming</option>
-                    </select>
-                  </div>
-                  <label class="my-1 me-2" for="states">Select states:</label>
-                  <select
-                    id="states"
-                    class="w-100"
-                    name="states[]"
-                    multiple="multiple"
-                  >
-                    <option value="AK">Alaska</option>
-                    <option value="AZ">Arizona</option>
-                    <option value="AR">Arkansas</option>
-                    <option value="CA">California</option>
-                    <option value="CO">Colorado</option>
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="DC">District Of Columbia</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="HI">Hawaii</option>
-                    <option value="ID">Idaho</option>
-                    <option value="IL">Illinois</option>
-                    <option value="IN">Indiana</option>
-                    <option value="IA">Iowa</option>
-                    <option value="KS">Kansas</option>
-                    <option value="KY">Kentucky</option>
-                    <option value="LA">Louisiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
-                    <option value="MA">Massachusetts</option>
-                    <option value="MI">Michigan</option>
-                    <option value="MN">Minnesota</option>
-                    <option value="MS">Mississippi</option>
-                    <option value="MO">Missouri</option>
-                    <option value="MT">Montana</option>
-                    <option value="NE">Nebraska</option>
-                    <option value="NV">Nevada</option>
-                    <option value="NH">New Hampshire</option>
-                    <option value="NJ">New Jersey</option>
-                    <option value="NM">New Mexico</option>
-                    <option value="NY">New York</option>
-                    <option value="NC">North Carolina</option>
-                    <option value="ND">North Dakota</option>
-                    <option value="OH">Ohio</option>
-                    <option value="OK">Oklahoma</option>
-                    <option value="OR">Oregon</option>
-                    <option value="PA">Pennsylvania</option>
-                    <option value="RI">Rhode Island</option>
-                    <option value="SC">South Carolina</option>
-                    <option value="SD">South Dakota</option>
-                    <option value="TN">Tennessee</option>
-                    <option value="TX">Texas</option>
-                    <option value="UT">Utah</option>
-                    <option value="VT">Vermont</option>
-                    <option value="VA">Virginia</option>
-                    <option value="WA">Washington</option>
-                    <option value="WV">West Virginia</option>
-                    <option value="WI">Wisconsin</option>
-                    <option value="WY">Wyoming</option>
-                  </select>
-                  <div class="my-4">
-                    <label for="textarea">Example textarea</label>
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label"
+                      >Job description</label
+                    >
                     <textarea
                       class="form-control"
-                      placeholder="Enter your message..."
-                      id="textarea"
-                      rows="4"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      v-model="newJobData.jobDescription"
                     ></textarea>
                   </div>
-                  <div class="mb-4">
-                    <label for="usernameValidate">Username</label>
-                    <input
-                      type="text"
-                      class="form-control is-invalid"
-                      id="usernameValidate"
-                      required
-                    />
-                    <div class="invalid-feedback">
-                      Please choose a username.
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
                   <div class="mb-3">
-                    <label for="birthday">Birthday</label>
-                    <div class="input-group">
-                      <span class="input-group-text"
-                        ><span class="far fa-calendar-alt"></span
-                      ></span>
+                    <label for="exampleFormControlTextarea1" class="form-label"
+                      >Job benefit</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      v-model="newJobData.jobBenefit"
+                    ></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label"
+                      >Job requirement</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      v-model="newJobData.jobRequirement"
+                    ></textarea>
+                  </div>
+                  <div class="mb-2" v-if="skills.length > 0">
+                    <label class="my-1 me-2" for="state">Skill:</label>
+                    <select id="state" class="w-100" name="state" v-model="skillSelected">
+                      <option
+                        v-for="(location, index) in skills"
+                        :key="index"
+                        :value="{ skillId: location.skillId, skillName: location.skillName }"
+                      >
+                        {{ location.skillName }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="mb-2" v-if="skills.length <= 0">
+                    <label for="state" class="my-1 me-2">Skill:</label>
+                  </div>
+                  <div class="row">
+                    <div class="col-4 mb-3">
+                      <label for="exampleFormControlInput1" class="form-label"
+                        >Expected numbers of applicants</label
+                      >
                       <input
-                        data-datepicker=""
+                        type="number"
                         class="form-control"
-                        id="birthday"
-                        type="text"
-                        placeholder="dd/mm/yyyy"
-                        required
+                        id="exampleFormControlInput1"
+                        v-model="newJobData.expectedNumber"
+                        min="0"
+                        @keyup="preventNegativeNumInputListener($event)"
                       />
                     </div>
                   </div>
                   <div class="mb-3">
-                    <label for="disabledTextInput">Name</label>
+                    <label for="exampleFormControlInput1" class="form-label"
+                      >Address</label
+                    >
                     <input
                       type="text"
-                      id="disabledTextInput"
                       class="form-control"
-                      placeholder="Disabled input"
-                      disabled="disabled"
+                      id="exampleFormControlInput1"
+                      v-model="newJobData.address"
                     />
                   </div>
-                  <div class="mb-3">
-                    <label for="disabledSelect">Disabled select menu</label>
-                    <select
-                      id="disabledSelect"
-                      class="form-control"
-                      disabled="disabled"
-                    >
-                      <option>Disabled select</option>
+                  <div class="mb-2">
+                    <label class="my-1 me-2" for="state">Location:</label>
+                    <select id="state" class="w-100" name="state" v-model="locationSelected">
+                      <option
+                        v-for="(location, index) in vnLocation"
+                        :key="index"
+                        :value="{ locValue: location.value, locTitle: location.title }"
+                      >
+                        {{ location.title }}
+                      </option>
                     </select>
                   </div>
-                  <div class="mb-4">
-                    <label class="my-1 me-2" for="country">Country</label>
-                    <select
-                      class="form-select"
-                      id="country"
-                      aria-label="Default select example"
-                    >
-                      <option selected="selected">Open this select menu</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                  <div class="mb-3">
-                    <label for="formFile" class="form-label"
-                      >Default file input example</label
-                    >
-                    <input class="form-control" type="file" id="formFile" />
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-5 mb-lg-5">
-                <div class="col-lg-3 col-md-6">
-                  <div class="mb-3">
-                    <span class="h6 fw-bold">Checkboxes Round</span>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="defaultCheck10"
-                    />
-                    <label class="form-check-label" for="defaultCheck10"
-                      >Default checkbox</label
-                    >
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="defaultCheck20"
-                      disabled="disabled"
-                    />
-                    <label class="form-check-label" for="defaultCheck20"
-                      >Disabled checkbox</label
-                    >
-                  </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 mt-4 mt-md-0">
-                  <fieldset>
-                    <legend class="h6">Radios</legend>
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="exampleRadios"
-                        id="exampleRadios1"
-                        value="option1"
-                        checked="checked"
-                      />
-                      <label class="form-check-label" for="exampleRadios1"
-                        >Default radio</label
-                      >
-                    </div>
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="exampleRadios"
-                        id="exampleRadios2"
-                        value="option2"
-                      />
-                      <label class="form-check-label" for="exampleRadios2"
-                        >Second default radio</label
-                      >
-                    </div>
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="exampleRadios"
-                        id="exampleRadios3"
-                        value="option3"
-                        disabled="disabled"
-                      />
-                      <label class="form-check-label" for="exampleRadios3"
-                        >Disabled radio</label
-                      >
-                    </div>
-                  </fieldset>
-                </div>
-                <div class="col-lg-3 col-sm-6 mt-4 mt-md-0">
-                  <div class="mb-3">
-                    <span class="h6 fw-bold">Switches</span>
-                  </div>
-                  <div class="form-check form-switch">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="flexSwitchCheckDefault"
-                    />
-                    <label class="form-check-label" for="flexSwitchCheckDefault"
-                      >Default switch input</label
-                    >
-                  </div>
-                  <div class="form-check form-switch">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="flexSwitchCheckChecked"
-                      checked="checked"
-                    />
-                    <label class="form-check-label" for="flexSwitchCheckChecked"
-                      >Checked switch input</label
-                    >
-                  </div>
-                  <div class="form-check form-switch">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="flexSwitchCheckDisabled"
-                      disabled="disabled"
-                    />
-                    <label
-                      class="form-check-label"
-                      for="flexSwitchCheckDisabled"
-                      >Disabled switch input</label
-                    >
-                  </div>
-                  <div class="form-check form-switch">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="flexSwitchCheckCheckedDisabled"
-                      checked="checked"
-                      disabled="disabled"
-                    />
-                    <label
-                      class="form-check-label"
-                      for="flexSwitchCheckCheckedDisabled"
-                      >Disabled checked switch input</label
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="row justify-content-between">
-                <div class="col-12 col-md-5">
-                  <div class="mb-6">
-                    <span class="h6 fw-bold">Simple Range Slider</span>
-                  </div>
-                  <div class="input-slider-container">
-                    <div
-                      id="input-slider-forms"
-                      class="input-slider"
-                      data-range-value-min="100"
-                      data-range-value-max="500"
-                    ></div>
-                    <div class="row mt-3 d-none">
-                      <div class="col-6">
-                        <span
-                          class="range-slider-value"
-                          data-range-value-low="200"
-                        ></span>
+                  <div class="row">
+                    <div class="col-10 mb-4">
+                      <div class="row">
+                        <div class="col-lg-5 col-sm-6">
+                          <label
+                            for="exampleFormControlInput1"
+                            class="form-label"
+                            >Min salary</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="exampleFormControlInput1"
+                            v-model="newJobData.minSalary"
+                            min="0"
+                          />
+                          <p>.000đ</p>
+                        </div>
+                        <div class="col-lg-5 col-sm-6">
+                          <label
+                            for="exampleFormControlInput1"
+                            class="form-label"
+                            >Max salary</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="exampleFormControlInput1"
+                            v-model="newJobData.maxSalary"
+                            min="0"
+                          />
+                          <p>.000đ</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-12 col-md-5">
-                  <div class="mb-6">
-                    <span class="h6 fw-bold">Range Slider with numbers</span>
+                  <label for="birthday">Due date</label>
+                  <div class="mb-2 input-group">
+                    <span class="input-group-text"
+                      ><span class="far fa-calendar-alt"></span
+                    ></span>
+                    <input
+                      data-datepicker=""
+                      class="form-control"
+                      id="birthday"
+                      type="text"
+                      placeholder="dd/mm/yyyy"
+                      required
+                      v-model="newJobData.dueDate"
+                    />
                   </div>
-                  <div
-                    id="input-slider-range"
-                    data-range-value-min="100"
-                    data-range-value-max="500"
-                  ></div>
-                  <div class="row d-none">
-                    <div class="col-6">
-                      <span
-                        class="range-slider-value value-low"
-                        data-range-value-low="200"
-                        id="input-slider-range-value-low"
-                      ></span>
-                    </div>
-                    <div class="col-6 text-right">
-                      <span
-                        class="range-slider-value value-high"
-                        data-range-value-high="400"
-                        id="input-slider-range-value-high"
-                      ></span>
-                    </div>
+                  <div class="mb-3">
+                    <button
+                      class="btn w-100 btn-primary"
+                      type="button"
+                      @click="handleAddButton"
+                    >
+                      Post
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="col-lg-2 col-sm-6"></div>
           </div>
         </div>
       </div>
@@ -482,11 +201,91 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
 import MainContent from "@/components/MainContent.vue";
+import * as recruitmentPostService from "@/util/service/recruitmentPostService";
+import * as skillService from "@/util/service/skillService";
+
 export default {
   name: "EmployerCreateJob",
   components: {
     MainContent,
+  },
+  setup() {
+    const preventNegativeNumInputListener = (e) => {
+      if (
+        !(
+          (e.keyCode > 95 && e.keyCode < 106) ||
+          (e.keyCode > 47 && e.keyCode < 58) ||
+          e.keyCode == 8
+        )
+      ) {
+        newJobData.value.expectedNumber = 0;
+      }
+    };
+
+    const locationSelected = ref({});
+    const skillSelected = ref({});
+
+    const skills = ref([]);
+    const fetchSkillList = () => {
+      skillService.getListOfSkills().then((resp) => {
+        skills.value = resp;
+      });
+    };
+    const vnLocation = ref([
+      {
+        value: "HANOI",
+        title: "Ha Noi",
+      },
+      {
+        value: "HCM",
+        title: "Ho Chi Minh City",
+      },
+      {
+        value: "BIENHOA-DONGNAI",
+        title: "Bien Hoa, Dong Nai",
+      },
+      {
+        value: "MYTHO",
+        title: "My Tho, Ben Tre",
+      },
+      {
+        value: "THUDAUMOT",
+        title: "Thu Dau Mot, Binh Duong",
+      },
+      {
+        value: "RACHGIA",
+        title: "Rach Gia, Kien Giang",
+      },
+    ]);
+
+    const newJobData = ref({});
+
+    const handleAddButton = () => {
+      newJobData.value = {
+        ...newJobData.value,
+        "skillId": skillSelected.value.skillId,
+        "location": newJobData.value.address.concat(",", locationSelected.value.locTitle),
+      };
+      recruitmentPostService.postNewJob(newJobData.value);
+      console.log(newJobData.value);
+    };
+
+    onMounted(() => {
+      fetchSkillList();
+    });
+
+    return {
+      newJobData,
+      vnLocation,
+      skills,
+      locationSelected,
+      skillSelected,
+
+      handleAddButton,
+      preventNegativeNumInputListener,
+    };
   },
 };
 </script>
