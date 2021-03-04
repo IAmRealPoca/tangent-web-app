@@ -153,26 +153,6 @@
             <div class="table-settings mb-4">
               <div class="row justify-content-between align-items-center">
                 <div class="col-9 col-lg-4 d-flex">
-                  <div class="input-group me-2 me-lg-3">
-                    <span class="input-group-text"
-                      ><span class="fas fa-search"></span
-                    ></span>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Search"
-                    />
-                  </div>
-                  <select
-                    class="form-select w-25"
-                    aria-label="Message select example 2"
-                  >
-                    <option selected="selected">All</option>
-                    <option value="1">Active</option>
-                    <option value="2">Inactive</option>
-                    <option value="3">Pending</option>
-                    <option value="3">Canceled</option>
-                  </select>
                 </div>
                 <div class="col-3 col-lg-8 text-right">
                   <div class="btn-group me-1">
@@ -231,20 +211,6 @@
             <div
               class="card card-body shadow-sm table-wrapper table-responsive"
             >
-              <div class="d-flex mb-3">
-                <select
-                  class="form-select fmxw-150"
-                  aria-label="Message select example"
-                >
-                  <option selected="selected">Bulk Action</option>
-                  <option value="1">Send Email</option>
-                  <option value="2">Change Group</option>
-                  <option value="3">Delete User</option>
-                </select>
-                <button class="btn btn-sm px-3 btn-secondary ms-3">
-                  Apply
-                </button>
-              </div>
               <table class="table user-table table-hover align-items-center">
                 <thead>
                   <tr>
