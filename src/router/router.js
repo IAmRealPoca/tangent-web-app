@@ -80,7 +80,7 @@ const routes = [
         component: EmployerViewFairList
     },
     {
-        path: "/employer/jobfair/someId/detail",
+        path: "/employer/jobfair/someId/",
         name: "EmployerFairDetail",
         component: EmployerFairDetail
     },

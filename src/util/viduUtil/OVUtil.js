@@ -11,6 +11,7 @@ export const OVUtil = () => {
     myUserName: "Participant" + Math.floor(Math.random() * 100),
   };
   const joinSession = async () => {
+    let num = 0;
     // --- Get an OpenVidu object ---
     data.OV = new OpenVidu();
 
@@ -35,6 +36,7 @@ export const OVUtil = () => {
     });
     data.session.on("connectionCreated", (event) => {
       console.warn("data is sum event when connectionCreated: ", event);
+      console.warn("Num ", num++);
     });
     data.session.on("connectionDestroyed", (event) => {
       console.warn("data is sum event when connectionDestroyed: ", event);
@@ -99,7 +101,6 @@ export const OVUtil = () => {
 
     window.removeEventListener("beforeunload", leaveSession);
 
-    return data;
   };
 
   const updateMainVideoStreamManager = (stream) => {
