@@ -6,8 +6,8 @@
           <!-- Images avatar -->
           <div class="float-left col-sm-2">
             <img
-              src="@/assets/img/team/profile-picture-4.jpg"
-              class="user-avatar large-avatar rounded"
+              src="@/assets/img/fpt.png"
+              class="user-avatar large-avatar rounded border"
             />
           </div>
           <div class="float-right col-sm-10 d-flex flex-column px-4">
@@ -26,7 +26,7 @@
                 >
               </div>
               <!-- Country -->
-              <div class="float-right mx-6">
+              <div class="float-right px-6">
                 <i class="fas fa-globe-asia me-2" />
                 <label for="exampleFormControlInput2" class="form-label"
                   >Vietnam</label
@@ -77,7 +77,7 @@
           </ul>
 
           <!-- End of Tab Nav -->
-          <div class="card border-0 mt-4">
+          <div class="card border-0">
             <div class="tab-content" id="tabcontent1">
               <div
                 class="tab-pane fade show active"
@@ -85,13 +85,38 @@
                 role="tabpanel"
                 aria-labelledby="tabs-icons-text-1-tab"
               >
-                <p>
-                  Exercitation photo booth stumptown tote bag Banksy, elit small
-                  batch freegan sed. Craft beer elit seitan exercitation, photo
-                  booth et 8-bit kale chips proident chillwave deep v laborum.
-                  Aliquip veniam delectus, Marfa eiusmod Pinterest in do umami
-                  readymade swag.
-                </p>
+                <div class="row">
+                  <div
+                    v-for="item in jobItems"
+                    :key="item.jobTitle"
+                    class="col-12 col-lg-4"
+                  >
+                    <div class="card shadow-sm my-1">
+                      <div class="card-header">
+                        <img
+                          src="@/assets/img/fpt1_0.png"
+                          class="card-img-top rounded py-2"
+                          alt="blog image"
+                        />
+                        <div class="card-body">
+                          <h5 class="h5 text-truncate">{{ item.jobTitle }}</h5>
+                          <h6 class="h6 mb-1">
+                            <span class="icon icon-small"
+                              ><span class="fas fa-dollar-sign"> </span>
+                            </span>
+                            {{ item.salary }}
+                          </h6>
+                          <div class="small mb-2">
+                            <span class="icon icon-small"
+                              ><span class="fas fa-code"> </span>
+                            </span>
+                            {{ item.position }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -111,15 +136,32 @@ export default {
       { context: "Job Post", status: "active" },
       { context: "Pending Post", status: "unactive" },
     ];
-    return { navItems };
+    var jobItems = [
+      {
+        jobTitle: "Technical Leader",
+        salary: "Up to 2000",
+        position: ".Net",
+      },
+      {
+        jobTitle: ".NET Desktop Developer (Java, C#)",
+        salary: "Up to 1500",
+        position: "Junior .Net, Java",
+      },
+      {
+        jobTitle: "Senior Front-end",
+        salary: "Up to 1200",
+        position: "Fresher/Intern Vue, React",
+      },
+    ];
+    return { navItems, jobItems };
   },
 };
 </script>
 
 <style scoped>
-.company-bg-img {
+/* .company-bg-img {
   background: url("~@/assets/img/profile-cover.jpg");
-}
+} */
 /* .d-flex .align-items-center {
   display: none !important;
 } */
