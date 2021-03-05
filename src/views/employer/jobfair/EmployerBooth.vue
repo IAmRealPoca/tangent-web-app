@@ -21,36 +21,18 @@
         </div>
       </div>
       <div class="row">
+        <!-- Test Only -->
         <div v-if="data && !data.session">
           <input type="button" value="Call" @click="joinSession" />
         </div>
+        <!-- End Test Only -->
         <div v-if="data && data.session">
-          <div class="col-12 mb-4">
-            <div class="card border-light shadow-sm components-section">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-7">
-                    <div v-if="data.publisher">
-                      <video-player :stream-manager="data.mainStreamManager" />
-                    </div>
-                  </div>
-                  <div v-if="data.subscribers">
-                    <div
-                      class="col-5"
-                      v-for="sub in data.subscribers"
-                      :key="sub.stream.connection.connectionId"
-                    >
-                      <video-player
-                        :stream-manager="sub"
-                        @click="OV.updateMainVideoStreamManager"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <input type="button" value="Bye bye" @click="leaveSession" />
-              </div>
-            </div>
-          </div>
+          <employer-presentation
+            :stream-manager="data.mainStreamManager"
+            :data="propsData"
+            @updateMainStream="handleUpdateMainStream"
+            @endCallEvent="handleEndCallEvent"
+          />
         </div>
       </div>
     </MainContent>
@@ -59,33 +41,149 @@
 
 <script>
 import MainContent from "@/components/MainContent.vue";
+import { OpenVidu } from "openvidu-browser";
 
-import { OVUtil } from "@/util/viduUtil/OVUtil";
+import { useVCService } from "@/util/service/videoChatService";
 import { ref } from "@vue/reactivity";
 import VideoPlayer from "@/components/ViduComponent/VideoPlayer.vue";
+import EmployerPresentation from "@/components/ViduComponent/EmployerPresentation.vue";
 
 export default {
   name: "EmployerCreateBooth",
   components: {
     MainContent,
     VideoPlayer,
+    EmployerPresentation,
   },
   setup() {
-    const OV = OVUtil();
-    const data = ref({});
-    const joinSession = () => {
-      OV.joinSession()
-        .then((OVData) => {
-          data.value = OVData;
-          console.warn("Data check: ", data.value.subscribers);
-        })
-        .catch((e) => console.log(e));
+    const data = ref({
+      OV: undefined,
+      session: undefined,
+      mainStreamManager: undefined,
+      publisher: undefined,
+      subscribers: [],
+      mySessionId: "NyamSed",
+      myUserName: "Participant" + Math.floor(Math.random() * 100),
+    });
+    const propsData = ref({});
+    const joinSession = async () => {
+      // --- Get an OpenVidu object ---
+      data.value.OV = new OpenVidu();
+
+      // --- Init a session ---
+      data.value.session = data.value.OV.initSession();
+
+      // --- Specify the actions when events take place in the session ---
+
+      // On every new Stream received...
+      data.value.session.on("streamCreated", ({ stream }) => {
+        console.log("Tao la steram: ", stream);
+        const subscriber = data.value.session.subscribe(stream);
+        data.value.subscribers.push(subscriber);
+      });
+
+      // On every Stream destroyed...
+      data.value.session.on("streamDestroyed", ({ stream }) => {
+        const index = data.value.subscribers.indexOf(stream.streamManager, 0);
+        if (index >= 0) {
+          data.value.subscribers.splice(index, 1);
+        }
+      });
+      // data.value.session.on("connectionCreated", (event) => {
+      //   console.warn("data is sum event when connectionCreated: ", event);
+      // });
+      // data.value.session.on("connectionDestroyed", (event) => {
+      //   console.warn("data is sum event when connectionDestroyed: ", event);
+      // });
+
+      // --- Connect to the session with a valid user token ---
+
+      // 'getToken' method is simulating what your server-side should do.
+      // 'token' parameter should be retrieved and returned by your own backend
+      const token = await getToken2(data.value.mySessionId);
+      const session = await data.value.session.connect(token, {
+        clientData: data.value.myUserName,
+      });
+      try {
+        // --- Get your own camera stream with the desired properties ---
+        const publisher = data.value.OV.initPublisher(undefined, {
+          audioSource: undefined, // The source of audio. If undefined default microphone
+          videoSource: undefined, // The source of video. If undefined default webcam
+          publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
+          publishVideo: true, // Whether you want to start publishing with your video enabled or not
+          resolution: "640x480", // The resolution of your video
+          frameRate: 40, // The frame rate of your video
+          insertMode: "APPEND", // How the video is inserted in the target element 'video-container'
+          mirror: false, // Whether to mirror your local video or not
+        });
+
+        console.log("publisher init: ", publisher);
+
+        data.value.mainStreamManager = publisher;
+        data.value.publisher = publisher;
+
+        console.log("data publisher init: ", data.value.publisher);
+
+        // --- Publish your stream ---
+
+        data.value.session.publish(data.value.publisher);
+      } catch (error) {
+        console.log(
+          "There was an error connecting to the session:",
+          error.code,
+          error.message
+        );
+      }
+      propsData.value = {
+        publisher: data.value.publisher,
+        subscribers: data.value.subscribers
+      };
+
+      window.addEventListener("beforeunload", leaveSession);
+
+      console.warn("Data frmom Util: ", data);
+      console.warn("Data publisher from Util: ", data.value.publisher);
     };
     const leaveSession = () => {
-      OV.leaveSession();
-      data.value = {};
+      // --- Leave the session by calling 'disconnect' method over the Session object ---
+      if (data.value.session) data.value.session.disconnect();
+
+      data.value.session = undefined;
+      data.value.mainStreamManager = undefined;
+      data.value.publisher = undefined;
+      data.value.subscribers = [];
+      data.value.OV = undefined;
+
+      window.removeEventListener("beforeunload", leaveSession);
     };
-    return { data, joinSession, leaveSession, OV };
+
+    const updateMainVideoStreamManager = (stream) => {
+      if (data.value.mainStreamManager === stream) return;
+      data.value.mainStreamManager = stream;
+    };
+
+    const getToken2 = (sessionId) => {
+      const VCService = useVCService();
+      const session = {
+        recordingMode: "ALWAYS",
+        customSessionId: sessionId,
+      };
+      return VCService.getToken(session);
+    };
+    const handleUpdateMainStream = (sub) => {
+      updateMainVideoStreamManager(sub);
+    };
+    const handleEndCallEvent = () => {
+      leaveSession();
+    };
+    return {
+      data,
+      joinSession,
+      leaveSession,
+      propsData,
+      handleUpdateMainStream,
+      handleEndCallEvent,
+    };
   },
 };
 </script>

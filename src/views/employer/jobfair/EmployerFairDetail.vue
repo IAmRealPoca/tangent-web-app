@@ -191,8 +191,8 @@
               <div class="card-body">
                 <div class="row">
                   <div class="h4">Others booths</div>
-                  <div v-for="item in 10" :key="item" class="col-12 col-lg-4">
-                    <div class="card shadow-sm">
+                  <div v-for="item in 10" :key="item" class="col-12 col-lg-4 flex-grow-1">
+                    <div class="card shadow-sm h-100">
                       <div class="card-header">
                         <a href="#">
                           <img
@@ -224,6 +224,7 @@
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>

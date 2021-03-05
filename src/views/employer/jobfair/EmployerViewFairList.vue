@@ -138,7 +138,7 @@
               <div
                 class="card hover-state border-bottom rounded-0 rounded-top py-3"
               >
-                <a href="jobfair/someId/detail">
+                <a href="jobfair/someId/">
                   <div
                     class="card-body d-sm-flex align-items-center flex-wrap flex-lg-nowrap py-0"
                   >
@@ -232,7 +232,7 @@
               </div>
               <!-- End one item -->
               <div class="card hover-state border-bottom rounded-0 py-3">
-                <a href="jobfair/someId/detail">
+                <a href="jobfair/someId/">
                   <div
                     class="card-body d-sm-flex align-items-center flex-wrap flex-lg-nowrap py-0"
                   >
