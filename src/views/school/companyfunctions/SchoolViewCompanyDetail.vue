@@ -70,6 +70,7 @@
                 class="nav-link"
                 v-bind:class="item.status"
                 id="tabs-icons-text-1-tab"
+                data-bs-toggle="tab"
               >
                 {{ item.context }}
               </a>
@@ -77,6 +78,7 @@
           </ul>
 
           <!-- End of Tab Nav -->
+          <!-- Tab Contents -->
           <div class="card border-0">
             <div class="tab-content" id="tabcontent1">
               <div
@@ -91,7 +93,11 @@
                     :key="item.jobTitle"
                     class="col-12 col-lg-4"
                   >
-                    <div class="card shadow-sm my-1">
+                    <div
+                      class="card shadow-sm my-2"
+                      @mouseover="hover = true"
+                      @mouseleave="hover = false"
+                    >
                       <div class="card-header">
                         <img
                           src="@/assets/img/fpt1_0.png"
@@ -99,7 +105,14 @@
                           alt="blog image"
                         />
                         <div class="card-body">
-                          <h5 class="h5 text-truncate">{{ item.jobTitle }}</h5>
+                          <h5
+                            class="h5 text-truncate"
+                            @click="
+                              handleClick(`/school/job-detail/${item.jobTitle}`)
+                            "
+                          >
+                            {{ item.jobTitle }}
+                          </h5>
                           <h6 class="h6 mb-1">
                             <span class="icon icon-small"
                               ><span class="fas fa-dollar-sign"> </span>
@@ -120,6 +133,7 @@
               </div>
             </div>
           </div>
+          <!-- End of Tab Contents -->
         </div>
       </div>
     </div>
@@ -128,32 +142,46 @@
 
 <script>
 import MainContent from "@/components/MainContent.vue";
+import { useRouter } from "vue-router";
+
 export default {
   name: "SchoolViewCompanyDetail",
   components: { MainContent },
   data: function() {
     var navItems = [
       { context: "Job Post", status: "active" },
-      { context: "Pending Post", status: "unactive" },
+      { context: "Unused Tab", status: "unactive" },
     ];
+
     var jobItems = [
       {
         jobTitle: "Technical Leader",
-        salary: "Up to 2000",
+        salary: "Up to $3000",
         position: ".Net",
       },
       {
         jobTitle: ".NET Desktop Developer (Java, C#)",
-        salary: "Up to 1500",
+        salary: "Up to $1500",
         position: "Junior .Net, Java",
       },
       {
-        jobTitle: "Senior Front-end",
-        salary: "Up to 1200",
+        jobTitle: "Front-end",
+        salary: "Up to $1200",
         position: "Fresher/Intern Vue, React",
       },
     ];
-    return { navItems, jobItems };
+    var hover = false;
+    return { navItems, jobItems, hover };
+  },
+  setup() {
+    const router = useRouter();
+
+    const handleClick = (url) => {
+      router.push(url);
+    };
+    return {
+      handleClick,
+    };
   },
 };
 </script>

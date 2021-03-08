@@ -9,6 +9,7 @@ import EmployerJobDetails from "@/views/employer/jobs/EmployerJobDetails.vue";
 import EmployerViewSchoolList from "@/views/employer/schoolfunctions/EmployerViewSchoolList.vue";
 import SchoolViewCompanyList from "@/views/school/companyfunctions/SchoolViewCompanyList.vue";
 import SchoolViewCompanyDetail from "@/views/school/companyfunctions/SchoolViewCompanyDetail.vue";
+import SchoolViewJobDetail from "@/views/school/companyfunctions/SchoolViewJobDetail.vue"
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -72,6 +73,11 @@ const routes = [
         path: "/school/company-detail/:schoolId",
         name: "SchoolViewCompanyDetail",
         component: SchoolViewCompanyDetail
+    },
+    {
+        path: "/school/job-detail/:postId",
+        name: "SchoolViewJobDetail",
+        component: SchoolViewJobDetail
     },
 ];
 

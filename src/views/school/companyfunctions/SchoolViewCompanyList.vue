@@ -148,7 +148,7 @@
                     class="d-flex align-items-center"
                     @click="handleClick(`/school/company-detail/${userCheck1}`)"
                     ><img
-                      src="@/assets/img/team/profile-picture-1.jpg"
+                      src="@/assets/img/fpt.png"
                       class="user-avatar rounded-circle me-3"
                       alt="Avatar"
                     />
