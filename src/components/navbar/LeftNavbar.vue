@@ -165,7 +165,7 @@ export default {
       },
       {
         title: "Job Fair",
-        url: "/job-fair",
+        url: "/employer/jobfair",
         subItem: [],
       },
       {
