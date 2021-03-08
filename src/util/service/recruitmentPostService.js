@@ -20,7 +20,11 @@ const postNewJob = (newJob) => {
 
 const updateJob = (jobId, updatedJob) => {
     return recruitmentPostRepo.updateJob(jobId, updatedJob);
+};
+
+const postJobToSchool = (jobId, payload) => {
+    return recruitmentPostRepo.postJobToSchool(jobId, payload);
 }
 
-export {getListOfJobs, getListOfExpiredJobs, getOneById, postNewJob, updateJob};
+export {getListOfJobs, getListOfExpiredJobs, getOneById, postNewJob, updateJob, postJobToSchool};
 // export default recruitmentPostService

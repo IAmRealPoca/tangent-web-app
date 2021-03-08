@@ -8,6 +8,7 @@ import EmployerCalendar from "@/views/employer/jobfair/EmployerCalendar.vue";
 import EmployerApplicantList from "@/views/employer/jobs/EmployerApplicantList.vue";
 import EmployerApplicantDetails from "@/views/employer/jobs/EmployerApplicantDetails.vue";
 import EmployerJobDetails from "@/views/employer/jobs/EmployerJobDetails.vue";
+import EmployerPostJobToSchool from "@/views/employer/jobs/EmployerPostJobToSchool.vue";
 import EmployerViewSchoolList from "@/views/employer/schoolfunctions/EmployerViewSchoolList.vue";
 //Applicant Dashboard
 import EmployerApplicantDashboard from "@/views/employer/applicantfunctions/EmployerApplicantDashboard.vue";
@@ -68,6 +69,11 @@ const routes = [
         path: "/employer/jobs/:jobId",
         name: "EmployerJobDetails",
         component: EmployerJobDetails
+    },
+    {
+        path: "/employer/jobs/:jobId/post-to-school",
+        name: "EmployerPostJobToSchool",
+        component: EmployerPostJobToSchool
     },
     {
         path: "/employer/schools",

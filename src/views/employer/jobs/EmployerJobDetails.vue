@@ -44,17 +44,23 @@
                   </div>
                   <div class="col-lg-6 col-sm-6">
                     <h2 class="h5">Applicants</h2>
-                    <button class="btn btn-outline-gray-700 mt-0" type="button" @click="handleReviewApplicantClick">
+                    <button
+                      class="btn btn-outline-gray-700 mt-0"
+                      type="button"
+                      @click="handleReviewApplicantClick"
+                    >
                       Review {{ jobDetails.totalCVs }} applicants
                     </button>
-                    <br/>
+                    <br />
                     <span>View profile and application documents</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="card border-light shadow-sm components-section mb-4 pt-0">
+            <div
+              class="card border-light shadow-sm components-section mb-4 pt-0"
+            >
               <div class="table-responsive py-4 pt-0">
                 <table class="table table-flush">
                   <thead class="thead-light">
@@ -106,7 +112,9 @@
                       </div>
                       <div class="w-100"></div>
                       <div class="col">
-                        <a href="#" class="text-info me-3">Team CVideos (dummy)</a>
+                        <a href="#" class="text-info me-3"
+                          >Team CVideos (dummy)</a
+                        >
                       </div>
                     </div>
                   </div>
@@ -140,7 +148,9 @@
                 <hr />
                 <div class="row">
                   <div class="col-lg-2">Salary</div>
-                  <div class="col-lg-10">{{ jobDetails.minSalary }} - {{ jobDetails.maxSalary }}</div>
+                  <div class="col-lg-10">
+                    {{ jobDetails.minSalary }} - {{ jobDetails.maxSalary }}
+                  </div>
                 </div>
                 <hr />
                 <div class="row">
@@ -167,7 +177,11 @@
                     </div>
                   </div>
                   <div class="row mb-0">
-                    <button class="btn btn-outline-gray-700" type="button">
+                    <button
+                      class="btn btn-outline-gray-700"
+                      type="button"
+                      @click="handleSelectTargetSchoolClick"
+                    >
                       Select target school
                     </button>
                   </div>
@@ -213,8 +227,8 @@ export default {
     const jobPostId = Number(route.params.jobId);
 
     const handleReviewApplicantClick = () => {
-      router.push(`/employer/jobs/${jobPostId}/applicants`)
-    }
+      router.push(`/employer/jobs/${jobPostId}/applicants`);
+    };
 
     //fetch data from the recruitment post API first, then feetch from employer API to get no of submitted CVs
     //this is dumb, but this is how the API works
@@ -229,12 +243,17 @@ export default {
       });
     };
 
-    const fetchOneJobPost = async (jobId) => { //fetch from recruitment API
+    const fetchOneJobPost = async (jobId) => {
+      //fetch from recruitment API
       recruitmentPostService.getOneById(jobId).then((resp) => {
         jobDetails.value = resp;
         //force fetch in order
         fetchFromEmployerAPI(jobId);
       });
+    };
+
+    const handleSelectTargetSchoolClick = () => {
+      router.push(`/employer/jobs/${jobPostId}/post-to-school`);
     };
     //end double data fetch
 
@@ -244,10 +263,10 @@ export default {
 
     return {
       jobDetails,
-
-      handleReviewApplicantClick
-    }
-  }
+      handleSelectTargetSchoolClick,
+      handleReviewApplicantClick,
+    };
+  },
 };
 </script>
 

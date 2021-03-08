@@ -22,4 +22,8 @@ const getAppliedCVFromJobIdAndApplicationId = (jobId, applicationId) => {
     return employerRepo.getAppliedCVFromJobIdAndApplicationId(jobId, applicationId);
 };
 
-export {getCurrEmployerInfo, getCurrEmpJobs, getOneByIdCurrEmployer, getAppliedCVFromJobId, getAppliedCVFromJobIdAndApplicationId};
+const getApprovalInfo = () => {
+    return employerRepo.getApprovalInfo();
+};
+
+export {getCurrEmployerInfo, getCurrEmpJobs, getOneByIdCurrEmployer, getAppliedCVFromJobId, getAppliedCVFromJobIdAndApplicationId, getApprovalInfo};

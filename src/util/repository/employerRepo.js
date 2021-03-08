@@ -24,5 +24,9 @@ export default {
 
     getAppliedCVFromJobIdAndApplicationId(jobId, applicationId) {
         return http.get(`${path}/recruitment-posts/${jobId}/applied-cvs/${applicationId}`);
-    }
+    },
+
+    getApprovalInfo() {
+        return http.get(`${path}/approvals`);
+    },
 }
