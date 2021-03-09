@@ -134,11 +134,11 @@
                   aria-expanded="false"
                 >
                   <span class="icon icon-sm"
-                    ><span class="fas fa-ellipsis-h icon-dark"></span> </span
+                    ><span class="fas fa-ellipsis-h icon-dark"></span></span
                   ><span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div
-                  class="dropdown-menu dropdown-menu-end py-0 show"
+                  class="dropdown-menu dropdown-menu-end py-0"
                   style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(-170px, 26px);"
                   data-popper-placement="bottom-end"
                 >
