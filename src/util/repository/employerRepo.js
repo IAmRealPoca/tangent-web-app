@@ -34,4 +34,8 @@ export default {
     postJobToSchool(jobId, payload) {
         return http.post(`${path}/recruitment-posts/${jobId}/post-job`, payload);
     },
+
+    requestConnection(payload) {
+        return http.post(`${path}/approvals/request`, payload);
+    }
 }

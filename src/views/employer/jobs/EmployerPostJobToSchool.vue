@@ -35,9 +35,7 @@
                 >
                   <div class="card-body">
                     <div class="mb-2">
-                      <div class="card-body">
-
-                      </div>
+                      <div class="card-body"></div>
                     </div>
                     <div class="mb-2" v-if="approvedSchools.length > 0">
                       <label class="my-1 me-2" for="state">Job Posting:</label>
@@ -51,26 +49,37 @@
                           v-for="(school, index) in approvedSchools"
                           :key="index"
                           :value="{
-                            schoolId: school.school.accountId
+                            schoolId: school.school.accountId,
                           }"
                         >
                           {{ school.school.schoolName }}
                         </option>
                       </select>
-                    </div>
-                    <div class="mb-2">
-                      <label for="state" class="my-1 me-2">Skill:</label>
-                    </div>
 
-                    <div class="row mb-0">
-                    <button
-                      class="btn btn-outline-gray-700"
-                      type="button"
-                      @click="handlePostToSchoolButton"
-                    >
-                      Post to school
-                    </button>
-                  </div>
+                      <div class="row mb-0">
+                        <button
+                          class="btn btn-outline-gray-700"
+                          type="button"
+                          @click="handlePostToSchoolButton"
+                        >
+                          Post to school
+                        </button>
+                      </div>
+                    </div>
+                    <div class="mb-2" v-else>
+                      <label for="state" class="my-1 me-2"
+                        >You haven't been approved to any school yet.</label
+                      >
+                      <div class="row mb-0">
+                          <button
+                            class="btn btn-outline-gray-700"
+                            type="button"
+                            @click="handleGoBack"
+                          >
+                            Back
+                          </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -93,41 +102,42 @@ export default {
     MainContent,
   },
   setup() {
-        const route = useRoute();
-        const jobPostId = Number(route.params.jobId);
-        const schoolSelected = ref({});
+    const route = useRoute();
+    const router = useRouter();
+    const jobPostId = Number(route.params.jobId);
+    const schoolSelected = ref({});
     const approvedSchools = ref([]);
 
     // const user = JSON.parse(sessionStorage.getItem("userInfo"));
     const fetchApprovedSchools = () => {
-      employerService.getApprovalInfo()
-      .then((resp) => {
-        approvedSchools.value = resp;
-      })
-    }
-
-    const fetchJobPostToSchool = () => {
-      
-    }
+      employerService.getApprovalInfo().then((resp) => {
+        approvedSchools.value = resp.map((e) => e.status === 0);
+      });
+    };
 
     const handlePostToSchoolButton = () => {
       const payload = {
-        "recruitmentPostId": jobPostId,
-        "schoolId": schoolSelected.value.schoolId
+        recruitmentPostId: jobPostId,
+        schoolId: schoolSelected.value.schoolId,
       };
       console.log("School Id: ", schoolSelected.value.schoolId);
       employerService.postJobToSchool(jobPostId, payload);
-    }
-    
+    };
+
     onMounted(() => {
       fetchApprovedSchools();
     });
 
+    const handleGoBack = () => {
+      router.push(`/employer/jobs/${jobPostId}`);
+    }
+
     return {
       approvedSchools,
       schoolSelected,
-      handlePostToSchoolButton
-    }
+      handlePostToSchoolButton,
+      handleGoBack,
+    };
   },
 };
 </script>

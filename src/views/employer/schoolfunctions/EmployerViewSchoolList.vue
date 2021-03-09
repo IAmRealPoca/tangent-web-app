@@ -260,7 +260,7 @@
                             class="btn btn-outline-success"
                             type="button"
                             data-bs-toggle="modal"
-                            data-bs-target="#modal-form"
+                            :data-bs-target="'#modal-form-' + aSchool.accountId"
                           >
                             Request
                           </button>
@@ -282,10 +282,10 @@
                         <!-- request popup -->
                         <div
                           class="modal fade"
-                          id="modal-form"
+                          :id="'modal-form-' + aSchool.accountId"
                           tabindex="-1"
                           role="dialog"
-                          aria-labelledby="modal-form"
+                          :aria-labelledby="'modal-form-' + aSchool.accountId"
                           aria-hidden="true"
                         >
                           <div
@@ -304,7 +304,10 @@
                                   <div
                                     class="card-header border-0 text-center pb-0 text-wrap"
                                   >
-                                    <h2 class="h4">You are about to send an approval request to {{ aSchool.schoolName }}</h2>
+                                    <h2 class="h4">
+                                      You are about to send an approval request
+                                      to {{ aSchool.schoolName }}
+                                    </h2>
                                   </div>
                                   <div class="card-body p-0 pl-lg-3">
                                     <form action="#" class="mt-4">
@@ -315,14 +318,25 @@
                                         >
                                       </div>
                                       <!-- End of Form -->
-                                      <div class="d-grid">
+                                      <div class="d-grid col-12">
                                         <button
                                           type="submit"
                                           data-bs-dismiss="modal"
-                                          @click.prevent="handleRequestClick(aSchool.accountId)"
-                                          class="btn btn-info"
+                                          @click.prevent="
+                                            handleRequestClick(
+                                              aSchool.accountId
+                                            )
+                                          "
+                                          class="btn btn-info mb-4"
                                         >
                                           Request
+                                        </button>
+                                        <button
+                                          type="cancel"
+                                          data-bs-dismiss="modal"
+                                          class="btn btn-gray-300 mb-2"
+                                        >
+                                          Cancel
                                         </button>
                                       </div>
                                     </form>
@@ -382,34 +396,49 @@
 import MainContent from "@/components/MainContent.vue";
 import { ref, onMounted } from "vue";
 import * as schoolService from "@/util/service/schoolService.js";
-import employerService from "@/util/service/employerService.js";
+import * as employerService from "@/util/service/employerService.js";
 export default {
   name: "EmployerViewSchoolList",
   components: {
     MainContent,
   },
   setup() {
+    const modalFormId = ref("modal-form");
     const schoolList = ref([]);
     const approvalInfo = ref([]);
     const mergedArray = ref([]);
+
+    // const handleModalFormPopup = (schoolId) => {
+    //   modalFormId.value = "modal-form" +
+    // }
     const fetchSchoolList = () => {
       schoolService.getListOfSchools().then((resp) => {
         schoolList.value = resp;
-      });
-      employerService.getApprovalInfo().then((resp) => {
-        approvalInfo.value = resp;
+        employerService.getApprovalInfo().then((resp) => {
+          approvalInfo.value = resp;
 
-        console.log("schoolList: ", schoolList.value);
-        console.log("approvalInfo: ", approvalInfo.value);
-        mergedArray.value = mergeArrays(schoolList.value, approvalInfo.value);
-        console.log("mergedArray", mergedArray.value);
+          console.log("schoolList: ", schoolList.value);
+          console.log("approvalInfo: ", approvalInfo.value);
+          mergedArray.value = mergeArrays(schoolList.value, approvalInfo.value);
+          console.log("mergedArray", mergedArray.value);
+        });
       });
     };
 
     const mergeArrays = (array1, array2) => {
       var resultArray = [...array1];
+      for (var i = 0; i < resultArray.length; i++) {
+        resultArray[i] = {
+          ...resultArray[i],
+          status: {
+            statusId: -1,
+            statusName: "Not yet requested",
+          },
+        };
+      }
       console.log("array1: ", array1.length);
       console.log("array2: ", array2.length);
+      if (array2.length <= 0) return resultArray;
       for (var i = 0; i < array1.length; i++) {
         for (var j = 0; j < array2.length; j++) {
           console.log("arr1: ", array1[i]);
@@ -420,14 +449,6 @@ export default {
               status: {
                 statusId: array2[j].status,
                 statusName: checkStatus(array2[j].status),
-              },
-            };
-          } else {
-            resultArray[i] = {
-              ...array1[i],
-              status: {
-                statusId: -1,
-                statusName: "Not interacted",
               },
             };
           }
@@ -446,8 +467,11 @@ export default {
     };
 
     const handleRequestClick = (schoolId) => {
-
-    }
+      const payload = {
+        schoolId: schoolId,
+      };
+      employerService.requestConnection(payload);
+    };
 
     onMounted(() => {
       fetchSchoolList();
@@ -457,6 +481,8 @@ export default {
       schoolList,
       approvalInfo,
       mergedArray,
+
+      handleRequestClick,
     };
   },
 };

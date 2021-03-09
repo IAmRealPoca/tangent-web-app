@@ -30,4 +30,8 @@ const postJobToSchool = (jobId, payload) => {
     return employerRepo.postJobToSchool(jobId, payload);
 }
 
-export {getCurrEmployerInfo, getCurrEmpJobs, getOneByIdCurrEmployer, getAppliedCVFromJobId, getAppliedCVFromJobIdAndApplicationId, getApprovalInfo, postJobToSchool};
+const requestConnection = (payload) => {
+    return employerRepo.requestConnection(payload);
+}
+
+export {getCurrEmployerInfo, getCurrEmpJobs, getOneByIdCurrEmployer, getAppliedCVFromJobId, getAppliedCVFromJobIdAndApplicationId, getApprovalInfo, postJobToSchool, requestConnection};
