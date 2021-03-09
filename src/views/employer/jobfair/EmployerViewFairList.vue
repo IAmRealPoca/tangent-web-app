@@ -266,7 +266,7 @@
                   :key="index"
                   class="card hover-state border-bottom rounded-0 rounded-top py-3"
                 >
-                  <a :href="fair.jobFairId">
+                  <a :href="handleJobFairDetailClick(fair.jobFairId)">
                     <div
                       class="card-body d-sm-flex align-items-center flex-wrap flex-lg-nowrap py-0"
                     >
@@ -455,12 +455,12 @@ export default {
       return id.sub;
     };
 
-    const handleApplicantClick = (applicationId) => {
-      router.push(`/employer/jobs/${jobId}/applicants/${applicationId}`);
+    const handleJobFairDetailClick = (jobfairId) => {
+      router.push(`/employer/jobfair/${jobfairId}`);
     };
     return {
       listAppliedCVs,
-      handleApplicantClick,
+      handleJobFairDetailClick,
       listOfFair,
       formatDate,
       jobFair,

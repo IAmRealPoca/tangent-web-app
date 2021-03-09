@@ -242,15 +242,18 @@ export default {
 </script>
 <script setup>
 import MainContent from "@/components/MainContent.vue";
+import { useBoothService } from "@/util/service/boothService.js";
+import { useRouter, useRoute } from "vue-router";
 import { ref } from "vue";
+const boothService = useBoothService();
 const fairDetail = {
   name: "Ngày hội Android",
   desc: "Tới và theo dõi Mr. Thanh nói về cách để lập tình Android hiệu quả",
 };
 const isCreated = ref(false);
 const boothDetail = {
-  name: "Your Booth Name",
-  desc: "Booth Description",
+  name: "",
+  desc: "",
   thumbnail: "https://picsum.photos/id/237/450/300",
 };
 const handleFileUpload = (evt) => {
@@ -258,12 +261,22 @@ const handleFileUpload = (evt) => {
   console.log(path);
   boothDetail.thumbnail = path;
 };
+const route = useRoute();
 const handleCreate = (e) => {
   console.log(boothDetail.name);
   console.log(boothDetail.desc);
   console.log(boothDetail.thumbnail);
+  const fairIdFromRoute = Number(route.params.jobFairId);
+  const payload = {
+    boothName: boothDetail.name,
+    boothDescription: boothDetail.boothDescription,
+    boothThumbnail: boothDetail.thumbnail,
+    jobFairId: fairIdFromRoute
+  }
+  boothService.createBooth(payload);
   isCreated.value = true;
 };
+
 </script>
 
 <style scoped></style>

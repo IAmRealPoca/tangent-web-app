@@ -82,12 +82,12 @@ const routes = [
         component: EmployerViewFairList
     },
     {
-        path: "/employer/jobfair/someId/",
+        path: "/employer/jobfair/:jobFairId/",
         name: "EmployerFairDetail",
         component: EmployerFairDetail
     },
     {
-        path: "/employer/jobfair/someId/booth",
+        path: "/employer/jobfair/:jobFairId/booth",
         name: "EmployerBooth",
         component: EmployerBooth
     },
