@@ -12,7 +12,7 @@
       <section class="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
         <div class="container">
           <p class="text-center">
-            <a href="../dashboard/dashboard.html" class="text-gray-700"
+            <a href="/" class="text-gray-700"
               ><i class="fas fa-angle-left me-2"></i> Back to homepage</a
             >
           </p>

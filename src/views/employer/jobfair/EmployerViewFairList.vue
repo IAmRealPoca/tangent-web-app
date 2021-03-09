@@ -21,6 +21,133 @@
             <h2 class="h4">Job Fair</h2>
             <p class="mb-0">List of current job fairs.</p>
           </div>
+          <a
+            class="btn btn-sm btn-dark"
+            data-bs-toggle="modal"
+            data-bs-target="#modal-form"
+            ><span class="fas fa-plus me-2"></span> Create Job Fair</a
+          >
+        </div>
+        <div
+          class="modal fade"
+          id="modal-form"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="modal-form"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-body p-0">
+                <div class="card border-light p-3 p-lg-4">
+                  <button
+                    type="button"
+                    class="btn-close ms-auto"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                  <div class="card-header border-0 text-center pb-0">
+                    <h2 class="h4">Create Job Fair</h2>
+                  </div>
+                  <div class="card-body p-0 pl-lg-3">
+                    <form action="#" class="mt-4">
+                      <!-- Form -->
+                      <div class="form-group mb-4">
+                        <label for="booth_name">Job Fair Name</label>
+                        <div class="input-group">
+                          <span class="input-group-text" id="basic-addon1"
+                            ><span class="fas fa-signature"></span
+                          ></span>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="jobFair.jobFairName"
+                            placeholder="Your Fantasic Title"
+                            id="booth_name"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <!-- End of Form -->
+                      <div class="form-group mb-4">
+                        <label for="booth_name">Job Fair Thumbnail</label>
+                        <div class="input-group">
+                          <div class="mb-3">
+                            <input
+                              class="form-control"
+                              ref="thumbnail"
+                              @change="handleFileUpload"
+                              id="booth_thumbnail"
+                              type="file"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Date -->
+                      <div class="form-group mb-4">
+                        <label for="booth_name">Start Date</label>
+                        <div class="input-group">
+                          <div class="mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text"
+                                ><span class="far fa-calendar-alt"></span
+                              ></span>
+                              <flat-pickr
+                                v-model="jobFair.startDate"
+                                :config="config"
+                                class="form-control"
+                                placeholder="Select date"
+                                name="date"
+                              >
+                              </flat-pickr>
+                              <!-- <input
+                                data-datepicker=""
+                                class="form-control"
+                                id="dateEnd"
+                                type="text"
+                                placeholder="dd/mm/yyyy"
+                                v-model="jobFair.startDate"
+                                required
+                              /> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End Date -->
+                      <!-- Form -->
+                      <div class="form-group">
+                        <div class="form-group mb-4">
+                          <label for="booth_description"
+                            >Job Fair Description</label
+                          >
+                          <div class="input-group">
+                            <textarea
+                              class="form-control"
+                              v-model="jobFair.JobFairDescription"
+                              id="booth_description"
+                              rows="3"
+                              style="resize: none;"
+                            ></textarea>
+                          </div>
+                        </div>
+                        <!-- End of Form -->
+                      </div>
+                      <div class="d-grid">
+                        <button
+                          type="submit"
+                          @click.prevent="handleCreate"
+                          data-bs-dismiss="modal"
+                          class="btn btn-info"
+                        >
+                          Create!
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- End breadcrumb -->
         <div class="row">
@@ -106,7 +233,6 @@
                       ><span class="far fa-calendar-alt"></span
                     ></span>
                     <input
-
                       class="form-control"
                       id="birthday"
                       type="text"
@@ -119,7 +245,6 @@
                       ><span class="far fa-calendar-alt"></span
                     ></span>
                     <input
-
                       class="form-control"
                       id="birthday"
                       type="text"
@@ -135,194 +260,104 @@
           <div class="col-12 col-xl-9">
             <div class="task-wrapper border bg-white shadow-sm rounded">
               <!-- Start one item -->
-              <div
-                class="card hover-state border-bottom rounded-0 rounded-top py-3"
-              >
-                <a href="jobfair/someId/">
-                  <div
-                    class="card-body d-sm-flex align-items-center flex-wrap flex-lg-nowrap py-0"
-                  >
-                    <div class="col-1 text-left text-sm-center mb-2 mb-sm-0">
-                      <div class="me-sm-2">
-                        <img
-                          src="@/assets/img/z2358820138055_341c257ff575934f26613727fee0cb8e.jpg"
-                          class="user-avatar rounded-circle me-3"
-                          alt="Avatar"
-                        />
-                        <label
-                          class="form-check-label"
-                          for="mailCheck1"
-                        ></label>
-                      </div>
-                    </div>
-                    <div class="col-11 col-lg-8 px-0 mb-4 mb-md-0">
-                      <div class="mb-2">
-                        <h3 class="h5">2020-2021 Triton Alliance</h3>
-                        <div class="d-block d-sm-flex">
-                          <div class="small text-gray mb-3 mb-sm-0">
-                            <span>University of California San Diego</span>
-                          </div>
-                          <div>
-                            <h4
-                              class="h6 fw-normal text-gray mb-3 mb-sm-0 ms-sm-3"
-                            >
-                              <span class="fas fa-clock me-2"></span>07/01/2020
-                              10:00pm +07 - 07/01/21 6:30 am +07
-                            </h4>
-                          </div>
-                          <div class="ms-sm-3">
-                            <span class="badge super-badge badge-lg bg-warning"
-                              >In Progress</span
-                            >
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="fw-bold text-dark">
-                          <span class="fw-normal text-gray"
-                            >We established the Triton Alliance to recognize
-                            employers who support our innovative programs and
-                            initiatives and invest in the professional and
-                            career development of our students and alumni.
-                            Participation in the program is instrumental in
-                            helping UC...</span
-                          >
-                        </div>
-                      </div>
-                    </div>
+              <div v-if="listOfFair.length >= 0">
+                <div
+                  v-for="(fair, index) in listOfFair"
+                  :key="index"
+                  class="card hover-state border-bottom rounded-0 rounded-top py-3"
+                >
+                  <a :href="handleJobFairDetailClick(fair.jobFairId)">
                     <div
-                      class="col-10 col-sm-2 col-lg-2 col-xl-2 d-none d-lg-block d-xl-inline-flex align-items-center ms-lg-auto text-right justify-content-end px-md-0"
+                      class="card-body d-sm-flex align-items-center flex-wrap flex-lg-nowrap py-0"
                     >
-                      <div class="rating-star star-lg d-none d-lg-inline-block">
-                        <input type="checkbox" id="InboxStar1" name="star" />
-                        <label class="rating-star-label" for="InboxStar1"
-                          ><span class="sr-only">Star</span></label
-                        >
+                      <div class="col-1 text-left text-sm-center mb-2 mb-sm-0">
+                        <div class="me-sm-2">
+                          <img
+                            :src="fair.school.avatar"
+                            class="user-avatar rounded-circle me-3"
+                            alt="Avatar"
+                          />
+                          <label
+                            class="form-check-label"
+                            for="mailCheck1"
+                          ></label>
+                        </div>
                       </div>
-                      <div class="btn-group ms-md-3">
-                        <button
-                          class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
+                      <div class="col-11 col-lg-8 px-0 mb-4 mb-md-0">
+                        <div class="mb-2">
+                          <h3 class="h5">{{ fair.jobFairName }}</h3>
+                          <div class="d-block d-sm-flex">
+                            <div class="small text-gray mb-3 mb-sm-0">
+                              <span>{{ fair.school.schoolName }}</span>
+                            </div>
+                            <div>
+                              <h4
+                                class="h6 fw-normal text-gray mb-3 mb-sm-0 ms-sm-3"
+                              >
+                                <span class="fas fa-clock me-2"></span
+                                >{{ formatDate(fair.startDate) }}
+                              </h4>
+                            </div>
+                            <div class="ms-sm-3">
+                              <span
+                                class="badge super-badge badge-lg bg-warning"
+                                >In Progress</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="fw-bold text-dark">
+                            <span class="fw-normal text-gray">{{
+                              fair.JobFairDescriptionription
+                            }}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="col-10 col-sm-2 col-lg-2 col-xl-2 d-none d-lg-block d-xl-inline-flex align-items-center ms-lg-auto text-right justify-content-end px-md-0"
+                      >
+                        <div
+                          class="rating-star star-lg d-none d-lg-inline-block"
                         >
-                          <span class="icon icon-sm"
-                            ><span
-                              class="fas fa-ellipsis-h icon-dark"
-                            ></span> </span
-                          ><span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end py-0">
-                          <a class="dropdown-item rounded-top" href="#"
-                            ><span class="fas fa-edit"></span>Edit</a
+                          <input type="checkbox" id="InboxStar1" name="star" />
+                          <label class="rating-star-label" for="InboxStar1"
+                            ><span class="sr-only">Star</span></label
                           >
-                          <a class="dropdown-item text-warning" href="#"
-                            ><span class="fas fa-star"></span>Important</a
+                        </div>
+                        <div class="btn-group ms-md-3">
+                          <button
+                            class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
+                            data-bs-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
                           >
-                          <a
-                            class="dropdown-item text-danger rounded-bottom"
-                            href="#"
-                            ><span class="fas fa-trash-alt"></span>Delete</a
-                          >
+                            <span class="icon icon-sm"
+                              ><span
+                                class="fas fa-ellipsis-h icon-dark"
+                              ></span> </span
+                            ><span class="sr-only">Toggle Dropdown</span>
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-end py-0">
+                            <a class="dropdown-item rounded-top" href="#"
+                              ><span class="fas fa-edit"></span>Edit</a
+                            >
+                            <a class="dropdown-item text-warning" href="#"
+                              ><span class="fas fa-star"></span>Important</a
+                            >
+                            <a
+                              class="dropdown-item text-danger rounded-bottom"
+                              href="#"
+                              ><span class="fas fa-trash-alt"></span>Delete</a
+                            >
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </a>
+                  </a>
+                </div>
               </div>
               <!-- End one item -->
-              <div class="card hover-state border-bottom rounded-0 py-3">
-                <a href="jobfair/someId/">
-                  <div
-                    class="card-body d-sm-flex align-items-center flex-wrap flex-lg-nowrap py-0"
-                  >
-                    <div class="col-1 text-left text-sm-center mb-2 mb-sm-0">
-                      <div class="me-sm-2">
-                        <img
-                          src="@/assets/img/z2358820138055_341c257ff575934f26613727fee0cb8e.jpg"
-                          class="user-avatar rounded-circle me-3"
-                          alt="Avatar"
-                        />
-                        <label
-                          class="form-check-label"
-                          for="mailCheck11"
-                        ></label>
-                      </div>
-                    </div>
-                    <div class="col-11 col-lg-8 px-0 mb-4 mb-md-0">
-                      <div class="mb-2">
-                        <h3 class="h5">
-                          Meeting with the professional
-                        </h3>
-                        <div class="d-block d-sm-flex">
-                          <div class="small text-gray mb-3 mb-sm-0">
-                            <span>University of Phao sần ba lây</span>
-                          </div>
-                          <div>
-                            <h4
-                              class="h6 fw-normal text-gray mb-3 mb-sm-0 ms-3"
-                            >
-                              <span class="fas fa-clock me-2"></span>10:00 AM
-                            </h4>
-                          </div>
-                          <div class="ms-sm-3">
-                            <span class="badge super-badge badge-lg bg-purple"
-                              >Waiting</span
-                            >
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="fw-bold text-dark">
-                          <span class="fw-normal text-gray"
-                            >Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Morbi pulvinar feugiat consequat. Duis lacus
-                            nibh, sagittis id varius vel, aliquet non
-                            augue.</span
-                          >
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      class="col-10 col-sm-2 col-lg-2 col-xl-2 d-none d-lg-block d-xl-inline-flex align-items-center ms-lg-auto text-right justify-content-end px-md-0"
-                    >
-                      <div class="rating-star star-lg d-none d-lg-inline-block">
-                        <input type="checkbox" id="InboxStar11" name="star" />
-                        <label class="rating-star-label" for="InboxStar11"
-                          ><span class="sr-only">Star</span></label
-                        >
-                      </div>
-                      <div class="btn-group ms-md-3">
-                        <button
-                          class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <span class="icon icon-sm"
-                            ><span
-                              class="fas fa-ellipsis-h icon-dark"
-                            ></span> </span
-                          ><span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end py-0">
-                          <a class="dropdown-item rounded-top" href="#"
-                            ><span class="fas fa-edit"></span>Edit</a
-                          >
-                          <a class="dropdown-item text-warning" href="#"
-                            ><span class="fas fa-star"></span>Important</a
-                          >
-                          <a
-                            class="dropdown-item text-danger rounded-bottom"
-                            href="#"
-                            ><span class="fas fa-trash-alt"></span>Delete</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
             </div>
           </div>
         </div>
@@ -332,32 +367,107 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import MainContent from "@/components/MainContent.vue";
 import { useRoute, useRouter } from "vue-router";
-import * as EmployerService from "@/util/service/employerService";
+import { useJobFairService } from "@/util/service/jobFairService";
+import flatPickr from "vue-flatpickr-component";
+import jobFairRepo from "@/util/repository/jobFairRepo";
+import "flatpickr/dist/flatpickr.css";
+import "flatpickr/dist/themes/dark.css";
 
 export default {
   name: "EmployerViewFairList",
   components: {
     MainContent,
+    flatPickr,
   },
   setup() {
     const route = useRoute();
     const router = useRouter();
+    const thumbnail = ref(null);
+    const fairService = useJobFairService();
+    const listOfFair = ref([]);
+    const jobFair = reactive({
+      jobFairName: "",
+      JobFairDescription: "",
+      startDate: "",
+      jobFairThumbnail: Object,
+      schoolId: "",
+    });
     const jobId = Number(route.params.jobId);
     const listAppliedCVs = ref([]);
 
-    onMounted(() => {
+    const config = {
+      wrap: true,
+      enableTime: true,
+      altInput: true,
+      minDate: Date.parse(new Date().toLocaleDateString()),
+      timeFormat: "H:i",
+    };
+
+    onMounted(async () => {
       // fetchAppliedCV(jobId);
+      listOfFair.value = await fairService.getAllFair();
+      console.log(listOfFair.value);
+      parseJwt();
     });
 
-    const handleApplicantClick = (applicationId) => {
-      router.push(`/employer/jobs/${jobId}/applicants/${applicationId}`);
+    const formatDate = (time) => {
+      return new Date(time).toLocaleString();
+    };
+
+    const handleFileUpload = (evt) => {
+      const files = thumbnail.value.files[0];
+      console.log(thumbnail.value.files[0]);
+      jobFair.jobFairThumbnail = files;
+    };
+
+    const handleCreate = async (e) => {
+      jobFair.schoolId = parseJwt();
+      console.log("jobfair: ", jobFair);
+      // let formData = new FormData();
+      // formData.append('file',jobFair.jobFairThumbnail,jobFair.jobFairThumbnail.name);
+      // formData.append('jobfair',JSON.stringify(jobFair));
+
+      // console.warn(...formData);
+
+      let status = await fairService.createFair(jobFair);
+      if (status) {
+        location.reload();
+      }
+      // isCreated.value = true;
+    };
+
+    const parseJwt = () => {
+      let token = sessionStorage.getItem("token");
+      var base64Url = token.split(".")[1];
+      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      var jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split("")
+          .map(function(c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join("")
+      );
+      let id = JSON.parse(jsonPayload);
+      return id.sub;
+    };
+
+    const handleJobFairDetailClick = (jobfairId) => {
+      router.push(`/employer/jobfair/${jobfairId}`);
     };
     return {
       listAppliedCVs,
-      handleApplicantClick,
+      handleJobFairDetailClick,
+      listOfFair,
+      formatDate,
+      jobFair,
+      handleFileUpload,
+      handleCreate,
+      thumbnail,
+      config,
     };
   },
 };

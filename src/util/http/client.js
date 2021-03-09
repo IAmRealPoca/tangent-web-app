@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const axiosBase = () => {
+const axiosBase = (headers = {}) => {
     const instance = axios.create({
-        baseURL: `${process.env.VUE_APP_BASE_DOMAIN}`
+        baseURL: `${process.env.VUE_APP_BASE_DOMAIN}`,
+        headers: headers
     });
     return instance;
 }
