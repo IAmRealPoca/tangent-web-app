@@ -16,6 +16,8 @@ import EmployerViewFairList from "@/views/employer/jobfair/EmployerViewFairList.
 import EmployerFairDetail from "@/views/employer/jobfair/EmployerFairDetail.vue";
 import EmployerBooth from "@/views/employer/jobfair/EmployerBooth.vue";
 
+import BlobTest from "@/views/BlobTest.vue";
+
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
@@ -88,6 +90,11 @@ const routes = [
         path: "/employer/jobfair/someId/booth",
         name: "EmployerBooth",
         component: EmployerBooth
+    },
+    {
+        path: "/test",
+        name: "BlobTest",
+        component: BlobTest
     },
     
     

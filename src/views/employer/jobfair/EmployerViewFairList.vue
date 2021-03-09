@@ -21,9 +21,133 @@
             <h2 class="h4">Job Fair</h2>
             <p class="mb-0">List of current job fairs.</p>
           </div>
-          <a class="btn btn-sm btn-dark" @click="handleNewJobClick"
+          <a
+            class="btn btn-sm btn-dark"
+            data-bs-toggle="modal"
+            data-bs-target="#modal-form"
             ><span class="fas fa-plus me-2"></span> Create Job Fair</a
           >
+        </div>
+        <div
+          class="modal fade"
+          id="modal-form"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="modal-form"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-body p-0">
+                <div class="card border-light p-3 p-lg-4">
+                  <button
+                    type="button"
+                    class="btn-close ms-auto"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                  <div class="card-header border-0 text-center pb-0">
+                    <h2 class="h4">Create Job Fair</h2>
+                  </div>
+                  <div class="card-body p-0 pl-lg-3">
+                    <form action="#" class="mt-4">
+                      <!-- Form -->
+                      <div class="form-group mb-4">
+                        <label for="booth_name">Job Fair Name</label>
+                        <div class="input-group">
+                          <span class="input-group-text" id="basic-addon1"
+                            ><span class="fas fa-signature"></span
+                          ></span>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="jobFair.jobFairName"
+                            placeholder="Your Fantasic Title"
+                            id="booth_name"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <!-- End of Form -->
+                      <div class="form-group mb-4">
+                        <label for="booth_name">Job Fair Thumbnail</label>
+                        <div class="input-group">
+                          <div class="mb-3">
+                            <input
+                              class="form-control"
+                              ref="thumbnail"
+                              @change="handleFileUpload"
+                              id="booth_thumbnail"
+                              type="file"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Date -->
+                      <div class="form-group mb-4">
+                        <label for="booth_name">Start Date</label>
+                        <div class="input-group">
+                          <div class="mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text"
+                                ><span class="far fa-calendar-alt"></span
+                              ></span>
+                              <flat-pickr
+                                v-model="jobFair.startDate"
+                                :config="config"
+                                class="form-control"
+                                placeholder="Select date"
+                                name="date"
+                              >
+                              </flat-pickr>
+                              <!-- <input
+                                data-datepicker=""
+                                class="form-control"
+                                id="dateEnd"
+                                type="text"
+                                placeholder="dd/mm/yyyy"
+                                v-model="jobFair.startDate"
+                                required
+                              /> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End Date -->
+                      <!-- Form -->
+                      <div class="form-group">
+                        <div class="form-group mb-4">
+                          <label for="booth_description"
+                            >Job Fair Description</label
+                          >
+                          <div class="input-group">
+                            <textarea
+                              class="form-control"
+                              v-model="jobFair.JobFairDescription"
+                              id="booth_description"
+                              rows="3"
+                              style="resize: none;"
+                            ></textarea>
+                          </div>
+                        </div>
+                        <!-- End of Form -->
+                      </div>
+                      <div class="d-grid">
+                        <button
+                          type="submit"
+                          @click.prevent="handleCreate"
+                          data-bs-dismiss="modal"
+                          class="btn btn-info"
+                        >
+                          Create!
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- End breadcrumb -->
         <div class="row">
@@ -142,7 +266,7 @@
                   :key="index"
                   class="card hover-state border-bottom rounded-0 rounded-top py-3"
                 >
-                  <a href="jobfair/someId/">
+                  <a :href="fair.jobFairId">
                     <div
                       class="card-body d-sm-flex align-items-center flex-wrap flex-lg-nowrap py-0"
                     >
@@ -161,17 +285,17 @@
                       </div>
                       <div class="col-11 col-lg-8 px-0 mb-4 mb-md-0">
                         <div class="mb-2">
-                          <h3 class="h5">{{fair.jobFairName}}</h3>
+                          <h3 class="h5">{{ fair.jobFairName }}</h3>
                           <div class="d-block d-sm-flex">
                             <div class="small text-gray mb-3 mb-sm-0">
-                              <span>{{fair.school.schoolName}}</span>
+                              <span>{{ fair.school.schoolName }}</span>
                             </div>
                             <div>
                               <h4
                                 class="h6 fw-normal text-gray mb-3 mb-sm-0 ms-sm-3"
                               >
                                 <span class="fas fa-clock me-2"></span
-                                >{{fair.startDate}}
+                                >{{ formatDate(fair.startDate) }}
                               </h4>
                             </div>
                             <div class="ms-sm-3">
@@ -184,9 +308,9 @@
                         </div>
                         <div>
                           <div class="fw-bold text-dark">
-                            <span class="fw-normal text-gray"
-                              >{{fair.jobFairDescription}}</span
-                            >
+                            <span class="fw-normal text-gray">{{
+                              fair.JobFairDescriptionription
+                            }}</span>
                           </div>
                         </div>
                       </div>
@@ -243,30 +367,93 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import MainContent from "@/components/MainContent.vue";
 import { useRoute, useRouter } from "vue-router";
 import { useJobFairService } from "@/util/service/jobFairService";
-import * as EmployerService from "@/util/service/employerService";
+import flatPickr from "vue-flatpickr-component";
+import jobFairRepo from "@/util/repository/jobFairRepo";
+import "flatpickr/dist/flatpickr.css";
+import "flatpickr/dist/themes/dark.css";
 
 export default {
   name: "EmployerViewFairList",
   components: {
     MainContent,
+    flatPickr,
   },
   setup() {
     const route = useRoute();
     const router = useRouter();
+    const thumbnail = ref(null);
     const fairService = useJobFairService();
     const listOfFair = ref([]);
+    const jobFair = reactive({
+      jobFairName: "",
+      JobFairDescription: "",
+      startDate: "",
+      jobFairThumbnail: Object,
+      schoolId: "",
+    });
     const jobId = Number(route.params.jobId);
     const listAppliedCVs = ref([]);
+
+    const config = {
+      wrap: true,
+      enableTime: true,
+      altInput: true,
+      minDate: Date.parse(new Date().toLocaleDateString()),
+      timeFormat: "H:i",
+    };
 
     onMounted(async () => {
       // fetchAppliedCV(jobId);
       listOfFair.value = await fairService.getAllFair();
       console.log(listOfFair.value);
+      parseJwt();
     });
+
+    const formatDate = (time) => {
+      return new Date(time).toLocaleString();
+    };
+
+    const handleFileUpload = (evt) => {
+      const files = thumbnail.value.files[0];
+      console.log(thumbnail.value.files[0]);
+      jobFair.jobFairThumbnail = files;
+    };
+
+    const handleCreate = async (e) => {
+      jobFair.schoolId = parseJwt();
+      console.log("jobfair: ", jobFair);
+      // let formData = new FormData();
+      // formData.append('file',jobFair.jobFairThumbnail,jobFair.jobFairThumbnail.name);
+      // formData.append('jobfair',JSON.stringify(jobFair));
+
+      // console.warn(...formData);
+
+      let status = await fairService.createFair(jobFair);
+      if (status) {
+        location.reload();
+      }
+      // isCreated.value = true;
+    };
+
+    const parseJwt = () => {
+      let token = sessionStorage.getItem("token");
+      var base64Url = token.split(".")[1];
+      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      var jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split("")
+          .map(function(c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join("")
+      );
+      let id = JSON.parse(jsonPayload);
+      return id.sub;
+    };
 
     const handleApplicantClick = (applicationId) => {
       router.push(`/employer/jobs/${jobId}/applicants/${applicationId}`);
@@ -275,6 +462,12 @@ export default {
       listAppliedCVs,
       handleApplicantClick,
       listOfFair,
+      formatDate,
+      jobFair,
+      handleFileUpload,
+      handleCreate,
+      thumbnail,
+      config,
     };
   },
 };
