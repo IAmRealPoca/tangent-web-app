@@ -39,8 +39,12 @@
                       </div>
                     </div>
                     <div class="col">
-                      <a href="#"><h3 class="h5">Ngày hội Android</h3></a>
-                      <div class="small fw-bold mt-1">Time: 10:00</div>
+                      <a href="#"
+                        ><h3 class="h5">{{ fairDetailRef.jobFairName }}</h3></a
+                      >
+                      <div class="small fw-bold mt-1">
+                        {{ fairDetailRef.startDate }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -59,7 +63,7 @@
                           <h5 class="fw-normal">{{ boothDetail.name }}</h5>
                           <p class="text-gray mb-4">{{ boothDetail.desc }}</p>
                           <a class="btn btn-sm btn-secondary" href="booth"
-                            >Go to your boobs</a
+                            >Go to your booth</a
                           >
                         </div>
                       </div>
@@ -160,7 +164,7 @@
                                         id="booth_description"
                                         v-model="boothDetail.desc"
                                         rows="3"
-                                        style="resize: none;"
+                                        style="resize: none"
                                       ></textarea>
                                     </div>
                                   </div>
@@ -191,40 +195,50 @@
               <div class="card-body">
                 <div class="row">
                   <div class="h4">Others booths</div>
-                  <div v-for="item in 10" :key="item" class="col-12 col-lg-4 flex-grow-1">
-                    <div class="card shadow-sm h-100">
-                      <div class="card-header">
-                        <a href="#">
-                          <img
-                            class="avatar-sm me-2 img-fluid rounded-circle"
-                            src="https://picsum.photos/id/237/200/300"
-                            alt="avatar"
-                          />
-                          notPhuonghub
-                        </a>
-                      </div>
-                      <div class="card-body">
-                        <a href="#">
-                          <img
-                            src="@/assets/img/fsoft-tuyen-dung.jpg"
-                            class="card-img-top rounded py-2"
-                            alt="blog image"
-                          />
-                        </a>
-                        <h5 class="h5">{{ fairDetail.name }}</h5>
-                        <h6 class="h6 mb-1">
-                          {{ fairDetail.desc }}
-                        </h6>
-                        <div class="small mb-3">
-                          <span class="icon icon-small"
-                            ><span class="far fa-clock"></span
-                          ></span>
-                          10:30-11:00
+                  <div v-if="boothList.length > 0">
+                    <div
+                      v-for="(item, index) in boothList"
+                      :key="index"
+                      class="col-12 col-lg-4 flex-grow-1"
+                    >
+                      <div class="card shadow-sm h-100">
+                        <div class="card-header">
+                          <a href="#">
+                            <img
+                              class="avatar-sm me-2 img-fluid rounded-circle"
+                              src="https://picsum.photos/id/237/200/300"
+                              alt="avatar"
+                            />
+                            {{ item.BoothName }}
+                          </a>
+                        </div>
+                        <div class="card-body">
+                          <a href="#">
+                            <img
+                              src="@/assets/img/fsoft-tuyen-dung.jpg"
+                              class="card-img-top rounded py-2"
+                              alt="blog image"
+                            />
+                          </a>
+                          <h5 class="h5">{{ item.BoothName }}</h5>
+                          <h6 class="h6 mb-1">
+                            {{ item.BoothDescription }}
+                          </h6>
+                          <div class="small mb-3">
+                            <span class="icon icon-small"
+                              ><span class="far fa-clock"></span
+                            ></span>
+                            10:30 - 11:00
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-
+                  <div v-else>
+                    <div class="h6">
+                      There is no ohter booths to display right now
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -243,40 +257,61 @@ export default {
 <script setup>
 import MainContent from "@/components/MainContent.vue";
 import { useBoothService } from "@/util/service/boothService.js";
+import { useJobFairService } from "@/util/service/jobFairService.js";
 import { useRouter, useRoute } from "vue-router";
-import { ref } from "vue";
+import { ref, onMounted, reactive } from "vue";
 const boothService = useBoothService();
-const fairDetail = {
-  name: "Ngày hội Android",
-  desc: "Tới và theo dõi Mr. Thanh nói về cách để lập tình Android hiệu quả",
-};
+const jobFairService = useJobFairService();
+const fairDetailRef = ref({});
+// const fairDetail = reactive({
+//       jobFairName: "",
+//       JobFairDescription: "",
+//       startDate: "",
+//       jobFairThumbnail: Object,
+//       schoolId: "",
+//     });
 const isCreated = ref(false);
+const boothList = ref([]);
 const boothDetail = {
   name: "",
   desc: "",
   thumbnail: "https://picsum.photos/id/237/450/300",
+};
+const route = useRoute();
+const fairIdFromRoute = Number(route.params.jobFairId);
+const fetchJobFairDetail = () => {
+  jobFairService.getFair(fairIdFromRoute).then((resp) => {
+    fairDetailRef.value = resp;
+  });
+};
+const fetchBoothList = () => {
+  boothService.getAllBooth().then((resp) => {
+    boothList.value = resp;
+  });
 };
 const handleFileUpload = (evt) => {
   const path = evt.target.value;
   console.log(path);
   boothDetail.thumbnail = path;
 };
-const route = useRoute();
 const handleCreate = (e) => {
   console.log(boothDetail.name);
   console.log(boothDetail.desc);
   console.log(boothDetail.thumbnail);
-  const fairIdFromRoute = Number(route.params.jobFairId);
+
   const payload = {
     boothName: boothDetail.name,
     boothDescription: boothDetail.boothDescription,
     boothThumbnail: boothDetail.thumbnail,
-    jobFairId: fairIdFromRoute
-  }
+    jobFairId: fairIdFromRoute,
+  };
   boothService.createBooth(payload);
   isCreated.value = true;
 };
-
+onMounted(() => {
+  fetchJobFairDetail();
+  fetchBoothList();
+});
 </script>
 
 <style scoped></style>

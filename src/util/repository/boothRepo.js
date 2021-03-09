@@ -7,7 +7,7 @@ const path = "/booth";
 
 export default {
     getBoothList() {
-        return http.get(`${path}` + "/info");
+        return http.get(`${path}`);
     },
 
     getBoothById(boothId) {
