@@ -180,7 +180,12 @@
                     >{{ aSchool.status.statusName }}</span
                   >
                 </td>
-
+                <td v-if="aSchool.status.statusId === 1">
+                  <span class="fw-normal text-danger"
+                    ><span class="fas fa-times-circle text-danger me-2"></span
+                    >{{ aSchool.status.statusName }}</span
+                  >
+                </td>
                 <td v-if="aSchool.status.statusId === -1">
                   <span class="fw-normal text-gray-700"
                     ><span class="fas fa-minus-circle text-gray-700 me-2"></span
