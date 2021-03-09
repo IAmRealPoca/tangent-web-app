@@ -111,7 +111,9 @@ export default {
     // const user = JSON.parse(sessionStorage.getItem("userInfo"));
     const fetchApprovedSchools = () => {
       employerService.getApprovalInfo().then((resp) => {
-        approvedSchools.value = resp.map((e) => e.status === 0);
+        approvedSchools.value = resp.filter((e) => {
+          return e.status === 0;
+        });
       });
     };
 
