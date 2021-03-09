@@ -81,7 +81,6 @@
                   type="checkbox"
                   value=""
                   id="ckb1"
-                  checked="checked"
                 />
               </div>
             </div>
@@ -128,26 +127,32 @@
             >
               <div class="btn-group ms-md-3">
                 <button
+                  type="button"
                   class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
                   data-bs-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <span class="icon icon-sm"
-                    ><span class="fas fa-ellipsis-h icon-dark"></span></span
-                  ><span class="sr-only">Toggle Dropdown</span>
+                  <span class="icon icon-sm">
+                    <span class="fas fa-ellipsis-h icon-dark"></span>
+                  </span>
+                  <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div
                   class="dropdown-menu dropdown-menu-end py-0"
                   style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(-170px, 26px);"
                   data-popper-placement="bottom-end"
                 >
-                  <a class="dropdown-item rounded-top" href="#"
-                    ><span class="fas fa-edit"></span>Edit</a
+                  <a class="dropdown-item rounded-top" href="#">
+                    <span class="fas fa-edit"></span>Edit
+                  </a>
+                  <a
+                    class="dropdown-item text-danger rounded-bottom"
+                    href="#"
+                    @click="handleDelete(jobItems)"
                   >
-                  <a class="dropdown-item text-danger rounded-bottom" href="#"
-                    ><span class="fas fa-trash-alt"></span>Delete</a
-                  >
+                    <span class="fas fa-trash-alt"></span>Delete
+                  </a>
                 </div>
               </div>
             </div>
@@ -168,7 +173,7 @@ export default {
   name: "SchoolViewCompanyDetail",
   components: { MainContent },
   data: function() {
-    var navItems = [
+    const navItems = [
       { context: "Job Post", status: "active" },
       { context: "Unused Tab", status: "unactive" },
     ];
@@ -210,13 +215,18 @@ export default {
   },
   setup() {
     const router = useRouter();
-
     const handleClick = (url) => {
       router.push(url);
     };
+
     return {
       handleClick,
     };
+  },
+  methods: {
+    handleDelete: function(index) {
+      this.jobItems.splice(index, 1);
+    },
   },
 };
 </script>
