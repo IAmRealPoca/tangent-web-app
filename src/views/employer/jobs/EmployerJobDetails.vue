@@ -97,7 +97,7 @@
                   <div class="col-lg-2 col-sm-2">
                     <div class="mt-2">
                       <img
-                        src="@/assets/img/team/profile-picture-3.jpg"
+                        :src="companyData.avatar"
                         class="border-white"
                         alt="Company image"
                       />
@@ -113,7 +113,7 @@
                       <div class="w-100"></div>
                       <div class="col">
                         <a href="#" class="text-info me-3"
-                          >Team CVideos (dummy)</a
+                          >{{ companyData.name }}</a
                         >
                       </div>
                     </div>
@@ -132,8 +132,8 @@
                     <p>
                       {{ jobDetails.jobDescription }}
                     </p>
-                    <h1 class="h4">About company</h1>
-                    <p>Develop and deploy CVideos sysytem (dummy)</p>
+                    <h1 class="h4">About {{ companyData.name }}</h1>
+                    <p>{{ companyData.description }}</p>
                   </div>
                 </div>
               </div>
@@ -257,12 +257,21 @@ export default {
     };
     //end double data fetch
 
+    const companyData = ref({});
     onMounted(() => {
       fetchOneJobPost(jobPostId);
+      const user = sessionStorage.getItem("userInfo");
+      if (user) {
+        // userName.value = parseJwt(user).email;
+        companyData.value = JSON.parse(user);
+      }
     });
+
+    
 
     return {
       jobDetails,
+      companyData,
       handleSelectTargetSchoolClick,
       handleReviewApplicantClick,
     };
