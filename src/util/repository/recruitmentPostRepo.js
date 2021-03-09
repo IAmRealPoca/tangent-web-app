@@ -26,7 +26,4 @@ export default {
         return http.put(`${path}/${jobId}`, updatedJob)
     },
 
-    postJobToSchool(jobId, payload) {
-        return http.post(`${path}/${jobId}/post-job`, payload);
-    },
 }

@@ -26,4 +26,8 @@ const getApprovalInfo = () => {
     return employerRepo.getApprovalInfo();
 };
 
-export {getCurrEmployerInfo, getCurrEmpJobs, getOneByIdCurrEmployer, getAppliedCVFromJobId, getAppliedCVFromJobIdAndApplicationId, getApprovalInfo};
+const postJobToSchool = (jobId, payload) => {
+    return employerRepo.postJobToSchool(jobId, payload);
+}
+
+export {getCurrEmployerInfo, getCurrEmpJobs, getOneByIdCurrEmployer, getAppliedCVFromJobId, getAppliedCVFromJobIdAndApplicationId, getApprovalInfo, postJobToSchool};

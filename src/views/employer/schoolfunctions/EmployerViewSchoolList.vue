@@ -20,7 +20,6 @@
             <h2 class="h4">Schools List</h2>
             <p class="mb-0"></p>
           </div>
-          
         </div>
         <div class="table-settings mb-4">
           <div class="row justify-content-between align-items-center">
@@ -131,7 +130,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(a, index) in 1" :key="index">
+              <tr v-for="(aSchool, index) in mergedArray" :key="index">
                 <td>
                   <div class="form-check dashboard-check">
                     <input
@@ -146,30 +145,49 @@
                 <td>
                   <a href="#" class="d-flex align-items-center"
                     ><img
-                      src="@/assets/img/team/profile-picture-1.jpg"
+                      :src="aSchool.avatar"
                       class="user-avatar rounded-circle me-3"
                       alt="Avatar"
                     />
                     <div class="d-block">
-                      <span class="fw-bold">FPT University</span>
+                      <span class="fw-bold">{{ aSchool.schoolName }}</span>
                       <div class="small text-gray">
                         <span
                           class="__cf_email__"
                           data-cfemail="375e59515877524f565a475b521954585a"
-                          >District 9, Ho Chi Minh City</span
+                          >{{ aSchool.address }}</span
                         >
                       </div>
                     </div></a
                   >
                 </td>
-                <td><span class="fw-normal">10 Feb 2020</span></td>
                 <td>
-                  <span class="fw-normal"
-                    >University</span
+                  <span class="fw-normal">{{ aSchool.description }}</span>
+                </td>
+                <td>
+                  <span class="fw-normal">University</span>
+                </td>
+                <!-- Status column -->
+                <td v-if="aSchool.status.statusId === 0">
+                  <span class="fw-normal text-success"
+                    ><span class="fas fa-check-circle text-success me-2"></span
+                    >{{ aSchool.status.statusName }}</span
                   >
                 </td>
-                <td><span class="fw-normal text-success"><span class="fas fa-check-circle text-success me-2"></span
-                    >Active</span></td>
+                <td v-if="aSchool.status.statusId === 1">
+                  <span class="fw-normal text-gray-700"
+                    ><span class="fas fa-clock text-gray-700 me-2"></span
+                    >{{ aSchool.status.statusName }}</span
+                  >
+                </td>
+
+                <td v-if="aSchool.status.statusId === -1">
+                  <span class="fw-normal text-gray-700"
+                    ><span class="fas fa-minus-circle text-gray-700 me-2"></span
+                    >{{ aSchool.status.statusName }}</span
+                  >
+                </td>
+                <!-- End status column -->
                 <td>
                   <div class="btn-group">
                     <button
@@ -186,7 +204,8 @@
                     </button>
                     <div class="dropdown-menu py-0">
                       <a class="dropdown-item rounded-top" href="#"
-                        ><span class="fas fa-user-shield me-2"></span>Request connection</a
+                        ><span class="fas fa-user-shield me-2"></span>Request
+                        connection</a
                       >
                       <a class="dropdown-item" href="#"
                         ><span class="fas fa-eye me-2"></span>View Details</a
@@ -194,15 +213,16 @@
                       <a
                         class="dropdown-item text-danger rounded-bottom"
                         href="#"
-                        ><span class="fas fa-user-times me-2"></span>Cancel connection</a
+                        ><span class="fas fa-user-times me-2"></span>Cancel
+                        connection</a
                       >
                     </div>
                   </div>
                   <span
-                      class="fas fa-times-circle text-danger ms-2"
-                      title="Delete"
-                      data-bs-toggle="tooltip"
-                    ></span>
+                    class="fas fa-times-circle text-danger ms-2"
+                    title="Delete"
+                    data-bs-toggle="tooltip"
+                  ></span>
                 </td>
               </tr>
             </tbody>
@@ -239,10 +259,79 @@
 
 <script>
 import MainContent from "@/components/MainContent.vue";
+import { ref, onMounted } from "vue";
+import * as schoolService from "@/util/service/schoolService.js";
+import * as employerService from "@/util/service/employerService.js";
 export default {
   name: "EmployerViewSchoolList",
   components: {
     MainContent,
+  },
+  setup() {
+    const schoolList = ref([]);
+    const approvalInfo = ref([]);
+    const mergedArray = ref([]);
+    const fetchSchoolList = () => {
+      schoolService.getListOfSchools().then((resp) => {
+        schoolList.value = resp;
+      });
+      employerService.getApprovalInfo().then((resp) => {
+        approvalInfo.value = resp;
+
+        console.log("schoolList: ", schoolList.value);
+        console.log("approvalInfo: ", approvalInfo.value);
+        mergedArray.value = mergeArrays(schoolList.value, approvalInfo.value);
+        console.log("mergedArray", mergedArray.value);
+      });
+    };
+
+    const mergeArrays = (array1, array2) => {
+      var resultArray = [...array1];
+      console.log("array1: ", array1.length);
+      console.log("array2: ", array2.length);
+      for (var i = 0; i < array1.length; i++) {
+        for (var j = 0; j < array2.length; j++) {
+          console.log("arr1: ", array1[i]);
+          console.log("arr2: ", array2[j]);
+          if (array1[i].accountId === array2[j].school.accountId) {
+            resultArray[i] = {
+              ...resultArray[i],
+              status: { 
+                statusId: array2[j].status,
+                statusName: checkStatus(array2[j].status) },
+            };
+          } else {
+            resultArray[i] = {
+              ...resultArray[i],
+              status: {
+                statusId: -1,
+                statusName: "Not interacted"
+              },
+            };
+          }
+        }
+      }
+      console.log("resultArray: ", resultArray);
+      return resultArray;
+    };
+
+    const checkStatus = (statusInt) => {
+      if (statusInt === 0) return "Approved";
+      if (statusInt === 1) return "Pending";
+      if (statusInt === 2) return "Blocked";
+      if (statusInt === 3) return "Declined";
+      return "Not interacted";
+    };
+
+    onMounted(() => {
+      fetchSchoolList();
+    });
+
+    return {
+      schoolList,
+      approvalInfo,
+      mergedArray,
+    };
   },
 };
 </script>

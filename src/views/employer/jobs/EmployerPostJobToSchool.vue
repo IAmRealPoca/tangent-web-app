@@ -34,6 +34,11 @@
                   class="card border-light shadow-sm components-section px-5 py-3"
                 >
                   <div class="card-body">
+                    <div class="mb-2">
+                      <div class="card-body">
+
+                      </div>
+                    </div>
                     <div class="mb-2" v-if="approvedSchools.length > 0">
                       <label class="my-1 me-2" for="state">Job Posting:</label>
                       <select
@@ -81,7 +86,6 @@
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import * as employerService from "@/util/service/employerService.js";
-import * as recruitmentPostService from "@/util/service/recruitmentPostService.js";
 import MainContent from "@/components/MainContent.vue";
 export default {
   name: "EmployerPostJobToSchool",
@@ -102,13 +106,17 @@ export default {
       })
     }
 
+    const fetchJobPostToSchool = () => {
+      
+    }
+
     const handlePostToSchoolButton = () => {
       const payload = {
         "recruitmentPostId": jobPostId,
         "schoolId": schoolSelected.value.schoolId
       };
       console.log("School Id: ", schoolSelected.value.schoolId);
-      recruitmentPostService.postJobToSchool(jobPostId, payload);
+      employerService.postJobToSchool(jobPostId, payload);
     }
     
     onMounted(() => {

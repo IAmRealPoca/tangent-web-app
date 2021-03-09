@@ -29,4 +29,9 @@ export default {
     getApprovalInfo() {
         return http.get(`${path}/approvals`);
     },
+
+    
+    postJobToSchool(jobId, payload) {
+        return http.post(`${path}/recruitment-posts/${jobId}/post-job`, payload);
+    },
 }
