@@ -20,7 +20,7 @@ const postNewJob = (newJob) => {
 
 const updateJob = (jobId, updatedJob) => {
     return recruitmentPostRepo.updateJob(jobId, updatedJob);
-}
+};
 
 export {getListOfJobs, getListOfExpiredJobs, getOneById, postNewJob, updateJob};
 // export default recruitmentPostService

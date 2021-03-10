@@ -266,7 +266,7 @@ export default {
       newJobData.value = {
         ...newJobData.value,
         "skillId": skillSelected.value.skillId,
-        "location": newJobData.value.address.concat(",", locationSelected.value.locTitle),
+        "location": newJobData.value.address.concat(", ", locationSelected.value.locTitle),
       };
       recruitmentPostService.postNewJob(newJobData.value);
       console.log(newJobData.value);

@@ -13,7 +13,7 @@
             >
           </p>
         </div>
-        <div class="col-12 col-lg-6">
+        <!-- <div class="col-12 col-lg-6">
           <ul
             class="list-inline list-group-flush list-group-borderless text-center text-xl-right mb-0"
           >
@@ -30,7 +30,7 @@
               <a href="/contact">Contact</a>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </footer>
   </div>
@@ -42,5 +42,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -8,6 +8,7 @@ import EmployerCalendar from "@/views/employer/jobfair/EmployerCalendar.vue";
 import EmployerApplicantList from "@/views/employer/jobs/EmployerApplicantList.vue";
 import EmployerApplicantDetails from "@/views/employer/jobs/EmployerApplicantDetails.vue";
 import EmployerJobDetails from "@/views/employer/jobs/EmployerJobDetails.vue";
+import EmployerPostJobToSchool from "@/views/employer/jobs/EmployerPostJobToSchool.vue";
 import EmployerViewSchoolList from "@/views/employer/schoolfunctions/EmployerViewSchoolList.vue";
 //Applicant Dashboard
 import EmployerApplicantDashboard from "@/views/employer/applicantfunctions/EmployerApplicantDashboard.vue";
@@ -15,6 +16,11 @@ import EmployerApplicantDashboard from "@/views/employer/applicantfunctions/Empl
 import EmployerViewFairList from "@/views/employer/jobfair/EmployerViewFairList.vue";
 import EmployerFairDetail from "@/views/employer/jobfair/EmployerFairDetail.vue";
 import EmployerBooth from "@/views/employer/jobfair/EmployerBooth.vue";
+
+import BlobTest from "@/views/BlobTest.vue";
+import SchoolViewCompanyList from "@/views/school/companyfunctions/SchoolViewCompanyList.vue";
+import SchoolViewCompanyDetail from "@/views/school/companyfunctions/SchoolViewCompanyDetail.vue";
+import SchoolViewJobDetail from "@/views/school/companyfunctions/SchoolViewJobDetail.vue"
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -70,6 +76,11 @@ const routes = [
         component: EmployerJobDetails
     },
     {
+        path: "/employer/jobs/:jobId/post-to-school",
+        name: "EmployerPostJobToSchool",
+        component: EmployerPostJobToSchool
+    },
+    {
         path: "/employer/schools",
         name: "EmployerViewSchoolList",
         component: EmployerViewSchoolList
@@ -80,17 +91,37 @@ const routes = [
         component: EmployerViewFairList
     },
     {
-        path: "/employer/jobfair/someId/",
+        path: "/employer/jobfair/:jobFairId/",
         name: "EmployerFairDetail",
         component: EmployerFairDetail
     },
     {
-        path: "/employer/jobfair/someId/booth",
+        path: "/employer/jobfair/:jobFairId/:boothId",
         name: "EmployerBooth",
         component: EmployerBooth
     },
+    {
+        path: "/test",
+        name: "BlobTest",
+        component: BlobTest
+    },
     
     
+    {
+        path: "/school/company-list",
+        name: "SchoolViewCompanyList",
+        component: SchoolViewCompanyList
+    },
+    {
+        path: "/school/company-detail/:schoolId",
+        name: "SchoolViewCompanyDetail",
+        component: SchoolViewCompanyDetail
+    },
+    {
+        path: "/school/job-detail/:postId",
+        name: "SchoolViewJobDetail",
+        component: SchoolViewJobDetail
+    },
 ];
 
 const router = createRouter({

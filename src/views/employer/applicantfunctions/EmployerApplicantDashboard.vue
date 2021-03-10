@@ -11,7 +11,7 @@
                 <li class="breadcrumb-item">
                   <a href="#"><span class="fas fa-home"></span></a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Volt</a></li>
+                <li class="breadcrumb-item"><a href="#">Tangent</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
                   Applicant List
                 </li>
@@ -35,8 +35,6 @@
           </div>
         </div>
 
-
-        
         <div class="row">
           <div class="col-12 col-xl-3">
             <div class="card border-light shadow-sm components-section mb-4">
@@ -117,7 +115,7 @@
                     </label>
                   </div>
                 </div>
-                <hr/>
+                <hr />
                 <div class="row">
                   <span class="h5">Created at</span>
                   <div class="col-6 mb-2 input-group">
@@ -151,27 +149,10 @@
             </div>
           </div>
 
-
           <div class="col-12 col-xl-9">
             <div class="table-settings mb-4">
               <div class="row justify-content-between align-items-center">
                 <div class="col-9 col-lg-4 d-flex">
-                  <div class="input-group me-2 me-lg-3">
-                    <span class="input-group-text"
-                      ><span class="fas fa-search"></span
-                    ></span>
-                    <input type="text" class="form-control" placeholder="Search" />
-                  </div>
-                  <select
-                    class="form-select w-25"
-                    aria-label="Message select example 2"
-                  >
-                    <option selected="selected">All</option>
-                    <option value="1">Active</option>
-                    <option value="2">Inactive</option>
-                    <option value="3">Pending</option>
-                    <option value="3">Canceled</option>
-                  </select>
                 </div>
                 <div class="col-3 col-lg-8 text-right">
                   <div class="btn-group me-1">
@@ -227,19 +208,9 @@
                 </div>
               </div>
             </div>
-            <div class="card card-body shadow-sm table-wrapper table-responsive">
-              <div class="d-flex mb-3">
-                <select
-                  class="form-select fmxw-150"
-                  aria-label="Message select example"
-                >
-                  <option selected="selected">Bulk Action</option>
-                  <option value="1">Send Email</option>
-                  <option value="2">Change Group</option>
-                  <option value="3">Delete User</option>
-                </select>
-                <button class="btn btn-sm px-3 btn-secondary ms-3">Apply</button>
-              </div>
+            <div
+              class="card card-body shadow-sm table-wrapper table-responsive"
+            >
               <table class="table user-table table-hover align-items-center">
                 <thead>
                   <tr>
@@ -251,7 +222,10 @@
                           value=""
                           id="userCheck55"
                         />
-                        <label class="form-check-label" for="userCheck55"></label>
+                        <label
+                          class="form-check-label"
+                          for="userCheck55"
+                        ></label>
                       </div>
                     </th>
                     <th class="border-bottom">Name</th>
@@ -276,7 +250,10 @@
                           value=""
                           id="userCheck1"
                         />
-                        <label class="form-check-label" for="userCheck1"></label>
+                        <label
+                          class="form-check-label"
+                          for="userCheck1"
+                        ></label>
                       </div>
                     </td>
                     <td>
@@ -294,8 +271,8 @@
                             <span
                               class="__cf_email__"
                               data-cfemail="375e59515877524f565a475b521954585a"
-                              >[email&#160;protected]</span
-                            >
+                              >[email&#160;protected]
+                            </span>
                           </div>
                         </div>
                       </a>
@@ -303,7 +280,9 @@
                     <td><span class="fw-normal">10 Feb 2020</span></td>
                     <td>
                       <span class="fw-normal"
-                        ><span class="fas fa-check-circle text-success me-2"></span
+                        ><span
+                          class="fas fa-check-circle text-success me-2"
+                        ></span
                         >Email</span
                       >
                     </td>
@@ -328,12 +307,14 @@
                             Pass</a
                           >
                           <a class="dropdown-item" href="#"
-                            ><span class="fas fa-eye me-2"></span>View Details</a
+                            ><span class="fas fa-eye me-2"></span>View
+                            Details</a
                           >
                           <a
                             class="dropdown-item text-danger rounded-bottom"
                             href="#"
-                            ><span class="fas fa-user-times me-2"></span>Suspend</a
+                            ><span class="fas fa-user-times me-2"></span
+                            >Suspend</a
                           >
                         </div>
                       </div>
@@ -354,13 +335,21 @@
                     <li class="page-item">
                       <a class="page-link" href="#">Previous</a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">1</a>
+                    </li>
                     <li class="page-item active">
                       <a class="page-link" href="#">2</a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">4</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">5</a>
+                    </li>
                     <li class="page-item">
                       <a class="page-link" href="#">Next</a>
                     </li>

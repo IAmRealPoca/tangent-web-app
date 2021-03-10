@@ -11,23 +11,17 @@
                 <li class="breadcrumb-item">
                   <a href="#"><span class="fas fa-home"></span></a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Volt</a></li>
+                <li class="breadcrumb-item"><a href="#">Tangent</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
                   Applicant List
                 </li>
               </ol>
             </nav>
             <h2 class="h4">Applicant List</h2>
-            <p class="mb-0">Your web analytics dashboard template.</p>
+            <p class="mb-0">List of applicants that applied to your job</p>
           </div>
           <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="#" class="btn btn-sm btn-dark"
-              ><span class="fas fa-plus me-2"></span> New User</a
-            >
             <div class="btn-group ms-2 ms-lg-3">
-              <button type="button" class="btn btn-sm btn-outline-primary">
-                Share
-              </button>
               <button type="button" class="btn btn-sm btn-outline-primary">
                 Export
               </button>
@@ -55,22 +49,12 @@
                       placeholder="Keyword"
                     />
                   </div>
-                  <select
-                    class="form-select w-25"
-                    aria-label="Message select example 2"
-                  >
-                    <option selected="selected">All</option>
-                    <option value="1">Active</option>
-                    <option value="2">Inactive</option>
-                    <option value="3">Pending</option>
-                    <option value="3">Canceled</option>
-                  </select>
                 </div>
                 <hr />
                 <div class="row">
                   <span class="h5">Exclude students that do not match</span>
                 </div>
-                <div class="row">
+                <div class="row form-check form-switch">
                   <div class="col">
                     <input
                       class="form-check-input"
@@ -157,21 +141,14 @@
               <div class="row justify-content-between align-items-center">
                 <div class="col-9 col-lg-4 d-flex">
                   <div class="input-group me-2 me-lg-3">
-                    <span class="input-group-text"
-                      ><span class="fas fa-search"></span
-                    ></span>
-                    <input type="text" class="form-control" placeholder="Search" />
+                    
                   </div>
-                  <select
-                    class="form-select w-25"
+                  <div
+                    class="w-25"
                     aria-label="Message select example 2"
                   >
-                    <option selected="selected">All</option>
-                    <option value="1">Active</option>
-                    <option value="2">Inactive</option>
-                    <option value="3">Pending</option>
-                    <option value="3">Canceled</option>
-                  </select>
+                    
+                  </div>
                 </div>
                 <div class="col-3 col-lg-8 text-right">
                   <div class="btn-group me-1">
@@ -255,8 +232,8 @@
                       </div>
                     </th>
                     <th class="border-bottom">Name</th>
-                    <th class="border-bottom">Date Created</th>
-                    <th class="border-bottom">Verified</th>
+                    <th class="border-bottom">Date Graduated</th>
+                    <th class="border-bottom">School</th>
                     <th class="border-bottom">Status</th>
                     <th class="border-bottom">Action</th>
                   </tr>
@@ -265,7 +242,6 @@
                   <tr
                     v-for="(appliedCV, index) in listAppliedCVs"
                     :key="index"
-                    @click="handleApplicantClick(appliedCV.applicationId)"
                   >
                     <td>
                       <div class="form-check dashboard-check">
@@ -278,8 +254,8 @@
                         <label class="form-check-label" for="userCheck1"></label>
                       </div>
                     </td>
-                    <td>
-                      <a href="#" class="d-flex align-items-center"
+                    <td @click="handleApplicantClick(appliedCV.applicationId)">
+                      <a href="" class="d-flex align-items-center"
                         ><img
                           :src="appliedCV.cv.employee.avatar"
                           class="user-avatar rounded-circle me-3"
@@ -293,7 +269,7 @@
                             <span
                               class="__cf_email__"
                               data-cfemail="375e59515877524f565a475b521954585a"
-                              >[email&#160;protected]</span
+                              ></span
                             >
                           </div>
                         </div>

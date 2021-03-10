@@ -11,7 +11,7 @@
                 <li class="breadcrumb-item">
                   <a href="#"><span class="fas fa-home"></span></a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Volt</a></li>
+                <li class="breadcrumb-item"><a href="#">Tangent</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
                   Job detail
                 </li>
@@ -44,17 +44,23 @@
                   </div>
                   <div class="col-lg-6 col-sm-6">
                     <h2 class="h5">Applicants</h2>
-                    <button class="btn btn-outline-gray-700 mt-0" type="button" @click="handleReviewApplicantClick">
+                    <button
+                      class="btn btn-outline-gray-700 mt-0"
+                      type="button"
+                      @click="handleReviewApplicantClick"
+                    >
                       Review {{ jobDetails.totalCVs }} applicants
                     </button>
-                    <br/>
+                    <br />
                     <span>View profile and application documents</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="card border-light shadow-sm components-section mb-4 pt-0">
+            <div
+              class="card border-light shadow-sm components-section mb-4 pt-0"
+            >
               <div class="table-responsive py-4 pt-0">
                 <table class="table table-flush">
                   <thead class="thead-light">
@@ -91,7 +97,7 @@
                   <div class="col-lg-2 col-sm-2">
                     <div class="mt-2">
                       <img
-                        src="@/assets/img/team/profile-picture-3.jpg"
+                        :src="companyData.avatar"
                         class="border-white"
                         alt="Company image"
                       />
@@ -106,7 +112,9 @@
                       </div>
                       <div class="w-100"></div>
                       <div class="col">
-                        <a href="#" class="text-info me-3">Team CVideos (dummy)</a>
+                        <a href="#" class="text-info me-3">{{
+                          companyData.name
+                        }}</a>
                       </div>
                     </div>
                   </div>
@@ -124,8 +132,8 @@
                     <p>
                       {{ jobDetails.jobDescription }}
                     </p>
-                    <h1 class="h4">About company</h1>
-                    <p>Develop and deploy CVideos sysytem (dummy)</p>
+                    <h1 class="h4">About {{ companyData.name }}</h1>
+                    <p>{{ companyData.description }}</p>
                   </div>
                 </div>
               </div>
@@ -140,7 +148,9 @@
                 <hr />
                 <div class="row">
                   <div class="col-lg-2">Salary</div>
-                  <div class="col-lg-10">{{ jobDetails.minSalary }} - {{ jobDetails.maxSalary }}</div>
+                  <div class="col-lg-10">
+                    {{ jobDetails.minSalary }} - {{ jobDetails.maxSalary }}
+                  </div>
                 </div>
                 <hr />
                 <div class="row">
@@ -155,10 +165,16 @@
             <div class="col-12 mb-4">
               <div class="card shadow-sm p-0 mb-4">
                 <div class="card-header bg-primary text-white">
-                  <h5 class="h5">Posted to 0 school</h5>
+                  <h5 class="h5">Posted to {{ postedSchoolList.length }} school</h5>
                 </div>
                 <div class="card-body pb-3">
-                  <div class="row mb-0">
+                  <div class="row mb-0" v-for="(item, index) in postedSchoolList" :key="index">
+                    <div class="col-12 col-lg-4 flex-grow-1">
+                      <div class="btn btn-outline-gray-700">{{ item.schoolName }}</div>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div class="row mb-0" v-if="postedSchoolList.length <= 0">
                     <div class="col-lg-12 text-gray">
                       <p>
                         This job has not been to any schools, yet. Once you post
@@ -167,7 +183,11 @@
                     </div>
                   </div>
                   <div class="row mb-0">
-                    <button class="btn btn-outline-gray-700" type="button">
+                    <button
+                      class="btn btn-outline-gray-700"
+                      type="button"
+                      @click="handleSelectTargetSchoolClick"
+                    >
                       Select target school
                     </button>
                   </div>
@@ -211,10 +231,11 @@ export default {
     const router = useRouter();
     const jobDetails = ref({});
     const jobPostId = Number(route.params.jobId);
+    const postedSchoolList = ref([]);
 
     const handleReviewApplicantClick = () => {
-      router.push(`/employer/jobs/${jobPostId}/applicants`)
-    }
+      router.push(`/employer/jobs/${jobPostId}/applicants`);
+    };
 
     //fetch data from the recruitment post API first, then feetch from employer API to get no of submitted CVs
     //this is dumb, but this is how the API works
@@ -229,25 +250,47 @@ export default {
       });
     };
 
-    const fetchOneJobPost = async (jobId) => { //fetch from recruitment API
+    const fetchOneJobPost = async (jobId) => {
+      //fetch from recruitment API
       recruitmentPostService.getOneById(jobId).then((resp) => {
         jobDetails.value = resp;
         //force fetch in order
         fetchFromEmployerAPI(jobId);
       });
     };
+
+    const handleSelectTargetSchoolClick = () => {
+      router.push(`/employer/jobs/${jobPostId}/post-to-school`);
+    };
     //end double data fetch
+
+    const fetchSchoolPostedToList = (jobPostId) => {
+      employerService.getPostedSchoolListByJobPostId(jobPostId).then((resp) => {
+        postedSchoolList.value = resp;
+      });
+    };
+
+    const companyData = ref({});
 
     onMounted(() => {
       fetchOneJobPost(jobPostId);
+      fetchSchoolPostedToList(jobPostId);
+      const user = sessionStorage.getItem("userInfo");
+      if (user) {
+        // userName.value = parseJwt(user).email;
+        companyData.value = JSON.parse(user);
+      }
     });
 
     return {
       jobDetails,
+      companyData,
+      postedSchoolList,
 
-      handleReviewApplicantClick
-    }
-  }
+      handleSelectTargetSchoolClick,
+      handleReviewApplicantClick,
+    };
+  },
 };
 </script>
 

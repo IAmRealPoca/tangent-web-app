@@ -11,27 +11,27 @@
                 <li class="breadcrumb-item">
                   <a href="#"><span class="fas fa-home"></span></a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Volt</a></li>
+                <li class="breadcrumb-item"><a href="#">Tangent</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  Job detail
+                  Application details
                 </li>
               </ol>
             </nav>
-            <h2 class="h4">Job detail</h2>
-            <p class="mb-0">View and edit your job detail.</p>
+            <h2 class="h4">Application details</h2>
+            <p class="mb-0">Review your applicant.</p>
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" v-if="Object.keys(applicationInfo).length > 0">
           <div class="col-12 col-xl-3">
             <div class="card border-light shadow-sm components-section mb-4">
               <div class="card-body">
                 <h2 class="h5 mb-0 mt-2">Name</h2>
-                <span v-if="appliedCV">
-                  <span>A Pon</span>
+                <span>
+                  <span>{{ applicationInfo.cv.employee.fullName }}</span>
                 </span>
                 <h2 class="h5 mb-0 mt-2">Email Address</h2>
-                <span>[protected]</span>
+                <span>{{ applicationInfo.cv.employee.email }}</span>
                 <h2 class="h5 mb-0 mt-2">School Year</h2>
                 <span>Senior</span>
                 <h2 class="h5 mb-0 mt-2">Majors</h2>
@@ -54,11 +54,11 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Spring Internship</td>
+                    <tr v-if="Object.keys(jobPostInfo).length > 0">
+                      <td>{{ jobPostInfo.title }}</td>
                       <td>Reviewed</td>
-                      <td>June 6th 2018</td>
-                      <td>Aubree Chapman</td>
+                      <td>{{ applicationInfo.created }}</td>
+                      <td>{{ applicationInfo.cv.employee.fullName }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -95,9 +95,9 @@
                           role="tab"
                           aria-controls="nav-profile"
                           aria-selected="false"
-                          >Documents(2)</a
+                          >Documents</a
                         >
-                        <a
+                        <!-- <a
                           class="nav-item nav-link"
                           id="nav-contact-tab"
                           data-bs-toggle="tab"
@@ -106,7 +106,7 @@
                           aria-controls="nav-contact"
                           aria-selected="false"
                           >Notes(0)</a
-                        >
+                        > -->
                       </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
@@ -190,9 +190,9 @@
                             class="card border-light shadow-sm components-section mb-4"
                           >
                             <div class="card-body">
-                              <div class="row">
+                              <!-- <div class="row">
                                 <label class="my-1 me-2 h5" for="country"
-                                  >Country</label
+                                  >Document</label
                                 >
                                 <select
                                   class="form-select"
@@ -204,8 +204,38 @@
                                   <option value="2">Cover Letter</option>
                                   <option value="3">Cover Video</option>
                                 </select>
+                              </div> -->
+                              <div class="row pt-4">
+                                <div
+                                  class="card border-light shadow-sm"
+                                  v-if="
+                                    Object.keys(applicationInfo.cv).length > 0
+                                  "
+                                >
+                                  <h2 class="h4">CV</h2>
+                                  <div class="h5">
+                                    Title: {{ applicationInfo.cv.title }}
+                                  </div>
+                                  <div class="h5">
+                                    Applied: {{ applicationInfo.created }}
+                                  </div>
+                                  <embed
+    src="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0"
+
+    frameBorder="0"
+    scrolling="auto"
+    height="100%"
+    width="100%"
+/>
+
+                                </div>
+                                <!-- <div class="card border-light shadow-sm" v-if="Object.keys(applicationInfo.coverLetter).length > 0">
+                                  <h2 class="h4">CV</h2>
+                                  <div class="h5">Title: {{ applicationInfo.coverLetter.title }}</div>
+                                  <div class="h5">Applied: {{ applicationInfo.coverLetter.created }}</div>
+
+                                </div> -->
                               </div>
-                              <div class="row pt-4">abcdef</div>
                             </div>
                           </div>
                         </div>
@@ -257,25 +287,32 @@ export default {
   setup() {
     const route = useRoute();
 
-    const appliedCV = ref({});
+    const applicationInfo = ref({});
     const jobId = Number(route.params.jobId);
     const applicationId = Number(route.params.applicationId);
+    const jobPostInfo = ref({});
     const fetchCVFromJobAndApplicationId = (jobId, applicationId) => {
       EmployerService.getAppliedCVFromJobIdAndApplicationId(
         jobId,
         applicationId
       ).then((resp) => {
-        appliedCV.value = resp;
+        applicationInfo.value = resp;
         console.log("Applied CV: ", resp);
       });
-    }
+
+      EmployerService.getOneByIdCurrEmployer(jobId)
+      .then((resp) => {
+        jobPostInfo.value = resp;
+      });
+    };
     onMounted(() => {
       console.log("OnMounted Applicant Details");
       fetchCVFromJobAndApplicationId(jobId, applicationId);
-      console.log("hello: ",appliedCV.value);
+      console.log("hello: ", applicationInfo.value);
     });
     return {
-      appliedCV,
+      applicationInfo,
+      jobPostInfo,
     };
   },
 };

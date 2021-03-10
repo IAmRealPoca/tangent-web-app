@@ -19,10 +19,11 @@ export default {
     },
 
     postNewJob(newJob) {
-        return http.post(`${path}`,newJob);
+        return http.post(`${path}`, newJob);
     },
 
     updateJob(jobId, updatedJob) {
-        return http.put(`${path}/${jobId}`,updatedJob)
-    }
+        return http.put(`${path}/${jobId}`, updatedJob)
+    },
+
 }

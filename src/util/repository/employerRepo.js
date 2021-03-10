@@ -24,5 +24,26 @@ export default {
 
     getAppliedCVFromJobIdAndApplicationId(jobId, applicationId) {
         return http.get(`${path}/recruitment-posts/${jobId}/applied-cvs/${applicationId}`);
-    }
+    },
+
+    getApprovalInfo() {
+        return http.get(`${path}/approvals`);
+    },
+
+    
+    postJobToSchool(jobId, payload) {
+        return http.post(`${path}/recruitment-posts/${jobId}/post-job`, payload);
+    },
+
+    requestConnection(payload) {
+        return http.post(`${path}/approvals/request`, payload);
+    },
+
+    getJobPostedToSchool() {
+        return http.get(`${path}/recruitment-posts/posted-jobs`);
+    },
+
+    getPostedSchoolListByJobPostId(postId) {
+        return http.get(`${path}/recruitment-posts/${postId}/posted-jobs/schools`);
+    },
 }
