@@ -54,15 +54,15 @@
           <div class="col-12 col-lg-9">
             <div class="card border-light components-section mb-1">
               <div class="card p-0">
-                <div v-if="isCreated">
-                  <div v-if="boothDetail">
+                <div v-if="isCreated || boothList">
+                  <div v-if="isCreated && boothDetail">
                     <div class="row">
                       <div class="col-12 col-lg-6">
                         <div class="card-body">
                           <h4 class="h3">Your Company Booth</h4>
                           <h5 class="fw-normal">{{ boothDetail.name }}</h5>
                           <p class="text-gray mb-4">{{ boothDetail.desc }}</p>
-                          <a class="btn btn-sm btn-secondary" href="booth"
+                          <a class="btn btn-sm btn-secondary" href="bootp"
                             >Go to your booth</a
                           >
                         </div>
@@ -70,6 +70,32 @@
                       <div class="col-12 col-lg-6">
                         <img
                           :src="boothDetail.thumbnail"
+                          alt="Thumbnail"
+                          srcset=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="boothList">
+                    <div class="row">
+                      <div class="col-12 col-lg-6">
+                        <div class="card-body">
+                          <h4 class="h3">{{ boothList.boothName }}</h4>
+                          <p class="text-gray mb-4">
+                            {{ boothList.boothDescription }}
+                          </p>
+                          <a
+                            class="btn btn-sm btn-secondary"
+                            :href="
+                              fairDetailRef.jobFairId + `/` + boothList.boothId
+                            "
+                            >Go to your booth</a
+                          >
+                        </div>
+                      </div>
+                      <div class="col-12 col-lg-6">
+                        <img
+                          :src="boothList.boothThumbnail"
                           alt="Thumbnail"
                           srcset=""
                         />
@@ -195,9 +221,9 @@
               <div class="card-body">
                 <div class="row">
                   <div class="h4">Others booths</div>
-                  <div v-if="boothList.length > 0">
+                  <div v-if="fairDetailRef && boothsLength.length">
                     <div
-                      v-for="(item, index) in boothList"
+                      v-for="(item, index) in fairDetailRef.booths"
                       :key="index"
                       class="col-12 col-lg-4 flex-grow-1"
                     >
@@ -236,7 +262,7 @@
                   </div>
                   <div v-else>
                     <div class="h6">
-                      There is no ohter booths to display right now
+                      There is no other booths to display right now
                     </div>
                   </div>
                 </div>
@@ -263,6 +289,7 @@ import { ref, onMounted, reactive } from "vue";
 const boothService = useBoothService();
 const jobFairService = useJobFairService();
 const fairDetailRef = ref({});
+const boothsLength = ref([]);
 // const fairDetail = reactive({
 //       jobFairName: "",
 //       JobFairDescription: "",
@@ -271,7 +298,7 @@ const fairDetailRef = ref({});
 //       schoolId: "",
 //     });
 const isCreated = ref(false);
-const boothList = ref([]);
+const boothList = ref({});
 const boothDetail = {
   name: "",
   desc: "",
@@ -279,38 +306,66 @@ const boothDetail = {
 };
 const route = useRoute();
 const fairIdFromRoute = Number(route.params.jobFairId);
-const fetchJobFairDetail = () => {
-  jobFairService.getFair(fairIdFromRoute).then((resp) => {
-    fairDetailRef.value = resp;
-  });
+const parseJwt = () => {
+  let token = sessionStorage.getItem("token");
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split("")
+      .map(function(c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+  let id = JSON.parse(jsonPayload);
+  return id.sub;
 };
+const fetchJobFairDetail = async () => {
+  const fair = await jobFairService.getFair(fairIdFromRoute);
+  console.log("fair detail: ", fair);
+  fairDetailRef.value = fair;
+  boothsLength.value = fair.booths;
+  console.log("booths: ", boothsLength.value);
+};
+fetchJobFairDetail();
+
 const fetchBoothList = () => {
-  boothService.getAllBooth().then((resp) => {
+  const comId = parseJwt();
+  console.log("jwt: ", comId);
+  boothService.getBoothByComId(parseInt(comId)).then((resp) => {
+    console.log("booth from comid list: ", resp);
     boothList.value = resp;
   });
 };
+fetchBoothList();
 const handleFileUpload = (evt) => {
   const path = evt.target.value;
   console.log(path);
   boothDetail.thumbnail = path;
 };
+
 const handleCreate = (e) => {
+  const comId = parseJwt();
   console.log(boothDetail.name);
   console.log(boothDetail.desc);
   console.log(boothDetail.thumbnail);
 
   const payload = {
     boothName: boothDetail.name,
-    boothDescription: boothDetail.boothDescription,
+    boothDescription: boothDetail.desc,
     boothThumbnail: boothDetail.thumbnail,
     jobFairId: fairIdFromRoute,
+    companyId: parseInt(comId),
   };
+
+  console.log(payload);
+
   boothService.createBooth(payload);
   isCreated.value = true;
 };
 onMounted(() => {
-  fetchJobFairDetail();
-  fetchBoothList();
+  // fetchBoothList();
 });
 </script>
 

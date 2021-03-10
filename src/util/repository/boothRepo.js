@@ -13,6 +13,9 @@ export default {
     getBoothById(boothId) {
         return http.get(`${path}/${boothId}`);
     },
+    getBoothByComId(boothId) {
+        return http.get(`${path}/com/${boothId}`);
+    },
 
     createBooth(payload) {
         return http.post(`${path}`,payload);
