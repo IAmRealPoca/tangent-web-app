@@ -277,8 +277,8 @@ export default {
       if (user) {
         // userName.value = parseJwt(user).email;
         userName.value = JSON.parse(user);
-        console.log("User: ", JSON.parse(user));
-        console.log("Username: ", userName.value.name);
+        // console.log("User: ", JSON.parse(user));
+        // console.log("Username: ", userName.value.name);
       }
     });
     return {

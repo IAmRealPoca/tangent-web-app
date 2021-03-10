@@ -22,7 +22,7 @@ export const OVUtil = () => {
 
     // On every new Stream received...
     data.session.on("streamCreated", ({ stream }) => {
-      console.log("Tao la steram: ", stream);
+      // console.log("Tao la steram: ", stream);
       const subscriber = data.session.subscribe(stream);
       data.subscribers.push(subscriber);
     });
@@ -63,12 +63,12 @@ export const OVUtil = () => {
         mirror: false, // Whether to mirror your local video or not
       });
 
-      console.log("publisher init: ", publisher);
+      // console.log("publisher init: ", publisher);
 
       data.mainStreamManager = publisher;
       data.publisher = publisher;
 
-      console.log("data publisher init: ", data.publisher);
+      // console.log("data publisher init: ", data.publisher);
 
       // --- Publish your stream ---
 

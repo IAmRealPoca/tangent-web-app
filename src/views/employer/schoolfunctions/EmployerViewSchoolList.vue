@@ -417,10 +417,7 @@ export default {
         employerService.getApprovalInfo().then((resp) => {
           approvalInfo.value = resp;
 
-          console.log("schoolList: ", schoolList.value);
-          console.log("approvalInfo: ", approvalInfo.value);
           mergedArray.value = mergeArrays(schoolList.value, approvalInfo.value);
-          console.log("mergedArray", mergedArray.value);
         });
       });
     };
@@ -436,13 +433,9 @@ export default {
           },
         };
       }
-      console.log("array1: ", array1.length);
-      console.log("array2: ", array2.length);
       if (array2.length <= 0) return resultArray;
       for (var i = 0; i < array1.length; i++) {
         for (var j = 0; j < array2.length; j++) {
-          console.log("arr1: ", array1[i]);
-          console.log("arr2: ", array2[j]);
           if (array1[i].accountId === array2[j].school.accountId) {
             resultArray[i] = {
               ...array1[i],
@@ -454,7 +447,6 @@ export default {
           }
         }
       }
-      console.log("resultArray: ", resultArray);
       return resultArray;
     };
 

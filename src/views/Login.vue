@@ -127,7 +127,7 @@ export default {
     const selectedAccTypeId = ref();
     const selectedAccTypeString = ref();
     const userToken = sessionStorage.getItem("token");
-    console.log("user", userToken);
+    // console.log("user", userToken);
 
     if (userToken) {
       router.push("/");
@@ -144,7 +144,7 @@ export default {
 
     const selectType = (id) => {
       selectedAccTypeId.value = id;
-      console.log("id",id);
+      // console.log("id",id);
       if (id === 0 || id === 1 || id === 2 || id === 4) {
         if (id=== 0) {
           selectedAccTypeString.value = "Admin";
@@ -175,8 +175,8 @@ export default {
 
     function onClick() {
       selectedSchoolId.value = 1;
-      console.log("school: ", selectedSchoolId.value);
-      console.log("acc type: ", selectedAccTypeId.value);
+      // console.log("school: ", selectedSchoolId.value);
+      // console.log("acc type: ", selectedAccTypeId.value);
 
       // if (!selectedSchoolId.value || !selectedAccTypeId.value) {
 
@@ -197,7 +197,7 @@ export default {
       if (usrFlag === 0) {
       } else if (usrFlag === 2) {
         employerService.getCurrEmployerInfo().then((resp) => {
-          console.log(resp);
+          // console.log(resp);
           sessionStorage.setItem("userInfo", JSON.stringify(resp));
         });
       } else if (usrFlag === 4) {
@@ -206,10 +206,10 @@ export default {
     };
 
     const onChange = () => {
-      console.log("Normal trigger");
-      console.log("value ", selectedSchoolId.value);
+      // console.log("Normal trigger");
+      // console.log("value ", selectedSchoolId.value);
 
-      console.log(event);
+      // console.log(event);
     };
 
     const onClickToOpenVidu = () => {

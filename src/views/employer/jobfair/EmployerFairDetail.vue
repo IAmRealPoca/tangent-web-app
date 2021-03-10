@@ -323,33 +323,33 @@ const parseJwt = () => {
 };
 const fetchJobFairDetail = async () => {
   const fair = await jobFairService.getFair(fairIdFromRoute);
-  console.log("fair detail: ", fair);
+  // console.log("fair detail: ", fair);
   fairDetailRef.value = fair;
   boothsLength.value = fair.booths;
-  console.log("booths: ", boothsLength.value);
+  // console.log("booths: ", boothsLength.value);
 };
 fetchJobFairDetail();
 
 const fetchBoothList = () => {
   const comId = parseJwt();
-  console.log("jwt: ", comId);
+  // console.log("jwt: ", comId);
   boothService.getBoothByComId(parseInt(comId)).then((resp) => {
-    console.log("booth from comid list: ", resp);
+    // console.log("booth from comid list: ", resp);
     boothList.value = resp;
   });
 };
 fetchBoothList();
 const handleFileUpload = (evt) => {
   const path = evt.target.value;
-  console.log(path);
+  // console.log(path);
   boothDetail.thumbnail = path;
 };
 
 const handleCreate = (e) => {
   const comId = parseJwt();
-  console.log(boothDetail.name);
-  console.log(boothDetail.desc);
-  console.log(boothDetail.thumbnail);
+  // console.log(boothDetail.name);
+  // console.log(boothDetail.desc);
+  // console.log(boothDetail.thumbnail);
 
   const payload = {
     boothName: boothDetail.name,
@@ -359,7 +359,7 @@ const handleCreate = (e) => {
     companyId: parseInt(comId),
   };
 
-  console.log(payload);
+  // console.log(payload);
 
   boothService.createBooth(payload);
   isCreated.value = true;

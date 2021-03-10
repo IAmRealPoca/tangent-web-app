@@ -104,7 +104,7 @@ export default {
 
       // On every new Stream received...
       data.value.session.on("streamCreated", ({ stream }) => {
-        console.log("Tao la steram: ", stream);
+        // console.log("Tao la steram: ", stream);
         const subscriber = data.value.session.subscribe(stream);
         data.value.subscribers.push(subscriber);
       });
