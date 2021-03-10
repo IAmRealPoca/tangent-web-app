@@ -173,10 +173,6 @@ export default {
         url: "/school",
         subItem: [
           {
-            title: "School List",
-            url: "/employer/schools",
-          },
-          {
             title: "Company List",
             url: "/school/company-list",
           },

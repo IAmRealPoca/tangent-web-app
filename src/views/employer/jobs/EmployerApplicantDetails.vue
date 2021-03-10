@@ -297,7 +297,6 @@ export default {
         applicationId
       ).then((resp) => {
         applicationInfo.value = resp;
-        console.log("Applied CV: ", resp);
       });
 
       EmployerService.getOneByIdCurrEmployer(jobId)
@@ -306,7 +305,6 @@ export default {
       });
     };
     onMounted(() => {
-      console.log("OnMounted Applicant Details");
       fetchCVFromJobAndApplicationId(jobId, applicationId);
       console.log("hello: ", applicationInfo.value);
     });

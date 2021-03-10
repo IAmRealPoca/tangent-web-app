@@ -8,11 +8,11 @@ const authRepo = repoFactory.get("authRepo");
 //For testing purpose. TO BE CHANGED
 //To the line above: WHEN TO CHANGE -Nyam IV-
 const login = (schoolId, accountTypeId) => {
-    console.log('login');
+    // console.log('login');
     return new Promise((resolve, reject) => {
-        console.log('id ',schoolId);
+        // console.log('id ',schoolId);
         const provider = new firebase.auth.GoogleAuthProvider();
-        console.log(provider);
+        // console.log(provider);
         firebase.auth().signInWithPopup(provider)
             .then(userCredential => {
                 return userCredential.user?.getIdToken(true)
