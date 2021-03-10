@@ -13,7 +13,7 @@
         ><img
           class="navbar-brand-dark"
           src="@/assets/img/logo.svg"
-          alt="Volt logo" />
+          alt="Volt logo"/>
         <img
           class="navbar-brand-light"
           src="@/assets/img/logo.svg"
@@ -170,7 +170,29 @@ export default {
       },
       {
         title: "School",
-        url: "/employer/schools",
+        url: "/school",
+        subItem: [
+          {
+            title: "School List",
+            url: "/employer/schools",
+          },
+          {
+            title: "Company List",
+            url: "/school/company-list",
+          },
+          {
+            title: "Major List",
+            url: "/school/major",
+          },
+          {
+            title: "Students",
+            url: "/student",
+          },
+        ],
+      },
+      {
+        title: "Job Fair",
+        url: "/job-fair",
         subItem: [],
       },
     ],
@@ -178,5 +200,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

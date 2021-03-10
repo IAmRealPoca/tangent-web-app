@@ -18,6 +18,9 @@ import EmployerFairDetail from "@/views/employer/jobfair/EmployerFairDetail.vue"
 import EmployerBooth from "@/views/employer/jobfair/EmployerBooth.vue";
 
 import BlobTest from "@/views/BlobTest.vue";
+import SchoolViewCompanyList from "@/views/school/companyfunctions/SchoolViewCompanyList.vue";
+import SchoolViewCompanyDetail from "@/views/school/companyfunctions/SchoolViewCompanyDetail.vue";
+import SchoolViewJobDetail from "@/views/school/companyfunctions/SchoolViewJobDetail.vue"
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -104,6 +107,21 @@ const routes = [
     },
     
     
+    {
+        path: "/school/company-list",
+        name: "SchoolViewCompanyList",
+        component: SchoolViewCompanyList
+    },
+    {
+        path: "/school/company-detail/:schoolId",
+        name: "SchoolViewCompanyDetail",
+        component: SchoolViewCompanyDetail
+    },
+    {
+        path: "/school/job-detail/:postId",
+        name: "SchoolViewJobDetail",
+        component: SchoolViewJobDetail
+    },
 ];
 
 const router = createRouter({
