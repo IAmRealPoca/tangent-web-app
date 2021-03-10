@@ -112,9 +112,9 @@
                       </div>
                       <div class="w-100"></div>
                       <div class="col">
-                        <a href="#" class="text-info me-3"
-                          >{{ companyData.name }}</a
-                        >
+                        <a href="#" class="text-info me-3">{{
+                          companyData.name
+                        }}</a>
                       </div>
                     </div>
                   </div>
@@ -165,10 +165,16 @@
             <div class="col-12 mb-4">
               <div class="card shadow-sm p-0 mb-4">
                 <div class="card-header bg-primary text-white">
-                  <h5 class="h5">Posted to 0 school</h5>
+                  <h5 class="h5">Posted to {{ postedSchoolList.length }} school</h5>
                 </div>
                 <div class="card-body pb-3">
-                  <div class="row mb-0">
+                  <div class="row mb-0" v-for="(item, index) in postedSchoolList" :key="index">
+                    <div class="col-12 col-lg-4 flex-grow-1">
+                      <div class="btn btn-outline-gray-700">{{ item.schoolName }}</div>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div class="row mb-0" v-if="postedSchoolList.length <= 0">
                     <div class="col-lg-12 text-gray">
                       <p>
                         This job has not been to any schools, yet. Once you post
@@ -225,6 +231,7 @@ export default {
     const router = useRouter();
     const jobDetails = ref({});
     const jobPostId = Number(route.params.jobId);
+    const postedSchoolList = ref([]);
 
     const handleReviewApplicantClick = () => {
       router.push(`/employer/jobs/${jobPostId}/applicants`);
@@ -257,9 +264,17 @@ export default {
     };
     //end double data fetch
 
+    const fetchSchoolPostedToList = (jobPostId) => {
+      employerService.getPostedSchoolListByJobPostId(jobPostId).then((resp) => {
+        postedSchoolList.value = resp;
+      });
+    };
+
     const companyData = ref({});
+
     onMounted(() => {
       fetchOneJobPost(jobPostId);
+      fetchSchoolPostedToList(jobPostId);
       const user = sessionStorage.getItem("userInfo");
       if (user) {
         // userName.value = parseJwt(user).email;
@@ -267,11 +282,11 @@ export default {
       }
     });
 
-    
-
     return {
       jobDetails,
       companyData,
+      postedSchoolList,
+
       handleSelectTargetSchoolClick,
       handleReviewApplicantClick,
     };

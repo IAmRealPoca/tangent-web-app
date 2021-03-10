@@ -37,5 +37,13 @@ export default {
 
     requestConnection(payload) {
         return http.post(`${path}/approvals/request`, payload);
-    }
+    },
+
+    getJobPostedToSchool() {
+        return http.get(`${path}/recruitment-posts/posted-jobs`);
+    },
+
+    getPostedSchoolListByJobPostId(postId) {
+        return http.get(`${path}/recruitment-posts/${postId}/posted-jobs/schools`);
+    },
 }

@@ -34,4 +34,12 @@ const requestConnection = (payload) => {
     return employerRepo.requestConnection(payload);
 }
 
-export {getCurrEmployerInfo, getCurrEmpJobs, getOneByIdCurrEmployer, getAppliedCVFromJobId, getAppliedCVFromJobIdAndApplicationId, getApprovalInfo, postJobToSchool, requestConnection};
+const getJobPostedToSchool = () => {
+    return employerRepo.getJobPostedToSchool();
+}
+
+const getPostedSchoolListByJobPostId = (postId) => {
+    return employerRepo.getPostedSchoolListByJobPostId(postId);
+}
+
+export {getCurrEmployerInfo, getCurrEmpJobs, getOneByIdCurrEmployer, getAppliedCVFromJobId, getAppliedCVFromJobIdAndApplicationId, getApprovalInfo, postJobToSchool, requestConnection, getJobPostedToSchool, getPostedSchoolListByJobPostId};
