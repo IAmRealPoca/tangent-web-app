@@ -93,7 +93,7 @@ const routes = [
         component: EmployerFairDetail
     },
     {
-        path: "/employer/jobfair/:jobFairId/booth",
+        path: "/employer/jobfair/:jobFairId/:boothId",
         name: "EmployerBooth",
         component: EmployerBooth
     },

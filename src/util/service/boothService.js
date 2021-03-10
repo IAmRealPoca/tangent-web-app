@@ -9,10 +9,13 @@ const boothService = () => {
   const getBoothById = (boothId) => {
     return boothRepo.getBoothById(boothId);
   };
+  const getBoothByComId = (comId) => {
+    return boothRepo.getBoothByComId(comId);
+  };
   const createBooth = (data) => {
     return boothRepo.createBooth(data);
   };
-  return { getAllBooth, getBoothById, createBooth };
+  return { getAllBooth, getBoothById, createBooth, getBoothByComId };
 };
 
 export { boothService as useBoothService };

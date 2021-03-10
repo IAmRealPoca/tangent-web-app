@@ -23,7 +23,16 @@
       <div class="row">
         <!-- Test Only -->
         <div v-if="data && !data.session">
-          <input type="button" value="Call" @click="joinSession" />
+          <!-- <input type="button" value="Call" @click="joinSession" /> -->
+          <div class="d-flex justify-content-center">
+            <strong class="h1">Loading...</strong>
+            <div
+              class="spinner-border ml-auto"
+              style="width: 3rem; height: 3rem;" 
+              role="status"
+              aria-hidden="true"
+            ></div>
+          </div>
         </div>
         <!-- End Test Only -->
         <div v-if="data && data.session">
@@ -44,9 +53,14 @@ import MainContent from "@/components/MainContent.vue";
 import { OpenVidu } from "openvidu-browser";
 
 import { useVCService } from "@/util/service/videoChatService";
+import { useBoothService } from "@/util/service/boothService.js";
+import { getCurrEmployerInfo } from "@/util/service/employerService";
+
 import { ref } from "@vue/reactivity";
 import VideoPlayer from "@/components/ViduComponent/VideoPlayer.vue";
 import EmployerPresentation from "@/components/ViduComponent/EmployerPresentation.vue";
+import { useRoute,useRouter } from "vue-router";
+import { onMounted } from "@vue/runtime-core";
 
 export default {
   name: "EmployerCreateBooth",
@@ -65,7 +79,20 @@ export default {
       mySessionId: "NyamSed",
       myUserName: "Participant" + Math.floor(Math.random() * 100),
     });
+    const route = useRoute();
+    const router = useRouter();
+    const fairServive = useBoothService();
     const propsData = ref({});
+    const boothIdFromRoute = Number(route.params.boothId);
+
+    const getSessionId = async () => {
+      const resp = await fairServive.getBoothById(boothIdFromRoute);
+      data.value.mySessionId = resp.boothSessionUrl;
+      const info = await getCurrEmployerInfo();
+      console.log(resp.boothSessionUrl, " emp info: ", info);
+      data.value.myUserName = info.name;
+    };
+
     const joinSession = async () => {
       // --- Get an OpenVidu object ---
       data.value.OV = new OpenVidu();
@@ -136,7 +163,7 @@ export default {
       }
       propsData.value = {
         publisher: data.value.publisher,
-        subscribers: data.value.subscribers
+        subscribers: data.value.subscribers,
       };
 
       window.addEventListener("beforeunload", leaveSession);
@@ -164,18 +191,26 @@ export default {
 
     const getToken2 = (sessionId) => {
       const VCService = useVCService();
-      const session = {
-        recordingMode: "ALWAYS",
-        customSessionId: sessionId,
+      console.log("sessionId: ", sessionId);
+      const req = {
+        sessionId: sessionId,
       };
-      return VCService.getToken(session);
+      return VCService.getToken(req);
     };
     const handleUpdateMainStream = (sub) => {
       updateMainVideoStreamManager(sub);
     };
     const handleEndCallEvent = () => {
       leaveSession();
+      router.back();
     };
+
+    onMounted(async () => {
+      await getSessionId();
+
+      joinSession();
+    });
+
     return {
       data,
       joinSession,
