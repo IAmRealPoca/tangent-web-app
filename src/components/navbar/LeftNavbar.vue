@@ -190,11 +190,6 @@ export default {
           },
         ],
       },
-      {
-        title: "Job Fair",
-        url: "/job-fair",
-        subItem: [],
-      },
     ],
   }),
 };

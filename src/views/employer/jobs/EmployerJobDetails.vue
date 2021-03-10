@@ -11,7 +11,7 @@
                 <li class="breadcrumb-item">
                   <a href="#"><span class="fas fa-home"></span></a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Volt</a></li>
+                <li class="breadcrumb-item"><a href="#">Tangent</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
                   Job detail
                 </li>
