@@ -10,6 +10,7 @@ import EmployerApplicantDetails from "@/views/employer/jobs/EmployerApplicantDet
 import EmployerJobDetails from "@/views/employer/jobs/EmployerJobDetails.vue";
 import EmployerPostJobToSchool from "@/views/employer/jobs/EmployerPostJobToSchool.vue";
 import EmployerViewSchoolList from "@/views/employer/schoolfunctions/EmployerViewSchoolList.vue";
+import EmployerEditJob from "@/views/employer/jobs/EmployerEditJob.vue";
 //Applicant Dashboard
 import EmployerApplicantDashboard from "@/views/employer/applicantfunctions/EmployerApplicantDashboard.vue";
 //Employer Job fair related
@@ -116,6 +117,15 @@ const routes = [
             role: EmployerRole,
           }
     },
+    {
+      path: "/employer/jobs/:jobId/edit",
+      name: "EmployerEditJob",
+      component: EmployerEditJob,
+      meta: {
+          requiresAuth: true,
+          role: EmployerRole,
+        }
+  },
     {
         path: "/employer/jobs/:jobId/post-to-school",
         name: "EmployerPostJobToSchool",
