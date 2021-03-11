@@ -36,9 +36,11 @@
                 <div class="row mb-4">
                   <div class="col-lg-6 col-sm-6">
                     <h2 class="h5">Job</h2>
-                    <button class="btn btn-outline-gray-700 mt-0" type="button">
-                      Edit Details
-                    </button>
+                    <a :href="employerProfileLink">
+                      <button class="btn btn-outline-gray-700 mt-0" type="button">
+                        Edit Details
+                      </button>
+                    </a>
                     <br />
                     <a href="#" class="text-info">Duplicate job</a>
                   </div>
@@ -112,7 +114,7 @@
                       </div>
                       <div class="w-100"></div>
                       <div class="col">
-                        <a href="#" class="text-info me-3">{{
+                        <a href="/employer/profile" class="text-info me-3">{{
                           companyData.name
                         }}</a>
                       </div>
@@ -271,6 +273,7 @@ export default {
     };
 
     const companyData = ref({});
+    const employerProfileLink = ref(`/employer/jobs/${jobPostId}/edit`);
 
     onMounted(() => {
       fetchOneJobPost(jobPostId);
@@ -286,6 +289,7 @@ export default {
       jobDetails,
       companyData,
       postedSchoolList,
+      employerProfileLink,
 
       handleSelectTargetSchoolClick,
       handleReviewApplicantClick,

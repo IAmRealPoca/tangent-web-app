@@ -71,13 +71,23 @@
                         >You haven't been approved to any school yet.</label
                       >
                       <div class="row mb-0">
-                          <button
-                            class="btn btn-outline-gray-700"
-                            type="button"
-                            @click="handleGoBack"
-                          >
-                            Back
-                          </button>
+                        <button
+                          class="btn btn-outline-gray-700"
+                          type="button"
+                          @click="handleGoBack"
+                        >
+                          Back
+                        </button>
+                      </div>
+
+                      <div class="row mb-0">
+                        <button
+                          class="btn btn-outline-success"
+                          type="button"
+                          @click="handleGoToManageSchool"
+                        >
+                          Manage school network
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -132,13 +142,16 @@ export default {
 
     const handleGoBack = () => {
       router.push(`/employer/jobs/${jobPostId}`);
-    }
-
+    };
+    const handleGoToManageSchool = () => {
+      router.push(`/employer/schools`);
+    };
     return {
       approvedSchools,
       schoolSelected,
       handlePostToSchoolButton,
       handleGoBack,
+      handleGoToManageSchool,
     };
   },
 };

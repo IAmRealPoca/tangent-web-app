@@ -2,6 +2,7 @@ import Dashboard from "@/views/Dashboard.vue";
 import Login from "@/views/Login.vue";
 
 //Employers Jobs related
+import EmployerProfile from "@/views/employer/EmployerProfile.vue";
 import EmployerJobList from "@/views/employer/jobs/EmployerJobList.vue";
 import EmployerCreateJob from "@/views/employer/jobs/EmployerCreateJob.vue";
 import EmployerCalendar from "@/views/employer/jobfair/EmployerCalendar.vue";
@@ -54,6 +55,14 @@ const routes = [
             requiresAuth: false,
           }
     },
+    {
+      path: "/employer/profile",
+      name: "EmployerProfile",
+      component: EmployerProfile,
+      meta: {
+          requiresAuth: false,
+        }
+  },
     {
         path: "/employer/jobs",
         name: "EmployerJobList",
@@ -249,6 +258,12 @@ const parseJwt = (token) => {
           }
         } else if (parsedToken.role === "employee") {
           if (to.matched.some(record => record.meta.role === EmployeeRole)) {
+            next();
+          } else {
+            next({ name: "Dashboard" });
+          }
+        } else if (parsedToken.role === "school") {
+          if (to.matched.some(record => record.meta.role === SchoolRole)) {
             next();
           } else {
             next({ name: "Dashboard" });
