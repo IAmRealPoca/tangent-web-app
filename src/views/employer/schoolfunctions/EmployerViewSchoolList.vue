@@ -162,7 +162,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-xl-9">
+          <div class="col-12 col-xl-9" v-if="mergedArray.length > 0">
             <div
               class="card card-body shadow-sm table-wrapper table-responsive"
             >
@@ -175,7 +175,7 @@
                     <th class="border-bottom"></th>
                   </tr>
                 </thead>
-                <tbody v-if="mergedArray.length > 0">
+                <tbody>
                   <tr v-for="(aSchool, index) in mergedArray" :key="index">
                     <td>
                       <a href="#" class="d-flex align-items-center"
@@ -197,41 +197,46 @@
                       >
                     </td>
                     <td>
-                      <span class="fw-normal">{{ aSchool.description }}</span>
+                      <span class="fw-normal">{{
+                        formatDate(aSchool.created)
+                      }}</span>
                     </td>
                     <!-- Status column -->
-                    <td v-if="aSchool.status.statusId === 0">
-                      <span class="fw-normal text-success"
+                    <td>
+                      <span
+                        class="fw-normal text-success"
+                        v-if="aSchool.status.statusId === 0"
                         ><span
                           class="fas fa-check-circle text-success me-2"
                         ></span
                         >{{ aSchool.status.statusName }}</span
                       >
-                    </td>
-                    <td v-if="aSchool.status.statusId === 1">
-                      <span class="fw-normal text-info"
+                      <span
+                        class="fw-normal text-info"
+                        v-if="aSchool.status.statusId === 1"
                         ><span class="fas fa-clock text-info me-2"></span
                         >{{ aSchool.status.statusName }}</span
                       >
-                    </td>
-                    <td v-if="aSchool.status.statusId === 2">
-                      <span class="fw-normal text-danger"
+
+                      <span
+                        class="fw-normal text-danger"
+                        v-if="aSchool.status.statusId === 2"
                         ><span
                           class="fas fa-times-circle text-danger me-2"
                         ></span
                         >{{ aSchool.status.statusName }}</span
                       >
-                    </td>
-                    <td v-if="aSchool.status.statusId === 3">
-                      <span class="fw-normal text-danger"
+                      <span
+                        class="fw-normal text-danger"
+                        v-if="aSchool.status.statusId === 3"
                         ><span
                           class="fas fa-times-circle text-danger me-2"
                         ></span
                         >{{ aSchool.status.statusName }}</span
                       >
-                    </td>
-                    <td v-if="aSchool.status.statusId === -1">
-                      <span class="fw-normal text-gray-700"
+                      <span
+                        class="fw-normal text-gray-700"
+                        v-if="aSchool.status.statusId === -1"
                         ><span
                           class="fas fa-minus-circle text-gray-700 me-2"
                         ></span
@@ -386,6 +391,16 @@
               </div>
             </div>
           </div>
+
+          <div class="col-12 col-xl-9" v-else-if="mergedArray.length <= 0">
+            <div class="card text-center p-0 mb-4">
+              <div class="card-body">
+                <div class="spinner-border spinner-border-sm" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </MainContent>
@@ -411,15 +426,19 @@ export default {
     // const handleModalFormPopup = (schoolId) => {
     //   modalFormId.value = "modal-form" +
     // }
-    const fetchSchoolList = () => {
-      schoolService.getListOfSchools().then((resp) => {
-        schoolList.value = resp;
-        employerService.getApprovalInfo().then((resp) => {
-          approvalInfo.value = resp;
+    const fetchSchoolList = async () => {
+      schoolList.value = await schoolService.getListOfSchools();
+      approvalInfo.value = await employerService.getApprovalInfo();
+      mergedArray.value = mergeArrays(schoolList.value, approvalInfo.value);
 
-          mergedArray.value = mergeArrays(schoolList.value, approvalInfo.value);
-        });
-      });
+      // schoolService.getListOfSchools().then((resp) => {
+      //   schoolList.value = resp;
+      //   employerService.getApprovalInfo().then((resp) => {
+      //     approvalInfo.value = resp;
+
+      //     mergedArray.value = mergeArrays(schoolList.value, approvalInfo.value);
+      //   });
+      // });
     };
 
     const mergeArrays = (array1, array2) => {
@@ -465,6 +484,10 @@ export default {
       employerService.requestConnection(payload);
     };
 
+    const formatDate = (time) => {
+      return new Date(time).toLocaleString();
+    };
+
     onMounted(() => {
       fetchSchoolList();
     });
@@ -474,6 +497,7 @@ export default {
       approvalInfo,
       mergedArray,
 
+      formatDate,
       handleRequestClick,
     };
   },

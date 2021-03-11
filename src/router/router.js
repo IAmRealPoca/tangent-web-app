@@ -2,6 +2,7 @@ import Dashboard from "@/views/Dashboard.vue";
 import Login from "@/views/Login.vue";
 
 //Employers Jobs related
+import EmployerProfile from "@/views/employer/EmployerProfile.vue";
 import EmployerJobList from "@/views/employer/jobs/EmployerJobList.vue";
 import EmployerCreateJob from "@/views/employer/jobs/EmployerCreateJob.vue";
 import EmployerCalendar from "@/views/employer/jobfair/EmployerCalendar.vue";
@@ -10,6 +11,7 @@ import EmployerApplicantDetails from "@/views/employer/jobs/EmployerApplicantDet
 import EmployerJobDetails from "@/views/employer/jobs/EmployerJobDetails.vue";
 import EmployerPostJobToSchool from "@/views/employer/jobs/EmployerPostJobToSchool.vue";
 import EmployerViewSchoolList from "@/views/employer/schoolfunctions/EmployerViewSchoolList.vue";
+import EmployerEditJob from "@/views/employer/jobs/EmployerEditJob.vue";
 //Applicant Dashboard
 import EmployerApplicantDashboard from "@/views/employer/applicantfunctions/EmployerApplicantDashboard.vue";
 //Employer Job fair related
@@ -53,6 +55,14 @@ const routes = [
             requiresAuth: false,
           }
     },
+    {
+      path: "/employer/profile",
+      name: "EmployerProfile",
+      component: EmployerProfile,
+      meta: {
+          requiresAuth: false,
+        }
+  },
     {
         path: "/employer/jobs",
         name: "EmployerJobList",
@@ -116,6 +126,15 @@ const routes = [
             role: EmployerRole,
           }
     },
+    {
+      path: "/employer/jobs/:jobId/edit",
+      name: "EmployerEditJob",
+      component: EmployerEditJob,
+      meta: {
+          requiresAuth: true,
+          role: EmployerRole,
+        }
+  },
     {
         path: "/employer/jobs/:jobId/post-to-school",
         name: "EmployerPostJobToSchool",
@@ -239,6 +258,12 @@ const parseJwt = (token) => {
           }
         } else if (parsedToken.role === "employee") {
           if (to.matched.some(record => record.meta.role === EmployeeRole)) {
+            next();
+          } else {
+            next({ name: "Dashboard" });
+          }
+        } else if (parsedToken.role === "school") {
+          if (to.matched.some(record => record.meta.role === SchoolRole)) {
             next();
           } else {
             next({ name: "Dashboard" });

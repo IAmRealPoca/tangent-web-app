@@ -12,9 +12,7 @@
                   <a href="#"><span class="fas fa-home"></span></a>
                 </li>
                 <li class="breadcrumb-item"><a href="#">Tangent</a></li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  Jobs
-                </li>
+                <li class="breadcrumb-item active" aria-current="page">Jobs</li>
               </ol>
             </nav>
             <h2 class="h4">Jobs</h2>
@@ -35,7 +33,10 @@
           </div>
         </div>
         <div class="card">
-          <div class="card card-body shadow-sm table-wrapper table-responsive">
+          <div
+            class="card card-body shadow-sm table-wrapper table-responsive"
+            v-if="jobPostedList.length > 0"
+          >
             <table class="table user-table table-hover align-items-center">
               <thead>
                 <tr>
@@ -45,7 +46,7 @@
                   <th class="border-bottom">Due date</th>
                 </tr>
               </thead>
-              <tbody v-if="jobPostedList.length > 0">
+              <tbody>
                 <tr v-for="(aJob, index) in jobPostedList" :key="index">
                   <td>
                     <a class="d-flex align-items-center">
@@ -74,9 +75,6 @@
                   </td>
                 </tr>
               </tbody>
-              <tbody v-if="jobPostedList.length <= 0">
-                <div>No entries found.</div>
-              </tbody>
             </table>
             <div
               class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between"
@@ -100,6 +98,16 @@
               </nav>
               <div class="fw-normal small mt-4 mt-lg-0">
                 Showing <b>5</b> out of <b>25</b> entries
+              </div>
+            </div>
+          </div>
+          <div
+            class="card text-center p-0 mb-4"
+            v-if="jobPostedList.length <= 0"
+          >
+            <div class="card-body">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="sr-only">Loading...</span>
               </div>
             </div>
           </div>
@@ -163,7 +171,7 @@ export default {
     };
 
     const handleNewJobClick = () => {
-      router.push(`/employer/jobs/create`)
+      router.push(`/employer/jobs/create`);
     };
 
     onMounted(() => {

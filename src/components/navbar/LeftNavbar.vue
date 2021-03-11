@@ -169,6 +169,11 @@ export default {
         subItem: [],
       },
       {
+            title: "Schools",
+            url: "/employer/schools",
+            subItem: [],
+          },
+      {
         title: "School",
         url: "/school",
         subItem: [
