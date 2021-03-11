@@ -29,7 +29,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" v-if="Object.keys(jobDetails).length > 0">
           <div class="col-12 col-xl-8">
             <div class="card border-light shadow-sm components-section mb-4">
               <div class="card-body">
@@ -37,7 +37,10 @@
                   <div class="col-lg-6 col-sm-6">
                     <h2 class="h5">Job</h2>
                     <a :href="employerProfileLink">
-                      <button class="btn btn-outline-gray-700 mt-0" type="button">
+                      <button
+                        class="btn btn-outline-gray-700 mt-0"
+                        type="button"
+                      >
                         Edit Details
                       </button>
                     </a>
@@ -167,15 +170,23 @@
             <div class="col-12 mb-4">
               <div class="card shadow-sm p-0 mb-4">
                 <div class="card-header bg-primary text-white">
-                  <h5 class="h5">Posted to {{ postedSchoolList.length }} school</h5>
+                  <h5 class="h5">
+                    Posted to {{ postedSchoolList.length }} school
+                  </h5>
                 </div>
                 <div class="card-body pb-3">
-                  <div class="row mb-0" v-for="(item, index) in postedSchoolList" :key="index">
+                  <div
+                    class="row mb-0"
+                    v-for="(item, index) in postedSchoolList"
+                    :key="index"
+                  >
                     <div class="col-12 col-lg-4 flex-grow-1">
-                      <div class="btn btn-outline-gray-700">{{ item.schoolName }}</div>
+                      <div class="btn btn-outline-gray-700">
+                        {{ item.schoolName }}
+                      </div>
                     </div>
                   </div>
-                  <hr/>
+                  <hr />
                   <div class="row mb-0" v-if="postedSchoolList.length <= 0">
                     <div class="col-lg-12 text-gray">
                       <p>
@@ -208,6 +219,16 @@
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="card text-center p-0 mb-4"
+          v-if="Object.keys(jobDetails).length <= 0"
+        >
+          <div class="card-body">
+            <div class="spinner-border spinner-border-sm" role="status">
+              <span class="sr-only">Loading...</span>
             </div>
           </div>
         </div>

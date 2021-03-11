@@ -162,7 +162,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-xl-9">
+          <div class="col-12 col-xl-9" v-if="mergedArray.length > 0">
             <div
               class="card card-body shadow-sm table-wrapper table-responsive"
             >
@@ -175,7 +175,7 @@
                     <th class="border-bottom"></th>
                   </tr>
                 </thead>
-                <tbody v-if="mergedArray.length > 0">
+                <tbody>
                   <tr v-for="(aSchool, index) in mergedArray" :key="index">
                     <td>
                       <a href="#" class="d-flex align-items-center"
@@ -387,6 +387,16 @@
                 </nav>
                 <div class="fw-normal small mt-4 mt-lg-0">
                   Showing <b>5</b> out of <b>25</b> entries
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-xl-9" v-else-if="mergedArray.length <= 0">
+            <div class="card text-center p-0 mb-4">
+              <div class="card-body">
+                <div class="spinner-border spinner-border-sm" role="status">
+                  <span class="sr-only">Loading...</span>
                 </div>
               </div>
             </div>
