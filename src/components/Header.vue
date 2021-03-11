@@ -160,7 +160,7 @@
                       <div class="col-auto">
                         <img
                           alt="Image placeholder"
-                          :src="userName.avatar"
+                          :src="user.avatar"
                           class="user-avatar lg-avatar rounded-circle"
                         />
                       </div>
@@ -170,7 +170,7 @@
                         >
                           <div>
                             <h4 class="h6 mb-0 text-small">
-                              {{ userName.name }}
+                              {{ user.name }}
                             </h4>
                           </div>
                           <div class="text-end"><small>2 hrs ago</small></div>
@@ -201,13 +201,13 @@
                   <img
                     class="user-avatar md-avatar rounded-circle"
                     alt="Image placeholder"
-                    :src="userName.avatar"
+                    :src="user.avatar"
                   />
                   <div
                     class="media-body ms-2 text-dark align-items-center d-none d-lg-block"
                   >
                     <span class="mb-0 font-small fw-bold">{{
-                      userName.name
+                      user.name
                     }}</span>
                   </div>
                 </div>
@@ -236,7 +236,11 @@
             </li>
           </ul>
           <ul class="navbar-nav align-items-center" v-if="!user">
-            <button class="btn btn-outline-gray-700" type="button" @click="handleLoginClick">
+            <button
+              class="btn btn-outline-gray-700"
+              type="button"
+              @click="handleLoginClick"
+            >
               Login
             </button>
           </ul>
@@ -249,20 +253,30 @@
 <script>
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 export default {
   name: "Header",
   setup() {
     const router = useRouter();
     const handleLoginClick = () => {
       router.push("/login");
-    }
+    };
+    const store = useStore();
+
+    const userFromStorage = sessionStorage.getItem("userInfo");
+    // userFromStorage
+    //   ? store.commit("loginSuccess", userFromStorage)
+    //   : store.commit("logOut");
+    const user = store.state.userInfo;
+    
+
     function parseJwt(token) {
       var base64Url = token.split(".")[1];
       var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
       var jsonPayload = decodeURIComponent(
         atob(base64)
           .split("")
-          .map(function (c) {
+          .map(function(c) {
             return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
           })
           .join("")
@@ -272,14 +286,9 @@ export default {
     }
 
     const userName = ref({});
-    const user = sessionStorage.getItem("userInfo");
+
     onMounted(() => {
-      if (user) {
-        // userName.value = parseJwt(user).email;
-        userName.value = JSON.parse(user);
-        // console.log("User: ", JSON.parse(user));
-        // console.log("Username: ", userName.value.name);
-      }
+      
     });
     return {
       userName,
@@ -290,5 +299,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

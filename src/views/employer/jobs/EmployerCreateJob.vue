@@ -78,7 +78,7 @@
                   </div>
                   <div class="mb-2" v-if="skills.length > 0">
                     <label class="my-1 me-2" for="state">Skill:</label>
-                    <select id="state" class="w-100" name="state" v-model="skillSelected">
+                    <select id="state" class="w-100 form-select" name="state" v-model="skillSelected">
                       <option
                         v-for="(location, index) in skills"
                         :key="index"
@@ -119,7 +119,7 @@
                   </div>
                   <div class="mb-2">
                     <label class="my-1 me-2" for="state">Location:</label>
-                    <select id="state" class="w-100" name="state" v-model="locationSelected">
+                    <select id="state" class="w-100 form-select" name="state" v-model="locationSelected">
                       <option
                         v-for="(location, index) in vnLocation"
                         :key="index"
