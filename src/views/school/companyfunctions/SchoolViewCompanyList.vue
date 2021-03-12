@@ -126,13 +126,13 @@
                 </th>
                 <th class="border-bottom">Name</th>
                 <th class="border-bottom">Date Joined</th>
-                <th class="border-bottom">Type</th>
+                <!-- <th class="border-bottom">Type</th> -->
                 <th class="border-bottom">Status</th>
                 <th class="border-bottom">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(a, index) in 1" :key="index">
+              <tr v-for="(response, index) in listCompanies" :key="index">
                 <td>
                   <div class="form-check dashboard-check">
                     <input
@@ -150,31 +150,43 @@
                     class="d-flex align-items-center"
                     @click="handleClick(`/school/company-detail/${userCheck1}`)"
                     ><img
-                      src="@/assets/img/fpt.png"
+                      :src="response.avatar"
                       class="user-avatar rounded-circle me-3"
                       alt="Avatar"
                     />
                     <div class="d-block">
-                      <span class="fw-bold">FPT Software</span>
+                      <span class="fw-bold">{{ response.companyName }}</span>
                       <div class="small text-gray">
                         <span
                           class="__cf_email__"
                           data-cfemail="375e59515877524f565a475b521954585a"
-                          >District 9, Ho Chi Minh City</span
                         >
+                          {{ response.address }}
+                        </span>
                       </div>
-                    </div></a
-                  >
+                    </div>
+                  </a>
                 </td>
-                <td><span class="fw-normal">10 Feb 2020</span></td>
                 <td>
+                  <span class="fw-normal">
+                    <!-- {{ moment(response.created, moment.HTML5_FMT.DATE) }} -->
+                    {{ formatDate(response.created) }}
+                  </span>
+                </td>
+                <!-- <td>
                   <span class="fw-normal">University</span>
-                </td>
+                </td> -->
                 <td>
-                  <span class="fw-normal text-success"
-                    ><span class="fas fa-check-circle text-success me-2"></span
-                    >Active</span
-                  >
+                  <!-- <span :class="changeTextStatus(response.status)">
+                    <i
+                      class="fas fa-check-circle text-success me-2"
+                      :class="changeIconStatus(response.status)"
+                    />
+                    {{ response.status }}
+                  </span> -->
+                  <span :class="changeTextStatus(response.status)">
+                    {{ response.status }}
+                  </span>
                 </td>
                 <td>
                   <div class="btn-group">
@@ -184,37 +196,39 @@
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
-                      <span class="icon icon-sm pt-1"
-                        ><span
-                          class="fas fa-ellipsis-h icon-dark"
-                        ></span> </span
-                      ><span class="sr-only">Toggle Dropdown</span>
+                      <span class="icon icon-sm pt-1">
+                        <span class="fas fa-ellipsis-h icon-dark"> </span>
+                      </span>
+                      <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu py-0">
-                      <a class="dropdown-item rounded-top" href="#"
-                        ><span class="fas fa-user-shield me-2"></span>Request
-                        connection</a
-                      >
-                      <a class="dropdown-item" href="#"
-                        ><span class="fas fa-eye me-2"></span>View Details</a
-                      >
+                      <a class="dropdown-item rounded-top" href="#">
+                        <span class="fas fa-user-shield me-2"> </span>
+                        Request connection
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        <span class="fas fa-eye me-2"></span>
+                        View Details
+                      </a>
                       <a
                         class="dropdown-item text-danger rounded-bottom"
                         href="#"
-                        ><span class="fas fa-user-times me-2"></span>Cancel
-                        connection</a
                       >
+                        <span class="fas fa-user-times me-2"> </span>
+                        Cancel connection
+                      </a>
                     </div>
                   </div>
-                  <span
+                  <!-- <span
                     class="fas fa-times-circle text-danger ms-2"
                     title="Delete"
                     data-bs-toggle="tooltip"
-                  ></span>
+                  ></span> -->
                 </td>
               </tr>
             </tbody>
           </table>
+          <!-- Pagination -->
           <div
             class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between"
           >
@@ -223,13 +237,13 @@
                 <li class="page-item">
                   <a class="page-link" href="#">Previous</a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
                 <li class="page-item active">
+                  <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
                   <a class="page-link" href="#">2</a>
                 </li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
                 <li class="page-item">
                   <a class="page-link" href="#">Next</a>
                 </li>
@@ -239,6 +253,7 @@
               Showing <b>5</b> out of <b>25</b> entries
             </div>
           </div>
+          <!-- End of Pagination -->
         </div>
       </main>
     </MainContent>
@@ -246,20 +261,78 @@
 </template>
 
 <script>
+// import moment from "moment";
+import * as constants from "./constants.js";
+import { ref, onMounted } from "vue";
 import MainContent from "@/components/MainContent";
 import { useRouter } from "vue-router";
+import * as SchoolServices from "@/util/service/schoolService";
 
 export default {
   name: "SchoolViewCompanyList",
   components: { MainContent },
   setup() {
     const router = useRouter();
+    const listCompanies = ref([]);
 
     const handleClick = (url) => {
       router.push(url);
     };
+
+    const formatDate = (time) => {
+      return new Date(time).toLocaleString();
+    };
+
+    const fetchListOfCompanies = () => {
+      SchoolServices.getListOfCompany()
+        .then((res) => {
+          // console.log("-----response-----", res);
+          listCompanies.value = res;
+          res.forEach((res) => {
+            if (res.status === 0)
+              return (res.status = constants.STATUS_ENUM.APPROVED);
+            if (res.status === 1)
+              return (res.status = constants.STATUS_ENUM.PENDING);
+            if (res.status === 2)
+              return (res.status = constants.STATUS_ENUM.BLOCKED);
+            if (res.status === 3)
+              return (res.status = constants.STATUS_ENUM.DECLINED);
+            if (res.status === null)
+              return (res.status = constants.STATUS_ENUM.NOT_YET_REQUESTED);
+          });
+        })
+        .catch((er) => {
+          console.log("---------fetch-list-company---------", er);
+        });
+    };
+
+    onMounted(() => {
+      fetchListOfCompanies();
+    });
+
+    const changeTextStatus = (status) => {
+      if (status == constants.STATUS_ENUM.APPROVED) {
+        return constants.CSS_COLOR.APPROVED;
+      }
+      if (status == constants.STATUS_ENUM.PENDING) {
+        return constants.CSS_COLOR.PENDING;
+      }
+      if (status == constants.STATUS_ENUM.BLOCKED) {
+        return constants.CSS_COLOR.BLOCKED;
+      }
+      if (status == constants.STATUS_ENUM.DECLINED) {
+        return constants.CSS_COLOR.DECLINED;
+      }
+      if (status == constants.STATUS_ENUM.NOT_YET_REQUESTED) {
+        return constants.CSS_COLOR.NOT_YET_REQUESTED;
+      }
+    };
+
     return {
+      listCompanies,
       handleClick,
+      changeTextStatus,
+      formatDate,
     };
   },
 };

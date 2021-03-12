@@ -11,4 +11,12 @@ const getStudentListFromSchoolId = (schoolId) => {
     return schoolRepo.getListStudent(schoolId);
 }
 
-export { getListOfSchools, getStudentListFromSchoolId }
+const getListOfCompany = () => {
+    return schoolRepo.getListCompanies();
+}
+
+export {
+    getListOfSchools,
+    getStudentListFromSchoolId,
+    getListOfCompany,
+}

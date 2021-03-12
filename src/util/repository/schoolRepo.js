@@ -13,4 +13,8 @@ export default {
     getListStudent(schoolId) {
         return http.get(`${path}/${schoolId}/students`);
     },
+
+    getListCompanies() {
+        return http.get(`${path}/employers`);
+    }
 }

@@ -166,8 +166,10 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
 import MainContent from "@/components/MainContent.vue";
 import { useRouter } from "vue-router";
+import * as SchoolServices from "@/util/service/schoolService";
 
 export default {
   name: "SchoolViewCompanyDetail",
@@ -215,12 +217,30 @@ export default {
   },
   setup() {
     const router = useRouter();
+    const listCompanies = ref([]);
+
     const handleClick = (url) => {
       router.push(url);
     };
 
+    const fetchListOfCompanies = () => {
+      SchoolServices.getListOfCompany()
+        .then((res) => {
+          // console.log("-----response-----", res);
+          listCompanies.value = res;
+        })
+        .catch((er) => {
+          console.log("---------fetch-list-company---------", er);
+        });
+    };
+
+    onMounted(() => {
+      fetchListOfCompanies();
+    });
+
     return {
       handleClick,
+      fetchListOfCompanies,
     };
   },
   methods: {
