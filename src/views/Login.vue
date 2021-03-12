@@ -194,7 +194,7 @@ export default {
     });
 
     async function onClick() {
-      selectedSchoolId.value = 1;
+      selectedSchoolId.value = 3;
       console.log("school: ", selectedSchoolId.value);
       console.log("acc type: ", selectedAccTypeId.value);
 
