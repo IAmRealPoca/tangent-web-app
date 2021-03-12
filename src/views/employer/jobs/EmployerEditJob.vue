@@ -31,7 +31,10 @@
               <div
                 class="card border-light shadow-sm components-section px-5 py-3"
               >
-                <div class="card-body" v-if="Object.keys(oldJobPost).length > 0">
+                <div
+                  class="card-body"
+                  v-if="Object.keys(oldJobPost).length > 0"
+                >
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label"
                       >Job title</label
@@ -80,7 +83,7 @@
                     <label class="my-1 me-2" for="state">Skill:</label>
                     <select
                       id="state"
-                      class="w-100"
+                      class="w-100 form-select"
                       name="state"
                       v-model="skillSelected"
                     >
@@ -129,10 +132,11 @@
                     <label class="my-1 me-2" for="state">Location:</label>
                     <select
                       id="state"
-                      class="w-100"
+                      class="w-100 form-select"
                       name="state"
                       v-model="locationSelected"
                     >
+                      <option disabled value="">ABCD</option>
                       <option
                         v-for="(location, index) in vnLocation"
                         :key="index"
@@ -241,6 +245,7 @@ export default {
     const skillSelected = ref({});
 
     const skills = ref([]);
+    const fullAddress = ref([]);
 
     const oldJobPost = ref({});
     const fetchSkillList = () => {
@@ -248,15 +253,16 @@ export default {
         skills.value = resp;
       });
     };
-    const fetchCurrJobPost = (jobPostId) => {
-      recruitmentPostService
-        .getOneById(jobPostId)
-        .then((resp) => {
-          oldJobPost.value = {
-            ...resp,
-            "address": resp.location,
-          };
-        });
+    const fetchCurrJobPost = async (jobPostId) => {
+      const resp = await recruitmentPostService.getOneById(jobPostId);
+      console.log(resp);
+      fullAddress.value = resp.location.split("; ");
+      // locationSelected.value = fullAddress.value[1];
+      oldJobPost.value = {
+        ...resp,
+        address: fullAddress.value[0],
+        location: fullAddress.value[1],
+      };
     };
     const vnLocation = ref([
       {
@@ -290,16 +296,19 @@ export default {
         ...oldJobPost.value,
         skillId: skillSelected.value.skillId,
         location: oldJobPost.value.address.concat(
-          ", ",
+          "; ",
           locationSelected.value.locTitle
         ),
       };
-      recruitmentPostService.updateJob(oldJobPost.value.postId, oldJobPost.value);
+      recruitmentPostService.updateJob(
+        oldJobPost.value.postId,
+        oldJobPost.value
+      );
     };
 
-    onMounted(() => {
+    onMounted(async () => {
       fetchSkillList();
-      fetchCurrJobPost(jobPostId);
+      await fetchCurrJobPost(jobPostId);
     });
 
     return {
@@ -315,5 +324,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

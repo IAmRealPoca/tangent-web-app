@@ -1,5 +1,6 @@
 import Dashboard from "@/views/Dashboard.vue";
 import Login from "@/views/Login.vue";
+import LandingPage from "@/views/LandingPage.vue";
 
 //Employers Jobs related
 import EmployerProfile from "@/views/employer/EmployerProfile.vue";
@@ -23,6 +24,8 @@ import BlobTest from "@/views/BlobTest.vue";
 import SchoolViewCompanyList from "@/views/school/companyfunctions/SchoolViewCompanyList.vue";
 import SchoolViewCompanyDetail from "@/views/school/companyfunctions/SchoolViewCompanyDetail.vue";
 import SchoolViewJobDetail from "@/views/school/companyfunctions/SchoolViewJobDetail.vue"
+
+import SchoolViewStudents from "@/views/school/SchoolViewStudents.vue"
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -49,8 +52,8 @@ const routes = [
     },
     {
         path: "/",
-        name: "Dashboard",
-        component: Dashboard,
+        name: "LandingPage",
+        component: LandingPage,
         meta: {
             requiresAuth: false,
           }
@@ -223,6 +226,15 @@ const routes = [
             role: SchoolRole,
           }
     },
+    {
+        path: "/school/student",
+        name: "SchoolViewStudents",
+        component: SchoolViewStudents,
+        meta: {
+            requiresAuth: true,
+            role: SchoolRole,
+          }
+    },
 ];
 
 const router = createRouter({
@@ -238,48 +250,48 @@ const parseJwt = (token) => {
     }
   }
   
-  router.beforeEach((to, from, next) => {
-    // console.log("requiresAuth: ", to.matched.some(record => record.meta.requiresAuth));
-    // console.log("onlyGuest: ", to.matched.some(record => record.meta.onlyGuest));
-    // console.log("role er: ", to.matched.some(record => record.meta.role === EmployerRole));
-    // console.log("role ee: ", to.matched.some(record => record.meta.role === EmployeeRole));
-    // console.log("token: ", sessionStorage.getItem("token"));
+  // router.beforeEach((to, from, next) => {
+  //   // console.log("requiresAuth: ", to.matched.some(record => record.meta.requiresAuth));
+  //   // console.log("onlyGuest: ", to.matched.some(record => record.meta.onlyGuest));
+  //   // console.log("role er: ", to.matched.some(record => record.meta.role === EmployerRole));
+  //   // console.log("role ee: ", to.matched.some(record => record.meta.role === EmployeeRole));
+  //   // console.log("token: ", sessionStorage.getItem("token"));
   
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-      if (sessionStorage.getItem("token") === null) {
-        next({ name: "Login", });
-      } else {
-        const parsedToken = parseJwt(sessionStorage.getItem("token"));
-        if (parsedToken.role === "employer") {
-          if (to.matched.some(record => record.meta.role === EmployerRole)) {
-            next();
-          } else {
-            next({ name: "Dashboard" });
-          }
-        } else if (parsedToken.role === "employee") {
-          if (to.matched.some(record => record.meta.role === EmployeeRole)) {
-            next();
-          } else {
-            next({ name: "Dashboard" });
-          }
-        } else if (parsedToken.role === "school") {
-          if (to.matched.some(record => record.meta.role === SchoolRole)) {
-            next();
-          } else {
-            next({ name: "Dashboard" });
-          }
-        }
-      }
-    } else if (to.matched.some(record => record.meta.onlyGuest)){
-      if (sessionStorage.getItem("token") === null) {
-        next();
-      } else {
-        next({name: "Dashboard"})
-      }
-    } else {
-      next();
-    }
-  });
+  //   if (to.matched.some(record => record.meta.requiresAuth)) {
+  //     if (sessionStorage.getItem("token") === null) {
+  //       next({ name: "Login", });
+  //     } else {
+  //       const parsedToken = parseJwt(sessionStorage.getItem("token"));
+  //       if (parsedToken.role === "employer") {
+  //         if (to.matched.some(record => record.meta.role === EmployerRole)) {
+  //           next();
+  //         } else {
+  //           next({ name: "Dashboard" });
+  //         }
+  //       } else if (parsedToken.role === "employee") {
+  //         if (to.matched.some(record => record.meta.role === EmployeeRole)) {
+  //           next();
+  //         } else {
+  //           next({ name: "Dashboard" });
+  //         }
+  //       } else if (parsedToken.role === "school") {
+  //         if (to.matched.some(record => record.meta.role === SchoolRole)) {
+  //           next();
+  //         } else {
+  //           next({ name: "Dashboard" });
+  //         }
+  //       }
+  //     }
+  //   } else if (to.matched.some(record => record.meta.onlyGuest)){
+  //     if (sessionStorage.getItem("token") === null) {
+  //       next();
+  //     } else {
+  //       next({name: "Dashboard"})
+  //     }
+  //   } else {
+  //     next();
+  //   }
+  // });
 
 
 

@@ -152,8 +152,7 @@
           <div class="col-12 col-xl-9">
             <div class="table-settings mb-4">
               <div class="row justify-content-between align-items-center">
-                <div class="col-9 col-lg-4 d-flex">
-                </div>
+                <div class="col-9 col-lg-4 d-flex"></div>
                 <div class="col-3 col-lg-8 text-right">
                   <div class="btn-group me-1">
                     <button
@@ -389,7 +388,9 @@ export default {
         .then((resp) => {
           listAppliedCVs.value = resp;
         })
-        .catch((err) => {});
+        .catch((err) => {
+          console.log("err", err);
+        });
     };
 
     onMounted(() => {
@@ -407,5 +408,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

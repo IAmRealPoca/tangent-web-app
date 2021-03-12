@@ -8,6 +8,7 @@
     </div>
     <img :src="sasImg" alt="" srcset="" />
     <a :href="sasImg" class="btn btn-primary">Download</a>
+    <a class="btn btn-primary" @click.prevent="incre">Incre</a>
   </div>
 </template>
 
@@ -23,6 +24,11 @@ import {
 } from "@azure/storage-blob";
 import { ref } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
+import { useStore } from "vuex";
+
+const store = useStore();
+
+console.log(store.state.count);
 
 const blobSasUrl =
   "https://namiv.blob.core.windows.net/tangent-docs?sv=2020-04-08&st=2021-03-09T08%3A29%3A17Z&se=2021-03-10T08%3A29%3A17Z&sr=c&sp=ral&sig=Pypj%2BhtX5e%2Fq7WhYbBuC3ZBnfcaAi0ZQPygK%2B0ISAzY%3D";
@@ -36,7 +42,6 @@ const sasToken =
   "?sv=2020-04-08&st=2021-03-09T09%3A10%3A30Z&se=2021-03-10T09%3A10%3A30Z&sr=c&sp=rl&sig=jBymB%2FSTnSpgmpxcvIWEFVfqPfhWrIdAGF5hiowP83M%3D";
 const pipeline = newPipeline(new AnonymousCredential());
 
-
 const blobServiceClient = new BlobServiceClient(
   `https://${accountname}.blob.core.windows.net?${sasToken}`,
   pipeline
@@ -44,12 +49,9 @@ const blobServiceClient = new BlobServiceClient(
 
 const sasImg = baseImgUrl + sasToken;
 
-
 // Create a unique name for the container by
 // appending the current time to the file name
 const containerName = "tangent-docs";
-
-
 
 // Get a container client from the BlobServiceClient
 const containerClient = blobServiceClient.getContainerClient(containerName);
@@ -58,9 +60,14 @@ console.warn(containerClient);
 const status = ref("");
 const fileList = ref([]);
 
-const downloadFile = () =>{
-    return baseImgUrl;
-}
+const downloadFile = () => {
+  return baseImgUrl;
+};
+
+const incre = () => {
+  store.commit("increment")
+  console.log(store.state.count);
+};
 
 const listFiles = async () => {
   try {
@@ -83,7 +90,6 @@ const listFiles = async () => {
     console.log(error.message);
   }
 };
-
 
 onMounted(() => {
   listFiles();

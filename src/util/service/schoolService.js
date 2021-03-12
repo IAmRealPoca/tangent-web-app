@@ -7,8 +7,16 @@ const getListOfSchools = () => {
     return schoolRepo.get();
 }
 
-const getStudentListFromSchoolId = (schoolId) => {
-    return schoolRepo.getListStudent(schoolId);
+const getStudentListFromSchoolId = () => {
+    return schoolRepo.getListStudent();
 }
 
-export { getListOfSchools, getStudentListFromSchoolId }
+const getListOfCompany = () => {
+    return schoolRepo.getListCompanies();
+}
+
+export {
+    getListOfSchools,
+    getStudentListFromSchoolId,
+    getListOfCompany,
+}

@@ -31,7 +31,26 @@
                 </div>
                 <div class="d-flex justify-content-center my-4">
                   <div class="btn-group mx-auto">
-                    <button
+                    <select
+                      class="form-select btn btn-secondary"
+                      id="accType"
+                      aria-label="Default select for account type"
+                      v-on:change="onChange($event)"
+                    >
+                      <option selected
+                        >Choose an account type &nbsp;&nbsp;&nbsp;
+                        <span><i class="fas fa-chevron-circle-down"></i></span>
+                      </option>
+                      <option
+                        v-for="(accType, index) in listOfAccountType"
+                        :key="index"
+                        @click="selectType(accType.typeId)"
+                        :value="accType.typeId"
+                      >
+                        {{ accType.typeName }}
+                      </option>
+                    </select>
+                    <!-- <button
                       type="button"
                       class="btn btn-primary dropdown-toggle"
                       data-bs-toggle="dropdown"
@@ -41,7 +60,7 @@
                       {{ selectedAccTypeString }}
                       <i class="fas fa-angle-down dropdown-arrow"></i>
                       <span class="sr-only">\/</span>
-                    </button>
+                    </button> -->
                     <!-- <button
                       type="button"
                       class="btn btn-primary dropdown-toggle"
@@ -52,7 +71,7 @@
                       <i class="fas fa-angle-down dropdown-arrow"></i>
                       <span class="sr-only">\/</span>
                     </button> -->
-                    <div class="dropdown-menu m-0">
+                    <!-- <div class="dropdown-menu ">
                       <div
                         class="dropdown-item"
                         v-for="(accType, index) in listOfAccountType"
@@ -62,7 +81,7 @@
                       >
                         {{ accType.typeName }}
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
 
@@ -98,6 +117,7 @@ import { onMounted, ref, watchEffect } from "vue";
 import { loginService } from "@/util/service/login";
 import * as schoolService from "@/util/service/schoolService";
 import * as employerService from "@/util/service/employerService";
+import { useStore } from "vuex";
 
 export default {
   name: "Login",
@@ -105,6 +125,7 @@ export default {
     const router = useRouter();
     const listOfSchools = ref([]);
     const selectedSchoolId = ref();
+    const store = useStore();
     //match typeId with RoleIdConstants in backend
     const listOfAccountType = [
       {
@@ -136,7 +157,6 @@ export default {
       schoolService.getListOfSchools().then((resp) => {
         listOfSchools.value = resp;
       });
-
       // this._setUser(user ? JSON.parse(user) : null);
     });
 
@@ -144,18 +164,18 @@ export default {
 
     const selectType = (id) => {
       selectedAccTypeId.value = id;
-      // console.log("id",id);
+      console.log("id",id);
       if (id === 0 || id === 1 || id === 2 || id === 4) {
-        if (id=== 0) {
+        if (id === 0) {
           selectedAccTypeString.value = "Admin";
         }
-        if (id=== 1) {
+        if (id === 1) {
           selectedAccTypeString.value = "Employee";
         }
-        if (id=== 2) {
+        if (id === 2) {
           selectedAccTypeString.value = "Employer";
         }
-        if (id=== 4) {
+        if (id === 4) {
           selectedAccTypeString.value = "School";
         }
       }
@@ -173,48 +193,48 @@ export default {
       }
     });
 
-    function onClick() {
-      selectedSchoolId.value = 1;
-      // console.log("school: ", selectedSchoolId.value);
-      // console.log("acc type: ", selectedAccTypeId.value);
+    async function onClick() {
+      selectedSchoolId.value = 3;
+      console.log("school: ", selectedSchoolId.value);
+      console.log("acc type: ", selectedAccTypeId.value);
 
       // if (!selectedSchoolId.value || !selectedAccTypeId.value) {
 
-      loginService(selectedSchoolId.value, selectedAccTypeId.value)
-        .then((resp) => {
-          // console.log(resp.token);
-          sessionStorage.setItem("token", resp.token);
-          fetchUserData(selectedAccTypeId.value);
-          // store.dispatch("setCurrentUserFlag", resp.flg);
-          router.push("/");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const resp = await loginService(
+        selectedSchoolId.value,
+        selectedAccTypeId.value
+      );
+      sessionStorage.setItem("token", resp.token);
+      await fetchUserData(selectedAccTypeId.value);
+      // store.dispatch("setCurrentUserFlag", resp.flg);
+      router.push("/dashboard");
     }
 
-    const fetchUserData = (usrFlag) => {
+    const fetchUserData = async (usrFlag) => {
       if (usrFlag === 0) {
       } else if (usrFlag === 2) {
-        employerService.getCurrEmployerInfo().then((resp) => {
-          // console.log(resp);
-          sessionStorage.setItem("userInfo", JSON.stringify(resp));
-        });
+        const resp = await employerService.getCurrEmployerInfo();
+        sessionStorage.setItem("userInfo", JSON.stringify(resp));
+        store.commit("loginSuccess", resp);
       } else if (usrFlag === 4) {
         // schoolService.
+        // sessionStorage.setItem("userInfo", JSON.stringify(resp));
+        // store.commit("loginSuccess", resp);
       }
     };
 
-    const onChange = () => {
+    const onChange = (e) => {
+      selectedAccTypeId.value = e.target.value;
+      console.log(e.target.value);
       // console.log("Normal trigger");
       // console.log("value ", selectedSchoolId.value);
-
       // console.log(event);
     };
 
     const onClickToOpenVidu = () => {
       return "/vc";
     };
+
     return {
       //data
       listOfAccountType,
@@ -226,7 +246,7 @@ export default {
       onClick,
       onChange,
       onClickToOpenVidu,
-      selectType
+      selectType,
     };
   },
 };

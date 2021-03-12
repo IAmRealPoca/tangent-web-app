@@ -78,7 +78,7 @@
                   </div>
                   <div class="mb-2" v-if="skills.length > 0">
                     <label class="my-1 me-2" for="state">Skill:</label>
-                    <select id="state" class="w-100" name="state" v-model="skillSelected">
+                    <select id="state" class="w-100 form-select" name="state" v-model="skillSelected">
                       <option
                         v-for="(location, index) in skills"
                         :key="index"
@@ -119,7 +119,7 @@
                   </div>
                   <div class="mb-2">
                     <label class="my-1 me-2" for="state">Location:</label>
-                    <select id="state" class="w-100" name="state" v-model="locationSelected">
+                    <select id="state" class="w-100 form-select" name="state" v-model="locationSelected">
                       <option
                         v-for="(location, index) in vnLocation"
                         :key="index"
@@ -205,6 +205,7 @@ import { ref, onMounted } from "vue";
 import MainContent from "@/components/MainContent.vue";
 import * as recruitmentPostService from "@/util/service/recruitmentPostService";
 import * as skillService from "@/util/service/skillService";
+import { useRouter } from 'vue-router';
 
 export default {
   name: "EmployerCreateJob",
@@ -223,6 +224,9 @@ export default {
         newJobData.value.expectedNumber = 0;
       }
     };
+
+
+    const router = useRouter();
 
     const locationSelected = ref({});
     const skillSelected = ref({});
@@ -266,10 +270,11 @@ export default {
       newJobData.value = {
         ...newJobData.value,
         "skillId": skillSelected.value.skillId,
-        "location": newJobData.value.address.concat(", ", locationSelected.value.locTitle),
+        "location": newJobData.value.address.concat("; ", locationSelected.value.locTitle),
       };
       recruitmentPostService.postNewJob(newJobData.value);
       console.log(newJobData.value);
+      router.push("/employer/jobs");
     };
 
     onMounted(() => {

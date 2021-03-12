@@ -418,7 +418,6 @@ export default {
     MainContent,
   },
   setup() {
-    const modalFormId = ref("modal-form");
     const schoolList = ref([]);
     const approvalInfo = ref([]);
     const mergedArray = ref([]);
@@ -426,15 +425,19 @@ export default {
     // const handleModalFormPopup = (schoolId) => {
     //   modalFormId.value = "modal-form" +
     // }
-    const fetchSchoolList = () => {
-      schoolService.getListOfSchools().then((resp) => {
-        schoolList.value = resp;
-        employerService.getApprovalInfo().then((resp) => {
-          approvalInfo.value = resp;
+    const fetchSchoolList = async () => {
+      schoolList.value = await schoolService.getListOfSchools();
+      approvalInfo.value = await employerService.getApprovalInfo();
+      mergedArray.value = mergeArrays(schoolList.value, approvalInfo.value);
 
-          mergedArray.value = mergeArrays(schoolList.value, approvalInfo.value);
-        });
-      });
+      // schoolService.getListOfSchools().then((resp) => {
+      //   schoolList.value = resp;
+      //   employerService.getApprovalInfo().then((resp) => {
+      //     approvalInfo.value = resp;
+
+      //     mergedArray.value = mergeArrays(schoolList.value, approvalInfo.value);
+      //   });
+      // });
     };
 
     const mergeArrays = (array1, array2) => {

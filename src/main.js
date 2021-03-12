@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 import App from "./App.vue";
 
+import store from "@/store/store";
+
 import router from "@/router/router.js";
 
 import firebase from "firebase/app";
@@ -22,6 +24,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const app = createApp(App);
+
+app.use(store);
 
 app.use(router);
 

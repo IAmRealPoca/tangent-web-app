@@ -106,8 +106,8 @@
             v-if="jobPostedList.length <= 0"
           >
             <div class="card-body">
-              <div class="spinner-border spinner-border-sm" role="status">
-                <span class="sr-only">Loading...</span>
+              <div class="" role="status">
+                There is no job
               </div>
             </div>
           </div>
@@ -127,6 +127,12 @@ export default {
   name: "EmployerJobList",
   components: {
     MainContent,
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.fetchActiveJob();
+    console.log(this);
+
+    next();
   },
   setup() {
     const router = useRouter();
@@ -180,7 +186,6 @@ export default {
 
     return {
       jobPostedList,
-
       fetchActiveJob,
       handleJobDetailClick,
       handleApplicantClick,
