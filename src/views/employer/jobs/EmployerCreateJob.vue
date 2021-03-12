@@ -205,6 +205,7 @@ import { ref, onMounted } from "vue";
 import MainContent from "@/components/MainContent.vue";
 import * as recruitmentPostService from "@/util/service/recruitmentPostService";
 import * as skillService from "@/util/service/skillService";
+import { useRouter } from 'vue-router';
 
 export default {
   name: "EmployerCreateJob",
@@ -223,6 +224,9 @@ export default {
         newJobData.value.expectedNumber = 0;
       }
     };
+
+
+    const router = useRouter();
 
     const locationSelected = ref({});
     const skillSelected = ref({});
@@ -266,10 +270,11 @@ export default {
       newJobData.value = {
         ...newJobData.value,
         "skillId": skillSelected.value.skillId,
-        "location": newJobData.value.address.concat(", ", locationSelected.value.locTitle),
+        "location": newJobData.value.address.concat("; ", locationSelected.value.locTitle),
       };
       recruitmentPostService.postNewJob(newJobData.value);
       console.log(newJobData.value);
+      router.push("/employer/jobs");
     };
 
     onMounted(() => {

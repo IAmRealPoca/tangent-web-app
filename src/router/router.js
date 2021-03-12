@@ -25,6 +25,8 @@ import SchoolViewCompanyList from "@/views/school/companyfunctions/SchoolViewCom
 import SchoolViewCompanyDetail from "@/views/school/companyfunctions/SchoolViewCompanyDetail.vue";
 import SchoolViewJobDetail from "@/views/school/companyfunctions/SchoolViewJobDetail.vue"
 
+import SchoolViewStudents from "@/views/school/SchoolViewStudents.vue"
+
 import { createRouter, createWebHistory } from "vue-router";
 
 const EmployerRole = "Employer";
@@ -219,6 +221,15 @@ const routes = [
         path: "/school/job-detail/:postId",
         name: "SchoolViewJobDetail",
         component: SchoolViewJobDetail,
+        meta: {
+            requiresAuth: true,
+            role: SchoolRole,
+          }
+    },
+    {
+        path: "/school/student",
+        name: "SchoolViewStudents",
+        component: SchoolViewStudents,
         meta: {
             requiresAuth: true,
             role: SchoolRole,
