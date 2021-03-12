@@ -9,7 +9,7 @@
           </a>
         </div>
         <div class="buy-button">
-          <a href="javascript:void(0)" class="btn btn-primary">Login</a>
+          <a href="/login" class="btn btn-primary">Login</a>
         </div>
         <!--end login button-->
         <!-- End Logo container-->
@@ -168,7 +168,7 @@
           <div class="col-lg-6 col-md-5 mt-4 pt-2 mt-sm-0 pt-sm-0">
             <div class="bg-saas-shape position-relative">
               <img
-                src="@/assets/img/fisbee-dog.jpg"
+                src="@/assets/img/laptop.png"
                 height="450"
                 class="mx-auto d-block"
                 alt=""

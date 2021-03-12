@@ -418,7 +418,6 @@ export default {
     MainContent,
   },
   setup() {
-    const modalFormId = ref("modal-form");
     const schoolList = ref([]);
     const approvalInfo = ref([]);
     const mergedArray = ref([]);

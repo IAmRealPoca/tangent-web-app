@@ -264,10 +264,12 @@ export default {
     const store = useStore();
 
     const userFromStorage = sessionStorage.getItem("userInfo");
-    // userFromStorage
-    //   ? store.commit("loginSuccess", userFromStorage)
-    //   : store.commit("logOut");
-    const user = store.state.userInfo;
+    userFromStorage
+      ? store.commit("loginSuccess", userFromStorage)
+      : store.commit("logOut");
+
+    const user = JSON.parse(store.state.userInfo);
+    // const user = store.state.userInfo;
     
 
     function parseJwt(token) {

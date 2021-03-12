@@ -11,6 +11,6 @@ export default {
     },
 
     getListStudent(schoolId) {
-        return http.get(`${path}/${schoolId}/students`);
+        return http.get(`${path}/students`);
     },
 }

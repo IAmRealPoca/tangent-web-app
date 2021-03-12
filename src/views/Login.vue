@@ -207,7 +207,7 @@ export default {
       sessionStorage.setItem("token", resp.token);
       await fetchUserData(selectedAccTypeId.value);
       // store.dispatch("setCurrentUserFlag", resp.flg);
-      router.push("/");
+      router.push("/dashboard");
     }
 
     const fetchUserData = async (usrFlag) => {
