@@ -1,5 +1,6 @@
 import Dashboard from "@/views/Dashboard.vue";
 import Login from "@/views/Login.vue";
+import LandingPage from "@/components/LandingPage.vue";
 
 //Employers Jobs related
 import EmployerProfile from "@/views/employer/EmployerProfile.vue";
@@ -49,8 +50,8 @@ const routes = [
     },
     {
         path: "/",
-        name: "Dashboard",
-        component: Dashboard,
+        name: "LandingPage",
+        component: LandingPage,
         meta: {
             requiresAuth: false,
           }
