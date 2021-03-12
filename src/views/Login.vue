@@ -35,6 +35,7 @@
                       class="form-select btn btn-secondary"
                       id="accType"
                       aria-label="Default select for account type"
+                      v-on:change="onChange($event)"
                     >
                       <option selected
                         >Choose an account type &nbsp;&nbsp;&nbsp;
@@ -44,7 +45,7 @@
                         v-for="(accType, index) in listOfAccountType"
                         :key="index"
                         @click="selectType(accType.typeId)"
-                        value="accType.typeId"
+                        :value="accType.typeId"
                       >
                         {{ accType.typeName }}
                       </option>
@@ -163,7 +164,7 @@ export default {
 
     const selectType = (id) => {
       selectedAccTypeId.value = id;
-      // console.log("id",id);
+      console.log("id",id);
       if (id === 0 || id === 1 || id === 2 || id === 4) {
         if (id === 0) {
           selectedAccTypeString.value = "Admin";
@@ -194,8 +195,8 @@ export default {
 
     async function onClick() {
       selectedSchoolId.value = 1;
-      // console.log("school: ", selectedSchoolId.value);
-      // console.log("acc type: ", selectedAccTypeId.value);
+      console.log("school: ", selectedSchoolId.value);
+      console.log("acc type: ", selectedAccTypeId.value);
 
       // if (!selectedSchoolId.value || !selectedAccTypeId.value) {
 
@@ -222,7 +223,9 @@ export default {
       }
     };
 
-    const onChange = () => {
+    const onChange = (e) => {
+      selectedAccTypeId.value = e.target.value;
+      console.log(e.target.value);
       // console.log("Normal trigger");
       // console.log("value ", selectedSchoolId.value);
       // console.log(event);
