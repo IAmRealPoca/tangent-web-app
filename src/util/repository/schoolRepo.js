@@ -16,5 +16,13 @@ export default {
 
     getListCompanies() {
         return http.get(`${path}/employers`);
-    }
+    },
+
+    getListOfMajors() {
+        return http.get(`${path}/majors`);
+    },
+
+    getMajorById(majorId) {
+        return http.get(`${path}/majors/${majorId}`);
+    },
 }

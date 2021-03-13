@@ -183,7 +183,7 @@ export default {
           },
           {
             title: "Major List",
-            url: "/school/major",
+            url: "/school/majors",
           },
           {
             title: "Students",

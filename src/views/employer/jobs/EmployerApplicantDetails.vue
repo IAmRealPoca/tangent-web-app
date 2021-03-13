@@ -220,14 +220,12 @@
                                     Applied: {{ applicationInfo.created }}
                                   </div>
                                   <embed
-    src="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0"
-
-    frameBorder="0"
-    scrolling="auto"
-    height="100%"
-    width="100%"
-/>
-
+                                    src="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0"
+                                    frameBorder="0"
+                                    scrolling="auto"
+                                    height="100%"
+                                    width="100%"
+                                  />
                                 </div>
                                 <!-- <div class="card border-light shadow-sm" v-if="Object.keys(applicationInfo.coverLetter).length > 0">
                                   <h2 class="h4">CV</h2>
@@ -299,8 +297,7 @@ export default {
         applicationInfo.value = resp;
       });
 
-      EmployerService.getOneByIdCurrEmployer(jobId)
-      .then((resp) => {
+      EmployerService.getOneByIdCurrEmployer(jobId).then((resp) => {
         jobPostInfo.value = resp;
       });
     };

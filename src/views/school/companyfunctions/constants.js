@@ -13,3 +13,11 @@ export const CSS_COLOR = {
   DECLINED: 'badge super-badge badge-lg bg-danger',
   NOT_YET_REQUESTED: 'badge super-badge badge-lg bg-secondary'
 };
+
+export const EMPLOYEE_STATUS_ENUM = {
+  GRADUATED: 'Graduated',
+  QUALIFYFORINTERN: "QualifyForIntern",
+  STUDYING: "Studying",
+  PENDING: "Pending",
+  SUSPENDED: "Suspended",
+}

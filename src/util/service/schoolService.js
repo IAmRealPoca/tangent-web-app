@@ -15,8 +15,18 @@ const getListOfCompany = () => {
     return schoolRepo.getListCompanies();
 }
 
+const getListOfMajors = () => {
+    return schoolRepo.getListOfMajors();
+}
+
+const getMajorById = (majorId) => {
+    return schoolRepo.getMajorById(majorId);
+}
+
 export {
     getListOfSchools,
     getStudentListFromSchoolId,
     getListOfCompany,
+    getListOfMajors,
+    getMajorById,
 }
