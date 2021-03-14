@@ -13,15 +13,23 @@
                 </li>
                 <li class="breadcrumb-item"><a href="#">Tangent</a></li>
                 <li class="breadcrumb-item"><a href="#">School</a></li>
+                <li class="breadcrumb-item"><a href="#">Majors</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  Majors
+                  {{ majorDetail.majorName }}
                 </li>
               </ol>
             </nav>
-            <h2 class="h4">Majors</h2>
-            <p class="mb-0">Your school's all majors.</p>
+            <h2 class="h4">{{ majorDetail.majorName }}</h2>
+            <p class="mb-0">
+              Created at: {{ formatDate(majorDetail.created) }}
+            </p>
           </div>
           <div class="btn-toolbar mb-2 mb-md-0">
+            <a
+              class="btn btn-sm btn-dark me-2"
+              :href="`/school/majors/${majorDetail.majorId}/add-student`"
+              ><span class="fas fa-plus me-2"></span> Add students
+            </a>
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-outline-primary">
                 Export
@@ -30,26 +38,124 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-12 col-xl-3"></div>
+          <!-- Begin filter left -->
+          <div class="col-12 col-xl-3">
+            <div class="card border-light shadow-sm components-section mb-4">
+              <div class="card-header">
+                <h5 class="h5">Filters</h5>
+              </div>
+              <div class="card-body">
+                <div class="col-12 col-lg-12 d-flex">
+                  <div class="input-group me-2 me-lg-3">
+                    <span class="input-group-text"
+                      ><span class="fas fa-search"></span
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Keyword"
+                    />
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <span class="h5"> Student status </span>
+                </div>
+                <div class="row form-check form-switch">
+                  <div class="col">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="defaultCheck10"
+                    />
+                    <label for="defaultCheck10"> Graduated </label>
+                  </div>
+                  <div class="col">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="defaultCheck10"
+                    />
+                    <label class="form-check-label" for="defaultCheck10">
+                      Qualify for Intern
+                    </label>
+                  </div>
+                  <div class="w-100"></div>
+                  <div class="col">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="defaultCheck10"
+                    />
+                    <label class="form-check-label" for="defaultCheck10">
+                      Studying
+                    </label>
+                  </div>
+                  <div class="col">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="defaultCheck10"
+                    />
+                    <label class="form-check-label" for="defaultCheck10">
+                      Pending
+                    </label>
+                  </div>
+                  <div class="col">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="defaultCheck10"
+                    />
+                    <label class="form-check-label" for="defaultCheck10">
+                      Suspended
+                    </label>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <span class="h5">Enroll Date</span>
+                  <div class="col-6 mb-2 input-group">
+                    <span class="input-group-text"
+                      ><span class="far fa-calendar-alt"></span
+                    ></span>
+                    <input
+                      data-datepicker=""
+                      class="form-control"
+                      id="birthday"
+                      type="text"
+                      placeholder="From..."
+                      required
+                    />
+                  </div>
+                  <div class="col-6 mb-2 input-group">
+                    <span class="input-group-text"
+                      ><span class="far fa-calendar-alt"></span
+                    ></span>
+                    <input
+                      data-datepicker=""
+                      class="form-control"
+                      id="birthday"
+                      type="text"
+                      placeholder="To..."
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End filter left -->
           <div class="col-12 col-xl-9">
-            <div class="row">
+            <div class="row" v-if="Object.keys(majorDetail).length > 0">
               <div class="table-settings mb-4">
                 <div class="row align-items-center justify-content-between">
-                  <div class="col col-md-6 col-lg-3 col-xl-4">
-                    <div class="input-group">
-                      <span class="input-group-text" id="basic-addon2"
-                        ><span class="fas fa-search"></span
-                      ></span>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="exampleInputIconLeft"
-                        placeholder="Search"
-                        aria-label="Search"
-                        aria-describedby="basic-addon2"
-                      />
-                    </div>
-                  </div>
+                  <div class="col col-md-6 col-lg-3 col-xl-4"></div>
                   <div class="col-4 col-md-2 col-xl-1 ps-md-0 text-right">
                     <div class="btn-group">
                       <button
@@ -79,6 +185,38 @@
                 </div>
               </div>
               <div
+                class="card border-light shadow-sm components-section mb-4 pt-0"
+              >
+                <div class="table-responsive py-4 pt-0">
+                  <table class="table table-flush">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Major Name</th>
+                        <th># of students</th>
+                        <th>Last update</th>
+                        <th>Status</th>
+                        <th>Comments</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- <tr v-for="(aJob, index) in jobPostedList" :key="index">
+                        <td>{{ aJob.name }}</td>
+                        <td>{{ aJob.applicants }}</td>
+                        <td>{{ aJob.created }}</td>
+                        <td>{{ aJob.due }}</td>
+                      </tr> -->
+                      <tr>
+                        <td>{{ majorDetail.majorName }}</td>
+                        <td>{{ majorDetail.employees.length }}</td>
+                        <td>24/02/2021</td>
+                        <td>Reviewed</td>
+                        <td>High GPA</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div
                 class="card card-body shadow-sm table-wrapper table-responsive"
               >
                 <table class="table table-hover">
@@ -93,7 +231,7 @@
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <tbody v-if="Object.keys(majorDetail).length > 0">
+                  <tbody>
                     <tr
                       v-for="(student, index) in majorDetail.employees"
                       :key="student.accountId"
@@ -113,39 +251,19 @@
                       <td>
                         <span class="fw-bold">ZZZ</span>
                       </td>
-                      <td><span :class="student.statusClass">{{ student.statusString }}</span></td>
                       <td>
-                        <div class="btn-group">
-                          <button
-                            class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            <span class="icon icon-sm"
-                              ><span
-                                class="fas fa-ellipsis-h icon-dark"
-                              ></span> </span
-                            ><span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <div class="dropdown-menu py-0">
-                            <a
-                              class="dropdown-item rounded-top"
-                              href="https://demo.themesberg.com/volt-pro/invoice.html"
-                              ><span class="fas fa-eye me-2"></span>View
-                              Details</a
-                            >
-                            <a class="dropdown-item" href="#"
-                              ><span class="fas fa-edit me-2"></span>Edit</a
-                            >
-                            <a
-                              class="dropdown-item text-danger rounded-bottom"
-                              href="#"
-                              ><span class="fas fa-trash-alt me-2"></span
-                              >Remove</a
-                            >
-                          </div>
-                        </div>
+                        <span :class="student.statusClass">{{
+                          student.statusString
+                        }}</span>
+                      </td>
+                      <td>
+                        <button
+                          class="btn btn-outline-danger"
+                          type="button"
+                          @click="handleRemoveButtonClick(student.accountId)"
+                        >
+                          Remove
+                        </button>
                       </td>
                     </tr>
                   </tbody>
@@ -194,7 +312,7 @@
 <script>
 import MainContent from "@/components/MainContent.vue";
 import * as schoolService from "@/util/service/schoolService.js";
-import * as constants from "@/views/school/companyfunctions/constants.js";
+import { useMajorService } from "@/util/service/majorService.js";
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
@@ -208,19 +326,27 @@ export default {
     const route = useRoute();
     const majorIdFromRoute = Number(route.params.majorId);
     const majorDetail = ref({});
+    const majorService = useMajorService();
     const formatDate = (time) => {
       return new Date(time).toLocaleString();
     };
+
+    const handleRemoveButtonClick = (selectedStudentId) => {
+      const payload = {
+        employeeIds: [selectedStudentId]
+      }
+      majorService.removeStudentFromMajor(majorIdFromRoute, payload);
+    }
 
     const fetchMajorDetail = async (majorId) => {
       console.log("majorIdFromRoute: ", majorIdFromRoute);
       majorDetail.value = await schoolService.getMajorById(majorId);
       majorDetail.value.employees = majorDetail.value.employees.map((e) => {
-          return {
-              ...e,
-              "statusClass": checkStatusCSSClass(e.status),
-              "statusString": checkStatusString(e.status),
-          }
+        return {
+          ...e,
+          statusClass: checkStatusCSSClass(e.status),
+          statusString: checkStatusString(e.status),
+        };
       });
     };
 
@@ -234,13 +360,13 @@ export default {
     };
 
     const checkStatusCSSClass = (statusInt) => {
-        const fwBold = "fw-bold";
-        var cssClass = "text-gray";
-      if (statusInt === 0) cssClass = "text-success";
-      if (statusInt === 1) cssClass = "text-info";
-      if (statusInt === 2) cssClass = "text-info";
-      if (statusInt === 3) cssClass = "text-warning";
-      if (statusInt === 4) cssClass = "text-danger";
+      const fwBold = "badge super-badge badge-lg";
+      var cssClass = "bg-dark";
+      if (statusInt === 0) cssClass = "bg-success";
+      if (statusInt === 1) cssClass = "bg-info";
+      if (statusInt === 2) cssClass = "bg-info";
+      if (statusInt === 3) cssClass = "bg-warning text-dark";
+      if (statusInt === 4) cssClass = "bg-danger";
       return fwBold + " " + cssClass;
     };
 
@@ -249,7 +375,9 @@ export default {
     });
     return {
       majorDetail,
+
       formatDate,
+      handleRemoveButtonClick,
     };
   },
 };

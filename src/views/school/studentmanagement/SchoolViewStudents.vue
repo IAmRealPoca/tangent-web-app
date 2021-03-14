@@ -169,6 +169,7 @@
                   <th class="border-bottom">Student Name</th>
                   <th class="border-bottom">Date Joined</th>
                   <th class="border-bottom">Major</th>
+                  <th class="border-bottom">Status</th>
                   <th class="border-bottom"></th>
                 </tr>
               </thead>
@@ -198,15 +199,20 @@
                       formatDate(aStudent.dateOfBirth)
                     }}</span>
                   </td>
-                  <!-- Status column -->
+                  <!-- Major column -->
                   <td>
                     <span class="fw-normal text-success"
-                      >{{ major.majorName }}
+                      >{{ aStudent.majorName }}
                     </span>
                   </td>
+                  <!-- End major column -->
+
+                  <!-- Status column -->
+                  <td><span :class="aStudent.statusClass">{{ aStudent.statusString }}</span></td>
                   <!-- End status column -->
+
                   <td>
-                    <div v-if="!major.majorName">
+                    <div v-if="!aStudent.majorName">
                       <!-- <span class="fw-normal text-dark"
                         ><span class="fas fa-times-circle text-dark me-2"></span
                         >{{ aStudent.status.statusName }}</span
@@ -374,13 +380,44 @@ const mergedArray = ref([
   },
 ]);
 const studentsList = ref([]);
-const major = ref({});
+const major = ref([]);
 
 const fetchStudents = async () => {
   const resp = await getStudentListFromSchoolId();
-  console.log(resp);
-  studentsList.value = resp.employees;
-  major.value = resp.majors[0];
+  major.value = resp.majors;
+  studentsList.value = resp.employees.map((e) => {
+    const studentMajorId = e.majorId;
+    const studentMajorName = resp.majors.filter(
+      (e) => e.majorId === studentMajorId
+    )[0].majorName;
+    return {
+      ...e,
+      majorId: studentMajorId,
+      majorName: studentMajorName,
+      statusClass: checkStatusCSSClass(e.status),
+      statusString: checkStatusString(e.status),
+    };
+  });
+};
+
+const checkStatusString = (statusInt) => {
+  if (statusInt === 0) return "Graduated";
+  if (statusInt === 1) return "Qualify For Intern";
+  if (statusInt === 2) return "Studying";
+  if (statusInt === 3) return "Pending";
+  if (statusInt === 4) return "Suspended";
+  return "Not interacted";
+};
+
+const checkStatusCSSClass = (statusInt) => {
+  const fwBold = "badge super-badge badge-lg";
+  var cssClass = "bg-dark";
+  if (statusInt === 0) cssClass = "bg-success";
+  if (statusInt === 1) cssClass = "bg-info";
+  if (statusInt === 2) cssClass = "bg-info";
+  if (statusInt === 3) cssClass = "bg-warning text-dark";
+  if (statusInt === 4) cssClass = "bg-danger";
+  return fwBold + " " + cssClass;
 };
 
 const formatDate = (time) => {

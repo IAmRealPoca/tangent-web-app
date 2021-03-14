@@ -6,7 +6,7 @@
           <!-- Images avatar -->
           <div class="float-left col-sm-2">
             <img
-              src="@/assets/img/fpt.png"
+              :src="companyDetail.avatar"
               class="user-avatar large-avatar rounded border"
             />
           </div>
@@ -67,8 +67,8 @@
       <div class="task-wrapper border bg-white shadow-sm rounded">
         <div
           class="card hover-state border-bottom rounded-0 rounded-top py-2"
-          v-for="item in jobItems"
-          :key="item.jobTitle"
+          v-for="item in companyDetail.recruitmentPosts"
+          :key="item.postId"
         >
           <div
             class="card-body d-sm-flex align-items-center flex-wrap flex-lg-nowrap py-0"
@@ -98,16 +98,16 @@
             <div class="col-9 col-lg-7 px-0 mb-4 mb-md-0">
               <div
                 class="mb-2"
-                @click="handleClick(`/school/job-detail/${item.jobTitle}`)"
+                @click="handleClick(`/school/job-detail/${item.postId}`)"
               >
-                <h3 class="h5">{{ item.jobTitle }}</h3>
+                <h3 class="h5">{{ item.title }}</h3>
                 <div class="d-block d-sm-flex">
                   <div class="badge super-badge bg-info">
                     <h4 class="h6 fw-normal text-white mb-3 mb-sm-0">
                       <span class="icon icon-small">
                         <span class="fas fa-hand-holding-usd"></span>
                       </span>
-                      {{ item.salary }}
+                      {{ item.minSalary }} - {{ item.maxSalary }}
                     </h4>
                   </div>
                 </div>
@@ -116,7 +116,7 @@
                     <span class="icon icon-small">
                       <span class="fas fa-code"></span>
                     </span>
-                    {{ item.language }}
+                    {{ item.jobDescription }}
                   </h4>
                 </div>
               </div>
@@ -181,36 +181,36 @@ export default {
     ];
 
     var jobItems = [
-      {
-        jobTitle: "Technical Leader",
-        salary: "Up to $3000",
-        language: ".Net",
-        level: "Technical Lead",
-      },
-      {
-        jobTitle: ".NET Desktop Developer (Java, C#)",
-        salary: "Up to $1500",
-        language: ".Net, Java",
-        level: "Junior",
-      },
-      {
-        jobTitle: "Front-end",
-        salary: "Up to $1200",
-        language: "Vue, React",
-        level: "Fresher/Intern",
-      },
-      {
-        jobTitle: "Data Science",
-        salary: "Up to $2500",
-        language: "Python",
-        level: "Senior",
-      },
-      {
-        jobTitle: "Back-end",
-        salary: "Up to $1200",
-        language: "Python",
-        level: "Fresher",
-      },
+      // {
+      //   jobTitle: "Technical Leader",
+      //   salary: "Up to $3000",
+      //   language: ".Net",
+      //   level: "Technical Lead",
+      // },
+      // {
+      //   jobTitle: ".NET Desktop Developer (Java, C#)",
+      //   salary: "Up to $1500",
+      //   language: ".Net, Java",
+      //   level: "Junior",
+      // },
+      // {
+      //   jobTitle: "Front-end",
+      //   salary: "Up to $1200",
+      //   language: "Vue, React",
+      //   level: "Fresher/Intern",
+      // },
+      // {
+      //   jobTitle: "Data Science",
+      //   salary: "Up to $2500",
+      //   language: "Python",
+      //   level: "Senior",
+      // },
+      // {
+      //   jobTitle: "Back-end",
+      //   salary: "Up to $1200",
+      //   language: "Python",
+      //   level: "Fresher",
+      // },
     ];
     var hover = false;
     return { navItems, jobItems, hover };
@@ -218,15 +218,15 @@ export default {
   setup() {
     const router = useRouter();
     const route = useRoute();
-    // const companyIdFromRoute = Number(route.params.)
+    const companyIdFromRoute = Number(route.params.companyId);
     const companyDetail = ref({});
 
     const handleClick = (url) => {
       router.push(url);
     };
 
-    const fetchCompanyDetails = async () => {
-      companyDetail.value = await SchoolServices.getListOfCompany(2);
+    const fetchCompanyDetails = async (companyId) => {
+      companyDetail.value = await SchoolServices.getCompanyDetailsAsSchool(companyId);
       // SchoolServices.getListOfCompany(2)
       //   .then((res) => {
       //     companyDetail.value = res;
@@ -237,7 +237,7 @@ export default {
     };
 
     onMounted(() => {
-      fetchCompanyDetails();
+      fetchCompanyDetails(companyIdFromRoute);
     });
 
     return {

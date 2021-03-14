@@ -28,6 +28,8 @@ import SchoolViewJobDetail from "@/views/school/companyfunctions/SchoolViewJobDe
 import SchoolViewStudents from "@/views/school/studentmanagement/SchoolViewStudents.vue";
 import SchoolViewMajorList from "@/views/school/studentmanagement/major/SchoolViewMajorList.vue";
 import SchoolViewMajorDetail from "@/views/school/studentmanagement/major/SchoolViewMajorDetail.vue";
+import SchoolCreateMajor from "@/views/school/studentmanagement/major/SchoolCreateMajor.vue";
+import SchoolAddStudentToMajor from "@/views/school/studentmanagement/major/SchoolAddStudentToMajor.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -203,7 +205,7 @@ const routes = [
   },
 
   {
-    path: "/school/company-list",
+    path: "/school/company",
     name: "SchoolViewCompanyList",
     component: SchoolViewCompanyList,
     meta: {
@@ -212,7 +214,7 @@ const routes = [
     },
   },
   {
-    path: "/school/company-detail/:schoolId",
+    path: "/school/company/:companyId",
     name: "SchoolViewCompanyDetail",
     component: SchoolViewCompanyDetail,
     meta: {
@@ -239,9 +241,27 @@ const routes = [
     },
   },
   {
+    path: "/school/majors/create",
+    name: "SchoolCreateMajor",
+    component: SchoolCreateMajor,
+    meta: {
+      requiresAuth: true,
+      role: SchoolRole,
+    },
+  },
+  {
     path: "/school/majors/:majorId",
     name: "SchoolViewMajorDetail",
     component: SchoolViewMajorDetail,
+    meta: {
+      requiresAuth: true,
+      role: SchoolRole,
+    },
+  },
+  {
+    path: "/school/majors/:majorId/add-student",
+    name: "SchoolAddStudentToMajor",
+    component: SchoolAddStudentToMajor,
     meta: {
       requiresAuth: true,
       role: SchoolRole,

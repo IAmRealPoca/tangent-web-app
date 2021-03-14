@@ -26,6 +26,6 @@ export default {
         return http.get(`${path}/majors/${majorId}`);
     },
     getCompanyDetailsAsSchool(companyId) {
-        return http.get(`${path}/employers`);
+        return http.get(`${path}/employers/${companyId}`);
     },
 }

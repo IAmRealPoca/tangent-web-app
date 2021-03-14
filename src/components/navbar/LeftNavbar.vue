@@ -13,7 +13,7 @@
         ><img
           class="navbar-brand-dark"
           src="@/assets/img/logo.svg"
-          alt="Volt logo"/>
+          alt="Volt logo" />
         <img
           class="navbar-brand-light"
           src="@/assets/img/logo.svg"
@@ -169,17 +169,17 @@ export default {
         subItem: [],
       },
       {
-            title: "Schools",
-            url: "/employer/schools",
-            subItem: [],
-          },
+        title: "Schools",
+        url: "/employer/schools",
+        subItem: [],
+      },
       {
         title: "School",
         url: "/school",
         subItem: [
           {
             title: "Company List",
-            url: "/school/company-list",
+            url: "/school/company",
           },
           {
             title: "Major List",

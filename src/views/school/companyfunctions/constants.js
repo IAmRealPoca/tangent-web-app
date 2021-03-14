@@ -11,13 +11,5 @@ export const CSS_COLOR = {
   PENDING: 'badge super-badge badge-lg bg-info',
   BLOCKED: 'badge super-badge badge-lg bg-warning text-dark',
   DECLINED: 'badge super-badge badge-lg bg-danger',
-  NOT_YET_REQUESTED: 'badge super-badge badge-lg bg-secondary'
+  NOT_YET_REQUESTED: 'badge super-badge badge-lg bg-gray-400 text-dark'
 };
-
-export const EMPLOYEE_STATUS_ENUM = {
-  GRADUATED: 'Graduated',
-  QUALIFYFORINTERN: "QualifyForIntern",
-  STUDYING: "Studying",
-  PENDING: "Pending",
-  SUSPENDED: "Suspended",
-}

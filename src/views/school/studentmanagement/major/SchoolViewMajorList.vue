@@ -21,7 +21,11 @@
             <h2 class="h4">Majors</h2>
             <p class="mb-0">Your school's all majors.</p>
           </div>
-          <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-toolbar">
+            <a class="btn btn-sm btn-dark me-2" @click="handleNewMajorClick"
+              ><span class="fas fa-plus me-2"></span> New major </a
+            >
+
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-outline-primary">
                 Export
@@ -207,6 +211,7 @@
 import MainContent from "@/components/MainContent.vue";
 import * as schoolService from "@/util/service/schoolService.js";
 import { ref, onMounted } from "vue";
+import router from '@/router/router';
 export default {
   name: "SchoolViewMajorList",
   components: {
@@ -223,7 +228,9 @@ export default {
       listMajor.value = await schoolService.getListOfMajors();
     };
 
-    const handleMajorDetailClick = (event) => {};
+    const handleNewMajorClick = () => {
+      router.push("/school/majors/create")
+    };
 
     onMounted(() => {
       fetchMajorList();
@@ -231,6 +238,7 @@ export default {
     return {
       listMajor,
       formatDate,
+      handleNewMajorClick,
     };
   },
 };
