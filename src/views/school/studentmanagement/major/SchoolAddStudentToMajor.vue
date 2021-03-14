@@ -21,6 +21,7 @@
                         class="form-control"
                         id="exampleFormControlTextarea1"
                         rows="3"
+                        v-model="newStudentIds"
                       ></textarea>
                     </div>
                     <div class="mb-3">
@@ -62,7 +63,10 @@ export default {
     const majorIdFromRoute = Number(route.params.majorId);
     
     const handleAddButton = () => {
-      majorService.addStudentToMajor(majorIdFromRoute, newStudentIds.value);
+      const payload = {
+        employeeIds: [newStudentIds.value],
+      }
+      majorService.addStudentToMajor(majorIdFromRoute, payload);
     }
 
     return {
