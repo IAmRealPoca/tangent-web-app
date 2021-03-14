@@ -14,11 +14,11 @@
                 </li>
                 <li class="breadcrumb-item"><a href="#">Tangent</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  Companies
+                  Company
                 </li>
               </ol>
             </nav>
-            <!-- <h2 class="h4">Companies List</h2> -->
+            <h2 class="h4">Companies List</h2>
           </div>
         </div>
         <!-- End of Breadcrumb -->
@@ -106,9 +106,7 @@
           <div class="col-12 col-xl-9">
             <div class="table-settings mb-4">
               <div class="row justify-content-between align-items-center">
-                <div class="col-9 col-lg-4 d-flex">
-                  
-                </div>
+                <div class="col-9 col-lg-4 d-flex"></div>
                 <div class="col-3 col-lg-8 text-right">
                   <div class="btn-group me-1">
                     <button
@@ -266,41 +264,18 @@
                       </span>
                     </td>
                     <td>
-                      <div class="btn-group">
-                        <button
-                          class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <span class="icon icon-sm pt-1">
-                            <span class="fas fa-ellipsis-h icon-dark"> </span>
-                          </span>
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu py-0">
-                          <a class="dropdown-item rounded-top" href="#">
-                            <span class="fas fa-user-shield me-2"> </span>
-                            Request connection
-                          </a>
-                          <a class="dropdown-item" href="#">
-                            <span class="fas fa-eye me-2"></span>
-                            View Details
-                          </a>
-                          <a
-                            class="dropdown-item text-danger rounded-bottom"
-                            href="#"
-                          >
-                            <span class="fas fa-user-times me-2"> </span>
-                            Cancel connection
-                          </a>
-                        </div>
-                      </div>
-                      <!-- <span
-                      class="fas fa-times-circle text-danger ms-2"
-                      title="Delete"
-                      data-bs-toggle="tooltip"
-                    ></span> -->
+                      <button
+                        type="button"
+                        :class="changeButtonStatus(response.status)"
+                        @click="
+                          handleActionButtonClick(
+                            response.accountId,
+                            response.status
+                          )
+                        "
+                      >
+                        {{ response.status }}
+                      </button>
                     </td>
                   </tr>
                 </tbody>
@@ -356,6 +331,21 @@ export default {
     const router = useRouter();
     const listCompanies = ref([]);
 
+    const handleActionButtonClick = (companyAccountId, status) => {
+      console.log("currStatus: ", status);
+      var newStatus = -1;
+      if (status === constants.STATUS_ENUM.APPROVED) newStatus = 3;
+      if (status === constants.STATUS_ENUM.PENDING) newStatus = 0;
+      console.log("newStatus: ", newStatus);
+      if (newStatus !== -1) {
+        const payload = {
+          companyId: companyAccountId,
+          approvalStatus: newStatus,
+        };
+        SchoolServices.changeApprovalStatus(payload);
+      }
+    };
+
     const formatDate = (time) => {
       return new Date(time).toLocaleString();
     };
@@ -405,9 +395,29 @@ export default {
       }
     };
 
+    const changeButtonStatus = (status) => {
+      if (status == constants.STATUS_ENUM.APPROVED) {
+        return constants.CSS_BUTTON_COLOR.APPROVED;
+      }
+      if (status == constants.STATUS_ENUM.PENDING) {
+        return constants.CSS_BUTTON_COLOR.PENDING;
+      }
+      if (status == constants.STATUS_ENUM.BLOCKED) {
+        return constants.CSS_BUTTON_COLOR.BLOCKED;
+      }
+      if (status == constants.STATUS_ENUM.DECLINED) {
+        return constants.CSS_BUTTON_COLOR.DECLINED;
+      }
+      if (status == constants.STATUS_ENUM.NOT_YET_REQUESTED) {
+        return constants.CSS_BUTTON_COLOR.NOT_YET_REQUESTED;
+      }
+    };
+
     return {
       listCompanies,
       changeTextStatus,
+      changeButtonStatus,
+      handleActionButtonClick,
       formatDate,
     };
   },

@@ -28,4 +28,8 @@ export default {
     getCompanyDetailsAsSchool(companyId) {
         return http.get(`${path}/employers/${companyId}`);
     },
+
+    changeApprovalStatus(payload) {
+      return http.put(`${path}/employers/approvals`,payload);
+    }
 }

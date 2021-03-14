@@ -13,3 +13,11 @@ export const CSS_COLOR = {
   DECLINED: 'badge super-badge badge-lg bg-danger',
   NOT_YET_REQUESTED: 'badge super-badge badge-lg bg-gray-400 text-dark'
 };
+
+export const CSS_BUTTON_COLOR = {
+  APPROVED: 'btn btn-outline-success',
+  PENDING: 'btn btn-outline-info',
+  BLOCKED: 'btn btn-outline-warning text-dark',
+  DECLINED: 'btn btn-outline-danger',
+  NOT_YET_REQUESTED: 'btn btn-outline-gray-400 text-dark'
+};
