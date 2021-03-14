@@ -189,6 +189,10 @@ export default {
             title: "Students",
             url: "/school/student",
           },
+          {
+            title: "Job Fair",
+            url: "/school/jobfair",
+          },
         ],
       },
     ],

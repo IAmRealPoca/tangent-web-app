@@ -30,6 +30,8 @@ import SchoolViewMajorList from "@/views/school/studentmanagement/major/SchoolVi
 import SchoolViewMajorDetail from "@/views/school/studentmanagement/major/SchoolViewMajorDetail.vue";
 import SchoolCreateMajor from "@/views/school/studentmanagement/major/SchoolCreateMajor.vue";
 import SchoolAddStudentToMajor from "@/views/school/studentmanagement/major/SchoolAddStudentToMajor.vue";
+import SchoolFairManagement from "@/views/school/jobfair/SchoolFairManagement.vue";
+import SchoolFairDetail from "@/views/school/jobfair/SchoolFairDetail.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -271,6 +273,24 @@ const routes = [
     path: "/school/student",
     name: "SchoolViewStudents",
     component: SchoolViewStudents,
+    meta: {
+      requiresAuth: true,
+      role: SchoolRole,
+    },
+  },
+  {
+    path: "/school/jobfair",
+    name: "SchoolFairManagement",
+    component: SchoolFairManagement,
+    meta: {
+      requiresAuth: true,
+      role: SchoolRole,
+    },
+  },
+  {
+    path: "/school/jobfair/:jobFairId",
+    name: "SchoolFairDetail",
+    component: SchoolFairDetail,
     meta: {
       requiresAuth: true,
       role: SchoolRole,

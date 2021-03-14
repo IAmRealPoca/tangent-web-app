@@ -2,7 +2,6 @@
   <div>
     <MainContent>
       <main>
-        <!-- Breadcrumb -->
         <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
         >
@@ -14,7 +13,7 @@
                 </li>
                 <li class="breadcrumb-item"><a href="#">Job Fair</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  Applicant List
+                  School
                 </li>
               </ol>
             </nav>
@@ -126,7 +125,7 @@
                               v-model="jobFair.JobFairDescription"
                               id="booth_description"
                               rows="3"
-                              style="resize: none;"
+                              style="resize: none"
                             ></textarea>
                           </div>
                         </div>
@@ -266,7 +265,7 @@
                   :key="index"
                   class="card hover-state border-bottom rounded-0 rounded-top py-3"
                 >
-                  <a :href="`/employer/jobfair/`+fair.jobFairId">
+                  <a :href="`/school/jobfair/` + fair.jobFairId">
                     <div
                       class="card-body d-sm-flex align-items-center flex-wrap flex-lg-nowrap py-0"
                     >
@@ -368,23 +367,18 @@
 
 <script>
 import { ref, onMounted, reactive } from "vue";
-import MainContent from "@/components/MainContent.vue";
 import { useRoute, useRouter } from "vue-router";
 import { useJobFairService } from "@/util/service/jobFairService";
 import flatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import "flatpickr/dist/themes/dark.css";
-
+import MainContent from "@/components/MainContent.vue";
 export default {
-  name: "EmployerViewFairList",
+  name: "SchoolFairManagement",
   components: {
     MainContent,
-    flatPickr,
+    flatPickr
   },
-  computed:{
-
-  }
-  ,
   setup() {
     const route = useRoute();
     const router = useRouter();
@@ -468,8 +462,9 @@ export default {
       thumbnail,
       config,
     };
-  },
+  }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>
