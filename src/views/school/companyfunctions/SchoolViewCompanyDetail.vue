@@ -13,7 +13,7 @@
           <div class="float-right col-sm-10 d-flex flex-column px-4">
             <!-- Div name of company -->
             <div class="float-right">
-              <h2 class="h5 ">FPT Software</h2>
+              <h2 class="h5 ">{{ companyDetail.companyName }}</h2>
             </div>
 
             <!-- Bounce of information in Row 1 -->
@@ -22,7 +22,7 @@
                 <!-- Location -->
                 <i class="fas fa-map-marker-alt me-2" />
                 <label for="exampleFormControlInput1" class="form-label">
-                  Ha Noi, Ho Chi Minh, Da Nang</label
+                  {{ companyDetail.address }}</label
                 >
               </div>
               <!-- Country -->
@@ -168,7 +168,7 @@
 <script>
 import { ref, onMounted } from "vue";
 import MainContent from "@/components/MainContent.vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import * as SchoolServices from "@/util/service/schoolService";
 
 export default {
@@ -217,30 +217,33 @@ export default {
   },
   setup() {
     const router = useRouter();
-    const listCompanies = ref([]);
+    const route = useRoute();
+    // const companyIdFromRoute = Number(route.params.)
+    const companyDetail = ref({});
 
     const handleClick = (url) => {
       router.push(url);
     };
 
-    const fetchListOfCompanies = () => {
-      SchoolServices.getListOfCompany()
-        .then((res) => {
-          // console.log("-----response-----", res);
-          listCompanies.value = res;
-        })
-        .catch((er) => {
-          console.log("---------fetch-list-company---------", er);
-        });
+    const fetchCompanyDetails = async () => {
+      companyDetail.value = await SchoolServices.getListOfCompany(2);
+      // SchoolServices.getListOfCompany(2)
+      //   .then((res) => {
+      //     companyDetail.value = res;
+      //   })
+      //   .catch((er) => {
+      //     console.log("---------fetch-list-company---------", er);
+      //   });
     };
 
     onMounted(() => {
-      fetchListOfCompanies();
+      fetchCompanyDetails();
     });
 
     return {
+      companyDetail,
       handleClick,
-      fetchListOfCompanies,
+      fetchCompanyDetails,
     };
   },
   methods: {

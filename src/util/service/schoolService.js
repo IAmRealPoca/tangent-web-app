@@ -21,6 +21,8 @@ const getListOfMajors = () => {
 
 const getMajorById = (majorId) => {
     return schoolRepo.getMajorById(majorId);
+const getCompanyDetailsAsSchool = (companyId) => {
+    return schoolRepo.getCompanyDetailsAsSchool(companyId);
 }
 
 export {
@@ -29,4 +31,5 @@ export {
     getListOfCompany,
     getListOfMajors,
     getMajorById,
+    getCompanyDetailsAsSchool,
 }

@@ -25,4 +25,7 @@ export default {
     getMajorById(majorId) {
         return http.get(`${path}/majors/${majorId}`);
     },
+    getCompanyDetailsAsSchool(companyId) {
+        return http.get(`${path}/employers`);
+    },
 }
