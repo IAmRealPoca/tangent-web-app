@@ -21,8 +21,7 @@ const firebaseConfig = {
   appId: "1:596123512687:web:0e2c4583dc46ec02f0029a",
 };
 
-// let messaging: firebase.messaging.Messaging; 
-// if (firebase.messaging.isSupported()) { messaging = firebase.messaging(); } export { messaging };
+
 
 firebase.initializeApp(firebaseConfig);
 

@@ -3,7 +3,7 @@
     <div>
       <Navbar />
     </div>
-    <div class="content">
+    <div class="content" :class="{ contract: isContracted }">
       <Header />
       <slot></slot>
       <Footer />
@@ -16,6 +16,8 @@ import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 import Navbar from "@/components/navbar/LeftNavbar.vue";
 import { useStore } from "vuex";
+import { ref } from "vue";
+import { watchEffect } from "@vue/runtime-core";
 export default {
   name: "MainContent",
   components: {
@@ -24,12 +26,23 @@ export default {
     Navbar,
   },
   setup() {
-    // const store = useStore();
+    const store = useStore();
+    const isContracted = ref(false);
 
-    // console.log(store.state.count);
+    watchEffect(() => {
+      console.log("store.state.isContracted :>> ", store.state.isContracted);
+      isContracted.value = store.state.isContracted;
+    });
 
+    return {
+      isContracted,
+    };
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.contract {
+  margin-left: 95px !important;
+}
+</style>

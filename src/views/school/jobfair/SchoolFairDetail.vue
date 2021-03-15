@@ -28,24 +28,14 @@
             <div class="card border-light components-section-mb4">
               <div class="card shadow-sm mb-4">
                 <div class="card-header border-bottom border-gray-300">
-                  <h2 class="h5 mb-0">Events</h2>
+                  <h2 class="h5 mb-0">Details</h2>
                 </div>
                 <div class="card-body">
                   <div class="row align-items-center border-gray-300 pb-4 mb-4">
-                    <div class="col-auto">
-                      <div class="calendar d-flex">
-                        <span class="calendar-month">Aug</span
-                        ><span class="calendar-day">40</span>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <a href="#"
-                        ><h3 class="h5">{{ fairDetailRef.jobFairName }}</h3></a
-                      >
-                      <div class="small fw-bold mt-1">
-                        {{ fairDetailRef.startDate }}
-                      </div>
-                    </div>
+                    {{fairDetailRef.jobFairDescription}}
+                  </div>
+                  <div class="row align-items-center border-gray-300 pb-4 mb-4">
+                    <img :src="fairDetailRef.jobFairThumbnail" alt="" srcset="">
                   </div>
                 </div>
               </div>

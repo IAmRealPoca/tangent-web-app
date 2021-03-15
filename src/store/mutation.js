@@ -7,5 +7,8 @@ export default {
   },
   logOut(state){
       state.userInfo = null;
+  },
+  contract(state){
+      state.isContracted = !state.isContracted;
   }
 };
