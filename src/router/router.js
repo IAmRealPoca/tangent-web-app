@@ -37,6 +37,7 @@ import StudentViewCoverLetterList from '@/views/student/coverletter/StudentViewC
 import StudentViewCVList from '@/views/student/cv/StudentViewCVList.vue';
 import StudentViewCVDetail from "@/views/student/cv/StudentViewCVDetail.vue";
 import StudentCreateCV from "@/views/student/cv/StudentCreateCV.vue";
+import LandingPage from "@/views/LandingPage.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 
