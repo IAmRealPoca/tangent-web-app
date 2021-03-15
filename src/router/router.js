@@ -299,7 +299,7 @@ const routes = [
     },
   },
   {
-    path: "/student/cv",
+    path: "/student/coverletter",
     name: "StudentViewCoverLetterList",
     component: StudentViewCoverLetterList,
     meta: {
