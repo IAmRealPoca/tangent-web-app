@@ -16,7 +16,7 @@
             </li>
           </ol>
         </nav>
-        <h2 class="h4">Curriculum Vitae List</h2>
+        <h2 class="h4">Cover Letter</h2>
       </div>
     </div>
     <!-- End of Breadcrumb -->
@@ -196,7 +196,7 @@ export default {
     const listCVs = ref([]);
 
     const fetchCVList = () => {
-      EmployeeService.getListCV()
+      EmployeeService.getListCoverLetter()
         .then((response) => {
           console.log("response success-----> ", response);
           listCVs.value = response;
