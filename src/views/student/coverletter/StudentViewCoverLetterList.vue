@@ -91,7 +91,7 @@
           <table class="table table-flush table-hover align-items-center">
             <thead class="thead-light">
               <tr>
-                <th class="border-bottom">
+                <!-- <th class="border-bottom">
                   <div class="form-check dashboard-check">
                     <input
                       class="form-check-input"
@@ -101,7 +101,7 @@
                     />
                     <label class="form-check-label" for="userCheck55"></label>
                   </div>
-                </th>
+                </th> -->
                 <th class="border-bottom">Title</th>
                 <th class="border-bottom">Created Date</th>
                 <!-- <th class="border-bottom">Type</th> -->
@@ -147,23 +147,7 @@
                   </span>
                 </td>
                 <td>
-                  <span :class="changeTextStatus(response.status)">
-                    {{ response.status }}
-                  </span>
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    :class="changeButtonStatus(response.status)"
-                    @click="
-                      handleActionButtonClick(
-                        response.accountId,
-                        response.status
-                      )
-                    "
-                  >
-                    {{ response.status }}
-                  </button>
+                  {{ formatDate(response.lastUpdate) }}
                 </td>
               </tr>
             </tbody>
@@ -208,7 +192,7 @@ export default {
   setup() {
     // const route = useRoute();
     const router = useRouter();
-    // const jobId = Number(route.params.jobId);
+    // const cvId = Number(route.params.jobId);
     const listCVs = ref([]);
 
     const fetchCVList = () => {
@@ -227,7 +211,7 @@ export default {
     });
 
     const handleRowclick = (cvId) => {
-      router.push(`/employer/jobs/${jobId}/applicants/${cvId}`);
+      router.push(`/student/cv/${cvId}`);
     };
 
     const handleTableChange = (pagination, filtersArg, sorter) => {
@@ -237,9 +221,12 @@ export default {
           pageSize: pagination.pageSize,
         },
       };
+      return params;
     };
     return {
+      // variables
       listCVs,
+      // methods
       handleRowclick,
       handleTableChange,
     };
