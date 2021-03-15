@@ -6,11 +6,16 @@ const getCurrEmployeeInfo = () => {
     return employeeRepo.getCurrEmployerInfo();
 };
 
-const getListStudentCV = () => {
+const getListCV = () => {
     return employeeRepo.getListStudentCV();
-}
+};
+
+const getListCoverLetter = () => {
+    return employeeRepo.getListStudentCoverLetter();
+};
 
 export {
     getCurrEmployeeInfo,
-    getListStudentCV,
+    getListCV,
+    getListCoverLetter,
 }

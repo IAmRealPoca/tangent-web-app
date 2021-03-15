@@ -12,4 +12,7 @@ export default {
     getListStudentCV() {
         return http.get(`${path} + "/cvs"`);
     },
+    getListStudentCoverLetter() {
+        return http.get(`${path} + "/cover-letter`);
+    }
 }

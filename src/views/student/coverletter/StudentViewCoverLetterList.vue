@@ -196,7 +196,7 @@ export default {
     const listCVs = ref([]);
 
     const fetchCVList = () => {
-      EmployeeService.getListStudentCV()
+      EmployeeService.getListCV()
         .then((response) => {
           console.log("response success-----> ", response);
           listCVs.value = response;
