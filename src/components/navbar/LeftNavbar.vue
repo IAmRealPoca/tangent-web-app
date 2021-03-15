@@ -196,7 +196,11 @@ export default {
         ],
       },
     ],
+  
   }),
+  props: {
+    role: String,
+  }
 };
 </script>
 
