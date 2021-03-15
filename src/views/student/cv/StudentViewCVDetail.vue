@@ -37,9 +37,13 @@
         <!-- End breadcrumb -->
         <div class="row">
           <div v-if="Object.keys(cvDetail).length > 0">
-            <div class="row align-items-center border-gray-300 pb-4 mb-4">
-              <img :src="cvDetail.cvFile.fileURL" alt="" srcset="" />
-            </div>
+            <iframe
+              :src="cvDetail.cvFile.fileURL"
+              frameBorder="0"
+              scrolling="auto"
+              height="100%"
+              width="100%"
+            ></iframe>
           </div>
         </div>
       </main>

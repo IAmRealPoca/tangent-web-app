@@ -466,7 +466,7 @@ export default {
         text = "Ongoing";
       }
       if (statusInt === 2) {
-        cssClass = "bg-warning text-dark";
+        cssClass = "bg-warning";
         text = "In Future";
       }
       if (statusInt === 3) {

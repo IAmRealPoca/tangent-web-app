@@ -44,136 +44,52 @@
                   class="card border-light shadow-sm components-section px-5 py-3"
                 >
                   <div class="card-body">
-                    <div
-                      class="modal-dialog modal-dialog-centered"
-                      role="document"
-                    >
-                      <div class="modal-content">
-                        <div class="modal-body p-0">
-                          <div class="card border-light p-3 p-lg-4">
-                            <button
-                              type="button"
-                              class="btn-close ms-auto"
-                              data-bs-dismiss="modal"
-                              aria-label="Close"
-                            ></button>
-                            <div class="card-header border-0 text-center pb-0">
-                              <h2 class="h4">Create Job Fair</h2>
-                            </div>
-                            <div class="card-body p-0 pl-lg-3">
-                              <form action="#" class="mt-4">
-                                <!-- Form -->
-                                <div class="form-group mb-4">
-                                  <label for="booth_name">Job Fair Name</label>
-                                  <div class="input-group">
-                                    <span
-                                      class="input-group-text"
-                                      id="basic-addon1"
-                                      ><span class="fas fa-signature"></span
-                                    ></span>
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      v-model="jobFair.jobFairName"
-                                      placeholder="Your Fantasic Title"
-                                      id="booth_name"
-                                      required
-                                    />
-                                  </div>
-                                </div>
-                                <!-- End of Form -->
-                                <div class="form-group mb-4">
-                                  <label for="booth_name"
-                                    >Job Fair Thumbnail</label
-                                  >
-                                  <div class="input-group">
-                                    <div class="mb-3">
-                                      <input
-                                        class="form-control"
-                                        ref="thumbnail"
-                                        @change="handleFileUpload"
-                                        id="booth_thumbnail"
-                                        type="file"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <!-- Date -->
-                                <div class="form-group mb-4">
-                                  <label for="booth_name">Start Date</label>
-                                  <div class="input-group">
-                                    <div class="mb-3">
-                                      <div class="input-group">
-                                        <span class="input-group-text"
-                                          ><span
-                                            class="far fa-calendar-alt"
-                                          ></span
-                                        ></span>
-                                        <flat-pickr
-                                          v-model="jobFair.startDate"
-                                          :config="config"
-                                          class="form-control"
-                                          placeholder="Select date"
-                                          name="date"
-                                        >
-                                        </flat-pickr>
-                                        <!-- <input
-                                data-datepicker=""
-                                class="form-control"
-                                id="dateEnd"
-                                type="text"
-                                placeholder="dd/mm/yyyy"
-                                v-model="jobFair.startDate"
-                                required
-                              /> -->
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <!-- End Date -->
-                                <!-- Form -->
-                                <div class="form-group">
-                                  <div class="form-group mb-4">
-                                    <label for="booth_description"
-                                      >Job Fair Description</label
-                                    >
-                                    <div class="input-group">
-                                      <textarea
-                                        class="form-control"
-                                        v-model="jobFair.JobFairDescription"
-                                        id="booth_description"
-                                        rows="3"
-                                        style="resize: none"
-                                      ></textarea>
-                                    </div>
-                                  </div>
-                                  <!-- End of Form -->
-                                </div>
-                                <div class="d-grid">
-                                  <button
-                                    type="submit"
-                                    @click.prevent="handleCreate"
-                                    data-bs-dismiss="modal"
-                                    class="btn btn-info"
-                                  >
-                                    Create!
-                                  </button>
-                                </div>
-                              </form>
-                            </div>
+                    <form action="#" class="mt-4">
+                      <!-- Form -->
+                      <div class="form-group mb-4">
+                        <label for="booth_name">Job Fair Name</label>
+                        <div class="input-group">
+                          <span class="input-group-text" id="basic-addon1"
+                            ><span class="fas fa-signature"></span
+                          ></span>
+                          <input
+                            type="text"
+                            class="form-control"
+                            v-model="jobFair.jobFairName"
+                            placeholder="Your Fantasic Title"
+                            id="booth_name"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <!-- End of Form -->
+                      <div class="form-group mb-4">
+                        <label for="booth_name">Job Fair Thumbnail</label>
+                        <div class="input-group">
+                          <div class="mb-3">
+                            <input
+                              class="form-control"
+                              ref="thumbnail"
+                              @change="handleFileUpload"
+                              id="booth_thumbnail"
+                              type="file"
+                            />
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="mb-3">
-                      <button
-                        class="btn w-100 btn-primary"
-                        type="button"
-                        @click="handleAddButton"
-                      >
-                        Post
-                      </button>
-                    </div>
+                      <!-- Date -->
+
+                      <div class="d-grid">
+                        <button
+                          type="submit"
+                          @click.prevent="handleCreate"
+                          data-bs-dismiss="modal"
+                          class="btn btn-info"
+                        >
+                          Create!
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -189,17 +105,45 @@
 <script>
 import { ref, onMounted } from "vue";
 import MainContent from "@/components/MainContent.vue";
+import * as employeeService from "@/util/service/employeeService.js";
 export default {
   name: "StudentCreateCV",
   components: {
     MainContent,
   },
   setup() {
+    const newJobData = ref({});
+    
+    const thumbnail = ref(null);
     const jobFair = ref({});
+
+    const handleFileUpload = async (evt) => {
+      const files = thumbnail.value.files[0];
+      console.log(thumbnail.value.files[0]);
+      file.value = files;
+    };
+
+    const handleCreate = async (e) => {
+      console.log("jobfair: ", jobFair);
+      let formData = new FormData();
+      formData.append("file", file.value, jobFair.jobFairThumbnail.name);
+      formData.append("fairParams", JSON.stringify(jobFair));
+
+      console.warn(...formData);
+
+      let status = await fairService.createFair(formData);
+      if (status) {
+        await fetchListJF();
+      }
+      // isCreated.value = true;
+    };
+
     return {
-      jobFair,
-    }
-  }
+      newJobData,
+      handleCreate,
+      handleFileUpload,
+    };
+  },
 };
 </script>
 
