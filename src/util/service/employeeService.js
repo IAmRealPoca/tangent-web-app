@@ -10,6 +10,10 @@ const getListCV = () => {
     return employeeRepo.getListStudentCV();
 };
 
+const getStudentCVDetail = (cvId) => {
+  return employeeRepo.getStudentCVDetail(cvId);
+}
+
 const getListCoverLetter = () => {
     return employeeRepo.getListStudentCoverLetter();
 };
@@ -17,5 +21,6 @@ const getListCoverLetter = () => {
 export {
     getCurrEmployeeInfo,
     getListCV,
+    getStudentCVDetail,
     getListCoverLetter,
 }

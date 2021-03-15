@@ -35,6 +35,8 @@ import SchoolFairDetail from "@/views/school/jobfair/SchoolFairDetail.vue";
 
 import StudentViewCoverLetterList from '@/views/student/coverletter/StudentViewCoverLetterList.vue';
 import StudentViewCVList from '@/views/student/cv/StudentViewCVList.vue';
+import StudentViewCVDetail from "@/views/student/cv/StudentViewCVDetail.vue";
+import StudentCreateCV from "@/views/student/cv/StudentCreateCV.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -309,6 +311,24 @@ const routes = [
     },
   },
   {
+    path: "/student/cv/:cvId",
+    name: "StudentViewCVDetail",
+    component: StudentViewCVDetail,
+    meta: {
+      requiresAuth: true,
+      role: EmployeeRole,
+    },
+  },
+  {
+    path: "/student/cv/create",
+    name: "StudentCreateCV",
+    component: StudentCreateCV,
+    meta: {
+      requiresAuth: true,
+      role: SchoolRole,
+    },
+  },
+  {
     path: "/student/coverletter",
     name: "StudentViewCoverLetterList",
     component: StudentViewCoverLetterList,
@@ -317,6 +337,7 @@ const routes = [
       role: EmployeeRole,
     },
   },
+  
 ];
 
 const router = createRouter({

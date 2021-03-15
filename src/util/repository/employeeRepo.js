@@ -12,7 +12,10 @@ export default {
     getListStudentCV() {
         return http.get(`${path}` + "/cvs");
     },
+    getStudentCVDetail(cvId) {
+      return http.get(`/cvs/${cvId}`);
+    },
     getListStudentCoverLetter() {
         return http.get(`${path}` + "/cover-letter");
-    }
+    },
 }
