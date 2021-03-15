@@ -8,6 +8,7 @@ import actions from "./action";
     return {
       count: 0,
       userInfo: null,
+      isContracted: false,
     };
   },
   mutations,
