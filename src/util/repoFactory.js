@@ -7,6 +7,7 @@ import schoolRepo from './repository/schoolRepo';
 import videoChatRepo from './repository/videoChatRepo';
 import jobFairRepo from './repository/jobFairRepo';
 import boothRepo from './repository/boothRepo';
+import majorRepo from './repository/majorRepo';
 
 import employeeRepo from "./repository/employeeRepo";
 
@@ -21,6 +22,7 @@ const repositories = {
     "skillRepo": skillRepo,
     "jobFairRepo":jobFairRepo,
     "boothRepo": boothRepo,
+    "majorRepo": majorRepo
 }
 export default {
     get: (name) => repositories[name]

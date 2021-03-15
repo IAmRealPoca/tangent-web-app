@@ -13,4 +13,23 @@ export default {
     getListStudent(schoolId) {
         return http.get(`${path}/students`);
     },
+
+    getListCompanies() {
+        return http.get(`${path}/employers`);
+    },
+
+    getListOfMajors() {
+        return http.get(`${path}/majors`);
+    },
+
+    getMajorById(majorId) {
+        return http.get(`${path}/majors/${majorId}`);
+    },
+    getCompanyDetailsAsSchool(companyId) {
+        return http.get(`${path}/employers/${companyId}`);
+    },
+
+    changeApprovalStatus(payload) {
+      return http.put(`${path}/employers/approvals`,payload);
+    }
 }
