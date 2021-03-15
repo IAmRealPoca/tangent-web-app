@@ -19,7 +19,11 @@ const majorService = () => {
   const deleteMajor = (majorId) => {
     return majorRepo.deleteMajor(majorId);
   };
-  return { createMajor, addStudentToMajor, removeStudentFromMajor, deleteMajor };
+
+  const updateMajor = (majorId, payload) => {
+    return majorRepo.updateMajor(majorId, payload);
+  }
+  return { createMajor, addStudentToMajor, removeStudentFromMajor, deleteMajor, updateMajor };
 };
 
 export { majorService as useMajorService };

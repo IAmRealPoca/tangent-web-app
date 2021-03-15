@@ -32,6 +32,7 @@ import SchoolCreateMajor from "@/views/school/studentmanagement/major/SchoolCrea
 import SchoolAddStudentToMajor from "@/views/school/studentmanagement/major/SchoolAddStudentToMajor.vue";
 import SchoolFairManagement from "@/views/school/jobfair/SchoolFairManagement.vue";
 import SchoolFairDetail from "@/views/school/jobfair/SchoolFairDetail.vue";
+import SchoolEditMajor from "@/views/school/studentmanagement/major/SchoolEditMajor.vue";
 
 import StudentViewCoverLetterList from '@/views/student/coverletter/StudentViewCoverLetterList.vue';
 import StudentViewCVList from '@/views/student/cv/StudentViewCVList.vue';
@@ -260,6 +261,15 @@ const routes = [
     path: "/school/majors/:majorId",
     name: "SchoolViewMajorDetail",
     component: SchoolViewMajorDetail,
+    meta: {
+      requiresAuth: true,
+      role: SchoolRole,
+    },
+  },
+  {
+    path: "/school/majors/:majorId/edit",
+    name: "SchoolEditMajor",
+    component: SchoolEditMajor,
     meta: {
       requiresAuth: true,
       role: SchoolRole,

@@ -30,6 +30,11 @@
               :href="`/school/majors/${majorDetail.majorId}/add-student`"
               ><span class="fas fa-plus me-2"></span> Add students
             </a>
+            <a
+              class="btn btn-sm btn-dark me-2"
+              :href="`/school/majors/${majorDetail.majorId}/edit`"
+              ><span class="fas fa-plus me-2"></span> Edit major
+            </a>
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-outline-primary">
                 Export

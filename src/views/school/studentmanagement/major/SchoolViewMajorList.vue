@@ -23,8 +23,8 @@
           </div>
           <div class="btn-toolbar">
             <a class="btn btn-sm btn-dark me-2" @click="handleNewMajorClick"
-              ><span class="fas fa-plus me-2"></span> New major </a
-            >
+              ><span class="fas fa-plus me-2"></span> New major
+            </a>
 
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-outline-primary">
@@ -134,33 +134,14 @@
                         <div class="btn-group">
                           <button
                             class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
+                            @click="handleDeleteMajorClick(major.majorId)"
                           >
                             <span class="icon icon-sm"
                               ><span
-                                class="fas fa-ellipsis-h icon-dark"
+                                class="fas fa-trash align-center text-danger"
                               ></span> </span
-                            ><span class="sr-only">Toggle Dropdown</span>
+                            ><span class="sr-only">Delete</span>
                           </button>
-                          <div class="dropdown-menu py-0">
-                            <a
-                              class="dropdown-item rounded-top"
-                              href="https://demo.themesberg.com/volt-pro/invoice.html"
-                              ><span class="fas fa-eye me-2"></span>View
-                              Details</a
-                            >
-                            <a class="dropdown-item" href="#"
-                              ><span class="fas fa-edit me-2"></span>Edit</a
-                            >
-                            <a
-                              class="dropdown-item text-danger rounded-bottom"
-                              href="#"
-                              ><span class="fas fa-trash-alt me-2"></span
-                              >Remove</a
-                            >
-                          </div>
                         </div>
                       </td>
                     </tr>
@@ -210,8 +191,9 @@
 <script>
 import MainContent from "@/components/MainContent.vue";
 import * as schoolService from "@/util/service/schoolService.js";
+import { useMajorService } from "@/util/service/majorService.js";
 import { ref, onMounted } from "vue";
-import router from '@/router/router';
+import router from "@/router/router";
 export default {
   name: "SchoolViewMajorList",
   components: {
@@ -220,6 +202,7 @@ export default {
 
   setup() {
     const listMajor = ref([]);
+    const majorService = useMajorService();
     const formatDate = (time) => {
       return new Date(time).toLocaleString();
     };
@@ -229,8 +212,15 @@ export default {
     };
 
     const handleNewMajorClick = () => {
-      router.push("/school/majors/create")
+      router.push("/school/majors/create");
     };
+
+    const handleDeleteMajorClick = (majorId) => {
+      majorService.deleteMajor(majorId)
+      .catch(e => {
+        console.log(e);
+      });
+    }
 
     onMounted(() => {
       fetchMajorList();
@@ -239,6 +229,7 @@ export default {
       listMajor,
       formatDate,
       handleNewMajorClick,
+      handleDeleteMajorClick,
     };
   },
 };

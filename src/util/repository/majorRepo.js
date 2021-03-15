@@ -18,6 +18,10 @@ export default {
         return http.patch(`${path}/${majorId}/students/remove`, payload);
     },
 
+    updateMajor(majorId, payload) {
+      return http.put(`${path}/${majorId}`, payload);
+    },
+
     deleteMajor(majorId) {
         return http.delete(`${path}/${majorId}`);
     }
