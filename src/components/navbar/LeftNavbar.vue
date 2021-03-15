@@ -13,7 +13,7 @@
         ><img
           class="navbar-brand-dark"
           src="@/assets/img/logo.svg"
-          alt="Volt logo" />
+          alt="Volt logo"/>
         <img
           class="navbar-brand-light"
           src="@/assets/img/logo.svg"
@@ -195,12 +195,25 @@ export default {
           },
         ],
       },
+      {
+        title: "Student",
+        url: "/student",
+        subItem: [
+          {
+            title: "CV",
+            url: "/student/cv",
+          },
+          {
+            title: "Cover Letter",
+            url: "/student/cover-letter",
+          },
+        ],
+      },
     ],
-  
   }),
   props: {
     role: String,
-  }
+  },
 };
 </script>
 
