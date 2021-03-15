@@ -1,9 +1,38 @@
 import repoFactory from "@/util/repoFactory";
 
-const employerRepo = repoFactory.get("employerRepo");
+const employeeRepo = repoFactory.get("employeeRepo");
 
 const getCurrEmployeeInfo = () => {
-    return employerRepo.getCurrEmployerInfo();
+    return employeeRepo.getCurrEmployerInfo();
 };
 
-export{ getCurrEmployeeInfo }
+const getListCV = () => {
+    return employeeRepo.getListStudentCV();
+};
+
+const getStudentCVDetail = (cvId) => {
+  return employeeRepo.getStudentCVDetail(cvId);
+}
+
+const getListCoverLetter = () => {
+    return employeeRepo.getListStudentCoverLetter();
+};
+
+const deleteCV = (cvId) => {
+    return employeeRepo.deleteStudentCV(cvId);
+};
+
+const deleteCoverLetter = (coverletterId) => {
+    return employeeRepo.deleteStudentCoverLetter(coverletterId);
+};
+
+export {
+    // get
+    getCurrEmployeeInfo,
+    getListCV,
+    getStudentCVDetail,
+    getListCoverLetter,
+    // delete
+    deleteCV,
+    deleteCoverLetter,
+}

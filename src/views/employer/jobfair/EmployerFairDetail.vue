@@ -21,7 +21,63 @@
             <div class="h4">2020-2021 Triton Alliance</div>
             <div class="h5">Current Booths</div>
           </div>
+          <button
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#modal-notification"
+          >
+            Leave
+          </button>
         </div>
+        <!-- Modal Content -->
+        <div
+          class="modal fade"
+          id="modal-notification"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="modal-notification"
+          aria-hidden="true"
+        >
+          <div
+            class="modal-dialog modal-info modal-dialog-centered"
+            role="document"
+          >
+            <div class="modal-content">
+              <div class="modal-body bg-gradient-warning">
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+                <div class="py-3 text-center">
+                  <span class="modal-icon display-1-lg"
+                    ><i class="far fa-times-circle"></i
+                  ></span>
+                  <h2 class="h4 modal-title my-3">
+                    Do you really want to unregister?
+                  </h2>
+                  <p>
+                    This action cannot be redo. Your booth will also be removed!
+                  </p>
+                </div>
+              </div>
+              <div
+                class="modal-footer bg-gradient-danger justify-content-center"
+              >
+                <button
+                  type="button"
+                  @click="handleDelete"
+                  data-bs-dismiss="modal"
+                  class="btn btn-sm btn-white"
+                >
+                  Yes I Do!
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End of Modal Content -->
         <!-- The end of Breadcums -->
         <div class="row">
           <div class="col-12 col-lg-3">
@@ -285,7 +341,7 @@ import MainContent from "@/components/MainContent.vue";
 import { useBoothService } from "@/util/service/boothService.js";
 import { useJobFairService } from "@/util/service/jobFairService.js";
 import { useRouter, useRoute } from "vue-router";
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted } from "vue";
 const boothService = useBoothService();
 const jobFairService = useJobFairService();
 const fairDetailRef = ref({});
@@ -305,6 +361,7 @@ const boothDetail = {
   thumbnail: "https://picsum.photos/id/237/450/300",
 };
 const route = useRoute();
+const router = useRouter();
 const fairIdFromRoute = Number(route.params.jobFairId);
 const parseJwt = () => {
   let token = sessionStorage.getItem("token");
@@ -363,6 +420,23 @@ const handleCreate = (e) => {
 
   boothService.createBooth(payload);
   isCreated.value = true;
+};
+const handleDelete = () => {
+  const data = {
+    id: fairIdFromRoute,
+    comId: parseInt(parseJwt()),
+  };
+  console.log('data :>> ', data);
+  // if somethign for febug
+  jobFairService
+    .unregisterFair(data)
+    .then((resp) => {
+      console.log("resp :>> ", resp);
+      if (resp) router.push("/employer/jobfair/");
+    })
+    .catch((err) => {
+      console.log("err :>> ", err);
+    });
 };
 onMounted(() => {
   // fetchBoothList();

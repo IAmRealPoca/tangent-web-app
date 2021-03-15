@@ -15,6 +15,9 @@ const boothService = () => {
   const createBooth = (data) => {
     return boothRepo.createBooth(data);
   };
+  const deleteBooth = (data) => {
+    return boothRepo.createBooth(data);
+  };
   return { getAllBooth, getBoothById, createBooth, getBoothByComId };
 };
 

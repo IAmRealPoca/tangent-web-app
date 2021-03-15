@@ -169,30 +169,55 @@ export default {
         subItem: [],
       },
       {
-            title: "Schools",
-            url: "/employer/schools",
-            subItem: [],
-          },
+        title: "Schools",
+        url: "/employer/schools",
+        subItem: [],
+      },
       {
         title: "School",
         url: "/school",
         subItem: [
           {
             title: "Company List",
-            url: "/school/company-list",
+            url: "/school/company",
           },
           {
             title: "Major List",
-            url: "/school/major",
+            url: "/school/majors",
           },
           {
             title: "Students",
             url: "/school/student",
           },
+          {
+            title: "Job Fair",
+            url: "/school/jobfair",
+          },
+        ],
+      },
+      {
+        title: "Student",
+        url: "/student",
+        subItem: [
+          {
+            title: "CV",
+            url: "/student/cv",
+          },
+          // {
+          //   title: "CV Detail",
+          //   url: "/student/cv-detail",
+          // },
+          {
+            title: "Cover Letter",
+            url: "/student/coverletter",
+          },
         ],
       },
     ],
   }),
+  props: {
+    role: String,
+  },
 };
 </script>
 

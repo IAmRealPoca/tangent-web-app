@@ -9,6 +9,7 @@
     <img :src="sasImg" alt="" srcset="" />
     <a :href="sasImg" class="btn btn-primary">Download</a>
     <a class="btn btn-primary" @click.prevent="incre">Incre</a>
+    <a class="btn btn-primary" @click.prevent="loda">Lodas</a>
   </div>
 </template>
 
@@ -25,6 +26,7 @@ import {
 import { ref } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
+import _ from "lodash";
 
 const store = useStore();
 
@@ -65,8 +67,17 @@ const downloadFile = () => {
 };
 
 const incre = () => {
-  store.commit("increment")
+  store.commit("increment");
   console.log(store.state.count);
+};
+const loda = () => {
+  const a = [
+    { id: 1, name: "acd" },
+    { id: 2, name: "abd" },
+    { id: 3, name: "acqwed" },
+  ];
+  const b = _.find(a, { id: 3 });
+  console.log("b :>> ", b);
 };
 
 const listFiles = async () => {

@@ -1,4 +1,5 @@
 import repoFactory from "@/util/repoFactory";
+import qs from "query-string";
 
 const jobFairRepo = repoFactory.get("jobFairRepo");
 
@@ -12,7 +13,24 @@ const jobFairService = () => {
   const createFair = (data) => {
     return jobFairRepo.create(data);
   };
-  return { createFair, getAllFair, getFair };
+  const deleteFair = (id) => {
+    return jobFairRepo.delete(id);
+  };
+  const registerFair = (data) => {
+    return jobFairRepo.regis(data);
+  };
+  const unregisterFair = (data) => {
+    const payload = qs.stringify(data);
+    return jobFairRepo.unregis(payload);
+  };
+  return {
+    createFair,
+    deleteFair,
+    getAllFair,
+    getFair,
+    registerFair,
+    unregisterFair,
+  };
 };
 
 export { jobFairService as useJobFairService };

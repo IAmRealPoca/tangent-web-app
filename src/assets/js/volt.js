@@ -21,12 +21,12 @@ import "../vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js";
 import svgMap from "svgmap";
 import * as FullCalendar from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import { Datepicker,DateRangePicker } from "vanillajs-datepicker";
+import { Datepicker, DateRangePicker } from "vanillajs-datepicker";
 import { DataTable } from "simple-datatables";
 import noUiSlider from "@/assets/vendor/nouislider/distribute/nouislider.min.js";
 // import '@/assets/vendor/nouislider/distribute/nouislider.min.js';
 import Choices from "choices.js";
-import '@/assets/vendor/choices.js/public/assets/styles/choices.min.css'
+import "@/assets/vendor/choices.js/public/assets/styles/choices.min.css";
 
 import Chartist from "chartist";
 
@@ -143,6 +143,14 @@ d.addEventListener("DOMContentLoaded", function(event) {
     return new bootstrap.Popover(popoverTriggerEl);
   });
 
+  // Someshit
+  // var dropdownElementList = [].slice.call(
+  //   document.querySelectorAll('[data-bs-toggle="dropdown"]')
+  // );
+  // var dropdownList = dropdownElementList.map(function(dropdownToggleEl) {
+  //   return new bootstrap.Dropdown(dropdownToggleEl);
+  // });
+
   // Datepicker
   var datepickers = [].slice.call(d.querySelectorAll("[data-datepicker]"));
   var datepickersList = datepickers.map(function(el) {
@@ -151,7 +159,9 @@ d.addEventListener("DOMContentLoaded", function(event) {
     });
   });
   // DatepickerRange
-  var datepickerrange = [].slice.call(d.querySelectorAll("[data-datepickerange]"));
+  var datepickerrange = [].slice.call(
+    d.querySelectorAll("[data-datepickerange]")
+  );
   var datepickersRangeList = datepickerrange.map(function(el) {
     return new DateRangePicker(el, {
       buttonClass: "btn",
@@ -718,7 +728,7 @@ d.addEventListener("DOMContentLoaded", function(event) {
     var currentId = null;
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
-        plugins: [dayGridPlugin],
+      plugins: [dayGridPlugin],
       selectable: true,
       initialView: "dayGridMonth",
       themeSystem: "bootstrap",
