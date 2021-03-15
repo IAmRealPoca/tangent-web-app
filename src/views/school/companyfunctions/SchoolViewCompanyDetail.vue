@@ -1,31 +1,31 @@
 <template>
   <MainContent>
     <main>
-              <div class="py-4">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-              <li class="breadcrumb-item">
-                <a href="#"><span class="fas fa-home"></span></a>
-              </li>
-              <li class="breadcrumb-item"><a href="#">Tangent</a></li>
-              <li class="breadcrumb-item"><a href="#">Company</a></li>
-              <li class="breadcrumb-item active" aria-current="page">
-                {{ companyDetail.companyName }}
-              </li>
-            </ol>
-          </nav>
-          <div class="d-flex justify-content-between w-100 flex-wrap">
-            <div class="mb-3 mb-lg-0">
-              <!-- <h1 class="h4">Create major</h1>
+      <div class="py-0">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+            <li class="breadcrumb-item">
+              <a href="#"><span class="fas fa-home"></span></a>
+            </li>
+            <li class="breadcrumb-item"><a href="#">Tangent</a></li>
+            <li class="breadcrumb-item"><a href="#">Company</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {{ companyDetail.companyName }}
+            </li>
+          </ol>
+        </nav>
+        <div class="d-flex justify-content-between w-100 flex-wrap">
+          <div class="mb-3 mb-lg-0">
+            <!-- <h1 class="h4">Create major</h1>
               <p class="mb-0">Create new major</p> -->
-            </div>
-            <div>
-              <a href="#" class="btn btn-outline-gray"
-                ><i class="far fa-question-circle me-1"></i>
-              </a>
-            </div>
+          </div>
+          <div>
+            <a href="#" class="btn btn-outline-gray"
+              ><i class="far fa-question-circle me-1"></i>
+            </a>
           </div>
         </div>
+      </div>
       <div class="row">
         <div class="container-fluid col-lg-12 mt-2">
           <div class="card shadow-lg mb-3">
@@ -82,14 +82,15 @@
                       >Negotiable</label
                     >
                   </div>
+                  <!-- Description -->
+                  <div>
+                    {{ companyDetail.description }}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <!-- List of Job Posts -->
-          <!-- <div class="card shadow-sm mb-4">
-            <div class="card-body"></div>
-          </div> -->
           <div class="task-wrapper border bg-white shadow-sm rounded">
             <div
               class="card hover-state border-bottom rounded-0 rounded-top py-2"
@@ -254,7 +255,9 @@ export default {
     };
 
     const fetchCompanyDetails = async (companyId) => {
-      companyDetail.value = await SchoolServices.getCompanyDetailsAsSchool(companyId);
+      companyDetail.value = await SchoolServices.getCompanyDetailsAsSchool(
+        companyId
+      );
       // SchoolServices.getListOfCompany(2)
       //   .then((res) => {
       //     companyDetail.value = res;

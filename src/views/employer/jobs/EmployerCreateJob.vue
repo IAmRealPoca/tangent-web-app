@@ -167,18 +167,32 @@
                   </div>
                   <label for="birthday">Due date</label>
                   <div class="mb-2 input-group">
-                    <span class="input-group-text"
-                      ><span class="far fa-calendar-alt"></span
-                    ></span>
-                    <input
-                      data-datepicker=""
-                      class="form-control"
-                      id="birthday"
-                      type="text"
-                      placeholder="dd/mm/yyyy"
-                      required
-                      v-model="newJobData.dueDate"
-                    />
+                    <div class="input-group">
+                          <div class="mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text"
+                                ><span class="far fa-calendar-alt"></span
+                              ></span>
+                              <flat-pickr
+                                v-model="newJobData.dueDate"
+                                :config="config"
+                                class="form-control"
+                                placeholder="Select date"
+                                name="date"
+                              >
+                              </flat-pickr>
+                              <!-- <input
+                                data-datepicker=""
+                                class="form-control"
+                                id="dateEnd"
+                                type="text"
+                                placeholder="dd/mm/yyyy"
+                                v-model="jobFair.startDate"
+                                required
+                              /> -->
+                            </div>
+                          </div>
+                        </div>
                   </div>
                   <div class="mb-3">
                     <button
@@ -202,6 +216,9 @@
 
 <script>
 import { ref, onMounted } from "vue";
+import flatPickr from "vue-flatpickr-component";
+import "flatpickr/dist/flatpickr.css";
+import "flatpickr/dist/themes/dark.css";
 import MainContent from "@/components/MainContent.vue";
 import * as recruitmentPostService from "@/util/service/recruitmentPostService";
 import * as skillService from "@/util/service/skillService";
@@ -211,6 +228,7 @@ export default {
   name: "EmployerCreateJob",
   components: {
     MainContent,
+    flatPickr
   },
   setup() {
     const preventNegativeNumInputListener = (e) => {
@@ -267,6 +285,7 @@ export default {
     const newJobData = ref({});
 
     const handleAddButton = () => {
+      console.log(newJobData.value.dueDate);
       newJobData.value = {
         ...newJobData.value,
         "skillId": skillSelected.value.skillId,

@@ -107,7 +107,7 @@
             <div class="table-settings mb-4">
               <div class="row justify-content-between align-items-center">
                 <div class="col-9 col-lg-4 d-flex"></div>
-                <div class="col-3 col-lg-8 text-right">
+                <!-- <div class="col-3 col-lg-8 text-right">
                   <div class="btn-group me-1">
                     <button
                       class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-1"
@@ -158,7 +158,7 @@
                       >
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <div
@@ -291,12 +291,6 @@
                     </li>
                     <li class="page-item active">
                       <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">3</a>
                     </li>
                     <li class="page-item">
                       <a class="page-link" href="#">Next</a>
