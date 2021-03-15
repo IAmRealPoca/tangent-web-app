@@ -19,5 +19,8 @@ export default {
 
     createBooth(payload) {
         return http.post(`${path}`,payload);
+    },
+    deleteBooth(payload) {
+        return http.delete(`${path}`,payload);
     }
 }

@@ -14,6 +14,12 @@ export default {
   create(payload) {
     return http.post(`${path}`, payload);
   },
+  regis(payload) {
+    return http.post(`${path}/register`, payload);
+  },
+  unregis(payload) {
+    return http.delete(`${path}/unregister?${payload}`);
+  },
   update(payload, id) {
     return http.put(`${path}/${id}`, payload);
   },
