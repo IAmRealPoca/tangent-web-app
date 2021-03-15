@@ -1,6 +1,5 @@
 import Dashboard from "@/views/Dashboard.vue";
 import Login from "@/views/Login.vue";
-import LandingPage from "@/views/LandingPage.vue";
 
 //Employers Jobs related
 import EmployerProfile from "@/views/employer/EmployerProfile.vue";
@@ -39,6 +38,8 @@ import StudentViewCVList from '@/views/student/cv/StudentViewCVList.vue';
 import StudentViewCVDetail from "@/views/student/cv/StudentViewCVDetail.vue";
 import StudentCreateCV from "@/views/student/cv/StudentCreateCV.vue";
 
+import SchoolViewStudents from "@/views/school/SchoolViewStudents.vue"
+
 import { createRouter, createWebHistory } from "vue-router";
 
 const EmployerRole = "Employer";
@@ -63,15 +64,14 @@ const routes = [
       requiresAuth: true,
     },
   },
-  {
-    path: "/",
-    name: "LandingPage",
-    component: LandingPage,
-    meta: {
-      requiresAuth: false,
-      onlyGuest: true,
+    {
+        path: "/",
+        name: "LandingPage",
+        component: LandingPage,
+        meta: {
+            requiresAuth: false,
+        }
     },
-  },
   {
     path: "/employer/profile",
     name: "EmployerProfile",
