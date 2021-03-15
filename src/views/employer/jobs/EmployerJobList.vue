@@ -118,8 +118,8 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
-import { onMounted, ref } from "vue";
+import {  useRouter } from "vue-router";
+import { onBeforeUpdate, onMounted, ref } from "vue";
 import MainContent from "@/components/MainContent.vue";
 import * as employerService from "@/util/service/employerService";
 

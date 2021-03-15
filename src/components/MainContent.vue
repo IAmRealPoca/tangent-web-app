@@ -30,7 +30,7 @@ export default {
     const isContracted = ref(false);
 
     watchEffect(() => {
-      console.log("store.state.isContracted :>> ", store.state.isContracted);
+      // console.log("store.state.isContracted :>> ", store.state.isContracted);
       isContracted.value = store.state.isContracted;
     });
 

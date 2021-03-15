@@ -144,12 +144,12 @@ d.addEventListener("DOMContentLoaded", function(event) {
   });
 
   // Someshit
-  var dropdownElementList = [].slice.call(
-    document.querySelectorAll('[data-bs-toggle="dropdown"]')
-  );
-  var dropdownList = dropdownElementList.map(function(dropdownToggleEl) {
-    return new bootstrap.Dropdown(dropdownToggleEl);
-  });
+  // var dropdownElementList = [].slice.call(
+  //   document.querySelectorAll('[data-bs-toggle="dropdown"]')
+  // );
+  // var dropdownList = dropdownElementList.map(function(dropdownToggleEl) {
+  //   return new bootstrap.Dropdown(dropdownToggleEl);
+  // });
 
   // Datepicker
   var datepickers = [].slice.call(d.querySelectorAll("[data-datepicker]"));
