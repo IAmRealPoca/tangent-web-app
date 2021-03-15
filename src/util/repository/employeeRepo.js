@@ -10,9 +10,9 @@ export default {
         return http.get(`${path}` + "/info");
     },
     getListStudentCV() {
-        return http.get(`${path} + "/cvs"`);
+        return http.get(`${path}` + "/cvs");
     },
     getListStudentCoverLetter() {
-        return http.get(`${path} + "/cover-letter`);
+        return http.get(`${path}` + "/cover-letter");
     }
 }

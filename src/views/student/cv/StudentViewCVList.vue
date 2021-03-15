@@ -103,14 +103,14 @@
                   </div>
                 </th> -->
                 <th class="border-bottom">Title</th>
-                <th class="border-bottom">Created Date</th>
+                <th class="border-bottom">Full Name</th>
                 <!-- <th class="border-bottom">Type</th> -->
                 <th class="border-bottom">Last Update</th>
                 <th class="border-bottom">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(response, index) in listCVs" :key="index">
+              <tr v-for="(response, index) in listCVs" :key="index.cvId">
                 <!-- Checkbox -->
                 <!-- <td>
                   <div class="form-check dashboard-check">
@@ -130,16 +130,15 @@
                   >
                     <div class="d-block">
                       <span class="fw-bold">{{ response.title }}</span>
-                      <div class="small text-gray">
-                        <span
-                          class="__cf_email__"
-                          data-cfemail="375e59515877524f565a475b521954585a"
-                        >
-                          {{ response.created }}
-                        </span>
-                      </div>
                     </div>
                   </a>
+                </td>
+                <td>
+                  <div class="d-block">
+                    <span class="fw-bold">
+                      {{ response.employee.fullName }}
+                    </span>
+                  </div>
                 </td>
                 <td>
                   <span class="fw-normal">
@@ -147,7 +146,7 @@
                   </span>
                 </td>
                 <td>
-                  {{ formatDate(response.lastUpdate) }}
+                  <i class="fas fa-trash align-center text-danger"></i>
                 </td>
               </tr>
             </tbody>
@@ -198,7 +197,7 @@ export default {
     const fetchCVList = () => {
       EmployeeService.getListCV()
         .then((response) => {
-          console.log("response success-----> ", response);
+          console.log("response success-----> ", response[0].employee.fullName);
           listCVs.value = response;
         })
         .catch((error) => {
@@ -212,6 +211,10 @@ export default {
 
     const handleRowclick = (cvId) => {
       router.push(`/student/cv/${cvId}`);
+    };
+
+    const formatDate = (time) => {
+      return new Date(time).toLocaleString();
     };
 
     const handleTableChange = (pagination, filtersArg, sorter) => {
@@ -229,6 +232,7 @@ export default {
       // methods
       handleRowclick,
       handleTableChange,
+      formatDate,
     };
   },
 };

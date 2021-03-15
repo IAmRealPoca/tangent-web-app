@@ -81,6 +81,15 @@
                   Declined
                 </label>
               </div>
+              <hr />
+              <div class="d-flex mb-3">
+                <button
+                  @click="handleImport"
+                  class="btn btn-sm px-3 btn-secondary ms-3"
+                >
+                  Import
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -103,14 +112,17 @@
                   </div>
                 </th> -->
                 <th class="border-bottom">Title</th>
-                <th class="border-bottom">Created Date</th>
+                <th class="border-bottom">Full Name</th>
                 <!-- <th class="border-bottom">Type</th> -->
                 <th class="border-bottom">Last Update</th>
                 <th class="border-bottom">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(response, index) in listCVs" :key="index">
+              <tr
+                v-for="(response, index) in listCLs"
+                :key="index.coverLetterId"
+              >
                 <!-- Checkbox -->
                 <!-- <td>
                   <div class="form-check dashboard-check">
@@ -125,21 +137,20 @@
                 </td> -->
                 <td>
                   <a
-                    :href="`/student/cv/${response.cvId}`"
+                    :href="`/student/cv/${response.coverLetterId}`"
                     class="d-flex align-items-center"
                   >
                     <div class="d-block">
                       <span class="fw-bold">{{ response.title }}</span>
-                      <div class="small text-gray">
-                        <span
-                          class="__cf_email__"
-                          data-cfemail="375e59515877524f565a475b521954585a"
-                        >
-                          {{ response.created }}
-                        </span>
-                      </div>
                     </div>
                   </a>
+                </td>
+                <td>
+                  <div class="d-block">
+                    <span class="fw-bold">
+                      {{ response.employee.fullName }}
+                    </span>
+                  </div>
                 </td>
                 <td>
                   <span class="fw-normal">
@@ -147,7 +158,7 @@
                   </span>
                 </td>
                 <td>
-                  {{ formatDate(response.lastUpdate) }}
+                  <i class="fas fa-trash align-center text-danger"></i>
                 </td>
               </tr>
             </tbody>
@@ -190,16 +201,16 @@ export default {
   name: "StudentViewCoverLetterList",
   components: { MainContent },
   setup() {
-    // const route = useRoute();
+    const route = useRoute();
     const router = useRouter();
     // const cvId = Number(route.params.jobId);
-    const listCVs = ref([]);
+    const listCLs = ref([]);
 
-    const fetchCVList = () => {
+    const fetchCoverLetterList = () => {
       EmployeeService.getListCoverLetter()
         .then((response) => {
           console.log("response success-----> ", response);
-          listCVs.value = response;
+          listCLs.value = response;
         })
         .catch((error) => {
           console.log("err", error);
@@ -207,11 +218,15 @@ export default {
     };
 
     onMounted(() => {
-      fetchCVList();
+      fetchCoverLetterList();
     });
 
-    const handleRowclick = (cvId) => {
-      router.push(`/student/cv/${cvId}`);
+    const handleRowclick = (coverLetterId) => {
+      router.push(`/student/coverletter/${coverLetterId}`);
+    };
+
+    const formatDate = (time) => {
+      return new Date(time).toLocaleString();
     };
 
     const handleTableChange = (pagination, filtersArg, sorter) => {
@@ -223,12 +238,62 @@ export default {
       };
       return params;
     };
+
+    const handleImport = () => {
+      return (
+        <div
+          class="modal fade"
+          id="modal-default"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="modal-default"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="h6 modal-title">Terms of Service</h2>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <p>
+                  With less than a month to go before the European Union enacts
+                  new consumer privacy laws for its citizens, companies around
+                  the world are updating their terms of service agreements to
+                  comply.
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary">
+                  Import
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-link text-gray ms-auto"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
     return {
       // variables
-      listCVs,
+      listCLs,
       // methods
       handleRowclick,
       handleTableChange,
+      handleImport,
+      formatDate,
     };
   },
 };
