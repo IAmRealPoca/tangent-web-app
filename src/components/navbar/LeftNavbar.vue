@@ -209,7 +209,7 @@ export default {
           // },
           {
             title: "Cover Letter",
-            url: "/student/cover-letter",
+            url: "/student/coverletter",
           },
         ],
       },
