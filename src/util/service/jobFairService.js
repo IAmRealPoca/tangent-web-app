@@ -13,6 +13,9 @@ const jobFairService = () => {
   const createFair = (data) => {
     return jobFairRepo.create(data);
   };
+  const deleteFair = (id) => {
+    return jobFairRepo.delete(id);
+  };
   const registerFair = (data) => {
     return jobFairRepo.regis(data);
   };
@@ -20,7 +23,14 @@ const jobFairService = () => {
     const payload = qs.stringify(data);
     return jobFairRepo.unregis(payload);
   };
-  return { createFair, getAllFair, getFair, registerFair, unregisterFair };
+  return {
+    createFair,
+    deleteFair,
+    getAllFair,
+    getFair,
+    registerFair,
+    unregisterFair,
+  };
 };
 
 export { jobFairService as useJobFairService };

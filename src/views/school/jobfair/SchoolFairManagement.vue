@@ -299,8 +299,8 @@
                             </div>
                             <div class="ms-sm-3">
                               <span
-                                class="badge super-badge badge-lg bg-warning"
-                                >In Progress</span
+                                :class="fair.statusClass"
+                                >{{ fair.statusString }}</span
                               >
                             </div>
                           </div>
@@ -324,36 +324,19 @@
                             ><span class="sr-only">Star</span></label
                           >
                         </div>
-                        <div class="btn-group ms-md-3">
-                          <button
-                            class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            <span class="icon icon-sm"
-                              ><span
-                                class="fas fa-ellipsis-h icon-dark"
-                              ></span> </span
-                            ><span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <div class="dropdown-menu dropdown-menu-end py-0">
-                            <a class="dropdown-item rounded-top" href="#"
-                              ><span class="fas fa-edit"></span>Edit</a
-                            >
-                            <a class="dropdown-item text-warning" href="#"
-                              ><span class="fas fa-star"></span>Important</a
-                            >
-                            <a
-                              class="dropdown-item text-danger rounded-bottom"
-                              href="#"
-                              ><span class="fas fa-trash-alt"></span>Delete</a
-                            >
-                          </div>
-                        </div>
+                        <!-- the delete button is supposed to be here -->
                       </div>
                     </div>
                   </a>
+                  <div class="btn-group ms-md-3">
+                    <button
+                      class="btn btn-outline-danger"
+                      type="button"
+                      @click="handleRemoveButtonClick(fair.jobFairId)"
+                    >
+                      Cancel fair
+                    </button>
+                  </div>
                 </div>
               </div>
               <!-- End one item -->
@@ -377,7 +360,7 @@ export default {
   name: "SchoolFairManagement",
   components: {
     MainContent,
-    flatPickr
+    flatPickr,
   },
   setup() {
     const route = useRoute();
@@ -405,8 +388,15 @@ export default {
 
     const fetchListJF = async () => {
       listOfFair.value = await fairService.getAllFair();
-
-    }
+      listOfFair.value = listOfFair.value.map(e => {
+        return {
+          ...e,
+          statusString: checkStatusCSSClass(e.status).statusString,
+          statusClass: checkStatusCSSClass(e.status).statusClass,
+        }
+      });
+      console.log(listOfFair.value);
+    };
 
     onMounted(async () => {
       // fetchAppliedCV(jobId);
@@ -431,8 +421,8 @@ export default {
       jobFair.schoolId = parseJwt();
       console.log("jobfair: ", jobFair);
       let formData = new FormData();
-      formData.append('file',file.value,jobFair.jobFairThumbnail.name);
-      formData.append('fairParams',JSON.stringify(jobFair));
+      formData.append("file", file.value, jobFair.jobFairThumbnail.name);
+      formData.append("fairParams", JSON.stringify(jobFair));
 
       console.warn(...formData);
 
@@ -443,6 +433,10 @@ export default {
       // isCreated.value = true;
     };
 
+    const handleRemoveButtonClick = (id) => {
+      fairService.deleteFair(id);
+    };
+
     const parseJwt = () => {
       let token = sessionStorage.getItem("token");
       var base64Url = token.split(".")[1];
@@ -450,13 +444,39 @@ export default {
       var jsonPayload = decodeURIComponent(
         atob(base64)
           .split("")
-          .map(function(c) {
+          .map(function (c) {
             return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
           })
           .join("")
       );
       let id = JSON.parse(jsonPayload);
       return id.sub;
+    };
+
+    const checkStatusCSSClass = (statusInt) => {
+      let text = "";
+      const fwBold = "badge super-badge badge-lg";
+      let cssClass = "bg-dark";
+      if (statusInt === 0) {
+        cssClass = "bg-success";
+        text = "Done";
+      }
+      if (statusInt === 1) {
+        cssClass = "bg-info";
+        text = "Ongoing";
+      }
+      if (statusInt === 2) {
+        cssClass = "bg-warning text-dark";
+        text = "In Future";
+      }
+      if (statusInt === 3) {
+        cssClass = "bg-danger";
+        text = "Cancelled";
+      }
+      return {
+        statusClass: fwBold + " " + cssClass,
+        statusString: text,
+      };
     };
 
     return {
@@ -466,10 +486,11 @@ export default {
       jobFair,
       handleFileUpload,
       handleCreate,
+      handleRemoveButtonClick,
       thumbnail,
       config,
     };
-  }
+  },
 };
 </script>
 
