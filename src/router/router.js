@@ -38,8 +38,6 @@ import StudentViewCVList from '@/views/student/cv/StudentViewCVList.vue';
 import StudentViewCVDetail from "@/views/student/cv/StudentViewCVDetail.vue";
 import StudentCreateCV from "@/views/student/cv/StudentCreateCV.vue";
 
-import SchoolViewStudents from "@/views/school/SchoolViewStudents.vue"
-
 import { createRouter, createWebHistory } from "vue-router";
 
 const EmployerRole = "Employer";
