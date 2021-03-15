@@ -11,6 +11,7 @@
           <div class="d-flex align-items-center">
             <button
               id="sidebar-toggle"
+              @click="contracted"
               class="sidebar-toggle me-3 btn btn-icon-only btn-lg btn-circle d-none d-md-inline-block"
             >
               <span class="fas fa-bars"></span>
@@ -20,7 +21,10 @@
             <li class="nav-item dropdown">
               <a
                 class="nav-link text-dark me-lg-3 icon-notifications dropdown-toggle"
+                :class="{ show: isToggled }"
+                @click="showNoti"
                 data-unread-notifications="true"
+                ref="notibell"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -206,9 +210,7 @@
                   <div
                     class="media-body ms-2 text-dark align-items-center d-none d-lg-block"
                   >
-                    <span class="mb-0 font-small fw-bold">{{
-                      user.name
-                    }}</span>
+                    <span class="mb-0 font-small fw-bold">{{ user.name }}</span>
                   </div>
                 </div>
               </a>
@@ -262,6 +264,7 @@ export default {
       router.push("/login");
     };
     const store = useStore();
+    const notibell = ref(null);
 
     const userFromStorage = sessionStorage.getItem("userInfo");
     userFromStorage
@@ -270,7 +273,6 @@ export default {
 
     const user = JSON.parse(store.state.userInfo);
     // const user = store.state.userInfo;
-    
 
     function parseJwt(token) {
       var base64Url = token.split(".")[1];
@@ -286,15 +288,27 @@ export default {
 
       return JSON.parse(jsonPayload);
     }
+    const isToggled = ref(false);
+    const showNoti = () => {
+      console.log('Something :>> ', notibell.value);
+      isToggled = !isToggled;
+      console.log("isToggled :>> ", isToggled);
+    };
+
+    const contracted = () => {
+      store.commit("contract");
+    };
 
     const userName = ref({});
 
-    onMounted(() => {
-      
-    });
+    onMounted(() => {});
     return {
       userName,
       user,
+      notibell,
+      isToggled,
+      contracted,
+      showNoti,
       handleLoginClick,
     };
   },

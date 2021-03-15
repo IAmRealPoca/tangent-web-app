@@ -389,7 +389,7 @@ export default {
       jobFairName: "",
       JobFairDescription: "",
       startDate: "",
-      jobFairThumbnail: Object,
+      jobFairThumbnail: "",
       schoolId: "",
     });
     const jobId = Number(route.params.jobId);
@@ -403,9 +403,14 @@ export default {
       timeFormat: "H:i",
     };
 
+    const fetchListJF = async () => {
+      listOfFair.value = await fairService.getAllFair();
+
+    }
+
     onMounted(async () => {
       // fetchAppliedCV(jobId);
-      listOfFair.value = await fairService.getAllFair();
+      await fetchListJF();
       console.log(listOfFair.value);
       parseJwt();
     });
@@ -414,24 +419,26 @@ export default {
       return new Date(time).toLocaleString();
     };
 
-    const handleFileUpload = (evt) => {
+    const file = ref({});
+
+    const handleFileUpload = async (evt) => {
       const files = thumbnail.value.files[0];
       console.log(thumbnail.value.files[0]);
-      jobFair.jobFairThumbnail = files;
+      file.value = files;
     };
 
     const handleCreate = async (e) => {
       jobFair.schoolId = parseJwt();
       console.log("jobfair: ", jobFair);
-      // let formData = new FormData();
-      // formData.append('file',jobFair.jobFairThumbnail,jobFair.jobFairThumbnail.name);
-      // formData.append('jobfair',JSON.stringify(jobFair));
+      let formData = new FormData();
+      formData.append('file',file.value,jobFair.jobFairThumbnail.name);
+      formData.append('fairParams',JSON.stringify(jobFair));
 
-      // console.warn(...formData);
+      console.warn(...formData);
 
-      let status = await fairService.createFair(jobFair);
+      let status = await fairService.createFair(formData);
       if (status) {
-        location.reload();
+        await fetchListJF();
       }
       // isCreated.value = true;
     };
@@ -466,5 +473,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
