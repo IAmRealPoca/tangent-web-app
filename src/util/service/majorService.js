@@ -5,7 +5,7 @@ const majorRepo = repoFactory.get("majorRepo");
 const majorService = () => {
 
   const createMajor = (payload) => {
-    return majorRepo.createMajor(boothId);
+    return majorRepo.createMajor(payload);
   };
 
   const addStudentToMajor = (majorId, payload) => {
