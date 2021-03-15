@@ -18,9 +18,21 @@ const getListCoverLetter = () => {
     return employeeRepo.getListStudentCoverLetter();
 };
 
+const deleteCV = (cvId) => {
+    return employeeRepo.deleteStudentCV(cvId);
+};
+
+const deleteCoverLetter = (coverletterId) => {
+    return employeeRepo.deleteStudentCoverLetter(coverletterId);
+};
+
 export {
+    // get
     getCurrEmployeeInfo,
     getListCV,
     getStudentCVDetail,
     getListCoverLetter,
+    // delete
+    deleteCV,
+    deleteCoverLetter,
 }

@@ -13,9 +13,15 @@ export default {
         return http.get(`${path}` + "/cvs");
     },
     getStudentCVDetail(cvId) {
-      return http.get(`/cvs/${cvId}`);
+        return http.get(`/cvs/${cvId}`);
     },
     getListStudentCoverLetter() {
         return http.get(`${path}` + "/cover-letter");
+    },
+    deleteStudentCV(id) {
+        return http.delete(`${path}/cvs/${id}`);
+    },
+    deleteStudentCoverLetter(id) {
+        return http.delete(`${path}/cover-letters/${id}`);
     },
 }

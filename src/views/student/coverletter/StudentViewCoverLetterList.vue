@@ -158,7 +158,12 @@
                   </span>
                 </td>
                 <td>
-                  <i class="fas fa-trash align-center text-danger"></i>
+                  <span
+                    class="icon icon-lg"
+                    @click="handleDelete(response.coverLetterid)"
+                  >
+                    <i class="fas fa-trash align-center text-danger"></i>
+                  </span>
                 </td>
               </tr>
             </tbody>
@@ -203,7 +208,6 @@ export default {
   setup() {
     const route = useRoute();
     const router = useRouter();
-    // const cvId = Number(route.params.jobId);
     const listCLs = ref([]);
 
     const fetchCoverLetterList = () => {
@@ -286,11 +290,23 @@ export default {
       );
     };
 
+    const handleDelete = (id) => {
+      EmployeeService.deleteCoverLetter(id)
+        .then((res) => {
+          id = res.coverLetterId;
+          console.log("toi day roi ne", res);
+        })
+        .catch((error) => {
+          console.log("loi roi ahihi", error);
+        });
+    };
+
     return {
       // variables
       listCLs,
       // methods
       handleRowclick,
+      handleDelete,
       handleTableChange,
       handleImport,
       formatDate,
