@@ -164,7 +164,7 @@ export default {
 
     const selectType = (id) => {
       selectedAccTypeId.value = id;
-      console.log("id",id);
+      console.log("id", id);
       if (id === 0 || id === 1 || id === 2 || id === 4) {
         if (id === 0) {
           selectedAccTypeString.value = "Admin";
@@ -212,14 +212,14 @@ export default {
 
     const fetchUserData = async (usrFlag) => {
       if (usrFlag === 0) {
+        // console.log("Vo day roi ne --------------> ");
       } else if (usrFlag === 2) {
         const resp = await employerService.getCurrEmployerInfo();
         sessionStorage.setItem("userInfo", JSON.stringify(resp));
         store.commit("loginSuccess", resp);
       } else if (usrFlag === 4) {
-        // schoolService.
-        // sessionStorage.setItem("userInfo", JSON.stringify(resp));
-        // store.commit("loginSuccess", resp);
+        schoolService.sessionStorage.setItem("userInfo", JSON.stringify(resp));
+        store.commit("loginSuccess", resp);
       }
     };
 

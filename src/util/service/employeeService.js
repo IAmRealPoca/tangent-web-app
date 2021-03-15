@@ -1,9 +1,16 @@
 import repoFactory from "@/util/repoFactory";
 
-const employerRepo = repoFactory.get("employerRepo");
+const employeeRepo = repoFactory.get("employeeRepo");
 
 const getCurrEmployeeInfo = () => {
-    return employerRepo.getCurrEmployerInfo();
+    return employeeRepo.getCurrEmployerInfo();
 };
 
-export{ getCurrEmployeeInfo }
+const getListStudentCV = () => {
+    return employeeRepo.getListStudentCV();
+}
+
+export {
+    getCurrEmployeeInfo,
+    getListStudentCV,
+}

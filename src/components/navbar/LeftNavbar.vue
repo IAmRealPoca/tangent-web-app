@@ -203,6 +203,10 @@ export default {
             title: "CV",
             url: "/student/cv",
           },
+          // {
+          //   title: "CV Detail",
+          //   url: "/student/cv-detail",
+          // },
           {
             title: "Cover Letter",
             url: "/student/cover-letter",

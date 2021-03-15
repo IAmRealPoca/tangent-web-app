@@ -33,6 +33,8 @@ import SchoolAddStudentToMajor from "@/views/school/studentmanagement/major/Scho
 import SchoolFairManagement from "@/views/school/jobfair/SchoolFairManagement.vue";
 import SchoolFairDetail from "@/views/school/jobfair/SchoolFairDetail.vue";
 
+import StudentViewCoverLetterList from '@/views/student/coverletter/StudentViewCoverLetterList.vue';
+
 import { createRouter, createWebHistory } from "vue-router";
 
 const EmployerRole = "Employer";
@@ -294,6 +296,15 @@ const routes = [
     meta: {
       requiresAuth: true,
       role: SchoolRole,
+    },
+  },
+  {
+    path: "/student/cv",
+    name: "StudentViewCoverLetterList",
+    component: StudentViewCoverLetterList,
+    meta: {
+      requiresAuth: true,
+      role: EmployeeRole,
     },
   },
 ];
