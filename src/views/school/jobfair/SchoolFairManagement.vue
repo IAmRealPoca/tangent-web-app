@@ -388,7 +388,6 @@ export default {
 
     const fetchListJF = async () => {
       listOfFair.value = await fairService.getAllFair();
-<<<<<<< Updated upstream
       listOfFair.value = listOfFair.value.map(e => {
         return {
           ...e,
@@ -397,8 +396,6 @@ export default {
         }
       });
       console.log(listOfFair.value);
-=======
->>>>>>> Stashed changes
     };
 
     onMounted(async () => {
@@ -424,14 +421,10 @@ export default {
       jobFair.schoolId = parseJwt();
       console.log("jobfair: ", jobFair);
       let formData = new FormData();
-<<<<<<< Updated upstream
-      formData.append("file", file.value, jobFair.jobFairThumbnail.name);
-=======
       if (file.value.size) {
         console.warn("YAY");
         formData.append("file", file.value, jobFair.jobFairThumbnail.name);
       }
->>>>>>> Stashed changes
       formData.append("fairParams", JSON.stringify(jobFair));
 
       console.warn(...formData);
