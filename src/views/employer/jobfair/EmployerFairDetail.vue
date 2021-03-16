@@ -391,7 +391,7 @@ const fetchBoothList = () => {
   const comId = parseJwt();
   // console.log("jwt: ", comId);
   boothService.getBoothByComId(parseInt(comId)).then((resp) => {
-    // console.log("booth from comid list: ", resp);
+    console.log("booth from comid list: ", resp);
     boothList.value = resp;
   });
 };
