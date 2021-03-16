@@ -26,6 +26,14 @@ const deleteCoverLetter = (coverletterId) => {
     return employeeRepo.deleteStudentCoverLetter(coverletterId);
 };
 
+const uploadCVFile = (payload) => {
+  return employeeRepo.uploadCVFile(payload);
+};
+
+const createCV = (payload) => {
+  return employeeRepo.createCV(payload);
+};
+
 export {
     // get
     getCurrEmployeeInfo,
@@ -35,4 +43,7 @@ export {
     // delete
     deleteCV,
     deleteCoverLetter,
+    //post
+    uploadCVFile,
+    createCV,
 }

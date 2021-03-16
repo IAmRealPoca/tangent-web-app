@@ -421,7 +421,10 @@ export default {
       jobFair.schoolId = parseJwt();
       console.log("jobfair: ", jobFair);
       let formData = new FormData();
-      formData.append("file", file.value, jobFair.jobFairThumbnail.name);
+      if (file.value.size) {
+        console.warn("YAY");
+        formData.append("file", file.value, jobFair.jobFairThumbnail.name);
+      }
       formData.append("fairParams", JSON.stringify(jobFair));
 
       console.warn(...formData);
@@ -430,7 +433,7 @@ export default {
       if (status) {
         await fetchListJF();
       }
-      // isCreated.value = true;
+      isCreated.value = true;
     };
 
     const handleRemoveButtonClick = (id) => {

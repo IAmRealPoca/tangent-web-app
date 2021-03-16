@@ -20,6 +20,19 @@
             <h2 class="h4">Application details</h2>
             <p class="mb-0">Review your applicant.</p>
           </div>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <a class="btn btn-sm btn-dark" @click="handleMarkAsFavorite"
+              ><span class="fas fa-plus me-2"></span> Mark as interested </a
+            >
+            <!-- <div class="btn-group ms-2 ms-lg-3">
+              <button type="button" class="btn btn-sm btn-outline-primary">
+                Share
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-primary">
+                Export
+              </button>
+            </div> -->
+          </div>
         </div>
 
         <div class="row" v-if="Object.keys(applicationInfo).length > 0">
@@ -77,7 +90,7 @@
                         id="nav-tab"
                         role="tablist"
                       >
-                        <a
+                        <!-- <a
                           class="nav-item nav-link active"
                           id="nav-home-tab"
                           data-bs-toggle="tab"
@@ -86,15 +99,15 @@
                           aria-controls="nav-home"
                           aria-selected="true"
                           >Profile</a
-                        >
+                        > -->
                         <a
-                          class="nav-item nav-link"
+                          class="nav-item nav-link active"
                           id="nav-profile-tab"
                           data-bs-toggle="tab"
                           href="#nav-profile"
                           role="tab"
                           aria-controls="nav-profile"
-                          aria-selected="false"
+                          aria-selected="true"
                           >Documents</a
                         >
                         <!-- <a
@@ -111,7 +124,7 @@
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                       <div
-                        class="tab-pane fade show active"
+                        class="tab-pane fade"
                         id="nav-home"
                         role="tabpanel"
                         aria-labelledby="nav-home-tab"
@@ -180,7 +193,7 @@
                         </div>
                       </div>
                       <div
-                        class="tab-pane fade"
+                        class="tab-pane fade show active"
                         id="nav-profile"
                         role="tabpanel"
                         aria-labelledby="nav-profile-tab"
@@ -212,20 +225,14 @@
                                     Object.keys(applicationInfo.cv).length > 0
                                   "
                                 >
-                                  <h2 class="h4">CV</h2>
+                                  <h2 class="h4"></h2>
                                   <div class="h5">
-                                    Title: {{ applicationInfo.cv.title }}
+                                    {{ applicationInfo.cv.title }}
                                   </div>
                                   <div class="h5">
-                                    Applied: {{ applicationInfo.created }}
+                                    {{ applicationInfo.created }}
                                   </div>
-                                  <embed
-                                    src="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0"
-                                    frameBorder="0"
-                                    scrolling="auto"
-                                    height="100%"
-                                    width="100%"
-                                  />
+                                  
                                 </div>
                                 <!-- <div class="card border-light shadow-sm" v-if="Object.keys(applicationInfo.coverLetter).length > 0">
                                   <h2 class="h4">CV</h2>
@@ -276,6 +283,7 @@ import { useRoute } from "vue-router";
 import { onMounted, ref } from "vue";
 import MainContent from "@/components/MainContent.vue";
 import * as EmployerService from "@/util/service/employerService";
+import * as recruitmentPost from "@/util/service/recruitmentPostService.js";
 
 export default {
   name: "EmployerApplicantDetails",
@@ -305,9 +313,15 @@ export default {
       fetchCVFromJobAndApplicationId(jobId, applicationId);
       console.log("hello: ", applicationInfo.value);
     });
+
+    const handleMarkAsFavorite = () => {
+      recruitmentPost.markAsFavorite(applicationId, null);
+    };
+
     return {
       applicationInfo,
       jobPostInfo,
+      handleMarkAsFavorite,
     };
   },
 };

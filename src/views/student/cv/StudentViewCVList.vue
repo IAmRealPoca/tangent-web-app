@@ -146,7 +146,12 @@
                   </span>
                 </td>
                 <td>
-                  <i class="fas fa-trash align-center text-danger"></i>
+                  <span
+                    class="icon icon-lg"
+                    @click="handleDelete(response.cvId)"
+                  >
+                    <i class="fas fa-trash align-center text-danger"></i>
+                  </span>
                 </td>
               </tr>
             </tbody>
@@ -226,11 +231,21 @@ export default {
       };
       return params;
     };
+
+    const handleDelete = (id) => {
+      EmployeeService.deleteCV(id)
+        .then(() => true)
+        .catch((error) => {
+          console.log("---Error---", error);
+        });
+    };
+
     return {
       // variables
       listCVs,
       // methods
       handleRowclick,
+      handleDelete,
       handleTableChange,
       formatDate,
     };

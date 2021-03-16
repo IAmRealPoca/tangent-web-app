@@ -22,5 +22,9 @@ const updateJob = (jobId, updatedJob) => {
     return recruitmentPostRepo.updateJob(jobId, updatedJob);
 };
 
-export {getListOfJobs, getListOfExpiredJobs, getOneById, postNewJob, updateJob};
+const markAsFavorite = (applicationId, payload) => {
+  return recruitmentPostRepo.markAsFavorite(applicationId, payload);
+};
+
+export {getListOfJobs, getListOfExpiredJobs, getOneById, postNewJob, updateJob, markAsFavorite};
 // export default recruitmentPostService

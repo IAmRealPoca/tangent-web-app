@@ -159,7 +159,7 @@
                 </td>
                 <td>
                   <span
-                    class="icon icon-lg"
+                    class="icon icon-lg align-center"
                     @click="handleDelete(response.coverLetterid)"
                   >
                     <i class="fas fa-trash align-center text-danger"></i>
@@ -198,7 +198,7 @@
 // Script
 <script>
 import MainContent from "@/components/MainContent";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import { ref, onMounted } from "vue";
 import * as EmployeeService from "@/util/service/employeeService";
 
@@ -206,7 +206,6 @@ export default {
   name: "StudentViewCoverLetterList",
   components: { MainContent },
   setup() {
-    const route = useRoute();
     const router = useRouter();
     const listCLs = ref([]);
 
@@ -292,12 +291,9 @@ export default {
 
     const handleDelete = (id) => {
       EmployeeService.deleteCoverLetter(id)
-        .then((res) => {
-          id = res.coverLetterId;
-          console.log("toi day roi ne", res);
-        })
+        .then(() => true)
         .catch((error) => {
-          console.log("loi roi ahihi", error);
+          console.log("---Error---", error);
         });
     };
 

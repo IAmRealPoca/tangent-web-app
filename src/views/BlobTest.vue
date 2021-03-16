@@ -80,6 +80,23 @@ const loda = () => {
   console.log("b :>> ", b);
 };
 
+const registerServiceWorker = () => {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("/firebase-messaging-sw.js", {
+        scope: "/",
+      })
+      .then(function(reg) {
+        // registration worked
+        console.log("Registration succeeded. Scope is " + reg.scope);
+      })
+      .catch(function(error) {
+        // registration failed
+        console.log("Registration failed with " + error);
+      });
+  }
+};
+
 const listFiles = async () => {
   try {
     status.value = "Retrieving file list...";
@@ -104,6 +121,7 @@ const listFiles = async () => {
 
 onMounted(() => {
   listFiles();
+  registerServiceWorker();
 });
 </script>
 

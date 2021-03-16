@@ -47,7 +47,7 @@
                     <form action="#" class="mt-4">
                       <!-- Form -->
                       <div class="form-group mb-4">
-                        <label for="booth_name">Job Fair Name</label>
+                        <label for="booth_name">CV </label>
                         <div class="input-group">
                           <span class="input-group-text" id="basic-addon1"
                             ><span class="fas fa-signature"></span
@@ -55,16 +55,16 @@
                           <input
                             type="text"
                             class="form-control"
-                            v-model="jobFair.jobFairName"
-                            placeholder="Your Fantasic Title"
+                            v-model="jobFair.title"
+                            placeholder="CV Title"
                             id="booth_name"
                             required
                           />
                         </div>
                       </div>
                       <!-- End of Form -->
-                      <div class="form-group mb-4">
-                        <label for="booth_name">Job Fair Thumbnail</label>
+                      <!-- <div class="form-group mb-4">
+                        <label for="booth_name">CV File</label>
                         <div class="input-group">
                           <div class="mb-3">
                             <input
@@ -76,7 +76,7 @@
                             />
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                       <!-- Date -->
 
                       <div class="d-grid">
@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import MainContent from "@/components/MainContent.vue";
 import * as employeeService from "@/util/service/employeeService.js";
 export default {
@@ -115,7 +115,11 @@ export default {
     const newJobData = ref({});
     
     const thumbnail = ref(null);
-    const jobFair = ref({});
+    const jobFair = reactive({
+      title: "",
+    });
+    
+    const file = ref({});
 
     const handleFileUpload = async (evt) => {
       const files = thumbnail.value.files[0];
@@ -125,20 +129,26 @@ export default {
 
     const handleCreate = async (e) => {
       console.log("jobfair: ", jobFair);
-      let formData = new FormData();
-      formData.append("file", file.value, jobFair.jobFairThumbnail.name);
-      formData.append("fairParams", JSON.stringify(jobFair));
+      // let formData = new FormData();
+      // formData.append("file", file.value, "abcdefghijklmnopqrstuvwxyz");
+      // formData.append("newCvParam", JSON.stringify(jobFair));
 
-      console.warn(...formData);
+      // console.warn(...formData);
 
-      let status = await fairService.createFair(formData);
-      if (status) {
-        await fetchListJF();
+      // let status = await employeeService.uploadCVFile(formData);
+      const payload = {
+        title: jobFair.title,
       }
+      console.log("payload: ", payload);
+      await employeeService.createCV(payload);
+      // if (status) {
+      //   await fetchListJF();
+      // }
       // isCreated.value = true;
     };
 
     return {
+      jobFair,
       newJobData,
       handleCreate,
       handleFileUpload,

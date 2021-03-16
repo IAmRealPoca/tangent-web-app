@@ -31,6 +31,10 @@ const changeApprovalStatus = (payload) => {
   return schoolRepo.changeApprovalStatus(payload);
 }
 
+const changeStudentStatus = (studentId, payload) => {
+  return schoolRepo.changeStudentStatus(studentId, payload);
+}
+
 export {
     getListOfSchools,
     getStudentListFromSchoolId,
@@ -39,4 +43,5 @@ export {
     getMajorById,
     getCompanyDetailsAsSchool,
     changeApprovalStatus,
+    changeStudentStatus,
 }

@@ -10,6 +10,7 @@ import router from "@/router/router.js";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCj4pN0htCDHQR72-LgEsFx6QlItAoBlqw",
@@ -21,9 +22,15 @@ const firebaseConfig = {
   appId: "1:596123512687:web:0e2c4583dc46ec02f0029a",
 };
 
-
-
 firebase.initializeApp(firebaseConfig);
+const mess = firebase.messaging();
+mess.getToken({
+  vapidKey:
+    "BKmp1XnZf4-nc0ZjbVw_DJh9PKZy7AfsSPbp1IB9IoabSdk94_jTjg36mQvJlwFwBgfiJrmkaGv57Ud9Fls8p2c",
+});
+mess.onMessage((payload) => {
+  console.log("Message :>> ", payload);
+});
 
 const app = createApp(App);
 

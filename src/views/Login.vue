@@ -217,8 +217,8 @@ export default {
         sessionStorage.setItem("userInfo", JSON.stringify(resp));
         store.commit("loginSuccess", resp);
       } else if (usrFlag === 4) {
-        sessionStorage.setItem("userInfo", JSON.stringify(resp));
-        store.commit("loginSuccess", resp);
+        // sessionStorage.setItem("userInfo", JSON.stringify(resp));
+        // store.commit("loginSuccess", resp);
       }
     };
 
