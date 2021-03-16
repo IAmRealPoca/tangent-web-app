@@ -354,7 +354,7 @@ const boothsLength = ref([]);
 //       schoolId: "",
 //     });
 const isCreated = ref(false);
-const boothList = ref({});
+const boothList = ref(null);
 const boothDetail = {
   name: "",
   desc: "",
@@ -390,10 +390,19 @@ fetchJobFairDetail();
 const fetchBoothList = () => {
   const comId = parseJwt();
   // console.log("jwt: ", comId);
-  boothService.getBoothByComId(parseInt(comId)).then((resp) => {
-    console.log("booth from comid list: ", resp);
-    boothList.value = resp;
-  });
+  boothService
+    .getBoothByComId(parseInt(comId))
+    .then((resp) => {
+      console.log("booth from comid list: ", resp);
+      boothList.value = resp;
+    })
+    .catch((e) => {
+      const errCode = e.messages[0].status;
+      console.log("err :>> ", errCode);
+      if (errCode === 404) {
+        boothList.value = null;
+      }
+    });
 };
 fetchBoothList();
 const handleFileUpload = (evt) => {
@@ -418,15 +427,14 @@ const handleCreate = (e) => {
 
   // console.log(payload);
 
-  boothService.createBooth(payload);
-  isCreated.value = true;
+  boothService.createBooth(payload).then(() => (isCreated.value = true));
 };
 const handleDelete = () => {
   const data = {
     id: fairIdFromRoute,
     comId: parseInt(parseJwt()),
   };
-  console.log('data :>> ', data);
+  console.log("data :>> ", data);
   // if somethign for febug
   jobFairService
     .unregisterFair(data)
