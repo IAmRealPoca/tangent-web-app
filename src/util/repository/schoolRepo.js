@@ -31,5 +31,9 @@ export default {
 
     changeApprovalStatus(payload) {
       return http.put(`${path}/employers/approvals`,payload);
+    },
+
+    changeStudentStatus(studentId, payload) {
+      return http.put(`${path}/students/${studentId}`, payload);
     }
 }

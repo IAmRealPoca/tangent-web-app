@@ -212,98 +212,18 @@
                   <!-- End status column -->
 
                   <td>
-                    <div v-if="!aStudent.majorName">
+                    <div>
                       <!-- <span class="fw-normal text-dark"
                         ><span class="fas fa-times-circle text-dark me-2"></span
                         >{{ aStudent.status.statusName }}</span
                       > -->
-                      <button class="btn text-danger" type="button" disabled>
-                        No action
-                      </button>
+                      <!-- <button class="btn text-danger" type="button" disabled>
+                        Change status
+                      </button> -->
+                      <input type="text" v-model="aStudent.status"/>
+                      <button @click="handleChangeStatus(aStudent.accountId, aStudent.status)">Change status</button>
                     </div>
-                    <div v-else>
-                      <div>
-                        <button
-                          class="btn btn-outline-success"
-                          type="button"
-                          data-bs-toggle="modal"
-                          :data-bs-target="'#modal-form-' + aStudent.accountId"
-                        >
-                          Request
-                        </button>
-                      </div>
-                      <div>
-                        <button class="btn btn-outline-danger" type="button">
-                          Remove
-                        </button>
-                      </div>
-                      <!-- request popup -->
-                      <div
-                        class="modal fade"
-                        :id="'modal-form-' + aStudent.accountId"
-                        tabindex="-1"
-                        role="dialog"
-                        :aria-labelledby="'modal-form-' + aStudent.accountId"
-                        aria-hidden="true"
-                      >
-                        <div
-                          class="modal-dialog modal-dialog-centered"
-                          role="document"
-                        >
-                          <div class="modal-content">
-                            <div class="modal-body p-0">
-                              <div class="card border-light p-3 p-lg-4">
-                                <button
-                                  type="button"
-                                  class="btn-close ms-auto"
-                                  data-bs-dismiss="modal"
-                                  aria-label="Close"
-                                ></button>
-                                <div
-                                  class="card-header border-0 text-center pb-0 text-wrap"
-                                >
-                                  <h2 class="h4">
-                                    You are about to send an approval request to
-                                    {{ aStudent.schoolName }}
-                                  </h2>
-                                </div>
-                                <div class="card-body p-0 pl-lg-3">
-                                  <form action="#" class="mt-4">
-                                    <!-- Form -->
-                                    <div class="form-group mb-4">
-                                      <label for="booth_name"
-                                        >Are you sure?</label
-                                      >
-                                    </div>
-                                    <!-- End of Form -->
-                                    <div class="d-grid col-12">
-                                      <button
-                                        type="submit"
-                                        data-bs-dismiss="modal"
-                                        @click.prevent="
-                                          handleRequestClick(aStudent.accountId)
-                                        "
-                                        class="btn btn-info mb-4"
-                                      >
-                                        Request
-                                      </button>
-                                      <button
-                                        type="cancel"
-                                        data-bs-dismiss="modal"
-                                        class="btn btn-gray-300 mb-2"
-                                      >
-                                        Cancel
-                                      </button>
-                                    </div>
-                                  </form>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- end request popup -->
-                    </div>
+                    
                   </td>
                 </tr>
               </tbody>
@@ -363,7 +283,7 @@ export default {
 };
 </script>
 <script setup>
-import { getStudentListFromSchoolId } from "@/util/service/schoolService";
+import { getStudentListFromSchoolId, changeStudentStatus } from "@/util/service/schoolService";
 import { onMounted } from "@vue/runtime-core";
 const mergedArray = ref([
   {
@@ -399,6 +319,13 @@ const fetchStudents = async () => {
     };
   });
 };
+
+const handleChangeStatus = (studentId, newStatus) => {
+  const payload = {
+    status: newStatus,
+  }
+  changeStudentStatus(studentId, payload);
+}
 
 const checkStatusString = (statusInt) => {
   if (statusInt === 0) return "Graduated";

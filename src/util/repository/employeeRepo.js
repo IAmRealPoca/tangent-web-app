@@ -24,4 +24,10 @@ export default {
     deleteStudentCoverLetter(id) {
         return http.delete(`${path}/cover-letters/${id}`);
     },
+    uploadCVFile(payload) {
+      return http.post(`/cvs/upload-file`, payload);
+    },
+    createCV(payload) {
+      return http.post(`/cvs`, payload);
+    }
 }
