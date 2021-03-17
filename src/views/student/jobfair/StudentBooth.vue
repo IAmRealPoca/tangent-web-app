@@ -54,7 +54,7 @@ import { OpenVidu } from "openvidu-browser";
 
 import { useVCService } from "@/util/service/videoChatService";
 import { useBoothService } from "@/util/service/boothService.js";
-import { getCurrEmployerInfo } from "@/util/service/employerService";
+import { getCurrEmployeeInfo } from "@/util/service/employeeService";
 
 import { ref } from "@vue/reactivity";
 import VideoPlayer from "@/components/ViduComponent/VideoPlayer.vue";
@@ -88,7 +88,7 @@ export default {
     const getSessionId = async () => {
       const resp = await fairServive.getBoothById(boothIdFromRoute);
       data.value.mySessionId = resp.boothSessionUrl;
-      const info = await getCurrEmployerInfo();
+      const info = await getCurrEmployeeInfo();
       console.log(resp.boothSessionUrl, " emp info: ", info);
       data.value.myUserName = info.name;
     };

@@ -139,7 +139,7 @@
                   :key="index"
                   class="card hover-state border-bottom rounded-0 rounded-top py-3"
                 >
-                  <a @click="registerForFair(fair.jobFairId)">
+                  <a @click="joinJobFair(fair.jobFairId)">
                     <div
                       class="card-body d-sm-flex align-items-center flex-wrap flex-lg-nowrap py-0"
                     >
@@ -261,7 +261,7 @@ export default {
     const thumbnail = ref(null);
     const fairService = useJobFairService();
     const listOfFair = ref([]);
-    const comId = ref();
+    const stuId = ref();
     const jobFair = reactive({
       jobFairName: "",
       JobFairDescription: "",
@@ -296,15 +296,15 @@ export default {
       jobFair.jobFairThumbnail = files;
     };
 
-    const registerForFair = (jobFairId) => {
-      comId.value = parseJwt();
+    const joinJobFair = (jobFairId) => {
+      stuId.value = parseJwt();
       // if (!comId.value) error check
       const data = {
         id: jobFairId,
-        humanId: comId.value,
+        humanId: stuId.value,
       };
       fairService
-        .registerFair(data)
+        .joinFair(data)
         .then((resp) => {
           console.log(resp);
           if (resp) {
@@ -338,7 +338,7 @@ export default {
       formatDate,
       jobFair,
       handleFileUpload,
-      registerForFair,
+      joinJobFair,
       thumbnail,
       config,
     };

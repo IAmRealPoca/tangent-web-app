@@ -23,6 +23,13 @@ const jobFairService = () => {
     const payload = qs.stringify(data);
     return jobFairRepo.unregis(payload);
   };
+  const joinFair = (data) => {
+    return jobFairRepo.join(data);
+  };
+  const leaveFair = (data) => {
+    const payload = qs.stringify(data);
+    return jobFairRepo.leave(payload);
+  };
   return {
     createFair,
     deleteFair,
@@ -30,6 +37,8 @@ const jobFairService = () => {
     getFair,
     registerFair,
     unregisterFair,
+    joinFair,
+    leaveFair
   };
 };
 

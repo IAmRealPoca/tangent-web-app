@@ -55,11 +55,8 @@
                     ><i class="far fa-times-circle"></i
                   ></span>
                   <h2 class="h4 modal-title my-3">
-                    Do you really want to unregister?
+                    Do you really want to leave?
                   </h2>
-                  <p>
-                    This action cannot be redo. Your booth will also be removed!
-                  </p>
                 </div>
               </div>
               <div
@@ -108,212 +105,47 @@
             </div>
           </div>
           <div class="col-12 col-lg-9">
-            <div class="card border-light components-section mb-1">
-              <div class="card p-0">
-                <div v-if="isCreated || boothList">
-                  <div v-if="isCreated && boothDetail">
-                    <div class="row">
-                      <div class="col-12 col-lg-6">
-                        <div class="card-body">
-                          <h4 class="h3">Your Company Booth</h4>
-                          <h5 class="fw-normal">{{ boothDetail.name }}</h5>
-                          <p class="text-gray mb-4">{{ boothDetail.desc }}</p>
-                          <a class="btn btn-sm btn-secondary" href="bootp"
-                            >Go to your booth</a
-                          >
-                        </div>
-                      </div>
-                      <div class="col-12 col-lg-6">
-                        <img
-                          :src="boothDetail.thumbnail"
-                          alt="Thumbnail"
-                          srcset=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div v-if="boothList">
-                    <div class="row">
-                      <div class="col-12 col-lg-6">
-                        <div class="card-body">
-                          <h4 class="h3">{{ boothList.boothName }}</h4>
-                          <p class="text-gray mb-4">
-                            {{ boothList.boothDescription }}
-                          </p>
-                          <a
-                            class="btn btn-sm btn-secondary"
-                            :href="
-                              fairDetailRef.jobFairId + `/` + boothList.boothId
-                            "
-                            >Go to your booth</a
-                          >
-                        </div>
-                      </div>
-                      <div class="col-12 col-lg-6">
-                        <img
-                          :src="boothList.boothThumbnail"
-                          alt="Thumbnail"
-                          srcset=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div v-else>
-                  <div class="card-body text-center">
-                    <a
-                      href="#"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modal-form"
-                    >
-                      <span class="fas fa-plus-circle fa-7x"></span>
-                    </a>
-                    <div class="h4">You haven't create your booth.</div>
-                    <div class="h5">
-                      Create one by clicking the above button
-                    </div>
-                  </div>
-                  <div
-                    class="modal fade"
-                    id="modal-form"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-labelledby="modal-form"
-                    aria-hidden="true"
-                  >
-                    <div
-                      class="modal-dialog modal-dialog-centered"
-                      role="document"
-                    >
-                      <div class="modal-content">
-                        <div class="modal-body p-0">
-                          <div class="card border-light p-3 p-lg-4">
-                            <button
-                              type="button"
-                              class="btn-close ms-auto"
-                              data-bs-dismiss="modal"
-                              aria-label="Close"
-                            ></button>
-                            <div class="card-header border-0 text-center pb-0">
-                              <h2 class="h4">Create booth</h2>
-                            </div>
-                            <div class="card-body p-0 pl-lg-3">
-                              <form action="#" class="mt-4">
-                                <!-- Form -->
-                                <div class="form-group mb-4">
-                                  <label for="booth_name">Booth Name</label>
-                                  <div class="input-group">
-                                    <span
-                                      class="input-group-text"
-                                      id="basic-addon1"
-                                      ><span class="fas fa-signature"></span
-                                    ></span>
-                                    <input
-                                      type="text"
-                                      v-model="boothDetail.name"
-                                      class="form-control"
-                                      placeholder="Your Fantasic Title"
-                                      id="booth_name"
-                                      required
-                                    />
-                                  </div>
-                                </div>
-                                <!-- End of Form -->
-                                <div class="form-group mb-4">
-                                  <label for="booth_name"
-                                    >Booth Thumbnail</label
-                                  >
-                                  <div class="input-group">
-                                    <div class="mb-3">
-                                      <input
-                                        class="form-control"
-                                        id="booth_thumbnail"
-                                        @change="handleFileUpload"
-                                        type="file"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <!-- Form -->
-                                <div class="form-group">
-                                  <div class="form-group mb-4">
-                                    <label for="booth_description"
-                                      >Booth Description</label
-                                    >
-                                    <div class="input-group">
-                                      <textarea
-                                        class="form-control"
-                                        id="booth_description"
-                                        v-model="boothDetail.desc"
-                                        rows="3"
-                                        style="resize: none"
-                                      ></textarea>
-                                    </div>
-                                  </div>
-                                  <!-- End of Form -->
-                                </div>
-                                <div class="d-grid">
-                                  <button
-                                    type="submit"
-                                    @click.prevent="handleCreate"
-                                    data-bs-dismiss="modal"
-                                    class="btn btn-info"
-                                  >
-                                    Create!
-                                  </button>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- End of Modal Content -->
-                </div>
-              </div>
-            </div>
             <div class="card border-light shadow-sm components-section mb-4">
               <div class="card-body">
                 <div class="row">
-                  <div class="h4">Others booths</div>
+                  <div class="h4">Company booths</div>
                   <div v-if="fairDetailRef && boothsLength.length">
                     <div
-                      v-for="(item, index) in fairDetailRef.booths"
+                      v-for="(item, index) in boothsLength"
                       :key="index"
                       class="col-12 col-lg-4 flex-grow-1"
                     >
-                      <div class="card shadow-sm h-100">
-                        <div class="card-header">
-                          <a href="#">
+                      <a :href="fairDetailRef.jobFairId + `/` + item.boothId">
+                        <div class="card shadow-sm h-100">
+                          <div class="card-header">
                             <img
                               class="avatar-sm me-2 img-fluid rounded-circle"
                               src="https://picsum.photos/id/237/200/300"
                               alt="avatar"
                             />
-                            {{ item.BoothName }}
-                          </a>
-                        </div>
-                        <div class="card-body">
-                          <a href="#">
-                            <img
-                              src="@/assets/img/fsoft-tuyen-dung.jpg"
-                              class="card-img-top rounded py-2"
-                              alt="blog image"
-                            />
-                          </a>
-                          <h5 class="h5">{{ item.BoothName }}</h5>
-                          <h6 class="h6 mb-1">
-                            {{ item.BoothDescription }}
-                          </h6>
-                          <div class="small mb-3">
-                            <span class="icon icon-small"
-                              ><span class="far fa-clock"></span
-                            ></span>
-                            10:30 - 11:00
+                            {{ item.boothName }}
+                          </div>
+                          <div class="card-body">
+
+                              <img
+                                src="@/assets/img/fsoft-tuyen-dung.jpg"
+                                class="card-img-top rounded py-2"
+                                alt="blog image"
+                              />
+
+                            <h5 class="h5">{{ item.boothName }}</h5>
+                            <h6 class="h6 mb-1">
+                              {{ item.boothDescription }}
+                            </h6>
+                            <div class="small mb-3">
+                              <span class="icon icon-small"
+                                ><span class="far fa-clock"></span
+                              ></span>
+                              10:30 - 11:00
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </a>
                     </div>
                   </div>
                   <div v-else>
@@ -383,52 +215,10 @@ const fetchJobFairDetail = async () => {
   // console.log("fair detail: ", fair);
   fairDetailRef.value = fair;
   boothsLength.value = fair.booths;
-  // console.log("booths: ", boothsLength.value);
+  console.log("booths: ", boothsLength.value);
 };
 fetchJobFairDetail();
 
-const fetchBoothList = () => {
-  const comId = parseJwt();
-  // console.log("jwt: ", comId);
-  boothService
-    .getBoothByComId(parseInt(comId))
-    .then((resp) => {
-      console.log("booth from comid list: ", resp);
-      boothList.value = resp;
-    })
-    .catch((e) => {
-      const errCode = e.messages[0].status;
-      console.log("err :>> ", errCode);
-      if (errCode === 404) {
-        boothList.value = null;
-      }
-    });
-};
-fetchBoothList();
-const handleFileUpload = (evt) => {
-  const path = evt.target.value;
-  // console.log(path);
-  boothDetail.thumbnail = path;
-};
-
-const handleCreate = (e) => {
-  const comId = parseJwt();
-  // console.log(boothDetail.name);
-  // console.log(boothDetail.desc);
-  // console.log(boothDetail.thumbnail);
-
-  const payload = {
-    boothName: boothDetail.name,
-    boothDescription: boothDetail.desc,
-    boothThumbnail: boothDetail.thumbnail,
-    jobFairId: fairIdFromRoute,
-    companyId: parseInt(comId),
-  };
-
-  // console.log(payload);
-
-  boothService.createBooth(payload).then(() => (isCreated.value = true));
-};
 const handleDelete = () => {
   const data = {
     id: fairIdFromRoute,

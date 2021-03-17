@@ -283,34 +283,36 @@
                       :key="index"
                       class="col-12 col-lg-4 flex-grow-1"
                     >
-                      <div class="card shadow-sm h-100">
-                        <div class="card-header">
-                          <a href="#">
-                            <img
-                              class="avatar-sm me-2 img-fluid rounded-circle"
-                              src="https://picsum.photos/id/237/200/300"
-                              alt="avatar"
-                            />
-                            {{ item.BoothName }}
-                          </a>
-                        </div>
-                        <div class="card-body">
-                          <a href="#">
-                            <img
-                              src="@/assets/img/fsoft-tuyen-dung.jpg"
-                              class="card-img-top rounded py-2"
-                              alt="blog image"
-                            />
-                          </a>
-                          <h5 class="h5">{{ item.BoothName }}</h5>
-                          <h6 class="h6 mb-1">
-                            {{ item.BoothDescription }}
-                          </h6>
-                          <div class="small mb-3">
-                            <span class="icon icon-small"
-                              ><span class="far fa-clock"></span
-                            ></span>
-                            10:30 - 11:00
+                      <div v-if="item.companyId != comId">
+                        <div class="card shadow-sm h-100">
+                          <div class="card-header">
+                            <a href="#">
+                              <img
+                                class="avatar-sm me-2 img-fluid rounded-circle"
+                                src="https://picsum.photos/id/237/200/300"
+                                alt="avatar"
+                              />
+                              {{ item.boothName }}
+                            </a>
+                          </div>
+                          <div class="card-body">
+                            <a href="#">
+                              <img
+                                src="@/assets/img/fsoft-tuyen-dung.jpg"
+                                class="card-img-top rounded py-2"
+                                alt="blog image"
+                              />
+                            </a>
+                            <h5 class="h5">{{ item.boothName }}</h5>
+                            <h6 class="h6 mb-1">
+                              {{ item.boothDescription }}
+                            </h6>
+                            <div class="small mb-3">
+                              <span class="icon icon-small"
+                                ><span class="far fa-clock"></span
+                              ></span>
+                              10:30 - 11:00
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -363,6 +365,7 @@ const boothDetail = {
 const route = useRoute();
 const router = useRouter();
 const fairIdFromRoute = Number(route.params.jobFairId);
+
 const parseJwt = () => {
   let token = sessionStorage.getItem("token");
   var base64Url = token.split(".")[1];
@@ -378,6 +381,8 @@ const parseJwt = () => {
   let id = JSON.parse(jsonPayload);
   return id.sub;
 };
+const comId = parseJwt();
+
 const fetchJobFairDetail = async () => {
   const fair = await jobFairService.getFair(fairIdFromRoute);
   // console.log("fair detail: ", fair);
@@ -388,7 +393,6 @@ const fetchJobFairDetail = async () => {
 fetchJobFairDetail();
 
 const fetchBoothList = () => {
-  const comId = parseJwt();
   // console.log("jwt: ", comId);
   boothService
     .getBoothByComId(parseInt(comId))
