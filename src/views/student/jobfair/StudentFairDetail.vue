@@ -440,7 +440,7 @@ const handleDelete = () => {
     .unregisterFair(data)
     .then((resp) => {
       console.log("resp :>> ", resp);
-      if (resp) router.push("/employer/jobfair/");
+      if (resp) router.push("/student/jobfair/");
     })
     .catch((err) => {
       console.log("err :>> ", err);

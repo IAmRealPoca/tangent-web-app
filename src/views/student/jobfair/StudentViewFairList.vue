@@ -308,7 +308,7 @@ export default {
         .then((resp) => {
           console.log(resp);
           if (resp) {
-            router.push("/employer/jobfair/" + jobFairId);
+            router.push("/student/jobfair/" + jobFairId);
           }
         })
         .catch((err) => {

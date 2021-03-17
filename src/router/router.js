@@ -361,7 +361,7 @@ const routes = [
   },
   {
     path: "/student/jobfair",
-    name: "StudentViewCoverLetterList",
+    name: "StudentViewFairList",
     component: StudentViewFairList,
     meta: {
       requiresAuth: true,
@@ -370,7 +370,7 @@ const routes = [
   },
   {
     path: "/student/jobfair/:jobfairId",
-    name: "StudentViewCoverLetterList",
+    name: "StudentFairDetail",
     component: StudentFairDetail,
     meta: {
       requiresAuth: true,
@@ -379,7 +379,7 @@ const routes = [
   },
   {
     path: "/student/jobfair/:jobfairId/:boothId",
-    name: "StudentViewCoverLetterList",
+    name: "StudentBooth",
     component: StudentBooth,
     meta: {
       requiresAuth: true,

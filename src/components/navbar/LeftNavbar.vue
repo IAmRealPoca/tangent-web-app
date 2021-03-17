@@ -214,6 +214,10 @@ export default {
             title: "Cover Letter",
             url: "/student/coverletter",
           },
+          {
+            title: "JobFair",
+            url: "/student/jobfair",
+          },
         ],
       },
     ],
