@@ -22,8 +22,8 @@
           </div>
           <div class="btn-toolbar mb-2 mb-md-0">
             <a class="btn btn-sm btn-dark" @click="handleMarkAsFavorite"
-              ><span class="fas fa-plus me-2"></span> Mark as interested </a
-            >
+              ><span class="fas fa-plus me-2"></span> Mark as interested
+            </a>
             <!-- <div class="btn-group ms-2 ms-lg-3">
               <button type="button" class="btn btn-sm btn-outline-primary">
                 Share
@@ -232,14 +232,28 @@
                                   <div class="h5">
                                     {{ applicationInfo.created }}
                                   </div>
-                                  
                                 </div>
-                                <!-- <div class="card border-light shadow-sm" v-if="Object.keys(applicationInfo.coverLetter).length > 0">
-                                  <h2 class="h4">CV</h2>
-                                  <div class="h5">Title: {{ applicationInfo.coverLetter.title }}</div>
-                                  <div class="h5">Applied: {{ applicationInfo.coverLetter.created }}</div>
-
-                                </div> -->
+                                <div
+                                  class="card border-light shadow-sm"
+                                  v-if="
+                                    applicationInfo.coverLetter
+                                  "
+                                >
+                                  <h2 class="h4"></h2>
+                                  <div class="h5">
+                                    {{ applicationInfo.coverLetter.title }}
+                                  </div>
+                                  <div class="h5">
+                                    {{ applicationInfo.coverLetter.created }}
+                                  </div>
+                                  <video width="320" height="240" controls>
+                                    <source
+                                      :src="
+                                        applicationInfo.coverLetter.videoUrl
+                                      "
+                                    />
+                                  </video>
+                                </div>
                               </div>
                             </div>
                           </div>

@@ -232,7 +232,7 @@
                     <th class="border-bottom">Date Graduated</th>
                     <th class="border-bottom">School</th>
                     <th class="border-bottom">Status</th>
-                    <th class="border-bottom">Action</th>
+                    <th class="border-bottom"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -271,18 +271,18 @@
                         </div>
                       </a>
                     </td>
-                    <td><span class="fw-normal">10 Feb 2020</span></td>
+                    <td><span class="fw-normal">{{ formatDate(appliedCV.cv.created) }}</span></td>
                     <td>
                       <span class="fw-normal"
                         ><span
                           class="fas fa-check-circle text-success me-2"
                         ></span
-                        >Email</span
+                        >FPT University</span
                       >
                     </td>
                     <!-- <td><span class="fw-normal text-success">Active</span></td> -->
                     <td>
-                      <div class="ms-sm-3">
+                      <div class="ms-sm-0">
                         <span :class="appliedCV.statusClass">{{
                           appliedCV.statusString
                         }}</span>
@@ -290,7 +290,7 @@
                     </td>
 
                     <td>
-                      <div class="btn-group">
+                      <!-- <div class="btn-group">
                         <button
                           class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
                           data-bs-toggle="dropdown"
@@ -324,7 +324,7 @@
                         class="fas fa-times-circle text-danger ms-2"
                         title="Delete"
                         data-bs-toggle="tooltip"
-                      ></span>
+                      ></span> -->
                     </td>
                   </tr>
                 </tbody>
@@ -408,6 +408,10 @@ export default {
       router.push(`/employer/jobs/${jobId}/applicants/${applicationId}`);
     };
 
+    const formatDate = (time) => {
+      return new Date(time).toLocaleString();
+    };
+
 const checkStatusCSSClass = (statusInt) => {
       let text = "";
       const fwBold = "badge super-badge badge-lg";
@@ -430,6 +434,7 @@ const checkStatusCSSClass = (statusInt) => {
     return {
       listAppliedCVs,
       handleApplicantClick,
+      formatDate,
     };
   }
 }

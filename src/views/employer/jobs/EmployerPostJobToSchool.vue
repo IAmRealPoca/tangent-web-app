@@ -121,8 +121,8 @@ export default {
 
     // const user = JSON.parse(sessionStorage.getItem("userInfo"));
     const fetchApprovedSchools = async () => {
-      const result = await employerService.getApprovalInfo();
-      approvedSchools.value = result.filter((e) => {
+      let result = await employerService.getApprovalInfo();
+      result = result.filter((e) => {
           return e.status === 0;
       }); //get schools that have status = approved
       return result;
