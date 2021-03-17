@@ -262,6 +262,7 @@ export default {
         ...resp,
         address: fullAddress.value[0],
         location: fullAddress.value[1],
+        dueDate: new Date(resp.dueDate).toLocaleDateString()
       };
     };
     const vnLocation = ref([

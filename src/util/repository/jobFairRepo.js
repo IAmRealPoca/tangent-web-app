@@ -20,6 +20,12 @@ export default {
   unregis(payload) {
     return http.delete(`${path}/unregister?${payload}`);
   },
+  join(payload) {
+    return http.post(`${path}/join`, payload);
+  },
+  leave(payload) {
+    return http.delete(`${path}/leave?${payload}`);
+  },
   update(payload, id) {
     return http.put(`${path}/${id}`, payload);
   },

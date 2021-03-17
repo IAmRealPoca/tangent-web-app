@@ -380,7 +380,8 @@ export default {
   setup() {
     const route = useRoute();
     const router = useRouter();
-    const jobId = Number(route.params.jobId);
+    // const jobId = Number(route.params.jobId);
+    const jobId = 1002;
     const listAppliedCVs = ref([]);
 
     const fetchAppliedCV = (jobId) => {

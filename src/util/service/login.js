@@ -7,30 +7,64 @@ const authRepo = repoFactory.get("authRepo");
 
 //For testing purpose. TO BE CHANGED
 //To the line above: WHEN TO CHANGE -Nyam IV-
-const login = (schoolId, accountTypeId) => {
+const login = () => {
+  const registerGoogle = (schoolId, accountTypeId) => {
     // console.log('login');
     return new Promise((resolve, reject) => {
-        // console.log('id ',schoolId);
-        const provider = new firebase.auth.GoogleAuthProvider();
-        // console.log(provider);
-        firebase.auth().signInWithPopup(provider)
-            .then(userCredential => {
-                return userCredential.user?.getIdToken(true)
-            })
-            .then(token => {
-                return authRepo.getLogin({
-                    token,
-                    flg: accountTypeId,
-                    schoolId,
-                });
-            })
-            .then(resp => {
-                resolve(resp.data);
-            })
-            .catch(err => {
-                console.log(err);
-                reject(err);
-            });
+      // console.log('id ',schoolId);
+      const provider = new firebase.auth.GoogleAuthProvider();
+      // console.log(provider);
+      firebase.auth().signInWithPopup(provider)
+        .then(userCredential => {
+          return userCredential.user?.getIdToken(true)
+        })
+        .then(token => {
+          return authRepo.getRegister({
+            token,
+            flg: accountTypeId,
+            schoolId,
+          });
+        })
+        .then(resp => {
+          resolve(resp.data);
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
+        });
     });
-};
-export { login as loginService };
+  };
+
+  const loginGoogle = (schoolId) => {
+    // console.log('login');
+    return new Promise((resolve, reject) => {
+      // console.log('id ',schoolId);
+      const provider = new firebase.auth.GoogleAuthProvider();
+      // console.log(provider);
+      firebase.auth().signInWithPopup(provider)
+        .then(userCredential => {
+          return userCredential.user?.getIdToken(true)
+        })
+        .then(token => {
+          return authRepo.getLogin({
+            token,
+            schoolId,
+          });
+        })
+        .then(resp => {
+          resolve(resp.data);
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  };
+
+  return {
+    registerGoogle,
+    loginGoogle,
+  }
+}
+
+export { login as useLoginService };

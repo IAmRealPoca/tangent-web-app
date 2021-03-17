@@ -36,6 +36,7 @@
     <nav
       id="sidebarMenu"
       class="sidebar d-md-block bg-dark text-white collapse"
+      :class="{ contracted: isContracted }"
       data-simplebar
     >
       <div class="sidebar-inner px-4 pt-3">
@@ -142,6 +143,8 @@
 </template>
 
 <script>
+import { watchEffect,ref } from "vue";
+import { useStore } from "vuex";
 export default {
   name: "LeftNavbar",
   data: () => ({
@@ -211,12 +214,25 @@ export default {
             title: "Cover Letter",
             url: "/student/coverletter",
           },
+          {
+            title: "JobFair",
+            url: "/student/jobfair",
+          },
         ],
       },
     ],
   }),
   props: {
     role: String,
+  },
+  setup() {
+    const store = useStore();
+    const isContracted = ref(false);
+    watchEffect(() => {
+      // console.log("store.state.isContracted :>> ", store.state.isContracted);
+      isContracted.value = store.state.isContracted;
+    });
+    return { isContracted };
   },
 };
 </script>

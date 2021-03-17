@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div>{{ status }}</div>
-    <div v-if="fileList">
+    <!-- <div>{{ status }}</div> -->
+    <!-- <div v-if="fileList">
       <div v-for="(item, index) in fileList" :key="index">
         {{ item }}
       </div>
-    </div>
-    <img :src="sasImg" alt="" srcset="" />
-    <a :href="sasImg" class="btn btn-primary">Download</a>
+    </div> -->
+    <!-- <img :src="sasImg" alt="" srcset="" /> -->
+    <!-- <a :href="sasImg" class="btn btn-primary">Download</a> -->
     <a class="btn btn-primary" @click.prevent="incre">Incre</a>
     <a class="btn btn-primary" @click.prevent="loda">Lodas</a>
   </div>
@@ -24,7 +24,7 @@ import {
   newPipeline,
 } from "@azure/storage-blob";
 import { ref } from "@vue/reactivity";
-import { onMounted } from "@vue/runtime-core";
+import { onMounted, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import _ from "lodash";
 
@@ -32,32 +32,43 @@ const store = useStore();
 
 console.log(store.state.count);
 
-const blobSasUrl =
-  "https://namiv.blob.core.windows.net/tangent-docs?sv=2020-04-08&st=2021-03-09T08%3A29%3A17Z&se=2021-03-10T08%3A29%3A17Z&sr=c&sp=ral&sig=Pypj%2BhtX5e%2Fq7WhYbBuC3ZBnfcaAi0ZQPygK%2B0ISAzY%3D";
+// const blobSasUrl =
+//   "https://namiv.blob.core.windows.net/tangent-docs?sv=2020-04-08&st=2021-03-09T08%3A29%3A17Z&se=2021-03-10T08%3A29%3A17Z&sr=c&sp=ral&sig=Pypj%2BhtX5e%2Fq7WhYbBuC3ZBnfcaAi0ZQPygK%2B0ISAzY%3D";
 
 // Create a new BlobServiceClient
 // const blobServiceClient = new BlobServiceClient(blobSasUrl);
-const baseImgUrl =
-  "https://namiv.blob.core.windows.net/tangent-docs/Gura-20210305T165721617.jpg";
+// const baseImgUrl =
+//   "https://namiv.blob.core.windows.net/tangent-docs/Gura-20210305T165721617.jpg";
 const accountname = "namiv";
-const sasToken =
-  "?sv=2020-04-08&st=2021-03-09T09%3A10%3A30Z&se=2021-03-10T09%3A10%3A30Z&sr=c&sp=rl&sig=jBymB%2FSTnSpgmpxcvIWEFVfqPfhWrIdAGF5hiowP83M%3D";
-const pipeline = newPipeline(new AnonymousCredential());
+// const sasToken =
+//   "?sv=2020-04-08&st=2021-03-09T09%3A10%3A30Z&se=2021-03-10T09%3A10%3A30Z&sr=c&sp=rl&sig=jBymB%2FSTnSpgmpxcvIWEFVfqPfhWrIdAGF5hiowP83M%3D";
 
-const blobServiceClient = new BlobServiceClient(
-  `https://${accountname}.blob.core.windows.net?${sasToken}`,
-  pipeline
-);
+// const pipeline = newPipeline(new AnonymousCredential());
 
-const sasImg = baseImgUrl + sasToken;
+// const blobServiceClient = new BlobServiceClient(
+//   `https://${accountname}.blob.core.windows.net?${sasToken}`,
+//   pipeline
+// );
+
+// const sasImg = baseImgUrl + sasToken;
+
+const { proxy } = getCurrentInstance();
+// var config = {
+//   method: "get",
+//   url: "https://thongtindoanhnghiep.co/api/city",
+//   headers: {
+//     Cookie: "__cfduid=d1bca5f4e425aae7850f3bf19dc4492f21615959598",
+//   },
+// };
+// proxy.$http(config).then((resp) => console.log(JSON.parse(resp)));
 
 // Create a unique name for the container by
 // appending the current time to the file name
-const containerName = "tangent-docs";
+// const containerName = "tangent-docs";
 
-// Get a container client from the BlobServiceClient
-const containerClient = blobServiceClient.getContainerClient(containerName);
-console.warn(containerClient);
+// // Get a container client from the BlobServiceClient
+// const containerClient = blobServiceClient.getContainerClient(containerName);
+// console.warn(containerClient);
 
 const status = ref("");
 const fileList = ref([]);

@@ -1,5 +1,6 @@
 import Dashboard from "@/views/Dashboard.vue";
 import Login from "@/views/Login.vue";
+import Register from "@/views/Register.vue";
 
 //Employers Jobs related
 import EmployerProfile from "@/views/employer/EmployerProfile.vue";
@@ -37,6 +38,10 @@ import StudentViewCoverLetterList from '@/views/student/coverletter/StudentViewC
 import StudentViewCVList from '@/views/student/cv/StudentViewCVList.vue';
 import StudentViewCVDetail from "@/views/student/cv/StudentViewCVDetail.vue";
 import StudentCreateCV from "@/views/student/cv/StudentCreateCV.vue";
+import StudentFairDetail from "@/views/student/jobfair/StudentFairDetail.vue";
+import StudentBooth from "@/views/student/jobfair/StudentBooth.vue";
+import StudentViewFairList from "@/views/student/jobfair/StudentViewFairList.vue";
+
 import LandingPage from "@/views/LandingPage.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
@@ -51,6 +56,14 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+    meta: {
+      onlyGuest: true,
+    },
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
     meta: {
       onlyGuest: true,
     },
@@ -341,6 +354,33 @@ const routes = [
     path: "/student/coverletter",
     name: "StudentViewCoverLetterList",
     component: StudentViewCoverLetterList,
+    meta: {
+      requiresAuth: true,
+      role: EmployeeRole,
+    },
+  },
+  {
+    path: "/student/jobfair",
+    name: "StudentViewFairList",
+    component: StudentViewFairList,
+    meta: {
+      requiresAuth: true,
+      role: EmployeeRole,
+    },
+  },
+  {
+    path: "/student/jobfair/:jobFairId",
+    name: "StudentFairDetail",
+    component: StudentFairDetail,
+    meta: {
+      requiresAuth: true,
+      role: EmployeeRole,
+    },
+  },
+  {
+    path: "/student/jobfair/:jobfairId/:boothId",
+    name: "StudentBooth",
+    component: StudentBooth,
     meta: {
       requiresAuth: true,
       role: EmployeeRole,

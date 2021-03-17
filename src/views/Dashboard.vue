@@ -653,7 +653,7 @@ export default {
   },
   components: {
     MainContent
-  }
+  },
 }
 </script>
 

@@ -3,7 +3,7 @@ import repoFactory from "@/util/repoFactory";
 const employeeRepo = repoFactory.get("employeeRepo");
 
 const getCurrEmployeeInfo = () => {
-    return employeeRepo.getCurrEmployerInfo();
+    return employeeRepo.getCurrEmployeeInfo();
 };
 
 const getListCV = () => {
