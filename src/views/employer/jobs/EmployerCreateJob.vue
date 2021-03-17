@@ -284,16 +284,16 @@ export default {
 
     const newJobData = ref({});
 
-    const handleAddButton = () => {
+    const handleAddButton = async () => {
       console.log(newJobData.value.dueDate);
       newJobData.value = {
         ...newJobData.value,
         "skillId": skillSelected.value.skillId,
         "location": newJobData.value.address.concat("; ", locationSelected.value.locTitle),
       };
-      recruitmentPostService.postNewJob(newJobData.value);
+      const resp = await recruitmentPostService.postNewJob(newJobData.value);
       console.log(newJobData.value);
-      router.push("/employer/jobs");
+      if (resp) router.push("/employer/jobs");
     };
 
     onMounted(() => {

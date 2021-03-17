@@ -150,13 +150,13 @@ export default {
     const userToken = sessionStorage.getItem("token");
     // console.log("user", userToken);
 
-    if (userToken) {
-      router.push("/");
-    }
     onMounted(() => {
       schoolService.getListOfSchools().then((resp) => {
         listOfSchools.value = resp;
       });
+      if (userToken) {
+        router.push("/dashboard");
+      }
       // this._setUser(user ? JSON.parse(user) : null);
     });
 
