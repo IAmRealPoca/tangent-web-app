@@ -312,7 +312,7 @@
 
 <script>
 // import moment from "moment";
-import * as constants from "./constants.js";
+import * as constants from "./companyStatusUtil.js";
 import { ref, onMounted } from "vue";
 import MainContent from "@/components/MainContent";
 import { useRouter } from "vue-router";

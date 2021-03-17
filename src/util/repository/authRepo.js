@@ -4,10 +4,14 @@ import { axiosBase } from '../http/client.js';
 // const http = axiosInstance(axiosBase());
 const http = axiosBase();
 
-const path = "/auth/google";
+const path = "/auth";
 
 export default {
     getLogin(payload) {
-        return http.post(`${path}`,payload);
+        return http.post(`${path}/login/google`,payload);
     },
+
+    getRegister(payload) {
+      return http.post(`${path}/register/google`,payload);
+    }
 };

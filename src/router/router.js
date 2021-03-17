@@ -1,5 +1,6 @@
 import Dashboard from "@/views/Dashboard.vue";
 import Login from "@/views/Login.vue";
+import Register from "@/views/Register.vue";
 
 //Employers Jobs related
 import EmployerProfile from "@/views/employer/EmployerProfile.vue";
@@ -51,6 +52,14 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+    meta: {
+      onlyGuest: true,
+    },
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
     meta: {
       onlyGuest: true,
     },
