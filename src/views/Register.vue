@@ -103,7 +103,7 @@
                   </button>
                 </div>
                 <p class="text-center">
-                  <a href="/register" class="text-gray-700"
+                  <a href="/login" class="text-gray-700"
                     ><i class="fas fa-angle-left me-2"></i> Click here to
                     login.
                   </a>
