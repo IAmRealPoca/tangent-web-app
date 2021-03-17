@@ -38,6 +38,10 @@ import StudentViewCoverLetterList from '@/views/student/coverletter/StudentViewC
 import StudentViewCVList from '@/views/student/cv/StudentViewCVList.vue';
 import StudentViewCVDetail from "@/views/student/cv/StudentViewCVDetail.vue";
 import StudentCreateCV from "@/views/student/cv/StudentCreateCV.vue";
+import StudentFairDetail from "@/views/student/jobfair/StudentFairDetail.vue";
+import StudentBooth from "@/views/student/jobfair/StudentBooth.vue";
+import StudentViewFairList from "@/views/student/jobfair/StudentViewFairList.vue";
+
 import LandingPage from "@/views/LandingPage.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
@@ -350,6 +354,33 @@ const routes = [
     path: "/student/coverletter",
     name: "StudentViewCoverLetterList",
     component: StudentViewCoverLetterList,
+    meta: {
+      requiresAuth: true,
+      role: EmployeeRole,
+    },
+  },
+  {
+    path: "/student/jobfair",
+    name: "StudentViewCoverLetterList",
+    component: StudentViewFairList,
+    meta: {
+      requiresAuth: true,
+      role: EmployeeRole,
+    },
+  },
+  {
+    path: "/student/jobfair/:jobfairId",
+    name: "StudentViewCoverLetterList",
+    component: StudentFairDetail,
+    meta: {
+      requiresAuth: true,
+      role: EmployeeRole,
+    },
+  },
+  {
+    path: "/student/jobfair/:jobfairId/:boothId",
+    name: "StudentViewCoverLetterList",
+    component: StudentBooth,
     meta: {
       requiresAuth: true,
       role: EmployeeRole,
