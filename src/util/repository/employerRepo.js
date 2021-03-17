@@ -6,44 +6,48 @@ const http = axiosInstance(axiosBase());
 const path = "/employers";
 
 export default {
-    getCurrEmployerInfo() {
-        return http.get(`${path}` + "/info");
-    },
+  getCurrEmployerInfo() {
+    return http.get(`${path}` + "/info");
+  },
 
-    getCurrEmpJobs() {
-        return http.get(`${path}/recruitment-posts`);
-    },
+  getCurrEmpJobs() {
+    return http.get(`${path}/recruitment-posts`);
+  },
 
-    getOneByIdCurrEmployer(jobId) {
-        return http.get(`${path}/recruitment-posts/${jobId}`);
-    },
+  getOneByIdCurrEmployer(jobId) {
+    return http.get(`${path}/recruitment-posts/${jobId}`);
+  },
 
-    getAppliedCVFromJobId(jobId) {
-        return http.get(`${path}/recruitment-posts/${jobId}/applied-cvs`);
-    },
+  getAppliedCVFromJobId(jobId) {
+    return http.get(`${path}/recruitment-posts/${jobId}/applied-cvs`);
+  },
 
-    getAppliedCVFromJobIdAndApplicationId(jobId, applicationId) {
-        return http.get(`${path}/recruitment-posts/${jobId}/applied-cvs/${applicationId}`);
-    },
+  getAppliedCVFromJobIdAndApplicationId(jobId, applicationId) {
+    return http.get(`${path}/recruitment-posts/${jobId}/applied-cvs/${applicationId}`);
+  },
 
-    getApprovalInfo() {
-        return http.get(`${path}/approvals`);
-    },
+  getApprovalInfo() {
+    return http.get(`${path}/approvals`);
+  },
 
-    
-    postJobToSchool(jobId, payload) {
-        return http.post(`${path}/recruitment-posts/${jobId}/post-job`, payload);
-    },
 
-    requestConnection(payload) {
-        return http.post(`${path}/approvals/request`, payload);
-    },
+  postJobToSchool(jobId, payload) {
+    return http.post(`${path}/recruitment-posts/${jobId}/post-job`, payload);
+  },
 
-    getJobPostedToSchool() {
-        return http.get(`${path}/recruitment-posts/posted-jobs`);
-    },
+  requestConnection(payload) {
+    return http.post(`${path}/approvals/request`, payload);
+  },
 
-    getPostedSchoolListByJobPostId(postId) {
-        return http.get(`${path}/recruitment-posts/${postId}/posted-jobs/schools`);
-    },
+  removeConnection(payload) {
+    return http.put(`${path}/approvals/remove`, payload);
+  },
+
+  getJobPostedToSchool() {
+    return http.get(`${path}/recruitment-posts/posted-jobs`);
+  },
+
+  getPostedSchoolListByJobPostId(postId) {
+    return http.get(`${path}/recruitment-posts/${postId}/posted-jobs/schools`);
+  },
 }

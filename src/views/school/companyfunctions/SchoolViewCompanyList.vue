@@ -358,6 +358,8 @@ export default {
               return (res.status = constants.STATUS_ENUM.BLOCKED);
             if (res.status === 3)
               return (res.status = constants.STATUS_ENUM.DECLINED);
+              if (res.status === 4) 
+              return (res.status = constants.STATUS_ENUM.COMPANY_REMOVED_RELATION);
             if (res.status === null)
               return (res.status = constants.STATUS_ENUM.NOT_YET_REQUESTED);
           });

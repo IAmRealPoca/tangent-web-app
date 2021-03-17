@@ -271,7 +271,7 @@
                           </button>
                         </div>
                         <div v-if="aSchool.status.statusId === 0">
-                          <button class="btn btn-outline-danger" type="button">
+                          <button class="btn btn-outline-danger" type="button" @click="handleRemoveConnectionClick(aSchool.accountId)">
                             Remove
                           </button>
                         </div>
@@ -483,6 +483,13 @@ export default {
       employerService.requestConnection(payload);
     };
 
+    const handleRemoveConnectionClick = (schoolId) => {
+      const payload = {
+        schoolId: schoolId,
+      };
+      employerService.removeConnection(payload);
+    }
+
     const formatDate = (time) => {
       return new Date(time).toLocaleString();
     };
@@ -498,6 +505,7 @@ export default {
 
       formatDate,
       handleRequestClick,
+      handleRemoveConnectionClick,
     };
   },
 };
