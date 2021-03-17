@@ -106,6 +106,7 @@ import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import * as employerService from "@/util/service/employerService.js";
 import MainContent from "@/components/MainContent.vue";
+import _ from "lodash";
 export default {
   name: "EmployerPostJobToSchool",
   components: {
@@ -119,12 +120,33 @@ export default {
     const approvedSchools = ref([]);
 
     // const user = JSON.parse(sessionStorage.getItem("userInfo"));
-    const fetchApprovedSchools = () => {
-      employerService.getApprovalInfo().then((resp) => {
-        approvedSchools.value = resp.filter((e) => {
+    const fetchApprovedSchools = async () => {
+      const result = await employerService.getApprovalInfo();
+      approvedSchools.value = result.filter((e) => {
           return e.status === 0;
-        });
+      }); //get schools that have status = approved
+      return result;
+    };
+
+    const fetchSchoolPostedToList = async () => {
+      const result = await employerService.getPostedSchoolListByJobPostId(jobPostId);
+      return result;
+    };
+
+    const fetchThenMergeToGetUnpostedSchool = async () => {
+      approvedSchools.value = await fetchApprovedSchools();
+      const schoolPosted = await fetchSchoolPostedToList();
+      console.log("approvedSchools: ", approvedSchools.value);
+      console.log("schoolPosted: ", schoolPosted);
+      
+      //approvedSchools.value =
+      
+       schoolPosted.filter(e => {
+         console.log("e.accountId: ", e.accountId);
+         console.log("err", _.find(schoolPosted, sp => sp.accountId === e.accountId));
+        if (!_.find(schoolPosted, sp => sp.accountId === e.accountId)) return e;
       });
+      console.log("approvedSchools filtered: ", approvedSchools.value);
     };
 
     const handlePostToSchoolButton = () => {
@@ -138,6 +160,8 @@ export default {
 
     onMounted(() => {
       fetchApprovedSchools();
+      // fetchSchoolPostedToList();
+      fetchThenMergeToGetUnpostedSchool()
     });
 
     const handleGoBack = () => {
