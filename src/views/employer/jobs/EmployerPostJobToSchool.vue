@@ -139,12 +139,10 @@ export default {
       console.log("approvedSchools: ", approvedSchools.value);
       console.log("schoolPosted: ", schoolPosted);
       
-      //approvedSchools.value =
+      approvedSchools.value =
       
-       schoolPosted.filter(e => {
-         console.log("e.accountId: ", e.accountId);
-         console.log("err", _.find(schoolPosted, sp => sp.accountId === e.accountId));
-        if (!_.find(schoolPosted, sp => sp.accountId === e.accountId)) return e;
+       approvedSchools.value.filter(e => {
+        if (!_.find(schoolPosted, sp => sp.accountId === e.school.accountId)) return e;
       });
       console.log("approvedSchools filtered: ", approvedSchools.value);
     };
