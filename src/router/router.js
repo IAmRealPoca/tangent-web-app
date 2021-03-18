@@ -44,6 +44,8 @@ import StudentViewFairList from "@/views/student/jobfair/StudentViewFairList.vue
 
 import LandingPage from "@/views/LandingPage.vue";
 
+import EmployeeDashboard from '@/components/DashboardComponent/EmployeeDashboard'
+
 import { createRouter, createWebHistory } from "vue-router";
 
 const EmployerRole = "Employer";
@@ -70,20 +72,24 @@ const routes = [
   },
   {
     path: "/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
+    // name: "Dashboard",
+    // component: Dashboard,
+    name: "EmployeeDashboard",
+    component: EmployeeDashboard,
     meta: {
       requiresAuth: true,
+      // tem
+      role: EmployeeRole,
     },
   },
-    {
-        path: "/",
-        name: "LandingPage",
-        component: LandingPage,
-        meta: {
-            requiresAuth: false,
-        }
-    },
+  {
+    path: "/",
+    name: "LandingPage",
+    component: LandingPage,
+    meta: {
+      requiresAuth: false,
+    }
+  },
   {
     path: "/employer/profile",
     name: "EmployerProfile",
@@ -386,7 +392,7 @@ const routes = [
       role: EmployeeRole,
     },
   },
-  
+
 ];
 
 const router = createRouter({
