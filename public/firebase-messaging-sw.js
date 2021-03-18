@@ -1,15 +1,24 @@
-importScripts("https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js");
-importScripts("https://www.gstatic.com/firebasejs/7.3.0/firebase-messaging.js");
+importScripts("https://www.gstatic.com/firebasejs/7.22.0/firebase-app.js");
+importScripts("https://www.gstatic.com/firebasejs/7.22.0/firebase-messaging.js");
 
 // The contents of firebaseConfig can be obtained from the firebase console.
-var firebaseConfig = {
+// var firebaseConfig = {
+//   apiKey: "AIzaSyCj4pN0htCDHQR72-LgEsFx6QlItAoBlqw",
+//   authDomain: "cvideos-905a8.firebaseapp.com",
+//   databaseURL: "https://cvideos-905a8.firebaseio.com/",
+//   projectId: "cvideos-905a8",
+//   storageBucket: "cvideo-905a8.appspot.com",
+//   messagingSenderId: "596123512687",
+//   appId: "1:596123512687:web:0e2c4583dc46ec02f0029a",
+// };
+const firebaseConfig = {
   apiKey: "AIzaSyCj4pN0htCDHQR72-LgEsFx6QlItAoBlqw",
   authDomain: "cvideos-905a8.firebaseapp.com",
-  databaseURL: "https://cvideos-905a8.firebaseio.com/",
+  databaseURL: "https://cvideos-905a8.firebaseio.com",
   projectId: "cvideos-905a8",
-  storageBucket: "cvideo-905a8.appspot.com",
-  messagingSenderId: "596123512687",
-  appId: "1:596123512687:web:0e2c4583dc46ec02f0029a",
+  storageBucket: "cvideos-905a8.appspot.com",
+  messagingSenderId: "933755551828",
+  appId: "1:933755551828:web:e2c0dd8ac018e2ea932dc1"
 };
 
 // Initialize Firebase
