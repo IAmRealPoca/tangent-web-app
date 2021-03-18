@@ -232,6 +232,7 @@
                                   <div class="h5">
                                     {{ applicationInfo.created }}
                                   </div>
+                                  <PDFDocument v-bind="{url, scale}" />
                                 </div>
                                 <div
                                   class="card border-light shadow-sm"
@@ -298,11 +299,13 @@ import { onMounted, ref } from "vue";
 import MainContent from "@/components/MainContent.vue";
 import * as EmployerService from "@/util/service/employerService";
 import * as recruitmentPost from "@/util/service/recruitmentPostService.js";
+import PDFDocument from "@/components/PDFDocument.vue";
 
 export default {
   name: "EmployerApplicantDetails",
   components: {
     MainContent,
+    PDFDocument,
   },
   setup() {
     const route = useRoute();
@@ -311,6 +314,9 @@ export default {
     const jobId = Number(route.params.jobId);
     const applicationId = Number(route.params.applicationId);
     const jobPostInfo = ref({});
+
+    const url = ref("https://cdn.filestackcontent.com/5qOCEpKzQldoRsVatUPS");
+    const scale = ref(2);
     const fetchCVFromJobAndApplicationId = (jobId, applicationId) => {
       EmployerService.getAppliedCVFromJobIdAndApplicationId(
         jobId,
@@ -336,6 +342,9 @@ export default {
       applicationInfo,
       jobPostInfo,
       handleMarkAsFavorite,
+
+      url,
+      scale,
     };
   },
 };
