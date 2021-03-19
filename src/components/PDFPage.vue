@@ -1,40 +1,46 @@
 <template>
-  
+  <canvas v-bind="canvasAttrs"></canvas>
 </template>
 
 <script>
 export default {
-  props: ['page', 'scale'],
+  name: "PDFPage",
+  props: ["page", "scale"],
   render(h) {
-    const {canvasAttrs: attrs} = this;
-    return h('canvas', {attrs});
+    const { canvasAttrs: attrs } = this;
+    return h("canvas", { attrs });
   },
   created() {
     this.viewport = this.page.getViewport(this.scale);
   },
   computed: {
     canvasAttrs() {
-      let {width, height} = this.viewport;
-      [width, height] = [width, height].map(dim => Math.ceil(dim));
+      let { width, height } = this.viewport;
+      [width, height] = [width, height].map((dim) => Math.ceil(dim));
       const style = this.canvasStyle;
       return {
         width,
         height,
         style,
-        class: 'pdf-page',
+        class: "pdf-page",
       };
     },
 
     canvasStyle() {
-      const {width: actualSizeWidth, height: actualSizeHeight} = this.actualSizeViewport;
+      const {
+        width: actualSizeWidth,
+        height: actualSizeHeight,
+      } = this.actualSizeViewport;
       const pixelRatio = window.devicePixelRatio || 1;
-      const [pixelWidth, pixelHeight] = [actualSizeWidth, actualSizeHeight]
-        .map(dim => Math.ceil(dim / pixelRatio));
-      return `width: ${pixelWidth}px; height: ${pixelHeight}px;`
+      const [pixelWidth, pixelHeight] = [
+        actualSizeWidth,
+        actualSizeHeight,
+      ].map((dim) => Math.ceil(dim / pixelRatio));
+      return `width: ${pixelWidth}px; height: ${pixelHeight}px;`;
     },
 
     actualSizeViewport() {
-      return this.viewport.clone({scale: this.scale});
+      return this.viewport.clone({ scale: this.scale });
     },
   },
   mounted() {
@@ -45,19 +51,15 @@ export default {
     drawPage() {
       if (this.renderTask) return;
 
-      const {viewport} = this;
-      const canvasContext = this.$el.getContext('2d');
-      const renderContext = {canvasContext, viewport};
+      const { viewport } = this;
+      const canvasContext = this.$el.getContext("2d");
+      const renderContext = { canvasContext, viewport };
 
       // PDFPageProxy#render
       // https://mozilla.github.io/pdf.js/api/draft/PDFPageProxy.html
       this.renderTask = this.page.render(renderContext);
-      this.renderTask.
-        then(() => this.$emit('rendered', this.page));
-        this.renderTask.
-        then(/* */).
-        catch(this.destroyRenderTask);
-      
+      this.renderTask.then(() => this.$emit("rendered", this.page));
+      this.renderTask.then(/* */).catch(this.destroyRenderTask);
     },
 
     destroyPage(page) {
@@ -90,10 +92,8 @@ export default {
       this.destroyPage(oldPage);
     },
   },
-
-}
+};
 </script>
 
 <style scoped>
-
 </style>

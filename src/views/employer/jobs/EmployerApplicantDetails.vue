@@ -217,7 +217,7 @@
                                   <option value="2">Cover Letter</option>
                                   <option value="3">Cover Video</option>
                                 </select>
-                              </div> -->
+                              </div> --><PDFDocument v-bind="{url, scale}" />
                               <div class="row pt-4">
                                 <div
                                   class="card border-light shadow-sm"
@@ -232,14 +232,31 @@
                                   <div class="h5">
                                     {{ applicationInfo.created }}
                                   </div>
-                                  <PDFDocument v-bind="{url, scale}" />
+                                  
+                                  
+                                   <!-- <img :src="applicationInfo.cv.cvFile.fileURL" alt=""> -->
                                 </div>
-                                <!-- <div class="card border-light shadow-sm" v-if="Object.keys(applicationInfo.coverLetter).length > 0">
-                                  <h2 class="h4">CV</h2>
-                                  <div class="h5">Title: {{ applicationInfo.coverLetter.title }}</div>
-                                  <div class="h5">Applied: {{ applicationInfo.coverLetter.created }}</div>
-
-                                </div> -->
+                                <div
+                                  class="card border-light shadow-sm"
+                                  v-if="
+                                    applicationInfo.coverLetter
+                                  "
+                                >
+                                  <h2 class="h4"></h2>
+                                  <div class="h5">
+                                    {{ applicationInfo.coverLetter.title }}
+                                  </div>
+                                  <div class="h5">
+                                    {{ applicationInfo.coverLetter.created }}
+                                  </div>
+                                  <video width="320" height="240" controls>
+                                    <source
+                                      :src="
+                                        applicationInfo.coverLetter.videoUrl
+                                      "
+                                    />
+                                  </video>
+                                </div>
                               </div>
                             </div>
                           </div>
