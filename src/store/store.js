@@ -9,6 +9,7 @@ import actions from "./action";
       count: 0,
       userInfo: null,
       isContracted: false,
+      
     };
   },
   mutations,

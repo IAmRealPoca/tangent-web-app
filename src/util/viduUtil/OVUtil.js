@@ -100,7 +100,6 @@ export const OVUtil = () => {
     data.OV = undefined;
 
     window.removeEventListener("beforeunload", leaveSession);
-
   };
 
   const updateMainVideoStreamManager = (stream) => {
@@ -112,6 +111,7 @@ export const OVUtil = () => {
     const VCService = useVCService();
     const session = {
       recordingMode: "ALWAYS",
+      defaultOutputMode: "INDIVIDUAL",
       customSessionId: sessionId,
     };
     return VCService.getToken(session);

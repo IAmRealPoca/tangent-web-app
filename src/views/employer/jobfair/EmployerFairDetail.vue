@@ -385,7 +385,7 @@ const comId = parseJwt();
 
 const fetchJobFairDetail = async () => {
   const fair = await jobFairService.getFair(fairIdFromRoute);
-  // console.log("fair detail: ", fair);
+  console.log("fair detail: ", fair);
   fairDetailRef.value = fair;
   boothsLength.value = fair.booths;
   // console.log("booths: ", boothsLength.value);

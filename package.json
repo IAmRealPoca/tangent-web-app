@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@azure/storage-blob": "^12.4.1",
+    "@ckeditor/ckeditor5-build-classic": "^26.0.0",
+    "@ckeditor/ckeditor5-build-inline": "^26.0.0",
+    "@ckeditor/ckeditor5-vue": "^2.0.1",
     "@fullcalendar/daygrid": "^5.5.0",
     "@fullcalendar/vue": "^5.5.0",
     "@mdi/font": "^5.9.55",
