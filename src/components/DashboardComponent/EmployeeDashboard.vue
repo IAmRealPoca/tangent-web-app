@@ -16,7 +16,7 @@
         </div>
       </div>
       <!-- end of searchbox -->
-      <div class="task-wrapper border bg-white shadow-sm rounded-top">
+      <div class="task-wrapper border bg-white rounded-top">
         <div
           class="card hover-state border-bottom rounded-0 rounded-top py-2"
           v-for="(response, index) in listJobs"
@@ -30,7 +30,7 @@
                 class="user-avatar large-avatar rounded border"
               />
             </div>
-            <div class="container-fluid mb-5">
+            <div class="container-fluid mb-2">
               <!-- Information -->
               <div class="grid col-10">
                 <div class="row">
@@ -50,11 +50,17 @@
                 </div>
                 <div class="row pb-2">
                   <div class="col text-start">
+                    <span class="icon icon-sm pt-1"
+                      ><span class="fas fa-building"></span
+                    ></span>
                     {{ response.company.name }}
                   </div>
                 </div>
                 <div class="row">
                   <div class="col text-start text-success">
+                    <span class="icon icon-sm pt-1"
+                      ><span class="fas fa-map-marker-alt"></span
+                    ></span>
                     {{ response.location }}
                   </div>
                   <div class="col text-end">
@@ -67,7 +73,7 @@
                 <div class="row">
                   <!-- Apply Button -->
                   <div class="text-end">
-                    <button type="button" class="hover btn btn-warning rounded">
+                    <button type="button" class="hover-state btn btn-warning">
                       Apply
                     </button>
                   </div>
