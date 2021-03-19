@@ -646,6 +646,7 @@
 
 <script>
 import MainContent from "@/components/MainContent.vue";
+import { useParseJwt } from '@/util/parseJwt';
 export default {
   name: "Dashboard",
   props: {

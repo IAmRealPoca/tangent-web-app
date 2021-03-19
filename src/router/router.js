@@ -62,6 +62,14 @@ const routes = [
       onlyGuest: true,
     },
   },
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   component: Dashboard,
+  //   meta: {
+  //     requiresAuth: true,
+  //   },
+  // },
   {
     path: "/register",
     name: "Register",
