@@ -235,6 +235,14 @@
                         >{{ aSchool.status.statusName }}</span
                       >
                       <span
+                        class="fw-normal text-danger"
+                        v-if="aSchool.status.statusId === 4"
+                        ><span
+                          class="fas fa-times-circle text-danger me-2"
+                        ></span
+                        >{{ aSchool.status.statusName }}</span
+                      >
+                      <span
                         class="fw-normal text-gray-700"
                         v-if="aSchool.status.statusId === -1"
                         ><span
@@ -282,6 +290,16 @@
                             disabled
                           >
                             Pending
+                          </button>
+                        </div>
+
+                        <div v-if="aSchool.status.statusId === 4">
+                          <button
+                            class="btn btn-outline-danger"
+                            type="button"
+                            disabled
+                          >
+                            Relation removed
                           </button>
                         </div>
                         <!-- request popup -->
@@ -473,6 +491,7 @@ export default {
       if (statusInt === 1) return "Pending";
       if (statusInt === 2) return "Blocked";
       if (statusInt === 3) return "Declined";
+      if (statusInt === 4) return "Company removed";
       return "Not interacted";
     };
 

@@ -104,7 +104,7 @@
                 </div>
                 <p class="text-center">
                   <a href="/login" class="text-gray-700"
-                    ><i class="fas fa-angle-left me-2"></i> Click here to
+                    > Click here to
                     login.
                   </a>
                 </p>
