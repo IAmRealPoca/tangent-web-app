@@ -16,7 +16,7 @@
 */
 
 import Swal from "sweetalert2";
-import * as bootstrap from "bootstrap";
+// import * as bootstrap from "bootstrap";
 import "../vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js";
 import svgMap from "svgmap";
 import * as FullCalendar from "@fullcalendar/core";
@@ -128,20 +128,20 @@ d.addEventListener("DOMContentLoaded", function(event) {
   });
 
   //Tooltips
-  var tooltipTriggerList = [].slice.call(
-    document.querySelectorAll('[data-bs-toggle="tooltip"]')
-  );
-  var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl);
-  });
+  // var tooltipTriggerList = [].slice.call(
+  //   document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  // );
+  // var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+  //   return new bootstrap.Tooltip(tooltipTriggerEl);
+  // });
 
   // Popovers
-  var popoverTriggerList = [].slice.call(
-    document.querySelectorAll('[data-bs-toggle="popover"]')
-  );
-  var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
-    return new bootstrap.Popover(popoverTriggerEl);
-  });
+  // var popoverTriggerList = [].slice.call(
+  //   document.querySelectorAll('[data-bs-toggle="popover"]')
+  // );
+  // var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+  //   return new bootstrap.Popover(popoverTriggerEl);
+  // });
 
   // // Someshit
   // var dropdownElementList = [].slice.call(

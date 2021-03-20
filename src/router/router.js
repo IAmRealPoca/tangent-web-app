@@ -21,6 +21,7 @@ import EmployerFairDetail from "@/views/employer/jobfair/EmployerFairDetail.vue"
 import EmployerBooth from "@/views/employer/jobfair/EmployerBooth.vue";
 
 import BlobTest from "@/views/BlobTest.vue";
+import NyamTest from "@/views/NyamTest.vue";
 import SchoolViewCompanyList from "@/views/school/companyfunctions/SchoolViewCompanyList.vue";
 import SchoolViewCompanyDetail from "@/views/school/companyfunctions/SchoolViewCompanyDetail.vue";
 import SchoolViewJobDetail from "@/views/school/companyfunctions/SchoolViewJobDetail.vue";
@@ -216,6 +217,15 @@ const routes = [
     meta: {
       requiresAuth: true,
       role: EmployerRole,
+    },
+  },
+  {
+    path: "/test/nyam",
+    name: "NyamTest",
+    component: NyamTest,
+    meta: {
+      requiresAuth: false,
+      // role: EmployerRole,
     },
   },
   {

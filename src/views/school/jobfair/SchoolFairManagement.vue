@@ -120,13 +120,17 @@
                             >Job Fair Description</label
                           >
                           <div class="input-group">
-                            <textarea
+                            <!-- <textarea
                               class="form-control"
-                              v-model="jobFair.JobFairDescription"
                               id="booth_description"
                               rows="3"
                               style="resize: none"
-                            ></textarea>
+                            ></textarea> -->
+                            <ckeditor
+                              :editor="editor"
+                              v-model="jobFair.JobFairDescription"
+
+                            ></ckeditor>
                           </div>
                         </div>
                         <!-- End of Form -->
@@ -298,10 +302,9 @@
                               </h4>
                             </div>
                             <div class="ms-sm-3">
-                              <span
-                                :class="fair.statusClass"
-                                >{{ fair.statusString }}</span
-                              >
+                              <span :class="fair.statusClass">{{
+                                fair.statusString
+                              }}</span>
                             </div>
                           </div>
                         </div>
@@ -356,11 +359,14 @@ import flatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import "flatpickr/dist/themes/dark.css";
 import MainContent from "@/components/MainContent.vue";
+import CKEditor from "@ckeditor/ckeditor5-vue";
+import InlineEditor from "@ckeditor/ckeditor5-build-inline";
 export default {
   name: "SchoolFairManagement",
   components: {
     MainContent,
     flatPickr,
+    ckeditor: CKEditor.component,
   },
   setup() {
     const route = useRoute();
@@ -368,6 +374,10 @@ export default {
     const thumbnail = ref(null);
     const fairService = useJobFairService();
     const listOfFair = ref([]);
+    const editor = ref(InlineEditor);
+    const editorConfig = ref({
+      toolbar: ["bold", "italic", "|", "link"],
+    });
     const jobFair = reactive({
       jobFairName: "",
       JobFairDescription: "",
@@ -388,12 +398,12 @@ export default {
 
     const fetchListJF = async () => {
       listOfFair.value = await fairService.getAllFair();
-      listOfFair.value = listOfFair.value.map(e => {
+      listOfFair.value = listOfFair.value.map((e) => {
         return {
           ...e,
           statusString: checkStatusCSSClass(e.status).statusString,
           statusClass: checkStatusCSSClass(e.status).statusClass,
-        }
+        };
       });
       console.log(listOfFair.value);
     };
@@ -447,7 +457,7 @@ export default {
       var jsonPayload = decodeURIComponent(
         atob(base64)
           .split("")
-          .map(function (c) {
+          .map(function(c) {
             return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
           })
           .join("")
@@ -486,6 +496,8 @@ export default {
       listAppliedCVs,
       listOfFair,
       formatDate,
+      editor,
+      editorConfig,
       jobFair,
       handleFileUpload,
       handleCreate,
@@ -497,4 +509,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.ck.ck-editor__editable_inline{
+  width: 100% !important;
+  height: 15rem;
+  border: .5px solid;
+}
+</style>
