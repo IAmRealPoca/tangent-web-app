@@ -1,5 +1,5 @@
-importScripts("https://www.gstatic.com/firebasejs/7.22.0/firebase-app.js");
-importScripts("https://www.gstatic.com/firebasejs/7.22.0/firebase-messaging.js");
+importScripts("https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js");
+importScripts("https://www.gstatic.com/firebasejs/8.3.1/firebase-messaging.js");
 
 // The contents of firebaseConfig can be obtained from the firebase console.
 // var firebaseConfig = {
@@ -30,7 +30,8 @@ const messaging = firebase.messaging();
 self.addEventListener(
   "push",
   function(event) {
-    console.log("event:push");
+    console.log("event:push: ", event.data.json);
+
     let messageTitle = "MESSAGETITLE";
     let messageBody = "MESSAGEBODY";
     let messageTag = "MESSAGETAG";
@@ -59,4 +60,10 @@ messaging.setBackgroundMessageHandler(function(payload) {
     body: messageBody,
     tag: messageTag,
   });
+});
+
+messaging.onBackgroundMessage((payload) => {
+  console.log("[fb-messaging-serviceworker.js] Received: ", payload)
+  self.registration.showNotification("Notification title");
+
 });

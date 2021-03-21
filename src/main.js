@@ -12,7 +12,6 @@ import router from "@/router/router.js";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-import "firebase/firebase-messaging";
 
 // const firebaseConfig = {
 //   apiKey: "AIzaSyCj4pN0htCDHQR72-LgEsFx6QlItAoBlqw",
