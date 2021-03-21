@@ -23,19 +23,21 @@
                 class="nav-link text-dark me-lg-3 icon-notifications dropdown-toggle"
                 :class="{ show: isToggled }"
                 @click="showNoti"
-                data-unread-notifications="true"
+                :data-unread-notifications="notification.isNoti"
                 ref="notibell"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-                ><span class="icon icon-sm"
-                  ><span class="fas fa-bell bell-shake"></span>
+                ><span class="icon icon-sm">
+                  <span class="fas fa-bell bell-shake"></span>
                   <span
                     class="icon-badge rounded-circle unread-notifications"
-                  ></span></span
-              ></a>
+                  >
+                  </span>
+                </span>
+              </a>
               <div
                 class="dropdown-menu dashboard-dropdown dropdown-menu-lg dropdown-menu-center mt-2 py-0"
               >
@@ -46,125 +48,14 @@
                     >Notifications</a
                   >
                   <a
-                    href="../calendar.html"
+                    href="#"
                     class="list-group-item list-group-item-action border-bottom border-light"
                   >
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <img
                           alt="Image placeholder"
-                          src="@/assets/img/team/profile-picture-1.jpg"
-                          class="user-avatar lg-avatar rounded-circle"
-                        />
-                      </div>
-                      <div class="col ps-0 ms-2">
-                        <div
-                          class="d-flex justify-content-between align-items-center"
-                        >
-                          <div>
-                            <h4 class="h6 mb-0 text-small">Jose Leos</h4>
-                          </div>
-                          <div class="text-end">
-                            <small class="text-danger">a few moments ago</small>
-                          </div>
-                        </div>
-                        <p class="font-small mt-1 mb-0">
-                          Added you to an event "Project stand-up" tomorrow at
-                          12:30 AM.
-                        </p>
-                      </div>
-                    </div> </a
-                  ><a
-                    href="../tasks.html"
-                    class="list-group-item list-group-item-action border-bottom border-light"
-                  >
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <img
-                          alt="Image placeholder"
-                          src="@/assets/img/team/profile-picture-2.jpg"
-                          class="user-avatar lg-avatar rounded-circle"
-                        />
-                      </div>
-                      <div class="col ps-0 ms-2">
-                        <div
-                          class="d-flex justify-content-between align-items-center"
-                        >
-                          <div>
-                            <h4 class="h6 mb-0 text-small">Neil Sims</h4>
-                          </div>
-                          <div class="text-end">
-                            <small class="text-danger">2 hrs ago</small>
-                          </div>
-                        </div>
-                        <p class="font-small mt-1 mb-0">
-                          You've been assigned a task for "Awesome new project".
-                        </p>
-                      </div>
-                    </div> </a
-                  ><a
-                    href="../tasks.html"
-                    class="list-group-item list-group-item-action border-bottom border-light"
-                  >
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <img
-                          alt="Image placeholder"
-                          src="@/assets/img/team/profile-picture-3.jpg"
-                          class="user-avatar lg-avatar rounded-circle"
-                        />
-                      </div>
-                      <div class="col ps-0 m-2">
-                        <div
-                          class="d-flex justify-content-between align-items-center"
-                        >
-                          <div>
-                            <h4 class="h6 mb-0 text-small">Roberta Casas</h4>
-                          </div>
-                          <div class="text-end"><small>5 hrs ago</small></div>
-                        </div>
-                        <p class="font-small mt-1 mb-0">
-                          Tagged you in a document called "First quarter
-                          financial plans",
-                        </p>
-                      </div>
-                    </div> </a
-                  ><a
-                    href="../single-message.html"
-                    class="list-group-item list-group-item-action border-bottom border-light"
-                  >
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <img
-                          alt="Image placeholder"
-                          src="@/assets/img/team/profile-picture-4.jpg"
-                          class="user-avatar lg-avatar rounded-circle"
-                        />
-                      </div>
-                      <div class="col ps-0 ms-2">
-                        <div
-                          class="d-flex justify-content-between align-items-center"
-                        >
-                          <div>
-                            <h4 class="h6 mb-0 text-small">Joseph Garth</h4>
-                          </div>
-                          <div class="text-end"><small>1 d ago</small></div>
-                        </div>
-                        <p class="font-small mt-1 mb-0">
-                          New message: "Hey, what's up? All set for the
-                          presentation?"
-                        </p>
-                      </div>
-                    </div> </a
-                  ><a
-                    href="../single-message.html"
-                    class="list-group-item list-group-item-action border-bottom border-light"
-                  >
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <img
-                          alt="Image placeholder"
-                          :src="user.avatar"
+                          src="@/assets/img/z2358820138055_341c257ff575934f26613727fee0cb8e.jpg"
                           class="user-avatar lg-avatar rounded-circle"
                         />
                       </div>
@@ -174,22 +65,19 @@
                         >
                           <div>
                             <h4 class="h6 mb-0 text-small">
-                              {{ user.name }}
+                              Nyam IV The Simps
                             </h4>
                           </div>
-                          <div class="text-end"><small>2 hrs ago</small></div>
+                          <div class="text-end">
+                            <small class="text-danger">a few moments ago</small>
+                          </div>
                         </div>
                         <p class="font-small mt-1 mb-0">
-                          New message: "We need to improve the UI/UX for the
-                          landing page."
+                          {{ notification.msg }}
                         </p>
                       </div>
-                    </div> </a
-                  ><a
-                    href="#"
-                    class="dropdown-item text-center text-primary fw-bold rounded-bottom py-3"
-                    >View all</a
-                  >
+                    </div>
+                  </a>
                 </div>
               </div>
             </li>
@@ -253,13 +141,28 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { useSignalR } from "@/util/signalr/signalrutil";
+
 export default {
   name: "Header",
   setup() {
     const router = useRouter();
+    const signalr = useSignalR();
+
+    const notification = reactive({
+      isNoti: true,
+      msg: "",
+    });
+    const hub = signalr.hubConnect();
+    hub.on("noti", (msg) => {
+      console.log(msg);
+      notification.isNoti = true;
+      notification.msg = msg;
+    });
+
     const handleLoginClick = () => {
       router.push("/login");
     };
@@ -289,8 +192,9 @@ export default {
       return JSON.parse(jsonPayload);
     }
     const isToggled = ref(false);
+    const userName = ref({});
     const showNoti = () => {
-      console.log('Something :>> ', notibell.value);
+      console.log("Something :>> ", notibell.value);
       isToggled = !isToggled;
       console.log("isToggled :>> ", isToggled);
     };
@@ -298,8 +202,6 @@ export default {
     const contracted = () => {
       store.commit("contract");
     };
-
-    const userName = ref({});
 
     onMounted(() => {});
     return {
@@ -310,6 +212,7 @@ export default {
       contracted,
       showNoti,
       handleLoginClick,
+      notification,
     };
   },
 };

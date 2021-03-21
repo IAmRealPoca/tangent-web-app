@@ -390,7 +390,6 @@ const fetchJobFairDetail = async () => {
   boothsLength.value = fair.booths;
   // console.log("booths: ", boothsLength.value);
 };
-fetchJobFairDetail();
 
 const fetchBoothList = () => {
   // console.log("jwt: ", comId);
@@ -408,7 +407,6 @@ const fetchBoothList = () => {
       }
     });
 };
-fetchBoothList();
 const handleFileUpload = (evt) => {
   const path = evt.target.value;
   // console.log(path);
@@ -452,6 +450,8 @@ const handleDelete = () => {
 };
 onMounted(() => {
   // fetchBoothList();
+  fetchJobFairDetail();
+  fetchBoothList();
 });
 </script>
 
