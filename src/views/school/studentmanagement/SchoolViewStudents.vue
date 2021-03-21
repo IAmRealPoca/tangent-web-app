@@ -208,7 +208,11 @@
                   <!-- End major column -->
 
                   <!-- Status column -->
-                  <td><span :class="aStudent.statusClass">{{ aStudent.statusString }}</span></td>
+                  <td>
+                    <span :class="aStudent.statusClass">{{
+                      aStudent.statusString
+                    }}</span>
+                  </td>
                   <!-- End status column -->
 
                   <td>
@@ -220,10 +224,18 @@
                       <!-- <button class="btn text-danger" type="button" disabled>
                         Change status
                       </button> -->
-                      <input type="text" v-model="aStudent.status"/>
-                      <button @click="handleChangeStatus(aStudent.accountId, aStudent.status)">Change status</button>
+                      <input type="text" v-model="aStudent.status" />
+                      <button
+                        @click="
+                          handleChangeStatus(
+                            aStudent.accountId,
+                            aStudent.status
+                          )
+                        "
+                      >
+                        Change status
+                      </button>
                     </div>
-                    
                   </td>
                 </tr>
               </tbody>
@@ -263,7 +275,7 @@
           </div>
         </div>
 
-        <div class="col-12 col-xl-9" v-else-if="mergedArray.length <= 0">
+        <div class="col-12 col-xl-9" v-else-if="studentsList.length <= 0">
           <div class="card text-center p-0 mb-4">
             <div class="card-body">
               <div class="spinner-border spinner-border-sm" role="status"></div>
@@ -277,83 +289,94 @@
 
 <script>
 import MainContent from "@/components/MainContent.vue";
+import {
+  getStudentListFromSchoolId,
+  changeStudentStatus,
+} from "@/util/service/schoolService";
+import { onMounted } from "@vue/runtime-core";
 import { ref } from "@vue/reactivity";
 export default {
+  name: "SchoolViewStudents",
   components: { MainContent },
-};
-</script>
-<script setup>
-import { getStudentListFromSchoolId, changeStudentStatus } from "@/util/service/schoolService";
-import { onMounted } from "@vue/runtime-core";
-const mergedArray = ref([
-  {
-    accountId: 3,
-    schoolName: "Ngo Son Nam",
-    address: "District 9, HCMC",
-    phone: null,
-    avatar:
-      "https://lh3.googleusercontent.com/a-/AOh14Gg7cbZQwc2tczU3fNcKyb9ajG_8iYHn0L2k_gOegg",
-    description: null,
-    created: "2021-03-12T08:06:34.8092103",
-    employees: null,
-    status: { statusId: -1, statusName: "Not yet requested" },
-  },
-]);
-const studentsList = ref([]);
-const major = ref([]);
+  setup() {
+    const mergedArray = ref([
+      {
+        accountId: 3,
+        schoolName: "Ngo Son Nam",
+        address: "District 9, HCMC",
+        phone: null,
+        avatar:
+          "https://lh3.googleusercontent.com/a-/AOh14Gg7cbZQwc2tczU3fNcKyb9ajG_8iYHn0L2k_gOegg",
+        description: null,
+        created: "2021-03-12T08:06:34.8092103",
+        employees: null,
+        status: { statusId: -1, statusName: "Not yet requested" },
+      },
+    ]);
+    const studentsList = ref([]);
+    const major = ref([]);
 
-const fetchStudents = async () => {
-  const resp = await getStudentListFromSchoolId();
-  major.value = resp.majors;
-  studentsList.value = resp.employees.map((e) => {
-    const studentMajorId = e.majorId;
-    const studentMajorName = resp.majors.filter(
-      (e) => e.majorId === studentMajorId
-    )[0].majorName;
-    return {
-      ...e,
-      majorId: studentMajorId,
-      majorName: studentMajorName,
-      statusClass: checkStatusCSSClass(e.status),
-      statusString: checkStatusString(e.status),
+    const fetchStudents = async () => {
+      const resp = await getStudentListFromSchoolId();
+      major.value = resp.majors;
+      studentsList.value = resp.employees.map((e) => {
+        const studentMajorId = e.majorId;
+        const studentMajorName = resp.majors.filter(
+          (e) => e.majorId === studentMajorId
+        )[0].majorName;
+        return {
+          ...e,
+          majorId: studentMajorId,
+          majorName: studentMajorName,
+          statusClass: checkStatusCSSClass(e.status),
+          statusString: checkStatusString(e.status),
+        };
+      });
     };
-  });
+
+    const handleChangeStatus = (studentId, newStatus) => {
+      const payload = {
+        status: newStatus,
+      };
+      changeStudentStatus(studentId, payload);
+    };
+
+    const checkStatusString = (statusInt) => {
+      if (statusInt === 0) return "Graduated";
+      if (statusInt === 1) return "Qualify For Intern";
+      if (statusInt === 2) return "Studying";
+      if (statusInt === 3) return "Pending";
+      if (statusInt === 4) return "Suspended";
+      return "Not interacted";
+    };
+
+    const checkStatusCSSClass = (statusInt) => {
+      const fwBold = "badge super-badge badge-lg";
+      var cssClass = "bg-dark";
+      if (statusInt === 0) cssClass = "bg-success";
+      if (statusInt === 1) cssClass = "bg-info";
+      if (statusInt === 2) cssClass = "bg-info";
+      if (statusInt === 3) cssClass = "bg-warning text-dark";
+      if (statusInt === 4) cssClass = "bg-danger";
+      return fwBold + " " + cssClass;
+    };
+
+    const formatDate = (time) => {
+      return new Date(time).toLocaleString();
+    };
+
+    onMounted(async () => {
+      await fetchStudents();
+    });
+
+    return {
+      studentsList,
+      major,
+
+      handleChangeStatus,
+      formatDate,
+    };
+  },
 };
-
-const handleChangeStatus = (studentId, newStatus) => {
-  const payload = {
-    status: newStatus,
-  }
-  changeStudentStatus(studentId, payload);
-}
-
-const checkStatusString = (statusInt) => {
-  if (statusInt === 0) return "Graduated";
-  if (statusInt === 1) return "Qualify For Intern";
-  if (statusInt === 2) return "Studying";
-  if (statusInt === 3) return "Pending";
-  if (statusInt === 4) return "Suspended";
-  return "Not interacted";
-};
-
-const checkStatusCSSClass = (statusInt) => {
-  const fwBold = "badge super-badge badge-lg";
-  var cssClass = "bg-dark";
-  if (statusInt === 0) cssClass = "bg-success";
-  if (statusInt === 1) cssClass = "bg-info";
-  if (statusInt === 2) cssClass = "bg-info";
-  if (statusInt === 3) cssClass = "bg-warning text-dark";
-  if (statusInt === 4) cssClass = "bg-danger";
-  return fwBold + " " + cssClass;
-};
-
-const formatDate = (time) => {
-  return new Date(time).toLocaleString();
-};
-
-onMounted(async () => {
-  await fetchStudents();
-});
 </script>
-
 <style></style>
