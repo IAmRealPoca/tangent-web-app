@@ -21,9 +21,7 @@
             <li class="nav-item dropdown">
               <a
                 class="nav-link text-dark me-lg-3 icon-notifications dropdown-toggle"
-                :class="{ show: isToggled }"
-                @click="showNoti"
-                :data-unread-notifications="notification.isNoti"
+                data-unread-notifications="false"
                 ref="notibell"
                 href="#"
                 role="button"
@@ -31,9 +29,10 @@
                 aria-haspopup="true"
                 aria-expanded="false"
                 ><span class="icon icon-sm">
-                  <span class="fas fa-bell bell-shake"></span>
+                  <span class="fas fa-bell bell-shake" ref="bellShake"></span>
                   <span
                     class="icon-badge rounded-circle unread-notifications"
+                    ref="unreadDisplay"
                   >
                   </span>
                 </span>
@@ -141,7 +140,7 @@
 </template>
 
 <script>
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive, ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { useSignalR } from "@/util/signalr/signalrutil";
@@ -153,21 +152,38 @@ export default {
     const signalr = useSignalR();
 
     const notification = reactive({
-      isNoti: true,
+      isNoti: false,
       msg: "",
     });
+    const bellShake = ref(null);
+    const notibell = ref(null);
+    // unreadNotifications.style.display = "none";
+    const unreadDisplay = ref(null);
+
     const hub = signalr.hubConnect();
     hub.on("noti", (msg) => {
       console.log(msg);
       notification.isNoti = true;
       notification.msg = msg;
+      if (bellShake.value) {
+        console.log("bellshake");
+        bellShake.value.setAttribute("data-unread-notifications", true);
+        if (unreadDisplay.value) {
+          unreadDisplay.value.style.display = "block";
+        }
+        console.log(bellShake.value);
+      }
+      if (notibell.value) {
+        console.log("notibell");
+        notibell.value.setAttribute("data-unread-notifications", true);
+        console.log(notibell.value);
+      }
     });
 
     const handleLoginClick = () => {
       router.push("/login");
     };
     const store = useStore();
-    const notibell = ref(null);
 
     const userFromStorage = sessionStorage.getItem("userInfo");
     userFromStorage
@@ -191,12 +207,10 @@ export default {
 
       return JSON.parse(jsonPayload);
     }
-    const isToggled = ref(false);
     const userName = ref({});
     const showNoti = () => {
-      console.log("Something :>> ", notibell.value);
-      isToggled = !isToggled;
-      console.log("isToggled :>> ", isToggled);
+      notification.isNoti = false;
+      console.log("HEllo s");
     };
 
     const contracted = () => {
@@ -204,15 +218,17 @@ export default {
     };
 
     onMounted(() => {});
+
     return {
       userName,
       user,
-      notibell,
-      isToggled,
       contracted,
       showNoti,
       handleLoginClick,
       notification,
+      bellShake,
+      notibell,
+      unreadDisplay,
     };
   },
 };
