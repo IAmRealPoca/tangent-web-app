@@ -110,12 +110,6 @@
                 <a class="dropdown-item fw-bold" href="#"
                   ><span class="fas fa-cog"></span>Settings</a
                 >
-                <a class="dropdown-item fw-bold" href="#"
-                  ><span class="fas fa-envelope-open-text"></span>Messages</a
-                >
-                <a class="dropdown-item fw-bold" href="#"
-                  ><span class="fas fa-user-shield"></span>Support</a
-                >
                 <div role="separator" class="dropdown-divider my-0"></div>
                 <a class="dropdown-item rounded-bottom fw-bold" href="#"
                   ><span class="fas fa-sign-out-alt text-danger"></span
@@ -166,17 +160,15 @@ export default {
       notification.isNoti = true;
       notification.msg = msg;
       if (bellShake.value) {
-        console.log("bellshake");
         bellShake.value.setAttribute("data-unread-notifications", true);
         if (unreadDisplay.value) {
           unreadDisplay.value.style.display = "block";
         }
-        console.log(bellShake.value);
+        // console.log(bellShake.value);
       }
       if (notibell.value) {
-        console.log("notibell");
         notibell.value.setAttribute("data-unread-notifications", true);
-        console.log(notibell.value);
+        // console.log(notibell.value);
       }
     });
 
