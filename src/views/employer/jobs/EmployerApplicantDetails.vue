@@ -217,7 +217,8 @@
                                   <option value="2">Cover Letter</option>
                                   <option value="3">Cover Video</option>
                                 </select>
-                              </div> --><PDFDocument v-bind="{url, scale}" />
+                              </div> -->
+
                               <div class="row pt-4">
                                 <div
                                   class="card border-light shadow-sm"
@@ -232,15 +233,17 @@
                                   <div class="h5">
                                     {{ applicationInfo.created }}
                                   </div>
+                                  <!-- <PDFDocument v-bind="{url, scale}" /> -->
                                   
-                                  
-                                   <!-- <img :src="applicationInfo.cv.cvFile.fileURL" alt=""> -->
+                                  <a :href="applicationInfo.cv.cvFile.fileURL">
+                                  PDF</a>
+
+                                  <!-- <img :src="applicationInfo.cv.cvFile.fileURL" alt=""> -->
+                                  <div class="h5">La la la</div>
                                 </div>
                                 <div
                                   class="card border-light shadow-sm"
-                                  v-if="
-                                    applicationInfo.coverLetter
-                                  "
+                                  v-if="applicationInfo.coverLetter"
                                 >
                                   <h2 class="h4"></h2>
                                   <div class="h5">
