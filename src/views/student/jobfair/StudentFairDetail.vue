@@ -126,12 +126,11 @@
                             {{ item.boothName }}
                           </div>
                           <div class="card-body">
-
-                              <img
-                                src="@/assets/img/fsoft-tuyen-dung.jpg"
-                                class="card-img-top rounded py-2"
-                                alt="blog image"
-                              />
+                            <img
+                              src="@/assets/img/fsoft-tuyen-dung.jpg"
+                              class="card-img-top rounded py-2"
+                              alt="blog image"
+                            />
 
                             <h5 class="h5">{{ item.boothName }}</h5>
                             <h6 class="h6 mb-1">
@@ -164,81 +163,91 @@
 </template>
 
 <script>
-export default {
-  name: "StudentFairDetail",
-};
-</script>
-<script setup>
 import MainContent from "@/components/MainContent.vue";
 import { useBoothService } from "@/util/service/boothService.js";
 import { useJobFairService } from "@/util/service/jobFairService.js";
 import { useRouter, useRoute } from "vue-router";
 import { ref, onMounted } from "vue";
-const boothService = useBoothService();
-const jobFairService = useJobFairService();
-const fairDetailRef = ref({});
-const boothsLength = ref([]);
-// const fairDetail = reactive({
-//       jobFairName: "",
-//       JobFairDescription: "",
-//       startDate: "",
-//       jobFairThumbnail: Object,
-//       schoolId: "",
-//     });
-const isCreated = ref(false);
-const boothList = ref(null);
-const boothDetail = {
-  name: "",
-  desc: "",
-  thumbnail: "https://picsum.photos/id/237/450/300",
-};
-const route = useRoute();
-const router = useRouter();
-const fairIdFromRoute = Number(route.params.jobFairId);
-const parseJwt = () => {
-  let token = sessionStorage.getItem("token");
-  var base64Url = token.split(".")[1];
-  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-  var jsonPayload = decodeURIComponent(
-    atob(base64)
-      .split("")
-      .map(function(c) {
-        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-      })
-      .join("")
-  );
-  let id = JSON.parse(jsonPayload);
-  return id.sub;
-};
-const fetchJobFairDetail = async () => {
-  const fair = await jobFairService.getFair(fairIdFromRoute);
-  // console.log("fair detail: ", fair);
-  fairDetailRef.value = fair;
-  boothsLength.value = fair.booths;
-  console.log("booths: ", boothsLength.value);
-};
-fetchJobFairDetail();
+export default {
+  name: "StudentFairDetail",
+  components: {
+    MainContent,
+  },
+  setup() {
+    const boothService = useBoothService();
+    const jobFairService = useJobFairService();
+    const fairDetailRef = ref({});
+    const boothsLength = ref([]);
+    // const fairDetail = reactive({
+    //       jobFairName: "",
+    //       JobFairDescription: "",
+    //       startDate: "",
+    //       jobFairThumbnail: Object,
+    //       schoolId: "",
+    //     });
+    const isCreated = ref(false);
+    const boothList = ref(null);
+    const boothDetail = {
+      name: "",
+      desc: "",
+      thumbnail: "https://picsum.photos/id/237/450/300",
+    };
+    const route = useRoute();
+    const router = useRouter();
+    const fairIdFromRoute = Number(route.params.jobFairId);
+    const parseJwt = () => {
+      let token = sessionStorage.getItem("token");
+      var base64Url = token.split(".")[1];
+      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      var jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split("")
+          .map(function (c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join("")
+      );
+      let id = JSON.parse(jsonPayload);
+      return id.sub;
+    };
+    const fetchJobFairDetail = async () => {
+      const fair = await jobFairService.getFair(fairIdFromRoute);
+      // console.log("fair detail: ", fair);
+      fairDetailRef.value = fair;
+      boothsLength.value = fair.booths;
+      console.log("booths: ", boothsLength.value);
+    };
 
-const handleDelete = () => {
-  const data = {
-    id: fairIdFromRoute,
-    comId: parseInt(parseJwt()),
-  };
-  console.log("data :>> ", data);
-  // if somethign for febug
-  jobFairService
-    .unregisterFair(data)
-    .then((resp) => {
-      console.log("resp :>> ", resp);
-      if (resp) router.push("/student/jobfair/");
-    })
-    .catch((err) => {
-      console.log("err :>> ", err);
+    const handleDelete = () => {
+      const data = {
+        id: fairIdFromRoute,
+        comId: parseInt(parseJwt()),
+      };
+      console.log("data :>> ", data);
+      // if somethign for debug
+      jobFairService
+        .unregisterFair(data)
+        .then((resp) => {
+          console.log("resp :>> ", resp);
+          if (resp) router.push("/student/jobfair/");
+        })
+        .catch((err) => {
+          console.log("err :>> ", err);
+        });
+    };
+    onMounted(() => {
+      fetchJobFairDetail();
     });
+    return {
+      fairDetailRef,
+      boothsLength,
+      isCreated,
+      boothList,
+      boothDetail,
+      handleDelete,
+    };
+  },
 };
-onMounted(() => {
-  // fetchBoothList();
-});
 </script>
 
 <style scoped></style>

@@ -191,26 +191,39 @@
 </template>
 
 <script>
-import { defineEmit, defineProps } from "vue";
+import VideoPlayer from "@/components/ViduComponent/VideoPlayer.vue";
 export default {
   name: "EmployerPresentation",
   emits: ["updateStream"],
-};
-</script>
-<script setup>
-import VideoPlayer from "@/components/ViduComponent/VideoPlayer.vue";
-const emits = defineEmit(["endCallEvent", "updateStream"]);
-const props = defineProps({
-  streamManager: {
-    type: Object,
+  components: {
+    VideoPlayer,
   },
-  data: {},
-});
-const endCall = () => {
-  emits("endCallEvent");
-};
-const updateMainStream = (sub) => {
-  emits("updateStream", sub);
+  props: {
+    streamManager: {
+      type: Object,
+    },
+    data: {},
+  },
+  emits: ["endCallEvent", "updateStream"],
+  setup(props, context) {
+    const emits = context.emit;
+    // const props = defineProps({
+    //   streamManager: {
+    //     type: Object,
+    //   },
+    //   data: {},
+    // });
+    const endCall = () => {
+      emits("endCallEvent");
+    };
+    const updateMainStream = (sub) => {
+      emits("updateStream", sub);
+    };
+    return {
+      endCall,
+      updateMainStream,
+    };
+  },
 };
 </script>
 
