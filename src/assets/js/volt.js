@@ -99,6 +99,7 @@ d.addEventListener("DOMContentLoaded", function(event) {
 
     iconNotifications.addEventListener("show.bs.dropdown", function() {
       bellShake.setAttribute("data-unread-notifications", false);
+      iconNotifications.setAttribute("data-unread-notifications", false);
       clearInterval(shakingInterval);
       bellShake.classList.remove("shaking");
       unreadNotifications.style.display = "none";

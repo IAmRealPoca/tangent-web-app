@@ -378,7 +378,7 @@ const routes = [
     },
   },
   {
-    path: "/student/jobfair/:jobfairId/:boothId",
+    path: "/student/jobfair/:jobFairId/:boothId",
     name: "StudentBooth",
     component: StudentBooth,
     meta: {

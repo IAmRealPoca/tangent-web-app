@@ -7,20 +7,12 @@
 
 <script>
 import MainContent from "@/components/MainContent.vue";
-
 import "./assets/js/volt.js";
 
 export default {
   name: "App",
   components: {
     MainContent,
-  },
-  mounted() {
-    // const plugin = document.createElement("script");
-    // plugin.setAttribute("src", "/volt.js");
-    // plugin.async = true;
-    // plugin.type = "module";
-    // document.head.appendChild(plugin);
   },
 };
 </script>
