@@ -2,9 +2,7 @@
   <MainContent>
     <!-- Top Navigation -->
     <div class="package mt-3 mb-2 rounded-top rounded-bottom">
-      <h4 class="mb-2 px-4 pt-2 text-dark fw-bold">
-        Tìm việc làm tuyển dụng
-      </h4>
+      <h4 class="mb-2 px-4 pt-2 text-dark fw-bold">Tìm việc làm tuyển dụng</h4>
       <!-- searchbox -->
       <div class="col-sm-6 col-lg-6 d-sm-flex px-4 py-2">
         <div class="input-group me-2 me-lg-3">
@@ -76,7 +74,7 @@
                     :class="response.style"
                   >
                     {{
-                      response.style == "text-warning" ? "Còn lại" : "Hết hạn"
+                      response.style === "text-warning" ? "Còn lại" : "Hết hạn"
                     }}
                     <span v-if="response.style != 'text-danger'"
                       >:
@@ -110,14 +108,14 @@
               </div>
               <div class="row">
                 <!-- Apply Button -->
-                <div class="text-end pt-4">
+                <div class="text-end pt-4" v-if="response.status === null">
                   <button
                     type="button"
                     class="hover-state btn btn-warning"
                     data-bs-toggle="modal"
                     data-bs-target="#modal-default"
                   >
-                    Upload CV
+                    Apply CV
                   </button>
                   <div
                     class="modal fade"
@@ -141,21 +139,34 @@
                             aria-label="Close"
                           ></button>
                         </div>
-                        <div class="px-2 py-2">
-                          <label for="formFile" class="form-label">
-                            Please choose .pdf file
-                          </label>
-                          <input
-                            class="form-control"
-                            type="file"
-                            id="formFile"
-                          />
+                        <div class="modal-body">
+                          <div class="px-2 py-2">
+                            <form>
+                              <div v-for="cv in listCV" :key="cv.cvId">
+                                <input
+                                  type="radio"
+                                  :id="cv.cvId"
+                                  :value="cv.cvId"
+                                  v-model="cvPicked"
+                                />
+                                <a :href="`/student/cv/${cv.cvId}`">
+                                  <label class="form-label">
+                                    {{ cv.title }}
+                                  </label>
+                                  <br />
+                                  <label class="form-label">
+                                    Created: {{ formatDate(cv.created) }}
+                                  </label>
+                                </a>
+                              </div>
+                            </form>
+                          </div>
                         </div>
                         <div class="modal-footer">
                           <button
                             type="button"
                             class="btn btn-secondary"
-                            @click="handleApplyClick"
+                            @click="handleApplyClick(response.postId)"
                           >
                             Apply
                           </button>
@@ -170,6 +181,15 @@
                       </div>
                     </div>
                   </div>
+                </div>
+                <div class="text-end pt4-" v-else>
+                  <button
+                    type="button"
+                    class="hover-state btn btn-warning"
+                    disabled
+                  >
+                    Applied
+                  </button>
                 </div>
               </div>
               <!-- end of Apply Button -->
@@ -207,7 +227,8 @@
 <script>
 import MainContent from "@/components/MainContent.vue";
 import * as constants from "./dashboardUtils.js";
-import { getListOfJobs } from "@/util/service/recruitmentPostService";
+import { getListOfJobs, applyJob } from "@/util/service/recruitmentPostService";
+import { getListCV } from "@/util/service/employeeService";
 
 export default {
   name: "EmployeeDashboard",
@@ -216,130 +237,8 @@ export default {
     return {
       listJobs: [],
       inputData: "",
-      dumpData: [
-        {
-          postId: 102,
-          company: {
-            id: 2,
-            name: "Team CVideos",
-            description: null,
-            phone: null,
-            email: "apocalypsetank456@gmail.com",
-            address: null,
-            avatar:
-              "https://lh4.googleusercontent.com/-sTSMchIYZas/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmHQg5825q8KoPT3eTn-05F9l3kgQ/s96-c/photo.jpg",
-          },
-          location: "0666 Kipling Lane",
-          expectedNumber: 3,
-          dueDate: "2020-09-03T00:00:00",
-          title: "Mauris sit amet eros.",
-          jobDescription:
-            "Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.\r\n\r\nNam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.",
-          jobRequirement: "Paralegal",
-          jobBenefit:
-            "Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\r\n\r\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.\r\n\r\nDonec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.",
-          minSalary: 12613,
-          maxSalary: 17411,
-          created: "2021-03-14T00:00:00",
-          isApplied: false,
-        },
-        {
-          postId: 1005,
-          company: {
-            id: 2,
-            name: "Team CVideos",
-            description: null,
-            phone: null,
-            email: "apocalypsetank456@gmail.com",
-            address: null,
-            avatar:
-              "https://lh4.googleusercontent.com/-sTSMchIYZas/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmHQg5825q8KoPT3eTn-05F9l3kgQ/s96-c/photo.jpg",
-          },
-          location: "Angel in Us, District 2; Ho Chi Minh City",
-          expectedNumber: 3,
-          dueDate: "2021-03-23T00:00:00",
-          title: "Mon amie",
-          jobDescription: "Je seus Mon Amie",
-          jobRequirement: "Jeseus MonAmie",
-          jobBenefit: "Graduate from FPT",
-          minSalary: 21,
-          maxSalary: 23,
-          created: "2021-03-17T18:34:53.6731576",
-          isApplied: false,
-        },
-        {
-          postId: 1005,
-          company: {
-            id: 2,
-            name: "Team CVideos",
-            description: null,
-            phone: null,
-            email: "apocalypsetank456@gmail.com",
-            address: null,
-            avatar:
-              "https://lh4.googleusercontent.com/-sTSMchIYZas/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmHQg5825q8KoPT3eTn-05F9l3kgQ/s96-c/photo.jpg",
-          },
-          location: "Angel in Us, District 2; Ho Chi Minh City",
-          expectedNumber: 3,
-          dueDate: "2021-03-29T00:00:00",
-          title: "Mon amie",
-          jobDescription: "Je seus Mon Amie",
-          jobRequirement: "Jeseus MonAmie",
-          jobBenefit: "Graduate from FPT",
-          minSalary: 21,
-          maxSalary: 23,
-          created: "2021-03-17T18:34:53.6731576",
-          isApplied: false,
-        },
-        {
-          postId: 1005,
-          company: {
-            id: 2,
-            name: "Team CVideos",
-            description: null,
-            phone: null,
-            email: "apocalypsetank456@gmail.com",
-            address: null,
-            avatar:
-              "https://lh4.googleusercontent.com/-sTSMchIYZas/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmHQg5825q8KoPT3eTn-05F9l3kgQ/s96-c/photo.jpg",
-          },
-          location: "Angel in Us, District 2; Ho Chi Minh City",
-          expectedNumber: 3,
-          dueDate: "2021-03-29T00:00:00",
-          title: "Mon amie",
-          jobDescription: "Je seus Mon Amie",
-          jobRequirement: "Jeseus MonAmie",
-          jobBenefit: "Graduate from FPT",
-          minSalary: 21,
-          maxSalary: 23,
-          created: "2021-03-17T18:34:53.6731576",
-          isApplied: false,
-        },
-        {
-          postId: 1005,
-          company: {
-            id: 2,
-            name: "Team CVideos",
-            description: null,
-            phone: null,
-            email: "apocalypsetank456@gmail.com",
-            address: null,
-            avatar:
-              "https://lh4.googleusercontent.com/-sTSMchIYZas/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmHQg5825q8KoPT3eTn-05F9l3kgQ/s96-c/photo.jpg",
-          },
-          location: "Angel in Us, District 2; Ho Chi Minh City",
-          expectedNumber: 3,
-          dueDate: "2021-03-29T00:00:00",
-          title: "Mon amie",
-          jobDescription: "Je seus Mon Amie",
-          jobRequirement: "Jeseus MonAmie",
-          jobBenefit: "Graduate from FPT",
-          minSalary: 21,
-          maxSalary: 23,
-          created: "2021-03-17T18:34:53.6731576",
-          isApplied: false,
-        },
-      ],
+      listCV: [],
+      cvPicked: {},
     };
   },
   mounted() {
@@ -378,6 +277,10 @@ export default {
         .catch((error) => {
           console.log("error: ", error);
         });
+
+      getListCV().then((response) => {
+        this.listCV = response;
+      });
     },
     formatDate(time) {
       const fmDate = new Date(time);
@@ -390,10 +293,14 @@ export default {
         fmDate.getFullYear()
       );
     },
-    handleApplyClick() {
+    handleApplyClick(postId) {
       // modal popup
-      const style = "";
-      console.log("okeeeee");
+      console.log("cvPicked: ", this.cvPicked);
+      const payload = {
+        cvId: this.cvPicked,
+      };
+      applyJob(postId, payload);
+      this.fecthPayload();
     },
   },
 };

@@ -113,7 +113,7 @@ export default {
     const fetchUserData = async ({ role }) => {
       console.log("usrFlag :>> ", role);
       if (role === "employee") {
-        const resp = await employeeService.getCurrEmployeeInfo();
+        const resp = await getCurrEmployeeInfo();
         sessionStorage.setItem("userInfo", JSON.stringify(resp));
         store.commit("loginSuccess", resp);
       } else if (role === "employer") {

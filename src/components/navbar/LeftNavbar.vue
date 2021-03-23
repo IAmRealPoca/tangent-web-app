@@ -13,7 +13,7 @@
         ><img
           class="navbar-brand-dark"
           src="@/assets/img/logo.svg"
-          alt="Volt logo"/>
+          alt="Volt logo" />
         <img
           class="navbar-brand-light"
           src="@/assets/img/logo.svg"
@@ -87,7 +87,7 @@
               ><span class="mt-1 sidebar-text">Tangent App</span></a
             >
           </li>
-          <div v-for="(menuItem, index) in menuItems" :key="index">
+          <div v-for="(menuItem, index) in menuItemsByRole" :key="index">
             <li class="nav-item" v-if="menuItem.subItem.length > 0">
               <span
                 class="nav-link d-flex justify-content-between align-items-center"
@@ -143,42 +143,68 @@
 </template>
 
 <script>
-import { watchEffect,ref } from "vue";
+import { watchEffect, ref, onMounted } from "vue";
 import { useStore } from "vuex";
 export default {
   name: "LeftNavbar",
-  data: () => ({
-    menuItems: [
+  props: {
+    role: String,
+  },
+  setup() {
+    const employerRole = "employer";
+    const employeeRole = "employee";
+    const schoolRole = "school";
+    const menuItems = [
       {
         icon: "",
         title: "Dashboard",
         url: "/",
         subItem: [],
+        meta: {
+          requiresAuth: true,
+          role: [employerRole],
+        },
       },
 
       {
         title: "Jobs",
         url: "/employer/jobs",
         subItem: [],
+        meta: {
+          requiresAuth: true,
+          role: [employerRole],
+        },
       },
       {
         title: "Applicants",
         url: "/employer/applicants",
         subItem: [],
+        meta: {
+          requiresAuth: true,
+          role: [employerRole],
+        },
       },
       {
         title: "Job Fair",
         url: "/employer/jobfair",
         subItem: [],
+        meta: {
+          requiresAuth: true,
+          role: [employerRole],
+        },
       },
       {
         title: "Schools",
         url: "/employer/schools",
         subItem: [],
+        meta: {
+          requiresAuth: true,
+          role: [employerRole],
+        },
       },
       {
         title: "School",
-        url: "/school",
+        url: "/school/dashboard",
         subItem: [
           {
             title: "Company List",
@@ -197,11 +223,28 @@ export default {
             url: "/school/jobfair",
           },
         ],
+        meta: {
+          requiresAuth: true,
+          role: [schoolRole],
+        },
+      },
+      {
+        title: "Schools",
+        url: "/employer/schools",
+        subItem: [],
+        meta: {
+          requiresAuth: true,
+          role: [employerRole],
+        },
       },
       {
         title: "Student",
-        url: "/student",
+        url: "/student/dashboard",
         subItem: [
+          {
+            title: "Dashboard",
+            url: "/student/dashboard",
+          },
           {
             title: "CV",
             url: "/student/cv",
@@ -219,20 +262,68 @@ export default {
             url: "/student/jobfair",
           },
         ],
+        meta: {
+          requiresAuth: true,
+          role: [employeeRole],
+        },
       },
-    ],
-  }),
-  props: {
-    role: String,
-  },
-  setup() {
+      {
+        title: "Login",
+        url: "/login",
+        subItem: [],
+        meta: {
+          requiresAuth: false,
+          onlyGuest: true,
+        },
+      },
+    ];
+    let menuItemsByRole = ref([]);
     const store = useStore();
     const isContracted = ref(false);
     watchEffect(() => {
       // console.log("store.state.isContracted :>> ", store.state.isContracted);
       isContracted.value = store.state.isContracted;
     });
-    return { isContracted };
+
+    const parseJwt = (token) => {
+      try {
+        return JSON.parse(atob(token.split(".")[1]));
+      } catch (e) {
+        return null;
+      }
+    };
+
+    onMounted(() => {
+      if (sessionStorage.getItem("token") === null) {
+        menuItemsByRole.value = menuItems.filter((e) => {
+          e.meta.requiresAuth === false && e.meta.onlyGuest === true;
+        });
+      } else {
+        const parsedToken = parseJwt(sessionStorage.getItem("token"));
+        if (parsedToken.role === "employer") {
+          menuItemsByRole.value = menuItems.filter(
+            (e) =>
+              e.meta.requiresAuth === true && e.meta.role[0] === employerRole
+          );
+        } else if (parsedToken.role === "employee") {
+          menuItemsByRole.value = menuItems.filter(
+            (e) =>
+              e.meta.requiresAuth === true && e.meta.role[0] === employeeRole
+          );
+        } else if (parsedToken.role === "school") {
+          menuItemsByRole.value = menuItems.filter(
+            (e) => e.meta.requiresAuth === true && e.meta.role[0] === schoolRole
+          );
+        }
+        console.log("menuItems: ", menuItems);
+        console.log("menuItemsByRole: ", menuItemsByRole.value);
+      }
+    });
+    return {
+      isContracted,
+      menuItems,
+      menuItemsByRole,
+    };
   },
 };
 </script>

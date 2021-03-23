@@ -13,20 +13,18 @@
                   <a href="#"><span class="fas fa-home"></span></a>
                 </li>
                 <li class="breadcrumb-item"><a href="#">Tangent</a></li>
-                <li class="breadcrumb-item"><a href="#">School</a></li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  Majors
-                </li>
+                <li class="breadcrumb-item"><a href="#">Student</a></li>
+                <li class="breadcrumb-item active" aria-current="page">CV</li>
               </ol>
             </nav>
-            <h2 class="h4">Majors</h2>
-            <p class="mb-0">Your school's all majors.</p>
+            <h2 class="h4">CV</h2>
+            <p class="mb-0"></p>
           </div>
           <div class="btn-toolbar">
-            <a class="btn btn-sm btn-dark me-2" @click="handleNewMajorClick"
-              ><span class="fas fa-plus me-2"></span> New major
-            </a>
-
+            <!-- <a class="btn btn-sm btn-dark me-2" @click="handleNewMajorClick"
+              ><span class="fas fa-plus me-2"></span> New cv
+            </a> -->
+            
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-outline-primary">
                 Export
@@ -53,7 +51,7 @@
 
 <script>
 import MainContent from "@/components/MainContent.vue";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import { useRoute } from "vue-router";
 import * as employeeService from "@/util/service/employeeService.js";
 export default {
@@ -65,9 +63,13 @@ export default {
     const route = useRoute();
     const cvIdFromRoute = Number(route.params.cvId);
     const cvDetail = ref({});
+    
     const fetchCVDetail = async () => {
       cvDetail.value = await employeeService.getStudentCVDetail(cvIdFromRoute);
     };
+
+    
+
     onMounted(() => {
       fetchCVDetail();
     });

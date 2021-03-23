@@ -27,5 +27,8 @@ export default {
   },
   markAsFavorite(applicationId, payload) {
     return http.put(`${path}/${applicationId}/fav`, payload);
+  },
+  applyJob(jobId, payload) {
+    return http.post(`${path}/${jobId}/apply-job`, payload);
   }
 }

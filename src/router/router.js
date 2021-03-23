@@ -79,11 +79,23 @@ const routes = [
     },
   },
   {
-    path: "/dashboard",
+    path: "/student/dashboard",
     // name: "Dashboard",
     // component: Dashboard,
     name: "EmployeeDashboard",
     component: EmployeeDashboard,
+    meta: {
+      requiresAuth: true,
+      // tem
+      role: EmployeeRole,
+    },
+  },
+  {
+    path: "/employer/dashboard",
+    // name: "Dashboard",
+    // component: Dashboard,
+    name: "Dashboard",
+    component: Dashboard,
     meta: {
       requiresAuth: true,
       // tem

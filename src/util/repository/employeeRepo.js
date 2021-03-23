@@ -19,7 +19,7 @@ export default {
         return http.get(`${path}` + "/cover-letter");
     },
     deleteStudentCV(id) {
-        return http.delete(`${path}/cvs/${id}`);
+        return http.delete(`/cvs/${id}`);
     },
     deleteStudentCoverLetter(id) {
         return http.delete(`${path}/cover-letters/${id}`);
@@ -29,5 +29,5 @@ export default {
     },
     createCV(payload) {
       return http.post(`/cvs`, payload);
-    }
+    },
 }
