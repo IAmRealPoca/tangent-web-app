@@ -207,11 +207,15 @@ export default {
         url: "/school/dashboard",
         subItem: [
           {
-            title: "Company List",
+            title: "Dashboard",
             url: "/school/company",
           },
           {
-            title: "Major List",
+            title: "Companys",
+            url: "/school/company",
+          },
+          {
+            title: "Majors",
             url: "/school/majors",
           },
           {
@@ -226,15 +230,6 @@ export default {
         meta: {
           requiresAuth: true,
           role: [schoolRole],
-        },
-      },
-      {
-        title: "Schools",
-        url: "/employer/schools",
-        subItem: [],
-        meta: {
-          requiresAuth: true,
-          role: [employerRole],
         },
       },
       {

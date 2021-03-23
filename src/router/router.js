@@ -428,47 +428,47 @@ const parseJwt = (token) => {
   }
 };
 
-// router.beforeEach((to, from, next) => {
-//   // console.log("requiresAuth: ", to.matched.some(record => record.meta.requiresAuth));
-//   // console.log("onlyGuest: ", to.matched.some(record => record.meta.onlyGuest));
-//   // console.log("role er: ", to.matched.some(record => record.meta.role === EmployerRole));
-//   // console.log("role ee: ", to.matched.some(record => record.meta.role === EmployeeRole));
-//   // console.log("token: ", sessionStorage.getItem("token"));
+router.beforeEach((to, from, next) => {
+  // console.log("requiresAuth: ", to.matched.some(record => record.meta.requiresAuth));
+  // console.log("onlyGuest: ", to.matched.some(record => record.meta.onlyGuest));
+  // console.log("role er: ", to.matched.some(record => record.meta.role === EmployerRole));
+  // console.log("role ee: ", to.matched.some(record => record.meta.role === EmployeeRole));
+  // console.log("token: ", sessionStorage.getItem("token"));
 
-//   if (to.matched.some(record => record.meta.requiresAuth)) {
-//     if (sessionStorage.getItem("token") === null) {
-//       next({ name: "Login", });
-//     } else {
-//       const parsedToken = parseJwt(sessionStorage.getItem("token"));
-//       if (parsedToken.role === "employer") {
-//         if (to.matched.some(record => record.meta.role === EmployerRole)) {
-//           next();
-//         } else {
-//           next({ name: "Dashboard" });
-//         }
-//       } else if (parsedToken.role === "employee") {
-//         if (to.matched.some(record => record.meta.role === EmployeeRole)) {
-//           next();
-//         } else {
-//           next({ name: "Dashboard" });
-//         }
-//       } else if (parsedToken.role === "school") {
-//         if (to.matched.some(record => record.meta.role === SchoolRole)) {
-//           next();
-//         } else {
-//           next({ name: "Dashboard" });
-//         }
-//       }
-//     }
-//   } else if (to.matched.some(record => record.meta.onlyGuest)){
-//     if (sessionStorage.getItem("token") === null) {
-//       next();
-//     } else {
-//       next({name: "Dashboard"})
-//     }
-//   } else {
-//     next();
-//   }
-// });
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (sessionStorage.getItem("token") === null) {
+      next({ name: "Login", });
+    } else {
+      const parsedToken = parseJwt(sessionStorage.getItem("token"));
+      if (parsedToken.role === "employer") {
+        if (to.matched.some(record => record.meta.role === EmployerRole)) {
+          next();
+        } else {
+          next({ name: "EmployerJobList" });
+        }
+      } else if (parsedToken.role === "employee") {
+        if (to.matched.some(record => record.meta.role === EmployeeRole)) {
+          next();
+        } else {
+          next({ name: "EmployeeDashboard" });
+        }
+      } else if (parsedToken.role === "school") {
+        if (to.matched.some(record => record.meta.role === SchoolRole)) {
+          next();
+        } else {
+          next({ name: "SchoolViewCompanyList" });
+        }
+      }
+    }
+  } else if (to.matched.some(record => record.meta.onlyGuest)){
+    if (sessionStorage.getItem("token") === null) {
+      next();
+    } else {
+      next({name: "EmployeeDashboard"})
+    }
+  } else {
+    next();
+  }
+});
 
 export default router;

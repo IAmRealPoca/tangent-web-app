@@ -54,7 +54,7 @@
                       <div class="col-auto">
                         <img
                           alt="Image placeholder"
-                          src="@/assets/img/z2358820138055_341c257ff575934f26613727fee0cb8e.jpg"
+                          src="@/assets/img/tangent.png"
                           class="user-avatar lg-avatar rounded-circle"
                         />
                       </div>

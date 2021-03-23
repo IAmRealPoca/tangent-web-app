@@ -38,6 +38,10 @@ const postJobToSchool = (jobId, payload) => {
     return employerRepo.postJobToSchool(jobId, payload);
 }
 
+const removeJobFromSchool = (jobId, schoolId) => {
+  return employerRepo.removeJobFromSchool(jobId, schoolId);
+}
+
 const getJobPostedToSchool = () => {
     return employerRepo.getJobPostedToSchool();
 }
@@ -46,4 +50,4 @@ const getPostedSchoolListByJobPostId = (postId) => {
     return employerRepo.getPostedSchoolListByJobPostId(postId);
 }
 
-export {getCurrEmployerInfo, getCurrEmpJobs, getOneByIdCurrEmployer, getAppliedCVFromJobId, getAppliedCVFromJobIdAndApplicationId, getApprovalInfo, postJobToSchool, requestConnection, getJobPostedToSchool, getPostedSchoolListByJobPostId, removeConnection};
+export {getCurrEmployerInfo, getCurrEmpJobs, getOneByIdCurrEmployer, getAppliedCVFromJobId, getAppliedCVFromJobIdAndApplicationId, getApprovalInfo, postJobToSchool, requestConnection, getJobPostedToSchool, getPostedSchoolListByJobPostId, removeConnection, removeJobFromSchool};

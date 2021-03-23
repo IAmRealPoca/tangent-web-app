@@ -20,9 +20,12 @@
             <h2 class="h4">Application details</h2>
             <p class="mb-0">Review your applicant.</p>
           </div>
-          <div class="btn-toolbar mb-2 mb-md-0">
-            <a class="btn btn-sm btn-dark" @click="handleMarkAsFavorite"
+          <div class="btn-toolbar mb-2 mb-md-0" v-if="Object.keys(applicationInfo).length > 0">
+            <a class="btn btn-sm btn-dark" @click="handleMarkAsFavorite" v-if="applicationInfo.status === 0"
               ><span class="fas fa-plus me-2"></span> Mark as interested
+            </a>
+            <a class="btn btn-sm btn-danger" @click="handleMarkAsFavorite" v-else-if="applicationInfo.status === 1"
+              ><span class="fas fa-minus me-2"></span> Unmark as interested
             </a>
             <!-- <div class="btn-group ms-2 ms-lg-3">
               <button type="button" class="btn btn-sm btn-outline-primary">
@@ -239,7 +242,6 @@
                                   PDF</a>
 
                                   <!-- <img :src="applicationInfo.cv.cvFile.fileURL" alt=""> -->
-                                  <div class="h5">La la la</div>
                                 </div>
                                 <div
                                   class="card border-light shadow-sm"
@@ -339,8 +341,9 @@ export default {
       console.log("hello: ", applicationInfo.value);
     });
 
-    const handleMarkAsFavorite = () => {
-      recruitmentPost.markAsFavorite(applicationId, null);
+    const handleMarkAsFavorite = async () => {
+      await recruitmentPost.markAsFavorite(applicationId, null);
+      fetchCVFromJobAndApplicationId(jobId, applicationId);
     };
 
     return {

@@ -90,7 +90,8 @@ export default {
         listOfSchools.value = resp;
       });
       if (userToken) {
-        router.push("/dashboard");
+        // router.push("/dashboard");
+        router.go(0);
       }
       // this._setUser(user ? JSON.parse(user) : null);
     });
@@ -107,7 +108,8 @@ export default {
       console.log("usrResp Token ", parseJwt(resp.token));
       const usrResp = await fetchUserData(parseJwt(resp.token));
       // store.dispatch("setCurrentUserFlag", resp.flg);
-      router.push("/dashboard");
+      // router.push("/dashboard");
+      router.go(0);
     }
 
     const fetchUserData = async ({ role }) => {

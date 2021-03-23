@@ -22,6 +22,10 @@ const updateJob = (jobId, updatedJob) => {
   return recruitmentPostRepo.updateJob(jobId, updatedJob);
 };
 
+const deleteJob = (jobId) => {
+  return recruitmentPostRepo.deleteJob(jobId);
+}
+
 const markAsFavorite = (applicationId, payload) => {
   return recruitmentPostRepo.markAsFavorite(applicationId, payload);
 };
@@ -35,6 +39,7 @@ export {
   getOneById,
   postNewJob,
   updateJob,
+  deleteJob,
   markAsFavorite,
   applyJob,
 };

@@ -113,16 +113,16 @@
                     type="button"
                     class="hover-state btn btn-warning"
                     data-bs-toggle="modal"
-                    data-bs-target="#modal-default"
+                    :data-bs-target="'#modal-default-' + response.postId"
                   >
                     Apply CV
                   </button>
                   <div
                     class="modal fade"
-                    id="modal-default"
+                    :id="'modal-default-' + response.postId"
                     tabindex="-1"
                     role="dialog"
-                    aria-labelledby="modal-default"
+                    :aria-labelledby="'modal-default-' + response.postId"
                     aria-hidden="true"
                   >
                     <div
@@ -140,7 +140,9 @@
                           ></button>
                         </div>
                         <div class="modal-body">
+
                           <div class="px-2 py-2">
+                            
                             <form>
                               <div v-for="cv in listCV" :key="cv.cvId">
                                 <input
@@ -148,6 +150,7 @@
                                   :id="cv.cvId"
                                   :value="cv.cvId"
                                   v-model="cvPicked"
+                                  
                                 />
                                 <a :href="`/student/cv/${cv.cvId}`">
                                   <label class="form-label">
@@ -166,7 +169,8 @@
                           <button
                             type="button"
                             class="btn btn-secondary"
-                            @click="handleApplyClick(response.postId)"
+                            data-bs-dismiss="modal"
+                            @click.prevent="handleApplyClick(response.postId)"
                           >
                             Apply
                           </button>
@@ -296,6 +300,7 @@ export default {
     handleApplyClick(postId) {
       // modal popup
       console.log("cvPicked: ", this.cvPicked);
+      console.log("jobPicked: ", postId);
       const payload = {
         cvId: this.cvPicked,
       };
