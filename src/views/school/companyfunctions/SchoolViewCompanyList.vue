@@ -25,7 +25,7 @@
 
         <div class="row">
           <div class="col-12 col-xl-3">
-            <div class="card border-light shadow-sm components-section mb-4">
+            <div class="card border-light shadow-sm components-section">
               <div class="card-header">
                 <h5 class="h5">Filters</h5>
               </div>
@@ -104,7 +104,7 @@
           </div>
 
           <div class="col-12 col-xl-9">
-            <div class="table-settings mb-4">
+            <div class="table-settings">
               <div class="row justify-content-between align-items-center">
                 <div class="col-9 col-lg-4 d-flex"></div>
                 <!-- <div class="col-3 col-lg-8 text-right">
@@ -315,14 +315,14 @@
 import * as constants from "./companyStatusUtil.js";
 import { ref, onMounted } from "vue";
 import MainContent from "@/components/MainContent";
-import { useRouter } from "vue-router";
+// import { useRouter } from "vue-router";
 import * as SchoolServices from "@/util/service/schoolService";
 
 export default {
   name: "SchoolViewCompanyList",
   components: { MainContent },
   setup() {
-    const router = useRouter();
+    // const router = useRouter();
     const listCompanies = ref([]);
 
     const handleActionButtonClick = (companyAccountId, status) => {
