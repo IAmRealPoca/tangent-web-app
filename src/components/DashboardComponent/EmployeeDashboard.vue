@@ -111,9 +111,65 @@
               <div class="row">
                 <!-- Apply Button -->
                 <div class="text-end pt-4">
-                  <button type="button" class="hover-state btn btn-warning">
-                    Apply
+                  <button
+                    type="button"
+                    class="hover-state btn btn-warning"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-default"
+                  >
+                    Upload CV
                   </button>
+                  <div
+                    class="modal fade"
+                    id="modal-default"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="modal-default"
+                    aria-hidden="true"
+                  >
+                    <div
+                      class="modal-dialog modal-dialog-centered"
+                      role="document"
+                    >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h2 class="h6 modal-title">Choose your CV</h2>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="px-2 py-2">
+                          <label for="formFile" class="form-label">
+                            Please choose .pdf file
+                          </label>
+                          <input
+                            class="form-control"
+                            type="file"
+                            id="formFile"
+                          />
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            @click="handleApplyClick"
+                          >
+                            Apply
+                          </button>
+                          <!-- <button
+                            type="button"
+                            class="btn btn-link text-gray ms-auto"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- end of Apply Button -->
@@ -121,7 +177,7 @@
           </div>
         </div>
       </div>
-      <nav aria-label="Templates page navigation">
+      <div aria-label="Templates page navigation" class="pt-2 ps-2">
         <ul class="pagination">
           <li class="page-item disabled">
             <a class="page-link" aria-label="first link" tabindex="-1" href="#"
@@ -135,7 +191,7 @@
             <a class="page-link" aria-label="first link" href="#">Next</a>
           </li>
         </ul>
-      </nav>
+      </div>
     </div>
     <!-- </div> -->
   </MainContent>
@@ -326,6 +382,11 @@ export default {
         "-" +
         fmDate.getFullYear()
       );
+    },
+    handleApplyClick() {
+      // modal popup
+      const style = "";
+      console.log("okeeeee");
     },
   },
 };
