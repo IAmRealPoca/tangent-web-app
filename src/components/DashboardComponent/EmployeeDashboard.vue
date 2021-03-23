@@ -1,7 +1,7 @@
 <template>
   <MainContent>
     <!-- Top Navigation -->
-    <div class="package mt-3 mb-2 rounded-top ">
+    <div class="package mt-3 mb-2 rounded-top rounded-bottom">
       <h4 class="mb-2 px-4 pt-2 text-dark fw-bold">
         Tìm việc làm tuyển dụng
       </h4>
@@ -177,23 +177,30 @@
           </div>
         </div>
       </div>
-      <div aria-label="Templates page navigation" class="pt-2 ps-2">
-        <ul class="pagination">
-          <li class="page-item disabled">
-            <a class="page-link" aria-label="first link" tabindex="-1" href="#"
-              >Previous</a
-            >
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">1</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" aria-label="first link" href="#">Next</a>
-          </li>
-        </ul>
+      <div
+        class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between"
+      >
+        <nav aria-label="Templates page navigation">
+          <ul class="pagination">
+            <li class="page-item disabled">
+              <a
+                class="page-link"
+                aria-label="first link"
+                tabindex="-1"
+                href="#"
+                >Previous</a
+              >
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" aria-label="first link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
-    <!-- </div> -->
   </MainContent>
 </template>
 
@@ -402,7 +409,7 @@ export default {
 }
 .package {
   z-index: -1;
-  background-color: #36a3f7 !important;
+  background-color: #67abdfef !important;
   border: 1px solid #ffffff !important;
   /* color: #ffffff !important; */
   -webkit-box-shadow: 0 3px 5px 0 rgba(54, 163, 247, 0.3);
