@@ -48,7 +48,7 @@
                   value=""
                   id="defaultCheck10"
                 />
-                <label for="defaultCheck10"> Approved </label>
+                <label for="defaultCheck10"> All Jobs </label>
               </div>
               <div class="row form-check form-switch">
                 <input
@@ -57,29 +57,7 @@
                   value=""
                   id="defaultCheck10"
                 />
-                <label for="defaultCheck10"> Pending </label>
-              </div>
-              <div class="row form-check form-switch">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="defaultCheck10"
-                />
-                <label class="form-check-label" for="defaultCheck10">
-                  Blocked
-                </label>
-              </div>
-              <div class="row form-check form-switch">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="defaultCheck10"
-                />
-                <label class="form-check-label" for="defaultCheck10">
-                  Declined
-                </label>
+                <label for="defaultCheck10"> Published </label>
               </div>
             </div>
           </div>
@@ -136,13 +114,13 @@
                 <td>
                   <div class="d-block">
                     <span class="fw-bold">
-                      {{ response.candidates }}
+                      {{ formatDate(response.created) }}
                     </span>
                   </div>
                 </td>
                 <td>
                   <span class="fw-normal">
-                    {{ formatDate(response.created) }}
+                    {{ response.candidates }}
                   </span>
                 </td>
                 <td>
@@ -186,7 +164,7 @@
 
 <script>
 import MainContent from "@/components/MainContent.vue";
-import * as constants from "./dashboardUtils.js";
+// import * as constants from "./dashboardUtils.js";
 import { getListOfJobs } from "@/util/service/recruitmentPostService";
 
 export default {
@@ -239,10 +217,9 @@ export default {
     formatDate(time) {
       const fmDate = new Date(time);
       return (
-        parseInt(fmDate.getMonth()) +
-        1 +
-        "-" +
         fmDate.getDate() +
+        "-" +
+        (parseInt(fmDate.getMonth()) + 1) +
         "-" +
         fmDate.getFullYear()
       );
