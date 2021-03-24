@@ -3,20 +3,9 @@
     <!-- Breadcrumb -->
     <main>
       <div
-        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-2"
       >
         <div class="d-block mb-2 mb-md-0">
-          <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-              <li class="breadcrumb-item">
-                <a href="#"><span class="fas fa-home"></span></a>
-              </li>
-              <li class="breadcrumb-item"><a href="#">Tangent</a></li>
-              <li class="breadcrumb-item active" aria-current="page">
-                Student
-              </li>
-            </ol>
-          </nav>
           <h2 class="h4">CV List</h2>
         </div>
         <div class="btn-toolbar">
@@ -53,7 +42,11 @@
                       <label for="formFile" class="form-label">
                         CV Title
                       </label>
-                      <input class="form-control" type="text" v-model="newCV.title"/>
+                      <input
+                        class="form-control"
+                        type="text"
+                        v-model="newCV.title"
+                      />
                     </div>
                     <div class="px-2 py-2">
                       <label for="formFile" class="form-label">

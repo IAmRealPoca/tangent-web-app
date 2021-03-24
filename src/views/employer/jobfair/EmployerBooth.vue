@@ -1,18 +1,7 @@
 <template>
   <div>
     <MainContent>
-      <div class="py-4">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-            <li class="breadcrumb-item">
-              <a href="#"><span class="fas fa-home"></span></a>
-            </li>
-            <li class="breadcrumb-item"><a href="#">Job Fair</a></li>
-            <li class="breadcrumb-item active" aria-current="page">
-              Your Booth
-            </li>
-          </ol>
-        </nav>
+      <div class="py-2">
         <div class="d-flex justify-content-between w-100 flex-wrap">
           <div class="mb-3 mb-lg-0">
             <h1 class="h4">Your Booth</h1>
@@ -28,7 +17,7 @@
             <strong class="h1">Loading...</strong>
             <div
               class="spinner-border ml-auto"
-              style="width: 3rem; height: 3rem;" 
+              style="width: 3rem; height: 3rem;"
               role="status"
               aria-hidden="true"
             ></div>
@@ -59,7 +48,7 @@ import { getCurrEmployerInfo } from "@/util/service/employerService";
 import { ref } from "@vue/reactivity";
 import VideoPlayer from "@/components/ViduComponent/VideoPlayer.vue";
 import EmployerPresentation from "@/components/ViduComponent/EmployerPresentation.vue";
-import { useRoute,useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { onMounted } from "@vue/runtime-core";
 
 export default {

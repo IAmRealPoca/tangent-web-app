@@ -4,7 +4,6 @@
     <div
       class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center"
     >
-      <!-- <b-breadcrumb :items="crumbs" /> -->
       <div class="d-block mb-2 mb-md-0">
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
           <ol class="breadcrumb breadcrumb-primary breadcrumb-transparent">

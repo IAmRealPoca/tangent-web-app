@@ -44,8 +44,9 @@
                   <a
                     href="#"
                     class="text-center text-primary fw-bold border-bottom border-light py-3"
-                    >Notifications</a
                   >
+                    Notifications
+                  </a>
                   <a
                     href="#"
                     class="list-group-item list-group-item-action border-bottom border-light"
@@ -104,23 +105,27 @@
               <div
                 class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-0"
               >
-                <a class="dropdown-item rounded-top fw-bold" href="#"
-                  ><span class="far fa-user-circle"></span>My Profile</a
-                >
-                <a class="dropdown-item fw-bold" href="#"
-                  ><span class="fas fa-cog"></span>Settings</a
-                >
-                <a class="dropdown-item fw-bold" href="#"
-                  ><span class="fas fa-envelope-open-text"></span>Messages</a
-                >
-                <a class="dropdown-item fw-bold" href="#"
-                  ><span class="fas fa-user-shield"></span>Support</a
-                >
+                <a class="dropdown-item rounded-top fw-bold" href="#">
+                  <span class="far fa-user-circle"></span>
+                  My Profile
+                </a>
+                <a class="dropdown-item fw-bold" href="#">
+                  <span class="fas fa-cog"></span>
+                  Settings
+                </a>
+                <a class="dropdown-item fw-bold" href="#">
+                  <span class="fas fa-envelope-open-text"></span>
+                  Messages
+                </a>
+                <a class="dropdown-item fw-bold" href="#">
+                  <span class="fas fa-user-shield"></span>
+                  Support
+                </a>
                 <div role="separator" class="dropdown-divider my-0"></div>
-                <a class="dropdown-item rounded-bottom fw-bold" href="#"
-                  ><span class="fas fa-sign-out-alt text-danger"></span
-                  >Logout</a
-                >
+                <a class="dropdown-item rounded-bottom fw-bold" href="#">
+                  <span class="fas fa-sign-out-alt text-danger"></span>
+                  Logout
+                </a>
               </div>
             </li>
           </ul>
@@ -136,6 +141,7 @@
         </div>
       </div>
     </nav>
+    <Breadcrumb />
   </div>
 </template>
 
@@ -144,9 +150,11 @@ import { onMounted, reactive, ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { useSignalR } from "@/util/signalr/signalrutil";
+import Breadcrumb from "@/components/Breadcrumb.vue";
 
 export default {
   name: "Header",
+  components: { Breadcrumb },
   setup() {
     const router = useRouter();
     const signalr = useSignalR();

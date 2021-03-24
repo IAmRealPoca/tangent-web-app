@@ -1,6 +1,5 @@
 <template>
   <MainContent>
-    <Breadscrumb />
     <h2 class="h4">Boothcamp</h2>
 
     <div class="row">
@@ -146,13 +145,12 @@
 
 <script>
 import MainContent from "@/components/MainContent.vue";
-import Breadscrumb from "@/components/Breadcrumb.vue";
 // import * as constants from "./dashboardUtils.js";
 import { getListOfJobs } from "@/util/service/recruitmentPostService";
 
 export default {
   name: "AdminDashboard",
-  components: { MainContent, Breadscrumb },
+  components: { MainContent },
   data() {
     return {
       listOfBoosth: [],

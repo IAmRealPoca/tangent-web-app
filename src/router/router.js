@@ -214,7 +214,7 @@ const routes = [
     },
   },
   {
-    path: "/employer/jobfair/:jobFairId/",
+    path: "/employer/jobfair/:jobFairId",
     name: "EmployerFairDetail",
     component: EmployerFairDetail,
     meta: {
