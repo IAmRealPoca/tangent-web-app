@@ -4,7 +4,7 @@
 
 <script>
 import "video.js/dist/video-js.css";
-import "videojs-record/dist/css/videojs.record.jss";
+import "videojs-record/dist/css/videojs.record.css";
 import videojs from "video.js";
 
 import "webrtc-adapter";

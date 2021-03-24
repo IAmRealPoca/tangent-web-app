@@ -38,6 +38,7 @@ import StudentViewCoverLetterList from '@/views/student/coverletter/StudentViewC
 import StudentViewCVList from '@/views/student/cv/StudentViewCVList.vue';
 import StudentViewCVDetail from "@/views/student/cv/StudentViewCVDetail.vue";
 import StudentCreateCV from "@/views/student/cv/StudentCreateCV.vue";
+import StudentCreateCoverLetter from "@/views/student/coverletter/StudentCreateCoverLetter.vue";
 import StudentFairDetail from "@/views/student/jobfair/StudentFairDetail.vue";
 import StudentBooth from "@/views/student/jobfair/StudentBooth.vue";
 import StudentViewFairList from "@/views/student/jobfair/StudentViewFairList.vue";
@@ -380,6 +381,15 @@ const routes = [
     path: "/student/coverletter",
     name: "StudentViewCoverLetterList",
     component: StudentViewCoverLetterList,
+    meta: {
+      requiresAuth: true,
+      role: EmployeeRole,
+    },
+  },
+  {
+    path: "/student/coverletter/create",
+    name: "StudentCreateCoverLetter",
+    component: StudentCreateCoverLetter,
     meta: {
       requiresAuth: true,
       role: EmployeeRole,
