@@ -77,7 +77,6 @@ const routes = [
     component: AdminDashboard,
     meta: {
       requiresAuth: true,
-      // tem
       role: Admin,
     },
   },
@@ -85,24 +84,18 @@ const routes = [
     path: "/student/dashboard",
     name: "EmployeeDashboard",
     component: EmployeeDashboard,
-    // name: "Dashboard",
-    // component: Dashboard,
     meta: {
       requiresAuth: true,
-      // tem
       role: EmployeeRole,
     },
   },
   {
     path: "/employer/dashboard",
-    // name: "Dashboard",
-    // component: Dashboard,
     name: "Dashboard",
     component: Dashboard,
     meta: {
       requiresAuth: true,
-      // tem
-      role: EmployeeRole,
+      role: EmployerRole,
     },
   },
   {
