@@ -16,7 +16,7 @@
       // If absolute URL from the remote server is provided, configure the CORS
       // header on that server.
       var url =
-        "https://namiv.blob.core.windows.net/tangent-fair-thumbnail/TANGENT_-20210322T184214434.pdf?sv=2019-02-02&sr=c&sig=7AQ8D1OigGb%2F7fvQcOw3lqsV2ikdD0qwujLiBCIupPE%3D&se=2021-03-23T00%3A56%3A02Z&sp=rl";
+        "https://cdn.filestackcontent.com/5qOCEpKzQldoRsVatUPS";
 
       // Loaded via <script> tag, create shortcut to access PDF.js exports.
       var pdfjsLib = window["pdfjs-dist/build/pdf"];
@@ -27,6 +27,7 @@
 
       // Asynchronous download of PDF
       var loadingTask = pdfjsLib.getDocument(url);
+      console.log("Soemshit ",loadingTask);
       loadingTask.promise.then(
         function(pdf) {
           console.log("PDF loaded");

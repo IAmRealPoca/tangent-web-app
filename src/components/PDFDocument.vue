@@ -1,9 +1,9 @@
 <template>
-  <div class="pdf-document">
+  <div class="">
     <div>ANCD</div>
     <PDFPage
       v-for="page in pages"
-      v-bind="{ page, sacale }"
+      v-bind="{ page, scale }"
       :key="page.pageNumber"
     />
   </div>
@@ -12,23 +12,25 @@
 <script>
 import PDFPage from "./PDFPage.vue";
 import range from "lodash/range";
-import { ref } from "@vue/reactivity";
+import { onMounted, ref } from "vue";
 // import pdfjs from "pdfjs-dist";
 export default {
   props: ["url", "scale"],
   components: {
     PDFPage,
   },
-  async setup() {
+  setup() {
     const pdf = ref(undefined);
     const pages = ref([]);
+    const scale = ref(2);
+
 
     const fetchPDF = async () => {
       const pdfjs = await import("pdfjs-dist/webpack");
       const pdfResp = await pdfjs.getDocument(
         "https://cdn.filestackcontent.com/5qOCEpKzQldoRsVatUPS"
       );
-      pdf.value = await pdfResp._capability.promise;
+      pdf.value = await pdfResp.promise;
       const promises = range(1, pdf.value.numPages).map((number) =>
         pdf.value.getPage(number)
       );
@@ -49,9 +51,12 @@ export default {
       //     pages.value = pagesRes;
       //   });
     };
-    await fetchPDF();
+    onMounted(async ()=>{
+      await fetchPDF();
     console.log("Page fetch: ", pages.value);
-    return { pages };
+
+    });
+    return { pages,scale };
   },
 };
 </script>

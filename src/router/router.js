@@ -45,6 +45,8 @@ import StudentViewFairList from "@/views/student/jobfair/StudentViewFairList.vue
 
 import LandingPage from "@/views/LandingPage.vue";
 
+import PDF from "@/components/PDFDocument.vue";
+
 import EmployeeDashboard from '@/components/DashboardComponent/EmployeeDashboard'
 
 import { createRouter, createWebHistory } from "vue-router";
@@ -420,6 +422,15 @@ const routes = [
     meta: {
       requiresAuth: true,
       role: EmployeeRole,
+    },
+  },
+  {
+    path: "/pdf",
+    name: "PDF",
+    component: PDF,
+    meta: {
+      // requiresAuth: true,
+      // role: EmployeeRole,
     },
   },
 
