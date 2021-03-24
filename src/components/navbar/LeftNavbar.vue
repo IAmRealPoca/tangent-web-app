@@ -13,7 +13,7 @@
         ><img
           class="navbar-brand-dark"
           src="@/assets/img/logo.svg"
-          alt="Volt logo" />
+          alt="Volt logo"/>
         <img
           class="navbar-brand-light"
           src="@/assets/img/logo.svg"
@@ -310,8 +310,8 @@ export default {
             (e) => e.meta.requiresAuth === true && e.meta.role[0] === schoolRole
           );
         }
-        console.log("menuItems: ", menuItems);
-        console.log("menuItemsByRole: ", menuItemsByRole.value);
+        // console.log("menuItems: ", menuItems);
+        // console.log("menuItemsByRole: ", menuItemsByRole.value);
       }
     });
     return {

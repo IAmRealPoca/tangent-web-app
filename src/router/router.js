@@ -44,7 +44,7 @@ import StudentViewFairList from "@/views/student/jobfair/StudentViewFairList.vue
 
 import LandingPage from "@/views/LandingPage.vue";
 
-import EmployeeDashboard from '@/components/DashboardComponent/EmployeeDashboard.vue'; 
+import EmployeeDashboard from '@/components/DashboardComponent/EmployeeDashboard.vue';
 import AdminDashboard from '@/components/DashboardComponent/AdminDashboard.vue';
 
 import { createRouter, createWebHistory } from "vue-router";

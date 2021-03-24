@@ -1,25 +1,7 @@
 <template>
   <MainContent>
-    <!-- Breadcrumb -->
-    <div
-      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
-    >
-      <div class="d-block mb-2 mb-md-0">
-        <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-          <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-            <li class="breadcrumb-item">
-              <a href="#"><span class="fas fa-home"></span></a>
-            </li>
-            <li class="breadcrumb-item"><a href="#">Tangent</a></li>
-            <li class="breadcrumb-item active" aria-current="page">
-              Admin
-            </li>
-          </ol>
-        </nav>
-        <h2 class="h4">Boothcamp</h2>
-      </div>
-    </div>
-    <!-- End of Breadcrumb -->
+    <Breadscrumb />
+    <h2 class="h4">Boothcamp</h2>
 
     <div class="row">
       <div class="col-12 col-xl-3">
@@ -164,12 +146,13 @@
 
 <script>
 import MainContent from "@/components/MainContent.vue";
+import Breadscrumb from "@/components/Breadcrumb.vue";
 // import * as constants from "./dashboardUtils.js";
 import { getListOfJobs } from "@/util/service/recruitmentPostService";
 
 export default {
   name: "AdminDashboard",
-  components: { MainContent },
+  components: { MainContent, Breadscrumb },
   data() {
     return {
       listOfBoosth: [],

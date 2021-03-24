@@ -140,9 +140,7 @@
                           ></button>
                         </div>
                         <div class="modal-body">
-
                           <div class="px-2 py-2">
-                            
                             <form>
                               <div v-for="cv in listCV" :key="cv.cvId">
                                 <input
@@ -150,7 +148,6 @@
                                   :id="cv.cvId"
                                   :value="cv.cvId"
                                   v-model="cvPicked"
-                                  
                                 />
                                 <a :href="`/student/cv/${cv.cvId}`">
                                   <label class="form-label">
@@ -174,13 +171,6 @@
                           >
                             Apply
                           </button>
-                          <!-- <button
-                            type="button"
-                            class="btn btn-link text-gray ms-auto"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
-                          </button> -->
                         </div>
                       </div>
                     </div>
