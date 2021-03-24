@@ -1,10 +1,10 @@
 import * as signalr from "@microsoft/signalr";
 
 const signalRUtil = () => {
-  const hubConnect = () => {
+  const hubConnect = (username) => {
     const baseURL = process.env.VUE_APP_BASE_URL;
     const conn = new signalr.HubConnectionBuilder()
-      .withUrl(`${baseURL}/notifications?username=Ayame`)
+      .withUrl(`${baseURL}/notifications?username=${username}`)
       .withAutomaticReconnect()
       .build();
 
