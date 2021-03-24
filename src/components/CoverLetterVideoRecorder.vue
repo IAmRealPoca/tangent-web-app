@@ -12,6 +12,8 @@ import RecordRTC from "recordrtc";
 import Record from 'videojs-record/dist/videojs.record.js';
 
 import { ref, onMounted, onBeforeUnmount } from "vue";
+
+import { uploadFile } from "@/util/publitio/publitioUtil.js";
 export default {
   name: "CoverLetterVideoRecorder",
   setup() {
@@ -61,7 +63,8 @@ export default {
       player.value.on("finishRecord", () => {
         // the blob object contains the recorded data that
         // can be downloaded by the user, stored on server etc.
-        console.log("finished recording: ", this.player.recordedData);
+        console.log("finished recording: ", player.value.recordedData);
+        uploadFile(player.value.recordedData, "file");
       });
 
       // error handling
@@ -70,7 +73,7 @@ export default {
       });
 
       player.value.on("deviceError", () => {
-        console.error("device error:", this.player.deviceErrorCode);
+        console.error("device error:", player.value.deviceErrorCode);
       });
     });
 
