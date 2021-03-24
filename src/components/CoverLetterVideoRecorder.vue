@@ -9,16 +9,18 @@ import videojs from "video.js";
 
 import "webrtc-adapter";
 import RecordRTC from "recordrtc";
-import Record from 'videojs-record/dist/videojs.record.js';
+import Record from "videojs-record/dist/videojs.record.js";
 
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
 import { usePublitioUtil } from "@/util/publitio/publitioUtil.js";
+import { useVideoService } from "@/util/service/videoService.js";
 export default {
   name: "CoverLetterVideoRecorder",
   setup() {
     const player = ref("");
     const publitio = usePublitioUtil();
+    const videoService = useVideoService();
     const options = {
       controls: true,
       autoplay: false,
@@ -61,11 +63,25 @@ export default {
       });
 
       // user completed recording and stream is available
-      player.value.on("finishRecord", () => {
+      player.value.on("finishRecord", async () => {
         // the blob object contains the recorded data that
         // can be downloaded by the user, stored on server etc.
         console.log("finished recording: ", player.value.recordedData);
-        publitio.uploadFile(player.value.recordedData, "file");
+
+        //upload to publitio
+        player.value.recordedData.name =
+          "tangent_coverletter_" + Date.now().toString();
+        const publitioResponse = await publitio.uploadFile(player.value.recordedData, "file");
+        console.log("publitioResponse: ", publitioResponse);
+        //save video url to database
+        const saveVideoPayload = {
+          coverLetterId: 1,
+          videoUrl: publitioResponse.url_short,
+          thumbUrl: publitioResponse.url_thumbnail,
+          aspectRatio: 0,
+          coverUrl: publitioResponse.url_preview,
+        };
+        videoService.addVideo(saveVideoPayload);
       });
 
       // error handling

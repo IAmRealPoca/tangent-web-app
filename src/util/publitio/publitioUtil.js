@@ -1,11 +1,13 @@
 import PublitioAPI from "publitio_js_sdk/build/publitio-api.min.js";
-const publitio = new PublitioAPI(process.env.PUBLITIO_KEY, process.env.PUBLITIO_SECRET);
+const publitio = new PublitioAPI("Stntcadtb0t004x5akqx", "GAXNwlGjsqwA22DyXzmt6c9PhVDzyHGJ");
 
 const publitioUtil = () => {
   const uploadFile = async (file, kind) => {
-    publitio.uploadFile(file, kind)
-    .then(resp => console.log("publitio upload: ", resp))
-    .catch(err => console.log("publitio upload error: ", err));
+    const response = await publitio.uploadFile(file, kind);
+    // .then(resp => console.log("publitio upload: ", resp))
+    // .catch(err => console.log("publitio upload error: ", err));
+    console.log("publitio upload: ", response);
+    return response;
   };
 
   return { uploadFile };
