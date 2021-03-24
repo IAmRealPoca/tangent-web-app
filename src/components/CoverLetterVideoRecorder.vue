@@ -1,5 +1,5 @@
 <template>
-  <video src="myVideo" class="video-js vjs-default-skin" playsinline></video>
+  <video id="myVideo" class="video-js vjs-default-skin" playsinline></video>
 </template>
 
 <script>
@@ -9,6 +9,7 @@ import videojs from "video.js";
 
 import "webrtc-adapter";
 import RecordRTC from "recordrtc";
+import Record from 'videojs-record/dist/videojs.record.js';
 
 import { ref, onMounted, onBeforeUnmount } from "vue";
 export default {
@@ -52,23 +53,23 @@ export default {
         console.log("device is ready");
       });
 
-      this.player.on("startRecord", () => {
+      player.value.on("startRecord", () => {
         console.log("started recording!");
       });
 
       // user completed recording and stream is available
-      this.player.on("finishRecord", () => {
+      player.value.on("finishRecord", () => {
         // the blob object contains the recorded data that
         // can be downloaded by the user, stored on server etc.
         console.log("finished recording: ", this.player.recordedData);
       });
 
       // error handling
-      this.player.on("error", (element, error) => {
+      player.value.on("error", (element, error) => {
         console.warn(error);
       });
 
-      this.player.on("deviceError", () => {
+      player.value.on("deviceError", () => {
         console.error("device error:", this.player.deviceErrorCode);
       });
     });
