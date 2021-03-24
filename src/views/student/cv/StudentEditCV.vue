@@ -1,23 +1,17 @@
 <template>
-  <div>
-<MainContent>
-    <main>
-        
-    </main>
-</MainContent>
-  </div>
+  <MainContent>
+    <main></main>
+  </MainContent>
 </template>
 
 <script>
 import MainContent from "@/components/MainContent.vue";
 export default {
-    name:"StudentEditCV",
-    components: {
-        MainContent,
-    }
-}
+  name: "StudentEditCV",
+  components: {
+    MainContent,
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
