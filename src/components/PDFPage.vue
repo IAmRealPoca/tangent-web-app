@@ -1,8 +1,9 @@
 <template>
-  <canvas v-show="drawPage" v-bind="canvasAttrs"></canvas>
+  <canvas v-visible.once="drawPage" v-bind="canvasAttrs"></canvas>
 </template>
 
 <script>
+import visible from "@/util/directive/visible";
 export default {
   name: "PDFPage",
   props: ["page", "scale"],
@@ -11,7 +12,11 @@ export default {
     return h("canvas", { attrs });
   },
   created() {
-    this.viewport = this.page.getViewport({scale: this.scale});
+    console.log(this.page);
+    this.viewport = this.page.getViewport({ scale: this.scale });
+  },
+  directives: {
+    visible,
   },
   computed: {
     canvasAttrs() {
