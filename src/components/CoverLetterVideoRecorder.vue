@@ -13,11 +13,12 @@ import Record from 'videojs-record/dist/videojs.record.js';
 
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
-import { uploadFile } from "@/util/publitio/publitioUtil.js";
+import { usePublitioUtil } from "@/util/publitio/publitioUtil.js";
 export default {
   name: "CoverLetterVideoRecorder",
   setup() {
     const player = ref("");
+    const publitio = usePublitioUtil();
     const options = {
       controls: true,
       autoplay: false,
@@ -64,7 +65,7 @@ export default {
         // the blob object contains the recorded data that
         // can be downloaded by the user, stored on server etc.
         console.log("finished recording: ", player.value.recordedData);
-        uploadFile(player.value.recordedData, "file");
+        publitio.uploadFile(player.value.recordedData, "file");
       });
 
       // error handling
