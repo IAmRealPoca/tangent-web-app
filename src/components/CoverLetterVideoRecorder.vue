@@ -15,9 +15,12 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
 
 import { usePublitioUtil } from "@/util/publitio/publitioUtil.js";
 import { useVideoService } from "@/util/service/videoService.js";
+import * as employeeService from "@/util/service/employeeService.js";
+import { useStore } from "vuex";
 export default {
   name: "CoverLetterVideoRecorder",
   setup() {
+    const store = useStore();
     const player = ref("");
     const publitio = usePublitioUtil();
     const videoService = useVideoService();
@@ -71,17 +74,30 @@ export default {
         //upload to publitio
         player.value.recordedData.name =
           "tangent_coverletter_" + Date.now().toString();
-        const publitioResponse = await publitio.uploadFile(player.value.recordedData, "file");
+        const publitioResponse = await publitio.uploadFile(
+          player.value.recordedData,
+          "file"
+        );
         console.log("publitioResponse: ", publitioResponse);
         //save video url to database
         const saveVideoPayload = {
-          coverLetterId: 1,
+          // coverLetterId: store.state.newCoverLetter.coverLetterId,
           videoUrl: publitioResponse.url_short,
           thumbUrl: publitioResponse.url_thumbnail,
           aspectRatio: 0,
           coverUrl: publitioResponse.url_preview,
         };
-        videoService.addVideo(saveVideoPayload);
+        // videoService.addVideo(saveVideoPayload);
+        const createCoverLetterPayload = {
+          // coverLetterId: store.state.newCoverLetter.coverLetterId,
+          title: store.state.newCoverLetter.title,
+          saveVideoPayload,
+        };
+        employeeService.createCoverLetter(
+          createCoverLetterPayload,
+          false,
+          true
+        );
       });
 
       // error handling

@@ -37,16 +37,17 @@ export default {
   components: {
     PDFPage,
   },
-  setup() {
+  setup(props) {
     const pdf = ref(undefined);
     const pages = ref([]);
     const page = ref({});
-    const scale = ref(2);
+    const scale = ref(props.scale);
 
     const fetchPDF = async () => {
       const pdfjs = await import("pdfjs-dist/webpack");
       const pdfResp = await pdfjs.getDocument(
-        "https://cdn.filestackcontent.com/5qOCEpKzQldoRsVatUPS"
+        // "https://cdn.filestackcontent.com/5qOCEpKzQldoRsVatUPS"
+        props.url
       );
       pdf.value = await pdfResp.promise;
       const promises = range(1, pdf.value.numPages).map((number) =>

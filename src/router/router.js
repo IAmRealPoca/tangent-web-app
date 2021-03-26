@@ -42,6 +42,7 @@ import StudentCreateCoverLetter from "@/views/student/coverletter/StudentCreateC
 import StudentFairDetail from "@/views/student/jobfair/StudentFairDetail.vue";
 import StudentBooth from "@/views/student/jobfair/StudentBooth.vue";
 import StudentViewFairList from "@/views/student/jobfair/StudentViewFairList.vue";
+import StudentRecordCoverLetter from "@/views/student/coverletter/StudentRecordCoverLetter.vue";
 
 import LandingPage from "@/views/LandingPage.vue";
 
@@ -392,6 +393,15 @@ const routes = [
     path: "/student/coverletter/create",
     name: "StudentCreateCoverLetter",
     component: StudentCreateCoverLetter,
+    meta: {
+      requiresAuth: true,
+      role: EmployeeRole,
+    },
+  },
+  {
+    path: "/student/coverletter/create/recordvieo",
+    name: "StudentRecordCoverLetter",
+    component: StudentRecordCoverLetter,
     meta: {
       requiresAuth: true,
       role: EmployeeRole,

@@ -271,7 +271,11 @@
                         </div>
                       </a>
                     </td>
-                    <td><span class="fw-normal">{{ formatDate(appliedCV.cv.created) }}</span></td>
+                    <td>
+                      <span class="fw-normal">{{
+                        formatDate(appliedCV.cv.created)
+                      }}</span>
+                    </td>
                     <td>
                       <span class="fw-normal"
                         ><span
@@ -412,7 +416,7 @@ export default {
       return new Date(time).toLocaleString();
     };
 
-const checkStatusCSSClass = (statusInt) => {
+    const checkStatusCSSClass = (statusInt) => {
       let text = "";
       const fwBold = "badge super-badge badge-lg";
       let cssClass = "bg-dark";
@@ -424,7 +428,7 @@ const checkStatusCSSClass = (statusInt) => {
         cssClass = "bg-success";
         text = "Marked";
       }
-      
+
       return {
         statusClass: fwBold + " " + cssClass,
         statusString: text,
@@ -436,9 +440,8 @@ const checkStatusCSSClass = (statusInt) => {
       handleApplicantClick,
       formatDate,
     };
-  }
-}
-
+  },
+};
 </script>
 
 <style scoped>
