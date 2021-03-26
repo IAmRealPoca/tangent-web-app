@@ -51,8 +51,6 @@
                         <button
                           class="btn btn-outline-dark"
                           v-on:click.stop.prevent="openWindowToRecordVideo()"
-                          data-bs-toggle="modal"
-                          data-bs-target="#record-video-modal-form"
                         >
                           Record Video
                         </button>
@@ -87,6 +85,7 @@
 <script>
 import MainContent from "@/components/MainContent.vue";
 import StudentRecordCoverLetter from "./StudentRecordCoverLetter.vue";
+import { ref } from "vue";
 import { useStore } from "vuex";
 export default {
   name: "StudentCreateCoverLetter",
