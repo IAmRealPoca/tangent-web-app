@@ -7,8 +7,8 @@ const videoService = () => {
     return videoRepo.getVideo();
   };
 
-  const addVideo = (payload) => {
-    return videoRepo.addVideo(payload);
+  const addVideo = (payload, hasPDF = false, hasVideo = false) => {
+    return videoRepo.addVideo(payload, hasPDF, hasVideo);
   };
   
   return { getVideo,addVideo};

@@ -15,6 +15,9 @@ export default {
     getStudentCVDetail(cvId) {
         return http.get(`/cvs/${cvId}`);
     },
+    getAppliedJob(cvId) {
+      return http.get(`${path}/applied-jobs?cvId=${cvId}`);
+    },
     getListStudentCoverLetter() {
         return http.get(`${path}` + "/cover-letter");
     },
@@ -30,4 +33,10 @@ export default {
     createCV(payload) {
       return http.post(`/cvs`, payload);
     },
+    createCoverLetter(payload, hasPDF, hasVideo) {
+      return http.post(`/cover-letters?hasPDF=${hasPDF}&hasVideo=${hasVideo}`, payload);
+    },
+    updateCoverLetter(coverLetterId, payload, hasPDF, hasVideo) {
+      return http.put(`/cover-letters/${coverLetterId}?hasPDF=${hasPDF}&hasVideo=${hasVideo}`, payload);
+    }
 }
