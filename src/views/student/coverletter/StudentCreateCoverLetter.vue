@@ -50,7 +50,7 @@
                       <div>
                         <button
                           class="btn btn-outline-dark"
-                          v-on:click.stop.prevent="openWindowToRecordVideo()"
+                          v-on:click.stop.prevent="openWindowToRecordVideo"
                         >
                           Record Video
                         </button>
@@ -71,8 +71,10 @@
                         </div> -->
                       </div>
                     </div>
+                    
                   </div>
                 </div>
+                <StudentRecordCoverLetter />
               </div>
             </div>
           </div>
@@ -100,7 +102,8 @@ export default {
       store.commit("newCoverLetter", {
         title: newCoverLetterTitle.value,
       });
-      window.open("/student/coverletter/create/recordvieo", '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+      console.log("title: ", store.state.newCoverLetter.title);
+      // window.open("/student/coverle/tter/create/recordvieo", '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
     };
     return {
       openWindowToRecordVideo,

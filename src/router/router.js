@@ -398,15 +398,15 @@ const routes = [
       role: EmployeeRole,
     },
   },
-  {
-    path: "/student/coverletter/create/recordvieo",
-    name: "StudentRecordCoverLetter",
-    component: StudentRecordCoverLetter,
-    meta: {
-      requiresAuth: true,
-      role: EmployeeRole,
-    },
-  },
+  // {
+  //   path: "/student/coverletter/create/recordvieo",
+  //   name: "StudentRecordCoverLetter",
+  //   component: StudentRecordCoverLetter,
+  //   meta: {
+  //     requiresAuth: true,
+  //     role: EmployeeRole,
+  //   },
+  // },
   {
     path: "/student/jobfair",
     name: "StudentViewFairList",

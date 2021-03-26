@@ -90,8 +90,9 @@ export default {
         // videoService.addVideo(saveVideoPayload);
         const createCoverLetterPayload = {
           // coverLetterId: store.state.newCoverLetter.coverLetterId,
+          coverLetterId: 0,
           title: store.state.newCoverLetter.title,
-          saveVideoPayload,
+          videoUploadParam: saveVideoPayload,
         };
         employeeService.createCoverLetter(
           createCoverLetterPayload,

@@ -11,7 +11,7 @@ export default {
   contract(state){
       state.isContracted = !state.isContracted;
   },
-  newCoverLetterId(state, newCoverLetter) {
+  newCoverLetter(state, newCoverLetter) {
     state.newCoverLetter = newCoverLetter;
-  }
+  },
 };
