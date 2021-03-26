@@ -118,7 +118,9 @@
                           <h4 class="h3">Your Company Booth</h4>
                           <h5 class="fw-normal">{{ boothDetail.name }}</h5>
                           <p class="text-gray mb-4">{{ boothDetail.desc }}</p>
-                          <a class="btn btn-sm btn-secondary" href="bootp"
+                          <a class="btn btn-sm btn-secondary" :href="
+                              fairDetailRef.jobFairId + `/` + boothList.boothId
+                            "
                             >Go to your booth</a
                           >
                         </div>
