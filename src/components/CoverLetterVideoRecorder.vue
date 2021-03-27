@@ -27,10 +27,10 @@ export default {
     const options = {
       controls: true,
       autoplay: false,
-      fluid: false,
+      fluid: true,
       loop: false,
-      width: 320,
-      height: 240,
+      width: '320',
+      height: '240',
       bigPlayButton: false,
       controlBar: {
         volumePanel: false,
