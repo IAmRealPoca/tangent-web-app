@@ -27,7 +27,7 @@
                 class="bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500"
               >
                 <div class="text-center text-md-center mb-4 mt-md-0">
-                  <h1 class="mb-0 h3">Sign in to our platform</h1>
+                  <h1 class="mb-0 h3">Register to our platform</h1>
                 </div>
                 <div class="d-flex justify-content-center my-4">
                   <div class="btn-group mx-auto">

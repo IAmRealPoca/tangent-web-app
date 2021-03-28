@@ -118,7 +118,9 @@
                           <h4 class="h3">Your Company Booth</h4>
                           <h5 class="fw-normal">{{ boothDetail.name }}</h5>
                           <p class="text-gray mb-4">{{ boothDetail.desc }}</p>
-                          <a class="btn btn-sm btn-secondary" href="bootp"
+                          <a class="btn btn-sm btn-secondary" :href="
+                              fairDetailRef.jobFairId + `/` + boothList.boothId
+                            "
                             >Go to your booth</a
                           >
                         </div>
@@ -384,37 +386,37 @@ export default {
     };
     const comId = parseJwt();
 
-const fetchJobFairDetail = async () => {
-  const fair = await jobFairService.getFair(fairIdFromRoute);
-  console.log("fair detail: ", fair);
-  fairDetailRef.value = fair;
-  boothsLength.value = fair.booths;
-  // console.log("booths: ", boothsLength.value);
-};
-fetchJobFairDetail();
+    const fetchJobFairDetail = async () => {
+      const fair = await jobFairService.getFair(fairIdFromRoute);
+      console.log("fair detail: ", fair);
+      fairDetailRef.value = fair;
+      boothsLength.value = fair.booths;
+      // console.log("booths: ", boothsLength.value);
+    };
+    fetchJobFairDetail();
 
-const fetchBoothList = () => {
-  // console.log("jwt: ", comId);
-  boothService
-    .getBoothByComId(parseInt(comId))
-    .then((resp) => {
-      console.log("booth from comid list: ", resp);
-      boothList.value = resp;
-    })
-    .catch((e) => {
-      const errCode = e.messages[0].status;
-      console.log("err :>> ", errCode);
-      if (errCode === 404) {
-        boothList.value = null;
-      }
-    });
-};
-fetchBoothList();
-const handleFileUpload = (evt) => {
-  const path = evt.target.value;
-  // console.log(path);
-  boothDetail.thumbnail = path;
-};
+    const fetchBoothList = () => {
+      // console.log("jwt: ", comId);
+      boothService
+        .getBoothByComId(parseInt(comId))
+        .then((resp) => {
+          console.log("booth from comid list: ", resp);
+          boothList.value = resp;
+        })
+        .catch((e) => {
+          const errCode = e.messages[0].status;
+          console.log("err :>> ", errCode);
+          if (errCode === 404) {
+            boothList.value = null;
+          }
+        });
+    };
+    fetchBoothList();
+    const handleFileUpload = (evt) => {
+      const path = evt.target.value;
+      // console.log(path);
+      boothDetail.thumbnail = path;
+    };
 
     const handleCreate = (e) => {
       const comId = parseJwt();
@@ -465,7 +467,7 @@ const handleFileUpload = (evt) => {
       handleCreate,
       handleDelete,
       handleFileUpload,
-    }
+    };
   },
 };
 onMounted(() => {

@@ -53,7 +53,7 @@
                       <div class="col-auto">
                         <img
                           alt="Image placeholder"
-                          src="@/assets/img/team/profile-picture-1.jpg"
+                          src="@/assets/img/tangent.png"
                           class="user-avatar lg-avatar rounded-circle"
                         />
                       </div>
@@ -69,127 +69,11 @@
                           </div>
                         </div>
                         <p class="font-small mt-1 mb-0">
-                          Added you to an event "Project stand-up" tomorrow at
-                          12:30 AM.
+                          {{ notification.msg }}
                         </p>
                       </div>
-                    </div> </a
-                  ><a
-                    href="../tasks.html"
-                    class="list-group-item list-group-item-action border-bottom border-light"
-                  >
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <img
-                          alt="Image placeholder"
-                          src="@/assets/img/team/profile-picture-2.jpg"
-                          class="user-avatar lg-avatar rounded-circle"
-                        />
-                      </div>
-                      <div class="col ps-0 ms-2">
-                        <div
-                          class="d-flex justify-content-between align-items-center"
-                        >
-                          <div>
-                            <h4 class="h6 mb-0 text-small">Neil Sims</h4>
-                          </div>
-                          <div class="text-end">
-                            <small class="text-danger">2 hrs ago</small>
-                          </div>
-                        </div>
-                        <p class="font-small mt-1 mb-0">
-                          You've been assigned a task for "Awesome new project".
-                        </p>
-                      </div>
-                    </div> </a
-                  ><a
-                    href="../tasks.html"
-                    class="list-group-item list-group-item-action border-bottom border-light"
-                  >
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <img
-                          alt="Image placeholder"
-                          src="@/assets/img/team/profile-picture-3.jpg"
-                          class="user-avatar lg-avatar rounded-circle"
-                        />
-                      </div>
-                      <div class="col ps-0 m-2">
-                        <div
-                          class="d-flex justify-content-between align-items-center"
-                        >
-                          <div>
-                            <h4 class="h6 mb-0 text-small">Roberta Casas</h4>
-                          </div>
-                          <div class="text-end"><small>5 hrs ago</small></div>
-                        </div>
-                        <p class="font-small mt-1 mb-0">
-                          Tagged you in a document called "First quarter
-                          financial plans",
-                        </p>
-                      </div>
-                    </div> </a
-                  ><a
-                    href="../single-message.html"
-                    class="list-group-item list-group-item-action border-bottom border-light"
-                  >
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <img
-                          alt="Image placeholder"
-                          src="@/assets/img/team/profile-picture-4.jpg"
-                          class="user-avatar lg-avatar rounded-circle"
-                        />
-                      </div>
-                      <div class="col ps-0 ms-2">
-                        <div
-                          class="d-flex justify-content-between align-items-center"
-                        >
-                          <div>
-                            <h4 class="h6 mb-0 text-small">Joseph Garth</h4>
-                          </div>
-                          <div class="text-end"><small>1 d ago</small></div>
-                        </div>
-                        <p class="font-small mt-1 mb-0">
-                          New message: "Hey, what's up? All set for the
-                          presentation?"
-                        </p>
-                      </div>
-                    </div> </a
-                  ><a
-                    href="../single-message.html"
-                    class="list-group-item list-group-item-action border-bottom border-light"
-                  >
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <img
-                          alt="Image placeholder"
-                          :src="user.avatar"
-                          class="user-avatar lg-avatar rounded-circle"
-                        />
-                      </div>
-                      <div class="col ps-0 ms-2">
-                        <div
-                          class="d-flex justify-content-between align-items-center"
-                        >
-                          <div>
-                            <h4 class="h6 mb-0 text-small">
-                              {{ user.name }}
-                            </h4>
-                          </div>
-                          <div class="text-end"><small>2 hrs ago</small></div>
-                        </div>
-                        <p class="font-small mt-1 mb-0">
-                          New message: "We need to improve the UI/UX for the
-                          landing page."
-                        </p>
-                      </div>
-                    </div> </a
-                  ><a
-                    href="#"
-                    class="dropdown-item text-center text-primary fw-bold rounded-bottom py-3"
-                    >View all</a
-                  >
+                    </div>
+                  </a>
                 </div>
               </div>
             </li>
@@ -217,17 +101,27 @@
               <div
                 class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-0"
               >
-                <a class="dropdown-item rounded-top fw-bold" href="#"
-                  ><span class="far fa-user-circle"></span>My Profile</a
-                >
-                <a class="dropdown-item fw-bold" href="#"
-                  ><span class="fas fa-cog"></span>Settings</a
-                >
+                <a class="dropdown-item rounded-top fw-bold" href="#">
+                  <span class="far fa-user-circle"></span>
+                  My Profile
+                </a>
+                <a class="dropdown-item fw-bold" href="#">
+                  <span class="fas fa-cog"></span>
+                  Settings
+                </a>
+                <a class="dropdown-item fw-bold" href="#">
+                  <span class="fas fa-envelope-open-text"></span>
+                  Messages
+                </a>
+                <a class="dropdown-item fw-bold" href="#">
+                  <span class="fas fa-user-shield"></span>
+                  Support
+                </a>
                 <div role="separator" class="dropdown-divider my-0"></div>
-                <a class="dropdown-item rounded-bottom fw-bold" href="#"
-                  ><span class="fas fa-sign-out-alt text-danger"></span
-                  >Logout</a
-                >
+                <a class="dropdown-item rounded-bottom fw-bold" href="#">
+                  <span class="fas fa-sign-out-alt text-danger"></span>
+                  Logout
+                </a>
               </div>
             </li>
           </ul>
@@ -243,6 +137,7 @@
         </div>
       </div>
     </nav>
+    <Breadcrumb />
   </div>
 </template>
 
@@ -250,10 +145,48 @@
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { useSignalR } from "@/util/signalr/signalrutil";
+import { useParseJwt } from "@/util/parseJwt";
+import Breadcrumb from "@/components/Breadcrumb.vue";
+
 export default {
   name: "Header",
+  components: { Breadcrumb },
   setup() {
     const router = useRouter();
+    const signalr = useSignalR();
+
+    const notification = reactive({
+      isNoti: false,
+      msg: "",
+    });
+    const bellShake = ref(null);
+    const notibell = ref(null);
+    // unreadNotifications.style.display = "none";
+    const unreadDisplay = ref(null);
+
+    const jwtParser = useParseJwt();
+    const userInfoToken = jwtParser.parseJwt(sessionStorage.getItem("token"));
+    const hub = signalr.hubConnect(userInfoToken.sub);
+    hub.on("noti", (msg) => {
+      console.log(msg);
+      notification.isNoti = true;
+      notification.msg = msg;
+      if (bellShake.value) {
+        console.log("bellshake");
+        bellShake.value.setAttribute("data-unread-notifications", true);
+        if (unreadDisplay.value) {
+          unreadDisplay.value.style.display = "block";
+        }
+        console.log(bellShake.value);
+      }
+      if (notibell.value) {
+        console.log("notibell");
+        notibell.value.setAttribute("data-unread-notifications", true);
+        console.log(notibell.value);
+      }
+    });
+
     const handleLoginClick = () => {
       router.push("/login");
     };
@@ -267,20 +200,17 @@ export default {
     const user = JSON.parse(store.state.userInfo);
     // const user = store.state.userInfo;
 
-    function parseJwt(token) {
-      var base64Url = token.split(".")[1];
-      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      var jsonPayload = decodeURIComponent(
-        atob(base64)
-          .split("")
-          .map(function(c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-
-      return JSON.parse(jsonPayload);
-    }
+    // function parseJwt(token) {
+    //   var base64Url = token.split(".")[1];
+    //   var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    //   var jsonPayload = decodeURIComponent(
+    //     atob(base64)
+    //       .split("")
+    //       .map(function(c) {
+    //         return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+    //       })
+    //       .join("")
+    //   );
     const isToggled = ref(false);
     const showNoti = () => {
       console.log('Something :>> ', notibell.value);

@@ -11,12 +11,23 @@
               <a href="#"><span class="fas fa-home"></span></a>
             </li>
             <li class="breadcrumb-item"><a href="#">Tangent</a></li>
-            <li class="breadcrumb-item active" aria-current="page">
-              Student
-            </li>
+            <li class="breadcrumb-item active" aria-current="page">Student</li>
           </ol>
         </nav>
         <h2 class="h4">Cover Letter</h2>
+      </div>
+      <div class="btn-toolbar">
+        <a href="/student/coverletter/create">
+          <button
+            type="button"
+            class="btn btn-sm btn-dark me-2"
+            data-bs-toggle="modal"
+            data-bs-target="#modal-default"
+          >
+            New Cover Letter
+          </button>
+        </a>
+        <div class="btn-group"></div>
       </div>
     </div>
     <!-- End of Breadcrumb -->

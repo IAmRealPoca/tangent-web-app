@@ -10,5 +10,8 @@ export default {
   },
   contract(state){
       state.isContracted = !state.isContracted;
-  }
+  },
+  newCoverLetter(state, newCoverLetter) {
+    state.newCoverLetter = newCoverLetter;
+  },
 };

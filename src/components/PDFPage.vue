@@ -1,8 +1,9 @@
 <template>
-  <canvas v-bind="canvasAttrs"></canvas>
+  <canvas v-visible.once="drawPage" v-bind="canvasAttrs"></canvas>
 </template>
 
 <script>
+import visible from "@/util/directive/visible";
 export default {
   name: "PDFPage",
   props: ["page", "scale"],
@@ -11,7 +12,11 @@ export default {
     return h("canvas", { attrs });
   },
   created() {
-    this.viewport = this.page.getViewport(this.scale);
+    console.log(this.page);
+    this.viewport = this.page.getViewport({ scale: this.scale });
+  },
+  directives: {
+    visible,
   },
   computed: {
     canvasAttrs() {
@@ -57,9 +62,13 @@ export default {
 
       // PDFPageProxy#render
       // https://mozilla.github.io/pdf.js/api/draft/PDFPageProxy.html
+      console.log("render :>> ", this.page);
       this.renderTask = this.page.render(renderContext);
-      this.renderTask.then(() => this.$emit("rendered", this.page));
-      this.renderTask.then(/* */).catch(this.destroyRenderTask);
+      console.log("this :>> ", this.renderTask.promise);
+      this.renderTask.promise
+        .then(() => this.$emit("rendered", this.page))
+        .catch(this.destroyRenderTask);
+      // this.renderTask.promise.then(/* */);
     },
 
     destroyPage(page) {
@@ -95,5 +104,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

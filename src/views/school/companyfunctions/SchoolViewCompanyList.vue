@@ -2,30 +2,9 @@
   <div>
     <MainContent>
       <main>
-        <!-- Breadcrumb -->
-        <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
-        >
-          <div class="d-block mb-2 mb-md-0">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-              <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                <li class="breadcrumb-item">
-                  <a href="#"><span class="fas fa-home"></span></a>
-                </li>
-                <li class="breadcrumb-item"><a href="#">Tangent</a></li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  Company
-                </li>
-              </ol>
-            </nav>
-            <h2 class="h4">Companies List</h2>
-          </div>
-        </div>
-        <!-- End of Breadcrumb -->
-
         <div class="row">
           <div class="col-12 col-xl-3">
-            <div class="card border-light shadow-sm components-section mb-4">
+            <div class="card border-light shadow-sm components-section">
               <div class="card-header">
                 <h5 class="h5">Filters</h5>
               </div>
@@ -104,7 +83,7 @@
           </div>
 
           <div class="col-12 col-xl-9">
-            <div class="table-settings mb-4">
+            <div class="table-settings">
               <div class="row justify-content-between align-items-center">
                 <div class="col-9 col-lg-4 d-flex"></div>
                 <!-- <div class="col-3 col-lg-8 text-right">
@@ -315,14 +294,14 @@
 import * as constants from "./companyStatusUtil.js";
 import { ref, onMounted } from "vue";
 import MainContent from "@/components/MainContent";
-import { useRouter } from "vue-router";
+// import { useRouter } from "vue-router";
 import * as SchoolServices from "@/util/service/schoolService";
 
 export default {
   name: "SchoolViewCompanyList",
   components: { MainContent },
   setup() {
-    const router = useRouter();
+    // const router = useRouter();
     const listCompanies = ref([]);
 
     const handleActionButtonClick = (companyAccountId, status) => {
@@ -358,8 +337,9 @@ export default {
               return (res.status = constants.STATUS_ENUM.BLOCKED);
             if (res.status === 3)
               return (res.status = constants.STATUS_ENUM.DECLINED);
-              if (res.status === 4) 
-              return (res.status = constants.STATUS_ENUM.COMPANY_REMOVED_RELATION);
+            if (res.status === 4)
+              return (res.status =
+                constants.STATUS_ENUM.COMPANY_REMOVED_RELATION);
             if (res.status === null)
               return (res.status = constants.STATUS_ENUM.NOT_YET_REQUESTED);
           });

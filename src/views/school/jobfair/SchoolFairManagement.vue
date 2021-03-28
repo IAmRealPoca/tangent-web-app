@@ -3,20 +3,9 @@
     <MainContent>
       <main>
         <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-2"
         >
-          <div class="d-block mb-4 mb-md-0">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-              <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                <li class="breadcrumb-item">
-                  <a href="#"><span class="fas fa-home"></span></a>
-                </li>
-                <li class="breadcrumb-item"><a href="#">Job Fair</a></li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  School
-                </li>
-              </ol>
-            </nav>
+          <div class="d-block mb-2 mb-md-0">
             <h2 class="h4">Job Fair</h2>
             <p class="mb-0">List of current job fairs.</p>
           </div>
@@ -129,7 +118,6 @@
                             <ckeditor
                               :editor="editor"
                               v-model="jobFair.JobFairDescription"
-
                             ></ckeditor>
                           </div>
                         </div>
@@ -152,7 +140,6 @@
             </div>
           </div>
         </div>
-        <!-- End breadcrumb -->
         <div class="row">
           <div class="col-12 col-xl-3">
             <div class="card border-light shadow-sm components-section mb-4">
@@ -331,7 +318,7 @@
                       </div>
                     </div>
                   </a>
-                  <div class="btn-group ms-md-3">
+                  <div class="btn-group ms-md-3 px-5">
                     <button
                       class="btn btn-outline-danger"
                       type="button"
@@ -510,9 +497,9 @@ export default {
 </script>
 
 <style scoped>
-.ck.ck-editor__editable_inline{
+.ck.ck-editor__editable_inline {
   width: 100% !important;
   height: 15rem;
-  border: .5px solid;
+  border: 0.5px solid;
 }
 </style>

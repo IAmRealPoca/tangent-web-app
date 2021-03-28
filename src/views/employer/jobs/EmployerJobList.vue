@@ -2,27 +2,14 @@
   <div>
     <MainContent>
       <main>
-        <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
-        >
-          <div class="d-block mb-4 mb-md-0">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-              <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                <li class="breadcrumb-item">
-                  <a href="#"><span class="fas fa-home"></span></a>
-                </li>
-                <li class="breadcrumb-item"><a href="#">Tangent</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Jobs</li>
-              </ol>
-            </nav>
-            <h2 class="h4">Jobs</h2>
-            <p class="mb-0">Your company's jobs are listed here.</p>
-          </div>
-          <div class="btn-toolbar mb-2 mb-md-0">
-            <a class="btn btn-sm btn-dark" @click="handleNewJobClick"
-              ><span class="fas fa-plus me-2"></span> New job</a
-            >
-            <!-- <div class="btn-group ms-2 ms-lg-3">
+        <h2 class="h4">Jobs</h2>
+        <p class="mb-0">Your company's jobs are listed here.</p>
+        <div class="btn-toolbar py-2 mb-md-0">
+          <a class="btn btn-sm btn-dark py-2" @click="handleNewJobClick">
+            <span class="fas fa-plus me-2"></span>
+            New job
+          </a>
+          <!-- <div class="btn-group ms-2 ms-lg-3">
               <button type="button" class="btn btn-sm btn-outline-primary">
                 Share
               </button>
@@ -30,7 +17,6 @@
                 Export
               </button>
             </div> -->
-          </div>
         </div>
         <div class="card">
           <div
@@ -85,12 +71,6 @@
                     <a class="page-link" href="#">Previous</a>
                   </li>
                   <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item active">
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">4</a></li>
-                  <li class="page-item"><a class="page-link" href="#">5</a></li>
                   <li class="page-item">
                     <a class="page-link" href="#">Next</a>
                   </li>
@@ -118,7 +98,7 @@
 </template>
 
 <script>
-import {  useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { onBeforeUpdate, onMounted, ref } from "vue";
 import MainContent from "@/components/MainContent.vue";
 import * as employerService from "@/util/service/employerService";

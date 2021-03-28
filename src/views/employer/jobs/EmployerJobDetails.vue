@@ -21,6 +21,71 @@
             <p class="mb-0">View and edit your job detail.</p>
           </div>
           <div class="btn-toolbar mb-2 mb-md-0">
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#modal-form"
+            >
+              Delete
+            </button>
+            <div
+              class="modal fade"
+              id="modal-form"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="modal-form"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-body p-0">
+                    <div class="card border-light p-3 p-lg-4">
+                      <button
+                        type="button"
+                        class="btn-close ms-auto"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                      <div
+                        class="card-header border-0 text-center pb-0 text-wrap"
+                      >
+                        <h2 class="h4">
+                          You are about to delete this job post.
+                        </h2>
+                      </div>
+                      <div class="card-body p-0 pl-lg-3">
+                        <form action="#" class="mt-4">
+                          <!-- Form -->
+                          <div class="form-group mb-4">
+                            <label for="booth_name">Are you sure?</label>
+                          </div>
+                          <!-- End of Form -->
+                          <div class="d-grid col-12">
+                            <button
+                              type="submit"
+                              data-bs-dismiss="modal"
+                              @click.prevent="handleDeleteJob"
+                              class="btn btn-danger mb-4"
+                            >
+                              Delete
+                            </button>
+                            <button
+                              type="cancel"
+                              data-bs-dismiss="modal"
+                              class="btn btn-gray-300 mb-2"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End of modal -->
             <div class="btn-group ms-2 ms-lg-3">
               <button type="button" class="btn btn-sm btn-outline-primary">
                 Export
@@ -181,9 +246,76 @@
                     :key="index"
                   >
                     <div class="col-12 col-lg-4 flex-grow-1">
-                      <div class="btn btn-outline-gray-700">
+                      <div
+                        class="btn btn-outline-gray-700"
+                        data-bs-toggle="modal"
+                        :data-bs-target="'#modal-form-' + item.accountId"
+                      >
                         {{ item.schoolName }}
                       </div>
+                      <div
+                        class="modal fade"
+                        :id="'modal-form-' + item.accountId"
+                        tabindex="-1"
+                        role="dialog"
+                        :aria-labelledby="'modal-form-' + item.accountId"
+                        aria-hidden="true"
+                      >
+                        <div
+                          class="modal-dialog modal-dialog-centered"
+                          role="document"
+                        >
+                          <div class="modal-content">
+                            <div class="modal-body p-0">
+                              <div class="card border-light p-3 p-lg-4">
+                                <button
+                                  type="button"
+                                  class="btn-close ms-auto"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                                <div
+                                  class="card-header border-0 text-center pb-0 text-wrap"
+                                >
+                                  <h2 class="h4">
+                                    You are about to remove this job post from
+                                    {{ item.schoolName }}
+                                  </h2>
+                                </div>
+                                <div class="card-body p-0 pl-lg-3">
+                                  <form action="#" class="mt-4">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                      <label for="booth_name"
+                                        >Are you sure?</label
+                                      >
+                                    </div>
+                                    <!-- End of Form -->
+                                    <div class="d-grid col-12">
+                                      <button
+                                        type="submit"
+                                        data-bs-dismiss="modal"
+                                        @click.prevent="handleRemoveJobPostFromSchool(item.accountId)"
+                                        class="btn btn-info mb-4"
+                                      >
+                                        Remove
+                                      </button>
+                                      <button
+                                        type="cancel"
+                                        data-bs-dismiss="modal"
+                                        class="btn btn-gray-300 mb-2"
+                                      >
+                                        Cancel
+                                      </button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End modal -->
                     </div>
                   </div>
                   <hr />
@@ -293,6 +425,15 @@ export default {
       });
     };
 
+    const handleDeleteJob = () => {
+      recruitmentPostService.deleteJob(jobPostId);
+      router.push("/employer/jobs");
+    };
+
+    const handleRemoveJobPostFromSchool = (schoolId) => {
+      employerService.removeJobFromSchool(jobPostId, schoolId);
+    };
+
     const companyData = ref({});
     const employerProfileLink = ref(`/employer/jobs/${jobPostId}/edit`);
 
@@ -314,6 +455,8 @@ export default {
 
       handleSelectTargetSchoolClick,
       handleReviewApplicantClick,
+      handleDeleteJob,
+      handleRemoveJobPostFromSchool,
     };
   },
 };

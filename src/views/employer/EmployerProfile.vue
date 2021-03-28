@@ -2,16 +2,7 @@
   <div>
     <MainContent>
       <main>
-        <div class="py-4">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-              <li class="breadcrumb-item">
-                <a href="#"><span class="fas fa-home"></span></a>
-              </li>
-              <li class="breadcrumb-item"><a href="#">Components</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Forms</li>
-            </ol>
-          </nav>
+        <div class="py-2">
           <div class="d-flex justify-content-between w-100 flex-wrap">
             <div class="mb-3 mb-lg-0">
               <h1 class="h4">Edit job</h1>
@@ -92,5 +83,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
