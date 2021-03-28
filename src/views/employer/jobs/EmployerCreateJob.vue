@@ -1,16 +1,7 @@
 <template>
   <div>
     <MainContent>
-      <div class="py-4">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-            <li class="breadcrumb-item">
-              <a href="#"><span class="fas fa-home"></span></a>
-            </li>
-            <li class="breadcrumb-item"><a href="#">Components</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Forms</li>
-          </ol>
-        </nav>
+      <div class="py-2">
         <div class="d-flex justify-content-between w-100 flex-wrap">
           <div class="mb-3 mb-lg-0">
             <h1 class="h4">Create job</h1>
@@ -78,11 +69,19 @@
                   </div>
                   <div class="mb-2" v-if="skills.length > 0">
                     <label class="my-1 me-2" for="state">Skill:</label>
-                    <select id="state" class="w-100 form-select" name="state" v-model="skillSelected">
+                    <select
+                      id="state"
+                      class="w-100 form-select"
+                      name="state"
+                      v-model="skillSelected"
+                    >
                       <option
                         v-for="(location, index) in skills"
                         :key="index"
-                        :value="{ skillId: location.skillId, skillName: location.skillName }"
+                        :value="{
+                          skillId: location.skillId,
+                          skillName: location.skillName,
+                        }"
                       >
                         {{ location.skillName }}
                       </option>
@@ -119,11 +118,19 @@
                   </div>
                   <div class="mb-2">
                     <label class="my-1 me-2" for="state">Location:</label>
-                    <select id="state" class="w-100 form-select" name="state" v-model="locationSelected">
+                    <select
+                      id="state"
+                      class="w-100 form-select"
+                      name="state"
+                      v-model="locationSelected"
+                    >
                       <option
                         v-for="(location, index) in vnLocation"
                         :key="index"
-                        :value="{ locValue: location.value, locTitle: location.title }"
+                        :value="{
+                          locValue: location.value,
+                          locTitle: location.title,
+                        }"
                       >
                         {{ location.title }}
                       </option>
@@ -168,20 +175,20 @@
                   <label for="birthday">Due date</label>
                   <div class="mb-2 input-group">
                     <div class="input-group">
-                          <div class="mb-3">
-                            <div class="input-group">
-                              <span class="input-group-text"
-                                ><span class="far fa-calendar-alt"></span
-                              ></span>
-                              <flat-pickr
-                                v-model="newJobData.dueDate"
-                                :config="config"
-                                class="form-control"
-                                placeholder="Select date"
-                                name="date"
-                              >
-                              </flat-pickr>
-                              <!-- <input
+                      <div class="mb-3">
+                        <div class="input-group">
+                          <span class="input-group-text"
+                            ><span class="far fa-calendar-alt"></span
+                          ></span>
+                          <flat-pickr
+                            v-model="newJobData.dueDate"
+                            :config="config"
+                            class="form-control"
+                            placeholder="Select date"
+                            name="date"
+                          >
+                          </flat-pickr>
+                          <!-- <input
                                 data-datepicker=""
                                 class="form-control"
                                 id="dateEnd"
@@ -190,9 +197,9 @@
                                 v-model="jobFair.startDate"
                                 required
                               /> -->
-                            </div>
-                          </div>
                         </div>
+                      </div>
+                    </div>
                   </div>
                   <div class="mb-3">
                     <button
@@ -222,13 +229,13 @@ import "flatpickr/dist/themes/dark.css";
 import MainContent from "@/components/MainContent.vue";
 import * as recruitmentPostService from "@/util/service/recruitmentPostService";
 import * as skillService from "@/util/service/skillService";
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 
 export default {
   name: "EmployerCreateJob",
   components: {
     MainContent,
-    flatPickr
+    flatPickr,
   },
   setup() {
     const preventNegativeNumInputListener = (e) => {
@@ -242,7 +249,6 @@ export default {
         newJobData.value.expectedNumber = 0;
       }
     };
-
 
     const router = useRouter();
 
@@ -288,8 +294,11 @@ export default {
       console.log(newJobData.value.dueDate);
       newJobData.value = {
         ...newJobData.value,
-        "skillId": skillSelected.value.skillId,
-        "location": newJobData.value.address.concat("; ", locationSelected.value.locTitle),
+        skillId: skillSelected.value.skillId,
+        location: newJobData.value.address.concat(
+          "; ",
+          locationSelected.value.locTitle
+        ),
       };
       const resp = await recruitmentPostService.postNewJob(newJobData.value);
       console.log(newJobData.value);
@@ -314,5 +323,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

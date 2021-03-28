@@ -178,7 +178,8 @@
                         href="#"
                         @click="handleDelete(jobItems)"
                       >
-                        <span class="fas fa-trash-alt"></span>Delete
+                        <span class="fas fa-trash-alt"></span>
+                        Delete
                       </a>
                     </div>
                   </div>

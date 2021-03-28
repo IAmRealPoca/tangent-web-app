@@ -4,27 +4,16 @@
       <main>
         <!-- Begin breadcrumb -->
         <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-2"
         >
           <div class="d-block mb-4 mb-md-0">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-              <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                <li class="breadcrumb-item">
-                  <a href="#"><span class="fas fa-home"></span></a>
-                </li>
-                <li class="breadcrumb-item"><a href="#">Tangent</a></li>
-                <li class="breadcrumb-item"><a href="#">School</a></li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  Majors
-                </li>
-              </ol>
-            </nav>
             <h2 class="h4">Majors</h2>
             <p class="mb-0">Your school's all majors.</p>
           </div>
           <div class="btn-toolbar">
-            <a class="btn btn-sm btn-dark me-2" @click="handleNewMajorClick"
-              ><span class="fas fa-plus me-2"></span> New major
+            <a class="btn btn-sm btn-dark me-2" @click="handleNewMajorClick">
+              <span class="fas fa-plus me-2"></span>
+              New major
             </a>
 
             <div class="btn-group">
@@ -113,12 +102,12 @@ export default {
   },
   setup() {
     const newJobData = ref({});
-    
+
     const thumbnail = ref(null);
     const jobFair = reactive({
       title: "",
     });
-    
+
     const file = ref({});
 
     const handleFileUpload = async (evt) => {
@@ -138,7 +127,7 @@ export default {
       // let status = await employeeService.uploadCVFile(formData);
       const payload = {
         title: jobFair.title,
-      }
+      };
       console.log("payload: ", payload);
       await employeeService.createCV(payload);
       // if (status) {
@@ -157,5 +146,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

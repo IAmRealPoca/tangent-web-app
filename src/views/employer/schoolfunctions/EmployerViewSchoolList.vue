@@ -2,87 +2,9 @@
   <div>
     <MainContent>
       <main>
-        <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
-        >
-          <div class="d-block mb-4 mb-md-0">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-              <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                <li class="breadcrumb-item">
-                  <a href="#"><span class="fas fa-home"></span></a>
-                </li>
-                <li class="breadcrumb-item"><a href="#">Tangent</a></li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  School Relation Management
-                </li>
-              </ol>
-            </nav>
-            <h2 class="h4">Schools Relation Management</h2>
-            <p class="mb-0">Manage your relationship with schools</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="table-settings mb-4">
-            <div class="row justify-content-between align-items-center">
-              <div class="col-9 col-lg-4 d-flex">
-                <div class="input-group me-2 me-lg-3"></div>
-                <div class="w-25"></div>
-              </div>
-              <div class="col-3 col-lg-8 text-right">
-                <div class="btn-group me-1">
-                  <button
-                    class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-1"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <span class="icon icon-sm icon-gray pt-1"
-                      ><span class="fas fa-sliders-h"></span> </span
-                    ><span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-end pb-0">
-                    <span class="small ps-3 fw-bold text-dark">Show</span>
-                    <a class="dropdown-item d-flex fw-bold" href="#"
-                      >10
-                      <span class="icon icon-small ms-auto"
-                        ><span class="fas fa-check"></span></span
-                    ></a>
-                    <a class="dropdown-item fw-bold" href="#">20</a>
-                    <a class="dropdown-item fw-bold rounded-bottom" href="#"
-                      >30</a
-                    >
-                  </div>
-                </div>
-                <div class="btn-group">
-                  <button
-                    class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-1"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <span class="icon icon-sm icon-gray pt-1"
-                      ><span class="fas fa-cog"></span> </span
-                    ><span class="sr-only">Toggle Dropdown</span>
-                  </button>
-                  <div
-                    class="dropdown-menu dropdown-menu-xs dropdown-menu-end pb-0"
-                  >
-                    <span class="small ps-3 fw-bold text-dark">Show</span>
-                    <a class="dropdown-item d-flex fw-bold" href="#"
-                      >10
-                      <span class="icon icon-small ms-auto"
-                        ><span class="fas fa-check"></span></span
-                    ></a>
-                    <a class="dropdown-item fw-bold" href="#">20</a>
-                    <a class="dropdown-item fw-bold rounded-bottom" href="#"
-                      >30</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <h2 class="h4">Schools Relation Management</h2>
+        <p class="mb-3">Manage your relationship with schools</p>
+
         <div class="row">
           <div class="col-12 col-xl-3">
             <div class="card border-light shadow-sm components-section mb-4">
@@ -256,7 +178,7 @@
                       <div
                         v-if="
                           aSchool.status.statusId === 2 ||
-                          aSchool.status.statusId === 3
+                            aSchool.status.statusId === 3
                         "
                       >
                         <!-- <span class="fw-normal text-dark"
@@ -279,7 +201,13 @@
                           </button>
                         </div>
                         <div v-if="aSchool.status.statusId === 0">
-                          <button class="btn btn-outline-danger" type="button" @click="handleRemoveConnectionClick(aSchool.accountId)">
+                          <button
+                            class="btn btn-outline-danger"
+                            type="button"
+                            @click="
+                              handleRemoveConnectionClick(aSchool.accountId)
+                            "
+                          >
                             Remove
                           </button>
                         </div>
@@ -385,18 +313,6 @@
                     </li>
                     <li class="page-item">
                       <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item active">
-                      <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">4</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">5</a>
                     </li>
                     <li class="page-item">
                       <a class="page-link" href="#">Next</a>
@@ -507,7 +423,7 @@ export default {
         schoolId: schoolId,
       };
       employerService.removeConnection(payload);
-    }
+    };
 
     const formatDate = (time) => {
       return new Date(time).toLocaleString();
