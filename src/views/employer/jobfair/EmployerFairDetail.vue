@@ -472,8 +472,6 @@ export default {
 };
 onMounted(() => {
   // fetchBoothList();
-  fetchJobFairDetail();
-  fetchBoothList();
 });
 </script>
 
