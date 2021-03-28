@@ -142,7 +142,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { useSignalR } from "@/util/signalr/signalrutil";
@@ -232,6 +232,7 @@ export default {
       contracted,
       showNoti,
       handleLoginClick,
+      notification,
     };
   },
 };
