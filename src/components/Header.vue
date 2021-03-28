@@ -8,7 +8,7 @@
           class="d-flex justify-content-between w-100"
           id="navbarSupportedContent"
         >
-          <div class="d-flex align-items-center">
+          <div class="d-flex align-items-center" v-if="!isBooth">
             <button
               id="sidebar-toggle"
               @click="contracted"
@@ -16,6 +16,11 @@
             >
               <span class="fas fa-bars"></span>
             </button>
+          </div>
+          <div class="d-flex" v-else>
+            <a href="#" @click.prevent="backPrevious"
+              ><span class="fas fa-arrow-left align-self-center"></span
+            ></a>
           </div>
           <ul class="navbar-nav align-items-center" v-if="user">
             <li class="nav-item dropdown">
@@ -54,7 +59,7 @@
                       <div class="col-auto">
                         <img
                           alt="Image placeholder"
-                          src="@/assets/img/z2358820138055_341c257ff575934f26613727fee0cb8e.jpg"
+                          src="@/assets/img/fpt.png"
                           class="user-avatar lg-avatar rounded-circle"
                         />
                       </div>
@@ -64,7 +69,7 @@
                         >
                           <div>
                             <h4 class="h6 mb-0 text-small">
-                              Nyam IV The Simps
+                              Nam Ngô
                             </h4>
                           </div>
                           <div class="text-end">
@@ -141,7 +146,10 @@ import { useSignalR } from "@/util/signalr/signalrutil";
 
 export default {
   name: "Header",
-  setup() {
+  props: {
+    isBooth: false,
+  },
+  setup(props) {
     const router = useRouter();
     const signalr = useSignalR();
 
@@ -209,6 +217,10 @@ export default {
       store.commit("contract");
     };
 
+    const backPrevious = () => {
+      router.back();
+    }
+
     onMounted(() => {});
 
     return {
@@ -216,7 +228,10 @@ export default {
       user,
       contracted,
       showNoti,
+
       handleLoginClick,
+      backPrevious,
+
       notification,
       bellShake,
       notibell,

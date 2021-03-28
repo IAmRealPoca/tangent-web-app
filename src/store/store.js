@@ -2,6 +2,7 @@ import { createStore,createLogger } from "vuex";
 import mutations from "./mutation";
 import getters from "./getter";
 import actions from "./action";
+import createPersistedState from "vuex-persistedstate";
 
  const store = createStore({
   state() {
@@ -9,12 +10,14 @@ import actions from "./action";
       count: 0,
       userInfo: null,
       isContracted: false,
-      
+      jobfairInfo: null,
+      boothInfo: null,
+      listOfSub: [],
     };
   },
   mutations,
   getters,
   actions,
-  plugins: [createLogger()]
+  plugins: [createLogger(),createPersistedState()]
 });
 export default store;

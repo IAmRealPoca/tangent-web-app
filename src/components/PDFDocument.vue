@@ -1,11 +1,11 @@
 <template>
   <div class="pdf-document">
     <div>ANCD</div>
-    <PDFPage
+    <!-- <PDFPage
       v-for="page in pages"
       v-bind="{ page, sacale }"
       :key="page.pageNumber"
-    />
+    /> -->
   </div>
 </template>
 
@@ -19,15 +19,16 @@ export default {
   components: {
     PDFPage,
   },
-  async setup() {
+  async setup(props) {
     const pdf = ref(undefined);
     const pages = ref([]);
 
     const fetchPDF = async () => {
       const pdfjs = await import("pdfjs-dist/webpack");
       const pdfResp = await pdfjs.getDocument(
-        "https://cdn.filestackcontent.com/5qOCEpKzQldoRsVatUPS"
+        "//cdn.mozilla.net/pdfjs/helloworld.pdf"
       );
+      console.log('pdfResp :>> ', pdfResp);
       pdf.value = await pdfResp._capability.promise;
       const promises = range(1, pdf.value.numPages).map((number) =>
         pdf.value.getPage(number)

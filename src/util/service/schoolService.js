@@ -6,6 +6,9 @@ const schoolRepo = repoFactory.get("schoolRepo");
 const getListOfSchools = () => {
     return schoolRepo.get();
 }
+const getInfoOfSchool = () => {
+    return schoolRepo.getInfo();
+}
 
 const getStudentListFromSchoolId = () => {
     return schoolRepo.getListStudent();
@@ -44,4 +47,5 @@ export {
     getCompanyDetailsAsSchool,
     changeApprovalStatus,
     changeStudentStatus,
+    getInfoOfSchool,
 }

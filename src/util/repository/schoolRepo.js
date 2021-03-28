@@ -9,6 +9,9 @@ export default {
     get() {
         return http.get(`${path}/list`);
     },
+    getInfo() {
+        return http.get(`${path}`);
+    },
 
     getListStudent(schoolId) {
         return http.get(`${path}/students`);

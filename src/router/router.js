@@ -20,7 +20,11 @@ import EmployerViewFairList from "@/views/employer/jobfair/EmployerViewFairList.
 import EmployerFairDetail from "@/views/employer/jobfair/EmployerFairDetail.vue";
 import EmployerBooth from "@/views/employer/jobfair/EmployerBooth.vue";
 
+// import EmployerPresentation from "@/components/ViduComponent/EmployerPresentation.vue";
+import EmployerPresentation from "@/components/ViduComponent/EmployerPresentation.vue";
+
 import BlobTest from "@/views/BlobTest.vue";
+
 import SchoolViewCompanyList from "@/views/school/companyfunctions/SchoolViewCompanyList.vue";
 import SchoolViewCompanyDetail from "@/views/school/companyfunctions/SchoolViewCompanyDetail.vue";
 import SchoolViewJobDetail from "@/views/school/companyfunctions/SchoolViewJobDetail.vue";
@@ -386,6 +390,16 @@ const routes = [
       role: EmployeeRole,
     },
   },
+  {
+    path: "/pres",
+    name: "EmpPresen",
+    component: EmployerPresentation,
+    meta: {
+      requiresAuth: true,
+      role: EmployeeRole,
+    },
+  },
+  
   
 ];
 

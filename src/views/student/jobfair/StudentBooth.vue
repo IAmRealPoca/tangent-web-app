@@ -1,18 +1,7 @@
 <template>
-  <div>
-    <MainContent>
-      <div class="py-4">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-            <li class="breadcrumb-item">
-              <a href="#"><span class="fas fa-home"></span></a>
-            </li>
-            <li class="breadcrumb-item"><a href="#">Job Fair</a></li>
-            <li class="breadcrumb-item active" aria-current="page">
-              Your Booth
-            </li>
-          </ol>
-        </nav>
+  <div class="mx-3">
+    <Header :isBooth="true"/>
+      <div class="py-1">
         <div class="d-flex justify-content-between w-100 flex-wrap">
           <div class="mb-3 mb-lg-0">
             <h1 class="h4">Your Booth</h1>
@@ -28,7 +17,7 @@
             <strong class="h1">Loading...</strong>
             <div
               class="spinner-border ml-auto"
-              style="width: 3rem; height: 3rem;" 
+              style="width: 3rem; height: 3rem;"
               role="status"
               aria-hidden="true"
             ></div>
@@ -38,34 +27,35 @@
         <div v-if="data && data.session">
           <employer-presentation
             :stream-manager="data.mainStreamManager"
-            :data="propsData"
+            v-bind="{ data,question }"
             @updateMainStream="handleUpdateMainStream"
             @endCallEvent="handleEndCallEvent"
+            @sendQuestion="sendQuestion"
           />
         </div>
       </div>
-    </MainContent>
   </div>
 </template>
 
 <script>
-import MainContent from "@/components/MainContent.vue";
+import Header from "@/components/Header.vue";
 import { OpenVidu } from "openvidu-browser";
 
 import { useVCService } from "@/util/service/videoChatService";
 import { useBoothService } from "@/util/service/boothService.js";
-import { getCurrEmployeeInfo } from "@/util/service/employeeService";
 
-import { ref } from "@vue/reactivity";
+import { ref, computed } from "@vue/reactivity";
 import VideoPlayer from "@/components/ViduComponent/VideoPlayer.vue";
 import EmployerPresentation from "@/components/ViduComponent/EmployerPresentation.vue";
-import { useRoute,useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { onMounted } from "@vue/runtime-core";
+
+import { useStore } from "vuex";
 
 export default {
   name: "StudentBooth",
   components: {
-    MainContent,
+    Header,
     VideoPlayer,
     EmployerPresentation,
   },
@@ -82,15 +72,19 @@ export default {
     const route = useRoute();
     const router = useRouter();
     const fairServive = useBoothService();
+    const store = useStore();
+
     const propsData = ref({});
+    const userInfo = computed(() => store.getters.getUser);
+    const question = ref({});
+
     const boothIdFromRoute = Number(route.params.boothId);
 
     const getSessionId = async () => {
       const resp = await fairServive.getBoothById(boothIdFromRoute);
       data.value.mySessionId = resp.boothSessionUrl;
-      const info = await getCurrEmployeeInfo();
-      console.log(resp.boothSessionUrl, " emp info: ", info);
-      data.value.myUserName = info.name;
+      // const info = await getCurrEmployeeInfo();
+      data.value.myUserName = userInfo.name;
     };
 
     const joinSession = async () => {
@@ -104,9 +98,12 @@ export default {
 
       // On every new Stream received...
       data.value.session.on("streamCreated", ({ stream }) => {
-        // console.log("Tao la steram: ", stream);
+        console.log("Tao la steram: ", stream);
         const subscriber = data.value.session.subscribe(stream);
+        console.warn("sub: ", subscriber);
         data.value.subscribers.push(subscriber);
+        // data.value.mainStreamManager = subscriber;
+        // data.value.publisher = subscriber;
       });
 
       // On every Stream destroyed...
@@ -116,51 +113,48 @@ export default {
           data.value.subscribers.splice(index, 1);
         }
       });
-      // data.value.session.on("connectionCreated", (event) => {
-      //   console.warn("data is sum event when connectionCreated: ", event);
-      // });
-      // data.value.session.on("connectionDestroyed", (event) => {
-      //   console.warn("data is sum event when connectionDestroyed: ", event);
-      // });
+      data.value.session.on("connectionCreated", (event) => {
+        store.dispatch("getSub", boothIdFromRoute);
 
+        if (
+          event.connection.connectionId ===
+          data.value.session.connection.connectionId
+        ) {
+          console.warn("YOUR OWN CONNECTION CREATED!");
+        } else {
+          console.warn("OTHER USER'S CONNECTION CREATED!");
+
+          // console.warn("OTHER USER'S CONNECTION DATA: ",event.connection.data);
+        }
+        console.warn("data is sum event when connectionCreated: ", event);
+      });
+      data.value.session.on("connectionDestroyed", (event) => {
+        if (
+          !event.connection.connectionId ===
+          data.value.session.connection.connectionId
+        ) {
+          console.warn("OTHER USER'S CONNECTION CREATED!");
+        }
+        console.warn("data is sum event when connectionDestroyed: ", event);
+      });
+
+      data.value.session.on("signal:question",(event)=>{
+        console.log('event from signal :>> ', event);
+        if (event.type === "signal:question") {
+          question.value = event;
+        }
+      })
       // --- Connect to the session with a valid user token ---
 
       // 'getToken' method is simulating what your server-side should do.
       // 'token' parameter should be retrieved and returned by your own backend
       const token = await getToken2(data.value.mySessionId);
-      const session = await data.value.session.connect(token, {
-        clientData: data.value.myUserName,
-      });
-      try {
-        // --- Get your own camera stream with the desired properties ---
-        const publisher = data.value.OV.initPublisher(undefined, {
-          audioSource: undefined, // The source of audio. If undefined default microphone
-          videoSource: undefined, // The source of video. If undefined default webcam
-          publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
-          publishVideo: true, // Whether you want to start publishing with your video enabled or not
-          resolution: "640x480", // The resolution of your video
-          frameRate: 40, // The frame rate of your video
-          insertMode: "APPEND", // How the video is inserted in the target element 'video-container'
-          mirror: false, // Whether to mirror your local video or not
-        });
-
-        console.log("publisher init: ", publisher);
-
-        data.value.mainStreamManager = publisher;
-        data.value.publisher = publisher;
-
-        console.log("data publisher init: ", data.value.publisher);
-
-        // --- Publish your stream ---
-
-        data.value.session.publish(data.value.publisher);
-      } catch (error) {
-        console.log(
-          "There was an error connecting to the session:",
-          error.code,
-          error.message
-        );
-      }
+      const shortenUserInfo = {
+        avatar: userInfo.value.avatar,
+        name: userInfo.value.fullName,
+        accountId: userInfo.value.accountId,
+      };
+      const session = await data.value.session.connect(token, shortenUserInfo);
       propsData.value = {
         publisher: data.value.publisher,
         subscribers: data.value.subscribers,
@@ -182,6 +176,15 @@ export default {
       data.value.OV = undefined;
 
       window.removeEventListener("beforeunload", leaveSession);
+    };
+
+    const sendQuestion = () => {
+      if (data.value.session) {
+        data.value.session
+          .signal({ data: "Test", type: "question" })
+          .then(() => console.log("send sucessfully"))
+          .catch(err => console.log(err));
+      }
     };
 
     const updateMainVideoStreamManager = (stream) => {
@@ -216,8 +219,12 @@ export default {
       joinSession,
       leaveSession,
       propsData,
+      userInfo,
+      question,
+
       handleUpdateMainStream,
       handleEndCallEvent,
+      sendQuestion,
     };
   },
 };
