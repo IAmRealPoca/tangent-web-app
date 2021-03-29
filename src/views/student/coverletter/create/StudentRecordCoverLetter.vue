@@ -58,7 +58,7 @@
                                         <span class="fas fa-clock me-2"></span
                                         >{{ question.questionTime }}
                                       </small>
-                                      <div class="small fw-bold text-dark"><span>{{ question.questionTime }}</span></div>
+                                      <div class="small fw-bold text-dark"><span>{{ remainingTimerCount }}</span></div>
                                     </div>
                                   </div>
                                   <div class="progress mb-0">
@@ -203,32 +203,32 @@ export default {
     const activeQuestionId = ref(0);
     const answeredQuestionIds = ref([]);
     const delayer = ms => new Promise(res => setTimeout(res, ms)); //delay single line 
-    const questionLooper = async (questions) => {
-      const realQuestions = questions[0].questions;
+    const questionLooper = async (questionSet) => {
+      const questions = questionSet[0].questions;
       
-      for (var i = 0; i < realQuestions.length; i++) {
-        activeQuestionId.value = realQuestions[i].questionId; //check active questionId to gray out or green-out question element in UI
-        let currCount = realQuestions[i].questionTime; //current time, reset each question loop
-        const maxCount = realQuestions[i].questionTime;//max time count, reset each question loop
+      for (var i = 0; i < questions.length; i++) {
+        activeQuestionId.value = questions[i].questionId; //check active questionId to gray out or green-out question element in UI
+        let currCount = questions[i].questionTime; //current time, reset each question loop
+        const maxCount = questions[i].questionTime;//max time count, reset each question loop
         remainingTimerCount.value = maxCount; //variable to display remaining time in number
-        console.log("maxCount: ", maxCount);
-        console.log("currCount: ", currCount);
-        console.log("activeQuestionId: ", activeQuestionId.value);
-        await delayer(5*1000);
+
+        await delayer(3*1000); //wait 5 secs before start question count down
         const questionCounterInterval = setInterval(() => {
           const percentCalc = (currCount / maxCount) * 100;
           remainingTimer.value = "width: " + percentCalc + "%";
-          currCount--;
           remainingTimerCount.value = currCount;
+          currCount--;
           console.log("remainingTimer: ", remainingTimer.value);
         }, 1000);
         setTimeout(() => {
           clearInterval(questionCounterInterval);
           console.log("question counter stopped");
         }, maxCount*1000 + 2*1000);
-        await delayer(maxCount*1000 + 2*1000);
-        answeredQuestionIds.value.push(realQuestions[i].questionId);
+        await delayer(maxCount*1000 + 5*1000);// wait the setTimeout and 5 more secs before jumping to next question
+        console.log("await delayer");
+        answeredQuestionIds.value.push(questions[i].questionId);
       }
+      activeQuestionId.value = -1;//grey out every questions when the loop is over
     };
 
     const answeredQuestionIdChecker = (array, questionIdToFind) => {
@@ -250,7 +250,7 @@ export default {
       remainingTimer,
       activeQuestionId,
       answeredQuestionIds,
-
+remainingTimerCount,
       answeredQuestionIdChecker
     };
   },
