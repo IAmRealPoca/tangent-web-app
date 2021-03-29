@@ -19,6 +19,8 @@ import EmployerApplicantDashboard from "@/views/employer/applicantfunctions/Empl
 import EmployerViewFairList from "@/views/employer/jobfair/EmployerViewFairList.vue";
 import EmployerFairDetail from "@/views/employer/jobfair/EmployerFairDetail.vue";
 import EmployerBooth from "@/views/employer/jobfair/EmployerBooth.vue";
+//Question related
+import EmployerQuestionManagementMain from "@/views/employer/questionfunctions/EmployerQuestionManagementMain.vue";
 
 import BlobTest from "@/views/BlobTest.vue";
 import SchoolViewCompanyList from "@/views/school/companyfunctions/SchoolViewCompanyList.vue";
@@ -230,6 +232,15 @@ const routes = [
     path: "/employer/jobfair/:jobFairId/:boothId",
     name: "EmployerBooth",
     component: EmployerBooth,
+    meta: {
+      requiresAuth: true,
+      role: EmployerRole,
+    },
+  },
+  {
+    path: "/employer/questions",
+    name: "EmployerQuestionManagementMain",
+    component: EmployerQuestionManagementMain,
     meta: {
       requiresAuth: true,
       role: EmployerRole,
