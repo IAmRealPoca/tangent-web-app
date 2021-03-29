@@ -19,6 +19,8 @@ import EmployerApplicantDashboard from "@/views/employer/applicantfunctions/Empl
 import EmployerViewFairList from "@/views/employer/jobfair/EmployerViewFairList.vue";
 import EmployerFairDetail from "@/views/employer/jobfair/EmployerFairDetail.vue";
 import EmployerBooth from "@/views/employer/jobfair/EmployerBooth.vue";
+//Question related
+import EmployerQuestionManagementMain from "@/views/employer/questionfunctions/EmployerQuestionManagementMain.vue";
 
 // import EmployerPresentation from "@/components/ViduComponent/EmployerPresentation.vue";
 import EmployerPresentation from "@/components/ViduComponent/EmployerPresentation.vue";
@@ -42,11 +44,18 @@ import StudentViewCoverLetterList from '@/views/student/coverletter/StudentViewC
 import StudentViewCVList from '@/views/student/cv/StudentViewCVList.vue';
 import StudentViewCVDetail from "@/views/student/cv/StudentViewCVDetail.vue";
 import StudentCreateCV from "@/views/student/cv/StudentCreateCV.vue";
+import StudentCreateCoverLetter from "@/views/student/coverletter/create/StudentCreateCoverLetter.vue";
 import StudentFairDetail from "@/views/student/jobfair/StudentFairDetail.vue";
 import StudentBooth from "@/views/student/jobfair/StudentBooth.vue";
 import StudentViewFairList from "@/views/student/jobfair/StudentViewFairList.vue";
+import StudentRecordCoverLetter from "@/views/student/coverletter/create/StudentRecordCoverLetter.vue";
 
 import LandingPage from "@/views/LandingPage.vue";
+
+import PDF from "@/components/PDFDocument.vue";
+
+import EmployeeDashboard from '@/components/DashboardComponent/EmployeeDashboard.vue';
+import AdminDashboard from '@/components/DashboardComponent/AdminDashboard.vue';
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -73,21 +82,40 @@ const routes = [
     },
   },
   {
-    path: "/dashboard",
+    path: "/admin/dashboard",
+    name: "AdminDashboard",
+    component: AdminDashboard,
+    meta: {
+      requiresAuth: true,
+      role: Admin,
+    },
+  },
+  {
+    path: "/student/dashboard",
+    name: "EmployeeDashboard",
+    component: EmployeeDashboard,
+    meta: {
+      requiresAuth: true,
+      role: EmployeeRole,
+    },
+  },
+  {
+    path: "/employer/dashboard",
     name: "Dashboard",
     component: Dashboard,
     meta: {
       requiresAuth: true,
+      role: EmployerRole,
     },
   },
-    {
-        path: "/",
-        name: "LandingPage",
-        component: LandingPage,
-        meta: {
-            requiresAuth: false,
-        }
-    },
+  {
+    path: "/",
+    name: "LandingPage",
+    component: LandingPage,
+    meta: {
+      requiresAuth: false,
+    }
+  },
   {
     path: "/employer/profile",
     name: "EmployerProfile",
@@ -196,7 +224,7 @@ const routes = [
     },
   },
   {
-    path: "/employer/jobfair/:jobFairId/",
+    path: "/employer/jobfair/:jobFairId",
     name: "EmployerFairDetail",
     component: EmployerFairDetail,
     meta: {
@@ -208,6 +236,15 @@ const routes = [
     path: "/employer/jobfair/:jobFairId/:boothId",
     name: "EmployerBooth",
     component: EmployerBooth,
+    meta: {
+      requiresAuth: true,
+      role: EmployerRole,
+    },
+  },
+  {
+    path: "/employer/questions",
+    name: "EmployerQuestionManagementMain",
+    component: EmployerQuestionManagementMain,
     meta: {
       requiresAuth: true,
       role: EmployerRole,
@@ -364,6 +401,24 @@ const routes = [
     },
   },
   {
+    path: "/student/coverletter/create",
+    name: "StudentCreateCoverLetter",
+    component: StudentCreateCoverLetter,
+    meta: {
+      requiresAuth: true,
+      role: EmployeeRole,
+    },
+  },
+  // {
+  //   path: "/student/coverletter/create/recordvieo",
+  //   name: "StudentRecordCoverLetter",
+  //   component: StudentRecordCoverLetter,
+  //   meta: {
+  //     requiresAuth: true,
+  //     role: EmployeeRole,
+  //   },
+  // },
+  {
     path: "/student/jobfair",
     name: "StudentViewFairList",
     component: StudentViewFairList,
@@ -382,7 +437,7 @@ const routes = [
     },
   },
   {
-    path: "/student/jobfair/:jobFairId/:boothId",
+    path: "/student/jobfair/:jobfairId/:boothId",
     name: "StudentBooth",
     component: StudentBooth,
     meta: {
@@ -401,6 +456,16 @@ const routes = [
   },
   
   
+  {
+    path: "/pdf",
+    name: "PDF",
+    component: PDF,
+    meta: {
+      // requiresAuth: true,
+      // role: EmployeeRole,
+    },
+  },
+
 ];
 
 const router = createRouter({
@@ -416,47 +481,47 @@ const parseJwt = (token) => {
   }
 };
 
-// router.beforeEach((to, from, next) => {
-//   // console.log("requiresAuth: ", to.matched.some(record => record.meta.requiresAuth));
-//   // console.log("onlyGuest: ", to.matched.some(record => record.meta.onlyGuest));
-//   // console.log("role er: ", to.matched.some(record => record.meta.role === EmployerRole));
-//   // console.log("role ee: ", to.matched.some(record => record.meta.role === EmployeeRole));
-//   // console.log("token: ", sessionStorage.getItem("token"));
+router.beforeEach((to, from, next) => {
+  // console.log("requiresAuth: ", to.matched.some(record => record.meta.requiresAuth));
+  // console.log("onlyGuest: ", to.matched.some(record => record.meta.onlyGuest));
+  // console.log("role er: ", to.matched.some(record => record.meta.role === EmployerRole));
+  // console.log("role ee: ", to.matched.some(record => record.meta.role === EmployeeRole));
+  // console.log("token: ", sessionStorage.getItem("token"));
 
-//   if (to.matched.some(record => record.meta.requiresAuth)) {
-//     if (sessionStorage.getItem("token") === null) {
-//       next({ name: "Login", });
-//     } else {
-//       const parsedToken = parseJwt(sessionStorage.getItem("token"));
-//       if (parsedToken.role === "employer") {
-//         if (to.matched.some(record => record.meta.role === EmployerRole)) {
-//           next();
-//         } else {
-//           next({ name: "Dashboard" });
-//         }
-//       } else if (parsedToken.role === "employee") {
-//         if (to.matched.some(record => record.meta.role === EmployeeRole)) {
-//           next();
-//         } else {
-//           next({ name: "Dashboard" });
-//         }
-//       } else if (parsedToken.role === "school") {
-//         if (to.matched.some(record => record.meta.role === SchoolRole)) {
-//           next();
-//         } else {
-//           next({ name: "Dashboard" });
-//         }
-//       }
-//     }
-//   } else if (to.matched.some(record => record.meta.onlyGuest)){
-//     if (sessionStorage.getItem("token") === null) {
-//       next();
-//     } else {
-//       next({name: "Dashboard"})
-//     }
-//   } else {
-//     next();
-//   }
-// });
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (sessionStorage.getItem("token") === null) {
+      next({ name: "Login", });
+    } else {
+      const parsedToken = parseJwt(sessionStorage.getItem("token"));
+      if (parsedToken.role === "employer") {
+        if (to.matched.some(record => record.meta.role === EmployerRole)) {
+          next();
+        } else {
+          next({ name: "EmployerJobList" });
+        }
+      } else if (parsedToken.role === "employee") {
+        if (to.matched.some(record => record.meta.role === EmployeeRole)) {
+          next();
+        } else {
+          next({ name: "EmployeeDashboard" });
+        }
+      } else if (parsedToken.role === "school") {
+        if (to.matched.some(record => record.meta.role === SchoolRole)) {
+          next();
+        } else {
+          next({ name: "SchoolViewCompanyList" });
+        }
+      }
+    }
+  } else if (to.matched.some(record => record.meta.onlyGuest)){
+    if (sessionStorage.getItem("token") === null) {
+      next();
+    } else {
+      next({name: "EmployeeDashboard"})
+    }
+  } else {
+    next();
+  }
+});
 
 export default router;

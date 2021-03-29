@@ -17,7 +17,6 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-
 // const firebaseConfig = {
 //   apiKey: "AIzaSyCj4pN0htCDHQR72-LgEsFx6QlItAoBlqw",
 //   authDomain: "cvideos-905a8.firebaseapp.com",

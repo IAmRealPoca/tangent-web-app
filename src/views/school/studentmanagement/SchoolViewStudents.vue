@@ -2,26 +2,15 @@
   <main-content>
     <main>
       <div
-        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-2"
       >
         <div class="d-block mb-4 mb-md-0">
-          <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-              <li class="breadcrumb-item">
-                <a href="#"><span class="fas fa-home"></span></a>
-              </li>
-              <li class="breadcrumb-item"><a href="#">Tangent</a></li>
-              <li class="breadcrumb-item active" aria-current="page">
-                Students Relation Management
-              </li>
-            </ol>
-          </nav>
           <h2 class="h4">Students Relation Management</h2>
           <p class="mb-0">Manage your relationship with students</p>
         </div>
       </div>
       <div class="row">
-        <div class="table-settings mb-4">
+        <div class="table-settings">
           <div class="row justify-content-between align-items-center">
             <div class="col-9 col-lg-4 d-flex">
               <div class="input-group me-2 me-lg-3"></div>

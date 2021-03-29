@@ -20,4 +20,7 @@ export default {
   getSub(state, sub) {
     state.listOfSub = sub;
   },
+  newCoverLetter(state, newCoverLetter) {
+    state.newCoverLetter = newCoverLetter;
+  },
 };

@@ -26,22 +26,21 @@
             <li class="nav-item dropdown">
               <a
                 class="nav-link text-dark me-lg-3 icon-notifications dropdown-toggle"
-                data-unread-notifications="false"
+                :class="{ show: isToggled }"
+                @click="showNoti"
+                data-unread-notifications="true"
                 ref="notibell"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-                ><span class="icon icon-sm">
-                  <span class="fas fa-bell bell-shake" ref="bellShake"></span>
+                ><span class="icon icon-sm"
+                  ><span class="fas fa-bell bell-shake"></span>
                   <span
                     class="icon-badge rounded-circle unread-notifications"
-                    ref="unreadDisplay"
-                  >
-                  </span>
-                </span>
-              </a>
+                  ></span></span
+              ></a>
               <div
                 class="dropdown-menu dashboard-dropdown dropdown-menu-lg dropdown-menu-center mt-2 py-0"
               >
@@ -52,14 +51,14 @@
                     >Notifications</a
                   >
                   <a
-                    href="#"
+                    href="../calendar.html"
                     class="list-group-item list-group-item-action border-bottom border-light"
                   >
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <img
                           alt="Image placeholder"
-                          src="@/assets/img/fpt.png"
+                          src="@/assets/img/tangent.png"
                           class="user-avatar lg-avatar rounded-circle"
                         />
                       </div>
@@ -68,9 +67,7 @@
                           class="d-flex justify-content-between align-items-center"
                         >
                           <div>
-                            <h4 class="h6 mb-0 text-small">
-                              Nam Ngô
-                            </h4>
+                            <h4 class="h6 mb-0 text-small">Jose Leos</h4>
                           </div>
                           <div class="text-end">
                             <small class="text-danger">a few moments ago</small>
@@ -109,17 +106,27 @@
               <div
                 class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-0"
               >
-                <a class="dropdown-item rounded-top fw-bold" href="#"
-                  ><span class="far fa-user-circle"></span>My Profile</a
-                >
-                <a class="dropdown-item fw-bold" href="#"
-                  ><span class="fas fa-cog"></span>Settings</a
-                >
+                <a class="dropdown-item rounded-top fw-bold" href="#">
+                  <span class="far fa-user-circle"></span>
+                  My Profile
+                </a>
+                <a class="dropdown-item fw-bold" href="#">
+                  <span class="fas fa-cog"></span>
+                  Settings
+                </a>
+                <a class="dropdown-item fw-bold" href="#">
+                  <span class="fas fa-envelope-open-text"></span>
+                  Messages
+                </a>
+                <a class="dropdown-item fw-bold" href="#">
+                  <span class="fas fa-user-shield"></span>
+                  Support
+                </a>
                 <div role="separator" class="dropdown-divider my-0"></div>
-                <a class="dropdown-item rounded-bottom fw-bold" href="#"
-                  ><span class="fas fa-sign-out-alt text-danger"></span
-                  >Logout</a
-                >
+                <a class="dropdown-item rounded-bottom fw-bold" href="#">
+                  <span class="fas fa-sign-out-alt text-danger"></span>
+                  Logout
+                </a>
               </div>
             </li>
           </ul>
@@ -135,17 +142,21 @@
         </div>
       </div>
     </nav>
+    <Breadcrumb />
   </div>
 </template>
 
 <script>
-import { onMounted, reactive, ref, watchEffect } from "vue";
+import { onMounted, ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { useSignalR } from "@/util/signalr/signalrutil";
+import { useParseJwt } from "@/util/parseJwt";
+import Breadcrumb from "@/components/Breadcrumb.vue";
 
 export default {
   name: "Header",
+  components: { Breadcrumb },
   props: {
     isBooth: false,
   },
@@ -162,21 +173,25 @@ export default {
     // unreadNotifications.style.display = "none";
     const unreadDisplay = ref(null);
 
-    const hub = signalr.hubConnect();
+    const jwtParser = useParseJwt();
+    const userInfoToken = jwtParser.parseJwt(sessionStorage.getItem("token"));
+    const hub = signalr.hubConnect(userInfoToken.sub);
     hub.on("noti", (msg) => {
       console.log(msg);
       notification.isNoti = true;
       notification.msg = msg;
       if (bellShake.value) {
+        console.log("bellshake");
         bellShake.value.setAttribute("data-unread-notifications", true);
         if (unreadDisplay.value) {
           unreadDisplay.value.style.display = "block";
         }
-        // console.log(bellShake.value);
+        console.log(bellShake.value);
       }
       if (notibell.value) {
+        console.log("notibell");
         notibell.value.setAttribute("data-unread-notifications", true);
-        // console.log(notibell.value);
+        console.log(notibell.value);
       }
     });
 
@@ -193,24 +208,22 @@ export default {
     const user = JSON.parse(store.state.userInfo);
     // const user = store.state.userInfo;
 
-    function parseJwt(token) {
-      var base64Url = token.split(".")[1];
-      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      var jsonPayload = decodeURIComponent(
-        atob(base64)
-          .split("")
-          .map(function(c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-
-      return JSON.parse(jsonPayload);
-    }
-    const userName = ref({});
+    // function parseJwt(token) {
+    //   var base64Url = token.split(".")[1];
+    //   var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    //   var jsonPayload = decodeURIComponent(
+    //     atob(base64)
+    //       .split("")
+    //       .map(function(c) {
+    //         return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+    //       })
+    //       .join("")
+    //   );
+    const isToggled = ref(false);
     const showNoti = () => {
-      notification.isNoti = false;
-      console.log("HEllo s");
+      console.log('Something :>> ', notibell.value);
+      isToggled = !isToggled;
+      console.log("isToggled :>> ", isToggled);
     };
 
     const contracted = () => {
@@ -220,6 +233,8 @@ export default {
     const backPrevious = () => {
       router.back();
     }
+
+    const userName = ref({});
 
     onMounted(() => {});
 

@@ -13,6 +13,7 @@ import createPersistedState from "vuex-persistedstate";
       jobfairInfo: null,
       boothInfo: null,
       listOfSub: [],
+      newCoverLetter: null,
     };
   },
   mutations,

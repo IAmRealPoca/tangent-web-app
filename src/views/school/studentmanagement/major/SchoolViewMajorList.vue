@@ -3,21 +3,9 @@
     <MainContent>
       <main>
         <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-3"
         >
           <div class="d-block mb-4 mb-md-0">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-              <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                <li class="breadcrumb-item">
-                  <a href="#"><span class="fas fa-home"></span></a>
-                </li>
-                <li class="breadcrumb-item"><a href="#">Tangent</a></li>
-                <li class="breadcrumb-item"><a href="#">School</a></li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  Majors
-                </li>
-              </ol>
-            </nav>
             <h2 class="h4">Majors</h2>
             <p class="mb-0">Your school's all majors.</p>
           </div>
@@ -216,11 +204,10 @@ export default {
     };
 
     const handleDeleteMajorClick = (majorId) => {
-      majorService.deleteMajor(majorId)
-      .catch(e => {
+      majorService.deleteMajor(majorId).catch((e) => {
         console.log(e);
       });
-    }
+    };
 
     onMounted(() => {
       fetchMajorList();
@@ -235,5 +222,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

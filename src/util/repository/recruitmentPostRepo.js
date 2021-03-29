@@ -25,7 +25,13 @@ export default {
   updateJob(jobId, updatedJob) {
     return http.put(`${path}/${jobId}`, updatedJob)
   },
+  deleteJob(jobId) {
+    return http.delete(`${path}/${jobId}`)
+  },
   markAsFavorite(applicationId, payload) {
     return http.put(`${path}/${applicationId}/fav`, payload);
+  },
+  applyJob(jobId, payload) {
+    return http.post(`${path}/${jobId}/apply-job`, payload);
   }
 }
