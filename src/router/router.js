@@ -56,13 +56,14 @@ import PDF from "@/components/PDFDocument.vue";
 
 import EmployeeDashboard from '@/components/DashboardComponent/EmployeeDashboard.vue';
 import AdminDashboard from '@/components/DashboardComponent/AdminDashboard.vue';
+import AdminAccountList from "@/views/admin/AdminAccountList.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 
 const EmployerRole = "Employer";
 const EmployeeRole = "Employee";
 const SchoolRole = "School";
-const Admin = "Admin";
+const AdminRole = "Admin";
 
 const routes = [
   {
@@ -87,7 +88,7 @@ const routes = [
     component: AdminDashboard,
     meta: {
       requiresAuth: true,
-      role: Admin,
+      role: AdminRole,
     },
   },
   {
@@ -446,6 +447,15 @@ const routes = [
     },
   },
   {
+    path: "/admin",
+    name: "AdminAccountList",
+    component: AdminAccountList,
+    meta: {
+      requiresAuth: true,
+      role: AdminRole,
+    },
+  },
+  {
     path: "/pres",
     name: "EmpPresen",
     component: EmployerPresentation,
@@ -454,8 +464,6 @@ const routes = [
       role: EmployeeRole,
     },
   },
-  
-  
   {
     path: "/pdf",
     name: "PDF",
