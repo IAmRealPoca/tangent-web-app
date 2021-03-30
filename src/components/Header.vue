@@ -30,8 +30,7 @@
                   <span
                     class="icon-badge rounded-circle unread-notifications"
                     ref="unreadDisplay"
-                  >
-                  </span>
+                  ></span>
                 </span>
               </a>
               <div
