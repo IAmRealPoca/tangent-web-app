@@ -4,18 +4,15 @@
       class="navbar navbar-top navbar-expand navbar-dashboard navbar-dark ps-0 pe-2 pb-0"
     >
       <div class="container-fluid px-0">
-        <div
-          class="d-flex justify-content-between w-100"
-          id="navbarSupportedContent"
-        >
+        <div class="d-flex justify-content-between w-100">
           <div class="d-flex align-items-center">
-            <button
+            <!-- <button
               id="sidebar-toggle"
               @click="contracted"
               class="sidebar-toggle me-3 btn btn-icon-only btn-lg btn-circle d-none d-md-inline-block"
             >
               <span class="fas fa-bars"></span>
-            </button>
+            </button> -->
           </div>
           <ul class="navbar-nav align-items-center" v-if="user">
             <li class="nav-item dropdown">
