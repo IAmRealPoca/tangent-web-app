@@ -297,7 +297,7 @@ export default {
       pathArray.forEach((item, index) => {
         pathArray[index] = item[0].toUpperCase() + item.slice(1);
       });
-
+      //ll
       console.log("pathArray", pathArray);
       SchoolServices.getCompanyDetailsAsSchool(parseInt(pathArray[2]))
         .then((data) => {
