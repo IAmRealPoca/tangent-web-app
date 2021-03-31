@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header id="topnav" class="defaultscroll sticky">
+    <header id="topnav" class="defaultscroll sticky-bar">
       <div class="container">
         <!-- Logo container-->
         <div>
@@ -144,22 +144,26 @@
 
     <!-- Hero Start -->
     <section
-      class="bg-half-130 d-table w-100 overflow-hidden"
+      class="d-table w-100 overflow-hidden"
       style="background: url('@/assets/img/bg/bg-index.png')"
     >
       <div class="container">
-        <div class="row mt-5 align-items-center pt-5">
+        <div class="row mt-0 align-items-center pt-0">
           <div class="col-lg-6 col-md-7">
             <div class="heading-title">
               <h1 class="heading font-weight-bold mb-3">
-                Online job fair <br />
-                and Video CV
+                Need a recruiting solution and job hunters?
               </h1>
-              <p class="para-desc text-muted">TBA</p>
+              <p class="para-desc text-muted">
+                We are here to solve this exact challenge
+              </p>
               <div class="watch-video mt-4 pt-2">
-                <a href="javascript:void(0)" class="btn btn-primary mb-2"
-                  >Get Started</a
+                <a
+                  href="javascript:void(0)"
+                  class="btn btn-outline-primary mb-2"
                 >
+                  Get Started
+                </a>
               </div>
             </div>
           </div>
@@ -168,10 +172,8 @@
           <div class="col-lg-6 col-md-5 mt-4 pt-2 mt-sm-0 pt-sm-0">
             <div class="bg-saas-shape position-relative">
               <img
-                src="@/assets/img/laptop.png"
-                height="450"
-                class="mx-auto d-block"
-                alt=""
+                src="@/assets/img/landingPage.png"
+                class="background-image mx-auto d-block"
               />
             </div>
           </div>
@@ -690,10 +692,7 @@
 <script>
 export default {
   name: "LandingPage",
-  
 };
 </script>
 
-<style scoped src="../assets/css/style.css">
-
-</style>
+<style scoped src="../assets/css/style.css"></style>
