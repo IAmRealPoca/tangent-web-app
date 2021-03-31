@@ -255,15 +255,6 @@ const routes = [
     path: "/test",
     name: "BlobTest",
     component: BlobTest,
-    meta: {
-      requiresAuth: true,
-      role: EmployerRole,
-    },
-  },
-  {
-    path: "/test",
-    name: "BlobTest",
-    component: BlobTest,
   },
 
   {
@@ -518,6 +509,12 @@ router.beforeEach((to, from, next) => {
           next();
         } else {
           next({ name: "SchoolViewCompanyList" });
+        }
+      } else if (parsedToken.role === "admin") {
+        if (to.matched.some(record => record.meta.role === AdminRole)) {
+          next();
+        } else {
+          next({ name: "AdminAccountList" });
         }
       }
     }

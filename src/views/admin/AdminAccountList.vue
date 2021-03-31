@@ -1,8 +1,8 @@
 <template>
   <div>
-<MainContent>
-  <main>
-    <div
+    <MainContent>
+      <main>
+        <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-2"
         >
           <div class="d-block mb-4 mb-md-0">
@@ -37,7 +37,7 @@
                 </div>
                 <hr />
                 <div class="row">
-                  <span class="h5">Exclude students that do not match</span>
+                  <span class="h5">Account type</span>
                 </div>
                 <div class="row form-check form-switch">
                   <div class="col">
@@ -47,9 +47,7 @@
                       value=""
                       id="defaultCheck10"
                     />
-                    <label for="defaultCheck10">
-                      School Year or Graduation Date
-                    </label>
+                    <label for="defaultCheck10"> Student </label>
                   </div>
                   <div class="col">
                     <input
@@ -59,7 +57,7 @@
                       id="defaultCheck10"
                     />
                     <label class="form-check-label" for="defaultCheck10">
-                      Minimum GPA
+                      School
                     </label>
                   </div>
                   <div class="w-100"></div>
@@ -71,7 +69,7 @@
                       id="defaultCheck10"
                     />
                     <label class="form-check-label" for="defaultCheck10">
-                      Major
+                      Company
                     </label>
                   </div>
                   <div class="col">
@@ -82,7 +80,7 @@
                       id="defaultCheck10"
                     />
                     <label class="form-check-label" for="defaultCheck10">
-                      Work authorization status
+                      Admin
                     </label>
                   </div>
                 </div>
@@ -130,9 +128,8 @@
                   aria-label="Message select example"
                 >
                   <option selected="selected">Bulk Action</option>
-                  <option value="1">Send Email</option>
-                  <option value="2">Change Group</option>
-                  <option value="3">Delete User</option>
+                  <option value="1">Approve selected</option>
+                  <option value="2">Reject selected</option>
                 </select>
                 <button class="btn btn-sm px-3 btn-secondary ms-3">
                   Apply
@@ -159,14 +156,14 @@
                       </div>
                     </th>
                     <th class="border-bottom">Name</th>
-                    <th class="border-bottom">Date Graduated</th>
-                    <th class="border-bottom">School</th>
+                    <th class="border-bottom">Date Joined</th>
+                    <th class="border-bottom">Type</th>
                     <th class="border-bottom">Status</th>
                     <th class="border-bottom"></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(appliedCV, index) in listAppliedCVs" :key="index">
+                  <tr v-for="(account, index) in listAccount" :key="index">
                     <td>
                       <div class="form-check dashboard-check">
                         <input
@@ -181,17 +178,29 @@
                         ></label>
                       </div>
                     </td>
-                    <td @click="handleApplicantClick(appliedCV.applicationId)">
+                    <td>
                       <a href="" class="d-flex align-items-center"
                         ><img
-                          :src="appliedCV.cv.employee.avatar"
+                          :src="account.accountInfo.avatar"
                           class="user-avatar rounded-circle me-3"
                           alt="Avatar"
                         />
                         <div class="d-block">
-                          <span class="fw-bold">{{
-                            appliedCV.cv.employee.fullName
-                          }}</span>
+                          <span
+                            class="fw-bold"
+                            v-if="account.role.roleName === 'employee'"
+                            >{{ account.accountInfo.fullName }}</span
+                          >
+                          <span
+                            class="fw-bold"
+                            v-if="account.role.roleName === 'employer'"
+                            >{{ account.accountInfo.name }}</span
+                          >
+                          <span
+                            class="fw-bold"
+                            v-if="account.role.roleName === 'school'"
+                            >{{ account.accountInfo.schoolName }}</span
+                          >
                           <div class="small text-gray">
                             <span
                               class="__cf_email__"
@@ -203,28 +212,23 @@
                     </td>
                     <td>
                       <span class="fw-normal">{{
-                        formatDate(appliedCV.cv.created)
+                        formatDate(account.created)
                       }}</span>
                     </td>
                     <td>
                       <span class="fw-normal"
-                        ><span
-                          class="fas fa-check-circle text-success me-2"
-                        ></span
-                        >FPT University</span
+                        >{{ formatRoleName(account.role.roleId) }}</span
                       >
                     </td>
-                    <!-- <td><span class="fw-normal text-success">Active</span></td> -->
                     <td>
                       <div class="ms-sm-0">
-                        <span :class="appliedCV.statusClass">{{
-                          appliedCV.statusString
+                        <span :class="account.statusClass">{{
+                          account.statusString
                         }}</span>
                       </div>
                     </td>
-
                     <td>
-                      <!-- <div class="btn-group">
+                      <div class="btn-group">
                         <button
                           class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
                           data-bs-toggle="dropdown"
@@ -238,7 +242,7 @@
                           ><span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu py-0">
-                          <a class="dropdown-item rounded-top" href="#"
+                          <a class="dropdown-item rounded-bottom" href="#"
                             ><span class="fas fa-user-shield me-2"></span> Reset
                             Pass</a
                           >
@@ -254,11 +258,6 @@
                           >
                         </div>
                       </div>
-                      <span
-                        class="fas fa-times-circle text-danger ms-2"
-                        title="Delete"
-                        data-bs-toggle="tooltip"
-                      ></span> -->
                     </td>
                   </tr>
                 </tbody>
@@ -286,21 +285,96 @@
             </div>
           </div>
         </div>
-  </main>
-</MainContent>
+      </main>
+    </MainContent>
   </div>
 </template>
 
 <script>
 import MainContent from "@/components/MainContent.vue";
+import { ref, onMounted } from "vue";
+import { useAdminService } from "@/util/service/adminService.js";
 export default {
   name: "AdminAccountList",
   components: {
     MainContent,
-  }
-}
+  },
+  setup() {
+    const listAccount = ref([]);
+    const adminService = useAdminService();
+    const fetchAccounts = async () => {
+      listAccount.value = await adminService.getAccounts();
+      listAccount.value = listAccount.value.map((e) => {
+        let result = {
+          ...e,
+          accountInfo: {},
+          statusClass: "",
+          statusString: "",
+        };
+        if (e.role.roleName === "employee") {
+          result.accountInfo = e.employeeDataset;
+          result.statusClass = "";
+          result.statusString = "N/A";
+        } else if (e.role.roleName === "employer") {
+          result.accountInfo = e.companyDataset;
+        } else if (e.role.roleName === "school") {
+          result.accountInfo = e.schoolDataset;
+        }
+        //check employer status
+        if (result.role.roleId !== 2) {
+          if (result.accountInfo.status === 0) {
+            result.statusClass = "text-success";
+            result.statusString = "Active";
+          } else if (result.accountInfo.status === 1) {
+            result.statusClass = "text-gray-500";
+            result.statusString = "Inactive";
+          } else if (result.accountInfo.status === 2) {
+            result.statusClass = "text-info";
+            result.statusString = "Pending";
+          } else if (result.accountInfo.status === 3) {
+            result.statusClass = "text-danger";
+            result.statusString = "Rejected";
+          } else {
+            result.statusClass = "text-gray-500";
+            result.statusString = "Unknown";
+          }
+        }
+        //end check employer status
+        return result;
+      });
+      console.log("account 2: ", listAccount.value);
+    };
+
+    const formatDate = (time) => {
+      return new Date(time).toLocaleString();
+    };
+
+    const formatRoleName = (roleId) => {
+      if (roleId === 1) {
+        return "Admin";
+      } else if (roleId === 2) {
+        return "Student";
+      } else if (roleId === 3) {
+        return "Company";
+      } else if (roleId === 5) {
+        return "School";
+      } else {
+        return "N/A";
+      }
+    };
+
+    onMounted(async () => {
+      await fetchAccounts();
+    });
+
+    return {
+      listAccount,
+      formatDate,
+      formatRoleName,
+    };
+  },
+};
 </script>
 
 <style scoped>
-
 </style>
