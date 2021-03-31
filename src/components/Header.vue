@@ -4,9 +4,12 @@
       class="navbar navbar-top navbar-expand navbar-dashboard navbar-dark ps-0 pe-2 pb-0"
     >
       <div class="container-fluid px-0">
-        <div class="d-flex justify-content-between w-100">
-          <div class="d-flex align-items-center">
-            <!-- <button
+        <div
+          class="d-flex justify-content-between w-100"
+          id="navbarSupportedContent"
+        >
+          <div class="d-flex align-items-center" v-if="!isBooth">
+            <button
               id="sidebar-toggle"
               @click="contracted"
               class="sidebar-toggle me-3 btn btn-icon-only btn-lg btn-circle d-none d-md-inline-block"
@@ -14,25 +17,30 @@
               <span class="fas fa-bars"></span>
             </button> -->
           </div>
+          <div class="d-flex" v-else>
+            <a href="#" @click.prevent="backPrevious"
+              ><span class="fas fa-arrow-left align-self-center"></span
+            ></a>
+          </div>
           <ul class="navbar-nav align-items-center" v-if="user">
             <li class="nav-item dropdown">
               <a
                 class="nav-link text-dark me-lg-3 icon-notifications dropdown-toggle"
-                data-unread-notifications="false"
+                :class="{ show: isToggled }"
+                @click="showNoti"
+                data-unread-notifications="true"
                 ref="notibell"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-                ><span class="icon icon-sm">
-                  <span class="fas fa-bell bell-shake" ref="bellShake"></span>
+                ><span class="icon icon-sm"
+                  ><span class="fas fa-bell bell-shake"></span>
                   <span
                     class="icon-badge rounded-circle unread-notifications"
-                    ref="unreadDisplay"
-                  ></span>
-                </span>
-              </a>
+                  ></span></span
+              ></a>
               <div
                 class="dropdown-menu dashboard-dropdown dropdown-menu-lg dropdown-menu-center mt-2 py-0"
               >
@@ -40,11 +48,10 @@
                   <a
                     href="#"
                     class="text-center text-primary fw-bold border-bottom border-light py-3"
+                    >Notifications</a
                   >
-                    Notifications
-                  </a>
                   <a
-                    href="#"
+                    href="../calendar.html"
                     class="list-group-item list-group-item-action border-bottom border-light"
                   >
                     <div class="row align-items-center">
@@ -60,9 +67,7 @@
                           class="d-flex justify-content-between align-items-center"
                         >
                           <div>
-                            <h4 class="h6 mb-0 text-small">
-                              Nyam IV The Simps
-                            </h4>
+                            <h4 class="h6 mb-0 text-small">Jose Leos</h4>
                           </div>
                           <div class="text-end">
                             <small class="text-danger">a few moments ago</small>
@@ -142,16 +147,20 @@
 </template>
 
 <script>
-import { onMounted, reactive, ref, watchEffect } from "vue";
+import { onMounted, ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { useSignalR } from "@/util/signalr/signalrutil";
+import { useParseJwt } from "@/util/parseJwt";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 
 export default {
   name: "Header",
   components: { Breadcrumb },
-  setup() {
+  props: {
+    isBooth: false,
+  },
+  setup(props) {
     const router = useRouter();
     const signalr = useSignalR();
 
@@ -164,7 +173,9 @@ export default {
     // unreadNotifications.style.display = "none";
     const unreadDisplay = ref(null);
 
-    const hub = signalr.hubConnect();
+    const jwtParser = useParseJwt();
+    const userInfoToken = jwtParser.parseJwt(sessionStorage.getItem("token"));
+    const hub = signalr.hubConnect(userInfoToken.sub);
     hub.on("noti", (msg) => {
       console.log(msg);
       notification.isNoti = true;
@@ -197,29 +208,33 @@ export default {
     const user = JSON.parse(store.state.userInfo);
     // const user = store.state.userInfo;
 
-    function parseJwt(token) {
-      var base64Url = token.split(".")[1];
-      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      var jsonPayload = decodeURIComponent(
-        atob(base64)
-          .split("")
-          .map(function(c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-
-      return JSON.parse(jsonPayload);
-    }
-    const userName = ref({});
+    // function parseJwt(token) {
+    //   var base64Url = token.split(".")[1];
+    //   var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    //   var jsonPayload = decodeURIComponent(
+    //     atob(base64)
+    //       .split("")
+    //       .map(function(c) {
+    //         return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+    //       })
+    //       .join("")
+    //   );
+    const isToggled = ref(false);
     const showNoti = () => {
-      notification.isNoti = false;
-      console.log("HEllo s");
+      console.log('Something :>> ', notibell.value);
+      isToggled = !isToggled;
+      console.log("isToggled :>> ", isToggled);
     };
 
     const contracted = () => {
       store.commit("contract");
     };
+
+    const backPrevious = () => {
+      router.back();
+    }
+
+    const userName = ref({});
 
     onMounted(() => {});
 
@@ -228,7 +243,10 @@ export default {
       user,
       contracted,
       showNoti,
+
       handleLoginClick,
+      backPrevious,
+
       notification,
       bellShake,
       notibell,

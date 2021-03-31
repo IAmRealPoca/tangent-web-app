@@ -49,9 +49,8 @@
                 </div>
 
                 <p class="text-center">
-                  <a href="/register" class="text-gray-700"
-                    > Click here to
-                    register.
+                  <a href="/register" class="text-gray-700">
+                    Click here to register.
                   </a>
                 </p>
               </div>
@@ -67,9 +66,9 @@
 import { useRouter } from "vue-router";
 import { onMounted, ref, watchEffect } from "vue";
 import { useLoginService } from "@/util/service/login";
-import * as schoolService from "@/util/service/schoolService";
-import * as employerService from "@/util/service/employerService";
+import { getCurrEmployerInfo } from "@/util/service/employerService";
 import { getCurrEmployeeInfo } from "@/util/service/employeeService";
+import { getInfoOfSchool } from "@/util/service/schoolService";
 import { useStore } from "vuex";
 
 export default {
@@ -116,15 +115,21 @@ export default {
       console.log("usrFlag :>> ", role);
       if (role === "employee") {
         const resp = await getCurrEmployeeInfo();
+        resp.role = role;
         sessionStorage.setItem("userInfo", JSON.stringify(resp));
         store.commit("loginSuccess", resp);
       } else if (role === "employer") {
-        const resp = await employerService.getCurrEmployerInfo();
+        const resp = await getCurrEmployerInfo();
+        resp.role = role;
         sessionStorage.setItem("userInfo", JSON.stringify(resp));
         store.commit("loginSuccess", resp);
       } else if (role === "school") {
-        // sessionStorage.setItem("userInfo", JSON.stringify(resp));
-        // store.commit("loginSuccess", resp);
+        const resp = await getInfoOfSchool();
+        if (resp) {
+          resp.role = role;
+          sessionStorage.setItem("userInfo", JSON.stringify(resp));
+          store.commit("loginSuccess", resp);
+        }
       }
     };
 

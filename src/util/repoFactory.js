@@ -8,8 +8,10 @@ import videoChatRepo from './repository/videoChatRepo';
 import jobFairRepo from './repository/jobFairRepo';
 import boothRepo from './repository/boothRepo';
 import majorRepo from './repository/majorRepo';
+import adminRepo from "./repository/adminRepo";
 
 import employeeRepo from "./repository/employeeRepo";
+import videoRepo from "./repository/videoRepo";
 
 const repositories = {
     "authRepo": authRepo,
@@ -22,7 +24,9 @@ const repositories = {
     "skillRepo": skillRepo,
     "jobFairRepo":jobFairRepo,
     "boothRepo": boothRepo,
-    "majorRepo": majorRepo
+    "majorRepo": majorRepo,
+    "videoRepo": videoRepo,
+    "adminRepo": adminRepo,
 }
 export default {
     get: (name) => repositories[name]

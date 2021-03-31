@@ -1,60 +1,65 @@
 <template>
-  <div>
-    <MainContent>
-      <div class="py-2">
-        <div class="d-flex justify-content-between w-100 flex-wrap">
-          <div class="mb-3 mb-lg-0">
-            <h1 class="h4">Your Booth</h1>
-            <p class="mb-0"></p>
-          </div>
+  <div class="mx-3">
+    <Header :isBooth="true" />
+    <div class="py-1">
+      <div class="d-flex justify-content-between w-100 flex-wrap">
+        <div class="mb-3 mb-lg-0">
+          <h1 class="h4">Your Booth</h1>
+          <p class="mb-0"></p>
         </div>
       </div>
-      <div class="row">
-        <!-- Test Only -->
-        <div v-if="data && !data.session">
-          <!-- <input type="button" value="Call" @click="joinSession" /> -->
-          <div class="d-flex justify-content-center">
-            <strong class="h1">Loading...</strong>
-            <div
-              class="spinner-border ml-auto"
-              style="width: 3rem; height: 3rem;"
-              role="status"
-              aria-hidden="true"
-            ></div>
-          </div>
-        </div>
-        <!-- End Test Only -->
-        <div v-if="data && data.session">
-          <employer-presentation
-            :stream-manager="data.mainStreamManager"
-            :data="propsData"
-            @updateMainStream="handleUpdateMainStream"
-            @endCallEvent="handleEndCallEvent"
-          />
+    </div>
+    <div class="row">
+      <!-- Test Only -->
+      <div v-if="data && !data.session">
+        <!-- <input type="button" value="Call" @click="joinSession" /> -->
+        <div class="d-flex justify-content-center">
+          <strong class="h1">Loading...</strong>
+          <div
+            class="spinner-border ml-auto"
+            style="width: 3rem; height: 3rem;"
+            role="status"
+            aria-hidden="true"
+          ></div>
         </div>
       </div>
-    </MainContent>
+      <!-- End Test Only -->
+      <div v-if="data && data.session">
+        <employer-presentation
+          :stream-manager="data.mainStreamManager"
+          :data="propsData"
+          :question="question"
+          @updateMainStream="handleUpdateMainStream"
+          @endCallEvent="handleEndCallEvent"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import MainContent from "@/components/MainContent.vue";
+import Header from "@/components/Header.vue";
+
 import { OpenVidu } from "openvidu-browser";
 
 import { useVCService } from "@/util/service/videoChatService";
 import { useBoothService } from "@/util/service/boothService.js";
-import { getCurrEmployerInfo } from "@/util/service/employerService";
 
-import { ref } from "@vue/reactivity";
 import VideoPlayer from "@/components/ViduComponent/VideoPlayer.vue";
 import EmployerPresentation from "@/components/ViduComponent/EmployerPresentation.vue";
+
+import { ref } from "@vue/reactivity";
 import { useRoute, useRouter } from "vue-router";
-import { onMounted } from "@vue/runtime-core";
+import { computed, onMounted } from "@vue/runtime-core";
+
+import { useStore } from "vuex";
 
 export default {
   name: "EmployerCreateBooth",
   components: {
     MainContent,
+    Header,
     VideoPlayer,
     EmployerPresentation,
   },
@@ -71,15 +76,19 @@ export default {
     const route = useRoute();
     const router = useRouter();
     const fairServive = useBoothService();
+    const store = useStore();
+
     const propsData = ref({});
+    const userInfo = computed(() => store.getters.getUser);
+    const question = ref({});
+
     const boothIdFromRoute = Number(route.params.boothId);
 
     const getSessionId = async () => {
       const resp = await fairServive.getBoothById(boothIdFromRoute);
       data.value.mySessionId = resp.boothSessionUrl;
-      const info = await getCurrEmployerInfo();
-      console.log(resp.boothSessionUrl, " emp info: ", info);
-      data.value.myUserName = info.name;
+      // const info = await getCurrEmployerInfo();
+      data.value.myUserName = userInfo.name;
     };
 
     const joinSession = async () => {
@@ -93,7 +102,7 @@ export default {
 
       // On every new Stream received...
       data.value.session.on("streamCreated", ({ stream }) => {
-        // console.log("Tao la steram: ", stream);
+        console.log("Tao la steram: ", stream);
         const subscriber = data.value.session.subscribe(stream);
         data.value.subscribers.push(subscriber);
       });
@@ -105,12 +114,34 @@ export default {
           data.value.subscribers.splice(index, 1);
         }
       });
-      // data.value.session.on("connectionCreated", (event) => {
-      //   console.warn("data is sum event when connectionCreated: ", event);
-      // });
-      // data.value.session.on("connectionDestroyed", (event) => {
-      //   console.warn("data is sum event when connectionDestroyed: ", event);
-      // });
+      data.value.session.on("connectionCreated", (event) => {
+        if (
+          event.connection.connectionId ===
+          data.value.session.connection.connectionId
+        ) {
+          console.warn("YOUR OWN CONNECTION CREATED!");
+        } else {
+          console.warn("OTHER USER'S CONNECTION CREATED!");
+          store.dispatch("getSub", boothIdFromRoute);
+          // console.warn("OTHER USER'S CONNECTION DATA: ",event.connection.data);
+        }
+        console.warn("data is sum event when connectionCreated: ", event);
+      });
+      data.value.session.on("connectionDestroyed", (event) => {
+        if (
+          !event.connection.connectionId ===
+          data.value.session.connection.connectionId
+        )
+          console.warn("OTHER USER'S CONNECTION DESTROYED!");
+        console.warn("data is sum event when connectionDestroyed: ", event);
+      });
+
+      data.value.session.on("signal:question", (event) => {
+        console.log("event from signal :>> ", event);
+        if (event.type === "signal:question") {
+          question.value = event;
+        }
+      });
 
       // --- Connect to the session with a valid user token ---
 
@@ -118,8 +149,10 @@ export default {
       // 'token' parameter should be retrieved and returned by your own backend
       const token = await getToken2(data.value.mySessionId);
       const session = await data.value.session.connect(token, {
-        clientData: data.value.myUserName,
+        clientData: userInfo.value,
       });
+
+      console.log("Hi there im in here");
       try {
         // --- Get your own camera stream with the desired properties ---
         const publisher = data.value.OV.initPublisher(undefined, {
@@ -150,6 +183,7 @@ export default {
           error.message
         );
       }
+
       propsData.value = {
         publisher: data.value.publisher,
         subscribers: data.value.subscribers,
@@ -196,7 +230,6 @@ export default {
 
     onMounted(async () => {
       await getSessionId();
-
       joinSession();
     });
 
@@ -205,6 +238,9 @@ export default {
       joinSession,
       leaveSession,
       propsData,
+      userInfo,
+      question,
+
       handleUpdateMainStream,
       handleEndCallEvent,
     };

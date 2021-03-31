@@ -1,7 +1,7 @@
 <template>
   <div v-if="streamManager">
     <video class="w-100 h-100" autoplay ref="vid" />
-    <p>{{ clientData.clientData }}</p>
+    <p>{{ clientData.clientData.name }}</p>
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
     console.warn("hi ref", props.streamManager);
     const getConnectionData = () => {
       const { connection } = props.streamManager.stream;
-      console.warn(connection.data);
+      // console.warn(connection.data);
       return JSON.parse(connection.data);
     };
     const clientData = computed(() => {

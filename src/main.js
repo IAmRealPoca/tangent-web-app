@@ -3,11 +3,15 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 import App from "./App.vue";
 
+import CKEditor from "@ckeditor/ckeditor5-vue";
+
 import axios from 'axios';
 
 import store from "@/store/store";
 
 import router from "@/router/router.js";
+
+import { sync } from 'vuex-router-sync';
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -44,10 +48,16 @@ firebase.initializeApp(firebaseConfig);
 
 const app = createApp(App);
 
+
+
 app.config.globalProperties.$http = axios
 
 app.use(store);
 
+app.use(CKEditor);
+
 app.use(router);
+
+sync(store,router);
 
 app.mount("#app");

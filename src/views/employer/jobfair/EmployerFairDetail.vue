@@ -111,14 +111,18 @@
             <div class="card border-light components-section mb-1">
               <div class="card p-0">
                 <div v-if="isCreated || boothList">
-                  <div v-if="isCreated && boothDetail">
+                  <!-- <div v-if="isCreated && boothDetail">
                     <div class="row">
                       <div class="col-12 col-lg-6">
                         <div class="card-body">
-                          <h4 class="h3">Your Company Booth</h4>
-                          <h5 class="fw-normal">{{ boothDetail.name }}</h5>
-                          <p class="text-gray mb-4">{{ boothDetail.desc }}</p>
-                          <a class="btn btn-sm btn-secondary" href="bootp"
+                          <h3 class="fw-normal">{{ boothDetail.name }}</h3>
+                          <p v-html="testHtml"></p>
+                          
+                          <a
+                            class="btn btn-sm btn-secondary"
+                            :href="
+                              fairDetailRef.jobFairId + `/` + boothList.boothId
+                            "
                             >Go to your booth</a
                           >
                         </div>
@@ -131,15 +135,18 @@
                         />
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                   <div v-if="boothList">
                     <div class="row">
                       <div class="col-12 col-lg-6">
-                        <div class="card-body">
-                          <h4 class="h3">{{ boothList.boothName }}</h4>
-                          <p class="text-gray mb-4">
-                            {{ boothList.boothDescription }}
-                          </p>
+                        <div
+                          class="card-body d-flex flex-column justify-content-between h-100"
+                        >
+                          <div class="h2">{{ boothList.boothName }}</div>
+                          <!-- <p
+                            v-html="boothList.boothDescription"
+                            class="text-gray mb-4"
+                          ></p> -->
                           <a
                             class="btn btn-sm btn-secondary"
                             :href="
@@ -241,13 +248,18 @@
                                       >Booth Description</label
                                     >
                                     <div class="input-group">
-                                      <textarea
+                                      <!-- <textarea
                                         class="form-control"
                                         id="booth_description"
                                         v-model="boothDetail.desc"
                                         rows="3"
                                         style="resize: none"
-                                      ></textarea>
+                                      ></textarea> -->
+                                      <ckeditor
+                                        :editor="editor"
+                                        :config="editorConfig"
+                                        v-model="boothDetail.desc"
+                                      ></ckeditor>
                                     </div>
                                   </div>
                                   <!-- End of Form -->
@@ -335,10 +347,15 @@
 
 <script>
 import MainContent from "@/components/MainContent.vue";
+import InlineEditor from "@ckeditor/ckeditor5-build-inline";
+
 import { useBoothService } from "@/util/service/boothService.js";
 import { useJobFairService } from "@/util/service/jobFairService.js";
 import { useRouter, useRoute } from "vue-router";
 import { ref, onMounted } from "vue";
+
+import { useStore } from 'vuex';
+
 export default {
   name: "EmployerFairDetail",
   components: {
@@ -347,8 +364,31 @@ export default {
   setup() {
     const boothService = useBoothService();
     const jobFairService = useJobFairService();
+    const store = useStore();
+
     const fairDetailRef = ref({});
     const boothsLength = ref([]);
+    const editor = ref(InlineEditor);
+    const editorConfig = ref({
+      toolbar: [
+        "heading",
+        "|",
+        "alignment",
+        "|",
+        "bold",
+        "italic",
+        "|",
+        "link",
+        "|",
+        "bulletedList",
+        "numberedList",
+        "-", // break point
+        "blockQuote",
+        "|",
+        "undo",
+        "redo",
+      ],
+    });
     // const fairDetail = reactive({
     //       jobFairName: "",
     //       JobFairDescription: "",
@@ -374,7 +414,7 @@ export default {
       var jsonPayload = decodeURIComponent(
         atob(base64)
           .split("")
-          .map(function (c) {
+          .map(function(c) {
             return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
           })
           .join("")
@@ -388,10 +428,11 @@ export default {
       const fair = await jobFairService.getFair(fairIdFromRoute);
       console.log("fair detail: ", fair);
       fairDetailRef.value = fair;
+      store.commit("getJobfairInfo",fair);
       boothsLength.value = fair.booths;
+      store.commit("getBoothInfo",fair.booths);
       // console.log("booths: ", boothsLength.value);
     };
-    fetchJobFairDetail();
 
     const fetchBoothList = () => {
       // console.log("jwt: ", comId);
@@ -409,7 +450,6 @@ export default {
           }
         });
     };
-    fetchBoothList();
     const handleFileUpload = (evt) => {
       const path = evt.target.value;
       // console.log(path);
@@ -451,9 +491,14 @@ export default {
           console.log("err :>> ", err);
         });
     };
-    onMounted(() => {
-      // fetchBoothList();
+    onMounted(async () => {
+      await fetchJobFairDetail();
+
+      fetchBoothList();
+
+
     });
+
     return {
       isCreated,
       boothList,
@@ -461,6 +506,8 @@ export default {
       fairDetailRef,
       boothsLength,
       comId,
+      editor,
+      editorConfig,
 
       handleCreate,
       handleDelete,
@@ -468,11 +515,19 @@ export default {
     };
   },
 };
-onMounted(() => {
-  // fetchBoothList();
-  fetchJobFairDetail();
-  fetchBoothList();
-});
+// onMounted(() => {
+//   // fetchBoothList();
+//   fetchJobFairDetail();
+//   fetchBoothList();
+// });
 </script>
 
-<style scoped></style>
+<style scoped>
+.ck.ck-editor__editable_inline {
+  width: 100% !important;
+  height: 15rem;
+  border: 1px solid;
+  border-color: rgba(0, 0, 255, 0.25);
+  background: #f9fafb;
+}
+</style>

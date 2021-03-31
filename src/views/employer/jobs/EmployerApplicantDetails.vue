@@ -20,11 +20,20 @@
             <h2 class="h4">Application details</h2>
             <p class="mb-0">Review your applicant.</p>
           </div>
-          <div class="btn-toolbar mb-2 mb-md-0" v-if="Object.keys(applicationInfo).length > 0">
-            <a class="btn btn-sm btn-dark" @click="handleMarkAsFavorite" v-if="applicationInfo.status === 0"
+          <div
+            class="btn-toolbar mb-2 mb-md-0"
+            v-if="Object.keys(applicationInfo).length > 0"
+          >
+            <a
+              class="btn btn-sm btn-dark"
+              @click="handleMarkAsFavorite"
+              v-if="applicationInfo.status === 0"
               ><span class="fas fa-plus me-2"></span> Mark as interested
             </a>
-            <a class="btn btn-sm btn-danger" @click="handleMarkAsFavorite" v-else-if="applicationInfo.status === 1"
+            <a
+              class="btn btn-sm btn-danger"
+              @click="handleMarkAsFavorite"
+              v-else-if="applicationInfo.status === 1"
               ><span class="fas fa-minus me-2"></span> Unmark as interested
             </a>
             <!-- <div class="btn-group ms-2 ms-lg-3">
@@ -72,7 +81,9 @@
                   <tbody>
                     <tr v-if="Object.keys(jobPostInfo).length > 0">
                       <td>{{ jobPostInfo.title }}</td>
-                      <td>Reviewed</td>
+                      <td><span :class="applicationInfo.statusClass">{{
+                          applicationInfo.statusString
+                        }}</span></td>
                       <td>{{ applicationInfo.created }}</td>
                       <td>{{ applicationInfo.cv.employee.fullName }}</td>
                     </tr>
@@ -236,10 +247,16 @@
                                   <div class="h5">
                                     {{ applicationInfo.created }}
                                   </div>
-                                  <!-- <PDFDocument v-bind="{url, scale}" /> -->
-                                  
+                                  <PDFDocument
+                                    v-bind="{
+                                      url: applicationInfo.cv.cvFile.fileURL,
+                                      scale,
+                                    }"
+                                  />
+
                                   <a :href="applicationInfo.cv.cvFile.fileURL">
-                                  PDF</a>
+                                    Download PDF</a
+                                  >
 
                                   <!-- <img :src="applicationInfo.cv.cvFile.fileURL" alt=""> -->
                                 </div>
@@ -257,7 +274,7 @@
                                   <video width="320" height="240" controls>
                                     <source
                                       :src="
-                                        applicationInfo.coverLetter.videoUrl
+                                        applicationInfo.coverLetter.video.videoUrl
                                       "
                                     />
                                   </video>
@@ -323,13 +340,17 @@ export default {
     const jobPostInfo = ref({});
 
     const url = ref("https://cdn.filestackcontent.com/5qOCEpKzQldoRsVatUPS");
-    const scale = ref(2);
+    const scale = ref(0.75);
     const fetchCVFromJobAndApplicationId = (jobId, applicationId) => {
       EmployerService.getAppliedCVFromJobIdAndApplicationId(
         jobId,
         applicationId
       ).then((resp) => {
-        applicationInfo.value = resp;
+        applicationInfo.value = {
+          ...resp,
+          statusString: checkStatusCSSClass(resp.status).statusString,
+          statusClass: checkStatusCSSClass(resp.status).statusClass,
+        };
       });
 
       EmployerService.getOneByIdCurrEmployer(jobId).then((resp) => {
@@ -344,6 +365,24 @@ export default {
     const handleMarkAsFavorite = async () => {
       await recruitmentPost.markAsFavorite(applicationId, null);
       fetchCVFromJobAndApplicationId(jobId, applicationId);
+    };
+
+    const checkStatusCSSClass = (statusInt) => {
+      let text = "";
+      let cssClass = "text-dark";
+      if (statusInt === 0) {
+        cssClass = "text-gray-700";
+        text = "Not marked";
+      }
+      if (statusInt === 1) {
+        cssClass = "text-success";
+        text = "Marked";
+      }
+
+      return {
+        statusClass: cssClass,
+        statusString: text,
+      };
     };
 
     return {

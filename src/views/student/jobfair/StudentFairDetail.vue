@@ -107,13 +107,13 @@
           <div class="col-12 col-lg-9">
             <div class="card border-light shadow-sm components-section mb-4">
               <div class="card-body">
-                <div class="row">
+                <div v-if="fairDetailRef && boothsLength.length" class="row">
                   <div class="h4">Company booths</div>
-                  <div v-if="fairDetailRef && boothsLength.length">
+
                     <div
                       v-for="(item, index) in boothsLength"
                       :key="index"
-                      class="col-12 col-lg-4 flex-grow-1"
+                      class="col-12 col-lg-5 flex-grow-1"
                     >
                       <a :href="fairDetailRef.jobFairId + `/` + item.boothId">
                         <div class="card shadow-sm h-100">
@@ -133,9 +133,6 @@
                             />
 
                             <h5 class="h5">{{ item.boothName }}</h5>
-                            <h6 class="h6 mb-1">
-                              {{ item.boothDescription }}
-                            </h6>
                             <div class="small mb-3">
                               <span class="icon icon-small"
                                 ><span class="far fa-clock"></span
@@ -146,13 +143,13 @@
                         </div>
                       </a>
                     </div>
-                  </div>
+
+                </div>
                   <div v-else>
                     <div class="h6">
                       There is no other booths to display right now
                     </div>
                   </div>
-                </div>
               </div>
             </div>
           </div>
@@ -195,6 +192,7 @@ export default {
     const route = useRoute();
     const router = useRouter();
     const fairIdFromRoute = Number(route.params.jobFairId);
+    
     const parseJwt = () => {
       let token = sessionStorage.getItem("token");
       var base64Url = token.split(".")[1];

@@ -203,6 +203,15 @@ export default {
         },
       },
       {
+        title: "Questions",
+        url: "/employer/questions",
+        subItem: [],
+        meta: {
+          requiresAuth: true,
+          role: [employerRole],
+        },
+      },
+      {
         title: "School",
         url: "/school/dashboard",
         subItem: [

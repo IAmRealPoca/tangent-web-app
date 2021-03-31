@@ -32,13 +32,14 @@
                     type="button"
                     class="btn-close ms-auto"
                     data-bs-dismiss="modal"
+                    ref="modalForm"
                     aria-label="Close"
                   ></button>
                   <div class="card-header border-0 text-center pb-0">
                     <h2 class="h4">Create Job Fair</h2>
                   </div>
                   <div class="card-body p-0 pl-lg-3">
-                    <form action="#" class="mt-4">
+                    <form action="#" class="mt-4 needs-validation" novalidate>
                       <!-- Form -->
                       <div class="form-group mb-4">
                         <label for="booth_name">Job Fair Name</label>
@@ -56,6 +57,9 @@
                           />
                         </div>
                       </div>
+                      <div class="text-danger" v-if="errorMessage.title">
+                        {{ errorMessage.title }}
+                      </div>
                       <!-- End of Form -->
                       <div class="form-group mb-4">
                         <label for="booth_name">Job Fair Thumbnail</label>
@@ -67,6 +71,7 @@
                               @change="handleFileUpload"
                               id="booth_thumbnail"
                               type="file"
+                              required
                             />
                           </div>
                         </div>
@@ -75,7 +80,7 @@
                       <div class="form-group mb-4">
                         <label for="booth_name">Start Date</label>
                         <div class="input-group">
-                          <div class="mb-3">
+                          <div class="mb-3 ">
                             <div class="input-group">
                               <span class="input-group-text"
                                 ><span class="far fa-calendar-alt"></span
@@ -85,9 +90,10 @@
                                 :config="config"
                                 class="form-control"
                                 placeholder="Select date"
-                                name="date"
+                                name="startDate"
                               >
                               </flat-pickr>
+
                               <!-- <input
                                 data-datepicker=""
                                 class="form-control"
@@ -99,6 +105,9 @@
                               /> -->
                             </div>
                           </div>
+                        </div>
+                        <div class="text-danger" v-if="errorMessage.startDate">
+                          {{ errorMessage.startDate }}
                         </div>
                       </div>
                       <!-- End Date -->
@@ -120,6 +129,9 @@
                               v-model="jobFair.JobFairDescription"
                             ></ckeditor>
                           </div>
+                          <div class="text-danger" v-if="errorMessage.desc">
+                            {{ errorMessage.desc }}
+                          </div>
                         </div>
                         <!-- End of Form -->
                       </div>
@@ -127,7 +139,6 @@
                         <button
                           type="submit"
                           @click.prevent="handleCreate"
-                          data-bs-dismiss="modal"
                           class="btn btn-info"
                         >
                           Create!
@@ -298,7 +309,7 @@
                         <div>
                           <div class="fw-bold text-dark">
                             <span class="fw-normal text-gray">{{
-                              fair.JobFairDescriptionription
+                              fair.JobFairDescription
                             }}</span>
                           </div>
                         </div>
@@ -339,15 +350,19 @@
 </template>
 
 <script>
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted, reactive, watchEffect, nextTick } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useJobFairService } from "@/util/service/jobFairService";
+import { useField } from "vee-validate";
+
 import flatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import "flatpickr/dist/themes/dark.css";
+
 import MainContent from "@/components/MainContent.vue";
 import CKEditor from "@ckeditor/ckeditor5-vue";
 import InlineEditor from "@ckeditor/ckeditor5-build-inline";
+
 export default {
   name: "SchoolFairManagement",
   components: {
@@ -356,15 +371,41 @@ export default {
     ckeditor: CKEditor.component,
   },
   setup() {
-    const route = useRoute();
-    const router = useRouter();
+    // const route = useRoute();
+    // const router = useRouter();
     const thumbnail = ref(null);
     const fairService = useJobFairService();
     const listOfFair = ref([]);
     const editor = ref(InlineEditor);
-    const editorConfig = ref({
-      toolbar: ["bold", "italic", "|", "link"],
+    const errorMessage = reactive({
+      title: "",
+      desc: "",
+      startDate: "",
+      file: "",
     });
+    const editorConfig = ref({
+      toolbar: [
+        "heading",
+        "|",
+        "alignment",
+        "|",
+        "bold",
+        "italic",
+        "underline",
+        "|",
+        "link",
+        "|",
+        "bulletedList",
+        "numberedList",
+        "-", // break point
+        "uploadImage",
+        "blockQuote",
+        "|",
+        "undo",
+        "redo",
+      ],
+    });
+    const modalForm = ref(null);
     const jobFair = reactive({
       jobFairName: "",
       JobFairDescription: "",
@@ -372,7 +413,7 @@ export default {
       jobFairThumbnail: "",
       schoolId: "",
     });
-    const jobId = Number(route.params.jobId);
+    // const jobId = Number(route.params.jobId);
     const listAppliedCVs = ref([]);
 
     const config = {
@@ -395,13 +436,6 @@ export default {
       console.log(listOfFair.value);
     };
 
-    onMounted(async () => {
-      // fetchAppliedCV(jobId);
-      await fetchListJF();
-      console.log(listOfFair.value);
-      parseJwt();
-    });
-
     const formatDate = (time) => {
       return new Date(time).toLocaleString();
     };
@@ -422,15 +456,42 @@ export default {
         console.warn("YAY");
         formData.append("file", file.value, jobFair.jobFairThumbnail.name);
       }
+      if (jobFair.startDate == "")
+        errorMessage.startDate = "This field cannot be emptied";
+      else errorMessage.startDate = "";
+
+      if (jobFair.jobFairName == "")
+        errorMessage.title = "This field cannot be emptied";
+      else errorMessage.title = "";
+
+      if (jobFair.JobFairDescription == "")
+        errorMessage.desc = "This field cannot be emptied";
+      else errorMessage.desc = "";
+
       formData.append("fairParams", JSON.stringify(jobFair));
 
       console.warn(...formData);
 
-      let status = await fairService.createFair(formData);
-      if (status) {
-        await fetchListJF();
+      try {
+        let status = null;
+        if (
+          jobFair.jobFairName.length > 0 &&
+          jobFair.JobFairDescription.length > 0 &&
+          jobFair.startDate != ""
+        ) {
+          status = await fairService.createFair(formData);
+        }
+        if (status) {
+          await fetchListJF();
+          if (modalForm.value) {
+            console.log("hi im here");
+            modalForm.value.click();
+          }
+          isCreated.value = true;
+        }
+      } catch (e) {
+        console.log(e);
       }
-      isCreated.value = true;
     };
 
     const handleRemoveButtonClick = (id) => {
@@ -479,6 +540,23 @@ export default {
       };
     };
 
+    const isValidated = (value) => {
+      if (value && value.trim()) {
+        return true;
+      }
+      return "This is required";
+    };
+
+    onMounted(async () => {
+      // fetchAppliedCV(jobId);
+      nextTick(() => {
+        console.log("ref: ", modalForm.value);
+      });
+      await fetchListJF();
+      console.log(listOfFair.value);
+      parseJwt();
+    });
+
     return {
       listAppliedCVs,
       listOfFair,
@@ -486,6 +564,9 @@ export default {
       editor,
       editorConfig,
       jobFair,
+      modalForm,
+      errorMessage,
+
       handleFileUpload,
       handleCreate,
       handleRemoveButtonClick,
