@@ -221,7 +221,7 @@ export default {
     //   );
     const isToggled = ref(false);
     const showNoti = () => {
-      console.log('Something :>> ', notibell.value);
+      console.log("Something :>> ", notibell.value);
       isToggled = !isToggled;
       console.log("isToggled :>> ", isToggled);
     };
@@ -232,7 +232,7 @@ export default {
 
     const backPrevious = () => {
       router.back();
-    }
+    };
 
     const userName = ref({});
 

@@ -18,4 +18,8 @@ export default {
         });
     }
   },
+  setBreadCrumb({ commit }, breadCrumb) {
+    console.log('action: setBreadCrumb');
+    commit('getDynamicBreadcrumb', breadCrumb)
+  }
 };

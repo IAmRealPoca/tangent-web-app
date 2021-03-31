@@ -2,7 +2,7 @@
   <MainContent>
     <main>
       <div class="py-0">
-        <nav aria-label="breadcrumb">
+        <!-- <nav aria-label="breadcrumb">
           <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
             <li class="breadcrumb-item">
               <a href="#"><span class="fas fa-home"></span></a>
@@ -13,7 +13,7 @@
               {{ companyDetail.companyName }}
             </li>
           </ol>
-        </nav>
+        </nav> -->
         <div class="d-flex justify-content-between w-100 flex-wrap">
           <div class="mb-3 mb-lg-0">
             <!-- <h1 class="h4">Create major</h1>
@@ -196,7 +196,8 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
+import { mapGetters, mapActions } from "vuex";
 import MainContent from "@/components/MainContent.vue";
 import { useRouter, useRoute } from "vue-router";
 import * as SchoolServices from "@/util/service/schoolService";
@@ -209,7 +210,7 @@ export default {
       { context: "Job Post", status: "active" },
       { context: "Unused Tab", status: "unactive" },
     ];
-
+    var companyDetail = ref({});
     var jobItems = [
       // {
       //   jobTitle: "Technical Leader",
@@ -243,44 +244,72 @@ export default {
       // },
     ];
     var hover = false;
-    return { navItems, jobItems, hover };
+    return { navItems, jobItems, hover, companyDetail };
+  },
+  mounted() {
+    this.initBreadCrumb();
+  },
+  computed: {
+    ...mapGetters(["getBreadCrumb"]),
   },
   setup() {
     const router = useRouter();
-    const route = useRoute();
-    const companyIdFromRoute = Number(route.params.companyId);
-    const companyDetail = ref({});
+    // const route = useRoute();
+    // const companyIdFromRoute = Number(route.params.companyId);
+    // const companyDetail = ref({});
 
     const handleClick = (url) => {
       router.push(url);
     };
 
-    const fetchCompanyDetails = async (companyId) => {
-      companyDetail.value = await SchoolServices.getCompanyDetailsAsSchool(
-        companyId
-      );
-      // SchoolServices.getListOfCompany(2)
-      //   .then((res) => {
-      //     companyDetail.value = res;
-      //   })
-      //   .catch((er) => {
-      //     console.log("---------fetch-list-company---------", er);
-      //   });
-    };
+    // const fetchCompanyDetails = async (companyId) => {
+    //   this.companyDetail.value = await SchoolServices.getCompanyDetailsAsSchool(
+    //     companyId
+    //   );
+    //   console.log(this.companyDetail.value);
+    //   // SchoolServices.getListOfCompany(2)
+    //   //   .then((res) => {
+    //   //     companyDetail.value = res;
+    //   //   })
+    //   //   .catch((er) => {
+    //   //     console.log("---------fetch-list-company---------", er);
+    //   //   });
+    // };
 
-    onMounted(() => {
-      fetchCompanyDetails(companyIdFromRoute);
-    });
+    // onMounted(() => {
+    //   fetchCompanyDetails(companyIdFromRoute);
+    // });
 
     return {
-      companyDetail,
       handleClick,
-      fetchCompanyDetails,
     };
   },
   methods: {
+    ...mapActions({ setBreadCrumb: "setBreadCrumb" }),
     handleDelete: function(index) {
       this.jobItems.splice(index, 1);
+    },
+    initBreadCrumb() {
+      this.setBreadCrumb("");
+      let pathArray = useRoute().path.split("/");
+      pathArray.shift();
+      // xử lý startCase
+      pathArray.forEach((item, index) => {
+        pathArray[index] = item[0].toUpperCase() + item.slice(1);
+      });
+
+      console.log("pathArray", pathArray);
+      SchoolServices.getCompanyDetailsAsSchool(parseInt(pathArray[2]))
+        .then((data) => {
+          this.companyDetail = data;
+          pathArray[2] = data.companyName;
+          // lưu thành object: {name: "", href: {}}
+          this.setBreadCrumb(pathArray);
+        })
+        .catch(() => {
+          // window.location.href = "http://localhost:8080/404.html";
+          // router.push("");
+        });
     },
   },
 };

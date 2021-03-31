@@ -1,10 +1,10 @@
-import { createStore,createLogger } from "vuex";
+import { createStore, createLogger } from "vuex";
 import mutations from "./mutation";
 import getters from "./getter";
 import actions from "./action";
 import createPersistedState from "vuex-persistedstate";
 
- const store = createStore({
+const store = createStore({
   state() {
     return {
       count: 0,
@@ -14,11 +14,12 @@ import createPersistedState from "vuex-persistedstate";
       boothInfo: null,
       listOfSub: [],
       newCoverLetter: null,
+      breadcrumbsData: []
     };
   },
   mutations,
   getters,
   actions,
-  plugins: [createLogger(),createPersistedState()]
+  plugins: [createLogger(), createPersistedState()]
 });
 export default store;

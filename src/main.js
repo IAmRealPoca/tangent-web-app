@@ -58,6 +58,6 @@ app.use(CKEditor);
 
 app.use(router);
 
-sync(store,router);
+sync(store, router);
 
 app.mount("#app");
