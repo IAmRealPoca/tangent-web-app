@@ -57,6 +57,7 @@ import PDF from "@/components/PDFDocument.vue";
 import EmployeeDashboard from '@/components/DashboardComponent/EmployeeDashboard.vue';
 import AdminDashboard from '@/components/DashboardComponent/AdminDashboard.vue';
 import AdminAccountList from "@/views/admin/AdminAccountList.vue";
+import AdminEventList from "@/views/admin/AdminEventList.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -86,6 +87,24 @@ const routes = [
     path: "/admin/dashboard",
     name: "AdminDashboard",
     component: AdminDashboard,
+    meta: {
+      requiresAuth: true,
+      role: AdminRole,
+    },
+  },
+  {
+    path: "/admin/account",
+    name: "AdminAccountList",
+    component: AdminAccountList,
+    meta: {
+      requiresAuth: true,
+      role: AdminRole,
+    },
+  },
+  {
+    path: "/admin/event",
+    name: "AdminEventList",
+    component: AdminEventList,
     meta: {
       requiresAuth: true,
       role: AdminRole,
@@ -438,15 +457,6 @@ const routes = [
     },
   },
   {
-    path: "/admin",
-    name: "AdminAccountList",
-    component: AdminAccountList,
-    meta: {
-      requiresAuth: true,
-      role: AdminRole,
-    },
-  },
-  {
     path: "/pres",
     name: "EmpPresen",
     component: EmployerPresentation,
@@ -518,11 +528,11 @@ router.beforeEach((to, from, next) => {
         }
       }
     }
-  } else if (to.matched.some(record => record.meta.onlyGuest)){
+  } else if (to.matched.some(record => record.meta.onlyGuest)) {
     if (sessionStorage.getItem("token") === null) {
       next();
     } else {
-      next({name: "EmployeeDashboard"})
+      next({ name: "EmployeeDashboard" })
     }
   } else {
     next();

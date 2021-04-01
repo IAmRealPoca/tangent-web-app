@@ -6,8 +6,21 @@ const adminService = () => {
   const getAccounts = () => {
     return adminRepo.getAccounts();
   };
-  
-  return { getAccounts };
+  const getEvents = () => {
+    return adminRepo.getEvents();
+  };
+  const approveEvent = () => {
+    return adminRepo.approveEvent();
+  };
+  const rejectEvent = () => {
+    return adminRepo.rejectEvent();
+  }
+  return {
+    getAccounts,
+    getEvents,
+    approveEvent,
+    rejectEvent
+  };
 };
 
 export { adminService as useAdminService };
