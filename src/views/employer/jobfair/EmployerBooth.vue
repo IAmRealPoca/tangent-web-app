@@ -24,7 +24,7 @@
         </div>
       </div>
       <!-- End Test Only -->
-      <div v-if="data && data.session">
+      <!-- <div v-if="data && data.session">
         <employer-presentation
           :stream-manager="data.mainStreamManager"
           :data="propsData"
@@ -32,7 +32,7 @@
           @updateMainStream="handleUpdateMainStream"
           @endCallEvent="handleEndCallEvent"
         />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -228,10 +228,10 @@ export default {
       router.back();
     };
 
-    onMounted(async () => {
-      await getSessionId();
-      joinSession();
-    });
+    // onMounted(async () => {
+    //   await getSessionId();
+    //   joinSession();
+    // });
 
     return {
       data,

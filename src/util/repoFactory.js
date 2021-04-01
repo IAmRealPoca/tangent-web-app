@@ -12,6 +12,7 @@ import adminRepo from "./repository/adminRepo";
 
 import employeeRepo from "./repository/employeeRepo";
 import videoRepo from "./repository/videoRepo";
+import interviewRepo from "./repository/interviewRepo";
 
 const repositories = {
     "authRepo": authRepo,
@@ -27,6 +28,7 @@ const repositories = {
     "majorRepo": majorRepo,
     "videoRepo": videoRepo,
     "adminRepo": adminRepo,
+    "interviewRepo": interviewRepo,
 }
 export default {
     get: (name) => repositories[name]

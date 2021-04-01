@@ -15,7 +15,7 @@
               class="sidebar-toggle me-3 btn btn-icon-only btn-lg btn-circle d-none d-md-inline-block"
             >
               <span class="fas fa-bars"></span>
-            </button> -->
+            </button>
           </div>
           <div class="d-flex" v-else>
             <a href="#" @click.prevent="backPrevious"
