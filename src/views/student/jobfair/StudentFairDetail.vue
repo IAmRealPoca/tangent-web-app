@@ -77,34 +77,7 @@
         <!-- End of Modal Content -->
         <!-- The end of Breadcums -->
         <div class="row">
-          <div class="col-12 col-lg-3">
-            <div class="card border-light components-section-mb4">
-              <div class="card shadow-sm mb-4">
-                <div class="card-header border-bottom border-gray-300">
-                  <h2 class="h5 mb-0">Events</h2>
-                </div>
-                <div class="card-body">
-                  <div class="row align-items-center border-gray-300 pb-4 mb-4">
-                    <div class="col-auto">
-                      <div class="calendar d-flex">
-                        <span class="calendar-month">Aug</span
-                        ><span class="calendar-day">40</span>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <a href="#"
-                        ><h3 class="h5">{{ fairDetailRef.jobFairName }}</h3></a
-                      >
-                      <div class="small fw-bold mt-1">
-                        {{ fairDetailRef.startDate }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-9">
+          <div class="col-12">
             <div class="card border-light shadow-sm components-section mb-4">
               <div class="card-body">
                 <div v-if="fairDetailRef && boothsLength.length" class="row">

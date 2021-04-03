@@ -449,10 +449,10 @@ const routes = [
     path: "/pres",
     name: "EmpPresen",
     component: EmployerPresentation,
-    meta: {
-      requiresAuth: true,
-      role: EmployeeRole,
-    },
+    // meta: {
+    //   requiresAuth: true,
+    //   role: EmployeeRole,
+    // },
   },
   
   

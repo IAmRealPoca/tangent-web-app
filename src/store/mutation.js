@@ -17,6 +17,9 @@ export default {
   getBoothInfo(state, boothInfo) {
     state.boothInfo = boothInfo;
   },
+  getboothToken(state,boothToken){
+    state.boothToken = boothToken;
+  },
   getSub(state, sub) {
     state.listOfSub = sub;
   },

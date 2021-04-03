@@ -79,7 +79,9 @@ export default {
     const store = useStore();
 
     const propsData = ref({});
+
     const userInfo = computed(() => store.getters.getUser);
+
     const question = ref({});
 
     const boothIdFromRoute = Number(route.params.boothId);
@@ -230,7 +232,7 @@ export default {
 
     onMounted(async () => {
       await getSessionId();
-      joinSession();
+      // joinSession();
     });
 
     return {
