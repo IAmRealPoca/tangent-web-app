@@ -19,6 +19,7 @@ import EmployerApplicantDashboard from "@/views/employer/applicantfunctions/Empl
 import EmployerViewFairList from "@/views/employer/jobfair/EmployerViewFairList.vue";
 import EmployerFairDetail from "@/views/employer/jobfair/EmployerFairDetail.vue";
 import EmployerBooth from "@/views/employer/jobfair/EmployerBooth.vue";
+import EmployerInterview from "@/views/employer/jobfair/EmployerInterview";
 //Question related
 import EmployerQuestionManagementMain from "@/views/employer/questionfunctions/EmployerQuestionManagementMain.vue";
 
@@ -219,6 +220,15 @@ const routes = [
     path: "/employer/jobfair",
     name: "EmployerViewFairList",
     component: EmployerViewFairList,
+    meta: {
+      requiresAuth: true,
+      role: EmployerRole,
+    },
+  },
+  {
+    path: "/employer/jobfair/interview",
+    name: "EmployerInterview",
+    component: EmployerInterview,
     meta: {
       requiresAuth: true,
       role: EmployerRole,
