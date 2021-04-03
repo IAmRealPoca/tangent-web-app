@@ -19,7 +19,7 @@ import EmployerApplicantDashboard from "@/views/employer/applicantfunctions/Empl
 import EmployerViewFairList from "@/views/employer/jobfair/EmployerViewFairList.vue";
 import EmployerFairDetail from "@/views/employer/jobfair/EmployerFairDetail.vue";
 import EmployerBooth from "@/views/employer/jobfair/EmployerBooth.vue";
-import EmployerInterview from "@/views/employer/jobfair/EmployerInterview";
+import EmployerInterview from "@/views/employer/jobfair/interviews/EmployerInterview";
 //Question related
 import EmployerQuestionManagementMain from "@/views/employer/questionfunctions/EmployerQuestionManagementMain.vue";
 
