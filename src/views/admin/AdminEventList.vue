@@ -133,7 +133,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr v-for="item in dumbData" :key="item">
                   <td>
                     <div class="form-check dashboard-check">
                       <input
@@ -173,18 +173,21 @@
                         </div>
                       </div>
                     </a> -->
+                    <span>
+                      {{ item.eventName }}
+                    </span>
                   </td>
                   <td>
                     <span class="fw-normal">
-                      <!-- {{ formatDate(account.created) }} -->
+                      {{ formatDate(item.created) }}
                     </span>
                   </td>
-                  <td></td>
+                  <td>{{ item.from }}</td>
                   <td>
                     <div class="ms-sm-0">
-                      <!-- <span :class="account.statusClass">
-                        {{ account.statusString }}
-                      </span> -->
+                      <span>
+                        {{ item.status }}
+                      </span>
                     </div>
                   </td>
                   <td>
@@ -262,12 +265,17 @@ export default {
         {
           eventId: "01",
           eventName: "Job Fair",
-          created: "",
+          created: "2009-06-15T13:45:30",
           from: "FPT University",
           status: "",
         },
       ],
     };
+  },
+  methods: {
+    formatDate(time) {
+      return new Date(time).toLocaleString();
+    },
   },
 };
 </script>
