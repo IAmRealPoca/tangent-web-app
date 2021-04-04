@@ -63,7 +63,8 @@
                   </div>
 
                   <div class="mb-3">
-                    <label>Start Time</label>
+                    <label>Start Time</label><br>
+                    <label class="text-gray-500">Your availability time</label>
                     <div class="mb-2 input-group">
                       <div class="input-group">
                         <div class="mb-3">
@@ -78,15 +79,6 @@
                               name="date"
                             >
                             </flat-pickr>
-                            <!-- <input
-                                  data-datepicker=""
-                                  class="form-control"
-                                  id="dateEnd"
-                                  type="text"
-                                  placeholder="dd/mm/yyyy"
-                                  v-model="jobFair.startDate"
-                                  required
-                                /> -->
                           </div>
                         </div>
                       </div>
@@ -121,6 +113,14 @@
                   <div class="mb-3">
                     <label>Delay between interview</label>
                     <input type="number" min="1" class="form-control" />
+                  </div>
+                  <div class="mb-3">
+                    <label>Buffer start</label>
+                    <input type="number" min="1" class="form-control" placeholder="minutes"/>
+                  </div>
+                  <div class="mb-3">
+                    <label>Buffer end</label>
+                    <input type="number" min="1" class="form-control" placeholder="minutes"/>
                   </div>
                   <div class="mb-3">
                     <button class="btn btn-dark">Confirm</button>

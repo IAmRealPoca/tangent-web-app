@@ -212,7 +212,7 @@ export default {
         const maxCount = questions[i].questionTime;//max time count, reset each question loop
         remainingTimerCount.value = maxCount; //variable to display remaining time in number
 
-        await delayer(3*1000); //wait 5 secs before start question count down
+        await delayer(3*1000); //wait 3 secs before start question count down
         const questionCounterInterval = setInterval(() => {
           const percentCalc = (currCount / maxCount) * 100;
           remainingTimer.value = "width: " + percentCalc + "%";
