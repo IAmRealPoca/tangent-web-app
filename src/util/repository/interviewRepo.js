@@ -12,7 +12,7 @@ export default {
   getInterviewsById(interviewId) {
     return http.get(`${path}/${interviewId}`);
   },
-  createInterviews(payload) {
+  createInterview(payload) {
     return http.post(`${path}`, payload);
   },
   

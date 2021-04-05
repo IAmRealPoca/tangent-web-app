@@ -22,7 +22,7 @@
                 <div class="">
                   <div class="mb-3">
                     <label>Name</label>
-                    <input type="text" class="form-control"/>
+                    <input type="text" class="form-control" v-model="newInterviewData.interviewName"/>
                   </div>
                   <div class="mb-3">
                     <label>When can student book interview?</label>
@@ -44,14 +44,16 @@
                       </label>
                     </div>
 
-                    <div class="input-group" >
+                    <div class="input-group">
                       <div class="mb-3">
                         <div class="input-group">
                           <span class="input-group-text">
                             <span class="far fa-calendar-alt"> </span>
                           </span>
                           <flat-pickr
-                            :disabled="availableTimeModeSelected !== 'onlySelectedDate'"
+                            :disabled="
+                              availableTimeModeSelected !== 'onlySelectedDate'
+                            "
                             :config="studentBookTimeConfig"
                             class="form-control"
                             placeholder="Select date"
@@ -63,7 +65,7 @@
                   </div>
 
                   <div class="mb-3">
-                    <label>Start Time</label><br>
+                    <label>Start Time</label><br />
                     <label class="text-gray-500">Your availability time</label>
                     <div class="mb-2 input-group">
                       <div class="input-group">
@@ -116,11 +118,21 @@
                   </div>
                   <div class="mb-3">
                     <label>Buffer start</label>
-                    <input type="number" min="1" class="form-control" placeholder="minutes"/>
+                    <input
+                      type="number"
+                      min="1"
+                      class="form-control"
+                      placeholder="minutes"
+                    />
                   </div>
                   <div class="mb-3">
                     <label>Buffer end</label>
-                    <input type="number" min="1" class="form-control" placeholder="minutes"/>
+                    <input
+                      type="number"
+                      min="1"
+                      class="form-control"
+                      placeholder="minutes"
+                    />
                   </div>
                   <div class="mb-3">
                     <button class="btn btn-dark">Confirm</button>
@@ -144,6 +156,8 @@ import "flatpickr/dist/themes/dark.css";
 import { useRoute } from "vue-router";
 import MainContent from "@/components/MainContent.vue";
 import { useInterviewService } from "@/util/service/interviewService.js";
+import { useJobFairService } from "@/util/service/jobFairService.js";
+import { useBoothService } from "@/util/service/boothService.js";
 
 export default {
   name: "EmployerInterview",
@@ -153,6 +167,44 @@ export default {
   },
   setup() {
     const route = useRoute();
+    const jobFairService = useJobFairService();
+    const interviewService = useInterviewService();
+    const boothService = useBoothService();
+    const jobFairDetail = ref({});
+    const boothDetail = ref({});
+    const fetchCurrentJobFairAndBooth = async () => {
+      jobFairDetail.value = await jobFairService.getFair(
+        Number(route.params.jobFairId)
+      );
+      boothDetail.value = await boothService.getBoothById(
+        Number(route.params.boothId)
+      );
+    };
+
+    const newInterviewData = ref({});
+    const handleCreateInterview = async () => {
+      const payload = {
+        interviewName: newInterviewData.interviewName,
+        boothId: Number(route.params.boothId),
+        availableTimes: [
+          {
+            startTime: "2021-04-05T07:00:00.000Z",
+            endTime: "2021-04-05T18:00:00.000Z",
+          },
+          {
+            startTime: "2021-04-06T10:00:00.000Z",
+            endTime: "2021-04-06T12:00:00.000Z",
+          },
+        ],
+        interviewDuration: 15,
+        bufferStart: 2,
+        bufferEnd: 5,
+        delayBetweenInterview: 5,
+      };
+
+      interviewService.createInterview();
+    };
+
     const flatpickrConfig = {
       wrap: true,
 
@@ -172,8 +224,8 @@ export default {
       mode: "multiple",
       enable: [
         {
-          from: "2021-04-04",
-          to: "2021-04-06",
+          from: jobFairDetail.value.startDate,
+          to: jobFairDetail.value.endDate,
         },
       ],
     };
@@ -191,12 +243,12 @@ export default {
       },
     ];
     const availableTimeModeSelected = ref();
-    setInterval(() => {
-      console.log(availableTimeModeSelected.value);
-    }, 1000);
+    // setInterval(() => {
+    //   console.log(dateTimeTest.value);
+    // }, 1000);
 
     const interviewList = ref([]);
-    const interviewService = useInterviewService();
+
     const fetchInterviews = async () => {
       interviewList.value = await interviewService.getInterviews();
     };
@@ -212,6 +264,7 @@ export default {
       flatpickrConfig,
       availableTimeMode,
       availableTimeModeSelected,
+      newInterviewData,
       dateTimeTest,
     };
   },

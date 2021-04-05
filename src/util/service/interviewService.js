@@ -8,8 +8,13 @@ const interviewService = () => {
     return interviewRepo.getInterviews();
   };
 
+  const createInterview = (payload) => {
+    return interviewRepo.createInterview(payload);
+  }
+
   return {
     getInterviews,
+    createInterview,
   };
 }
 

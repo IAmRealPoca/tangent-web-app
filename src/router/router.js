@@ -226,7 +226,7 @@ const routes = [
     },
   },
   {
-    path: "/employer/jobfair/interview",
+    path: "/employer/jobfair/:jobFairId/:boothId/interview",
     name: "EmployerInterview",
     component: EmployerInterview,
     meta: {
