@@ -16,6 +16,7 @@ const store = createStore({
       boothToken: null,
       listOfSub: [],
       newCoverLetter: null,
+      isBoothNotFound: false,
     };
   },
   mutations,

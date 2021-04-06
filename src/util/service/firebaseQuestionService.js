@@ -1,5 +1,5 @@
 import { questionDB } from "../firebase/firebaseUtil";
-const fireBaseService = () => {
+const firebaseQuestionService = () => {
   /**
    *   Get All value from DB
    * @returns
@@ -15,13 +15,13 @@ const fireBaseService = () => {
   const create = (payload) => {
     return questionDB.push(payload);
   };
-  const upload = (key, payload) => {
+  const update = (key, payload) => {
     return questionDB.child(key).update(payload);
   };
   const del = (key) => {
     return questionDB.child(key).remove();
   };
 
-  return { getAll, create, upload, del };
+  return { getAll, create, upload: update, del };
 };
-export { fireBaseService as useFirebaseService };
+export { firebaseQuestionService as useFirebaseService };

@@ -48,11 +48,15 @@ import StudentCreateCoverLetter from "@/views/student/coverletter/create/Student
 import StudentFairDetail from "@/views/student/jobfair/StudentFairDetail.vue";
 import StudentBooth from "@/views/student/jobfair/StudentBooth.vue";
 import StudentViewFairList from "@/views/student/jobfair/StudentViewFairList.vue";
+// eslint-disable-next-line no-unused-vars
 import StudentRecordCoverLetter from "@/views/student/coverletter/create/StudentRecordCoverLetter.vue";
 
 import LandingPage from "@/views/LandingPage.vue";
 
 import PDF from "@/components/PDFDocument.vue";
+
+import NotFoundComponent from "@/views/error/NotFoundComponent";
+import InternalServiceError from "@/views/error/InternalServiceError";
 
 import EmployeeDashboard from '@/components/DashboardComponent/EmployeeDashboard.vue';
 import AdminDashboard from '@/components/DashboardComponent/AdminDashboard.vue';
@@ -444,6 +448,16 @@ const routes = [
       requiresAuth: true,
       role: EmployeeRole,
     },
+  },
+  {
+    path: "/500",
+    name:"Internal Error",
+    component: InternalServiceError
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name:"Not Found",
+    component: NotFoundComponent
   },
   {
     path: "/pres",

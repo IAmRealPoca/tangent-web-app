@@ -10,6 +10,7 @@
     <!-- <a :href="sasImg" class="btn btn-primary">Download</a> -->
     <a class="btn btn-primary" @click.prevent="incre">Incre</a>
     <a class="btn btn-primary" @click.prevent="loda">Lodas</a>
+    <a class="btn btn-primary" @click.prevent="toast">Vuex Toast</a>
   </div>
 </template>
 
@@ -23,9 +24,9 @@ import {
   AnonymousCredential,
   newPipeline,
 } from "@azure/storage-blob";
-import { ref } from "@vue/reactivity";
-import { onMounted, getCurrentInstance } from "vue";
-import { useStore } from "vuex";
+import {ref} from "@vue/reactivity";
+import {onMounted, getCurrentInstance} from "vue";
+import {useStore} from "vuex";
 import _ from "lodash";
 
 const store = useStore();
@@ -52,7 +53,7 @@ const accountname = "namiv";
 
 // const sasImg = baseImgUrl + sasToken;
 
-const { proxy } = getCurrentInstance();
+const {proxy} = getCurrentInstance();
 // var config = {
 //   method: "get",
 //   url: "https://thongtindoanhnghiep.co/api/city",
@@ -83,28 +84,28 @@ const incre = () => {
 };
 const loda = () => {
   const a = [
-    { id: 1, name: "acd" },
-    { id: 2, name: "abd" },
-    { id: 3, name: "acqwed" },
+    {id: 1, name: "acd"},
+    {id: 2, name: "abd"},
+    {id: 3, name: "acqwed"},
   ];
-  const b = _.find(a, { id: 3 });
+  const b = _.find(a, {id: 3});
   console.log("b :>> ", b);
 };
 
 const registerServiceWorker = () => {
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker
-      .register("/firebase-messaging-sw.js", {
-        scope: "/",
-      })
-      .then(function(reg) {
-        // registration worked
-        console.log("Registration succeeded. Scope is " + reg.scope);
-      })
-      .catch(function(error) {
-        // registration failed
-        console.log("Registration failed with " + error);
-      });
+        .register("/firebase-messaging-sw.js", {
+          scope: "/",
+        })
+        .then(function (reg) {
+          // registration worked
+          console.log("Registration succeeded. Scope is " + reg.scope);
+        })
+        .catch(function (error) {
+          // registration failed
+          console.log("Registration failed with " + error);
+        });
   }
 };
 
@@ -129,6 +130,15 @@ const listFiles = async () => {
     console.log(error.message);
   }
 };
+
+const toast = () => {
+  const payload = {
+    proxy,
+    msg: "Hi from Test",
+    stt: "info"
+  }
+  store.dispatch("toastMsg",payload);
+}
 
 onMounted(() => {
   listFiles();

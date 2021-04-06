@@ -1,6 +1,6 @@
 <template>
   <div class="mx-3">
-    <Header :isBooth="true" />
+    <Header :isBooth="true"/>
     <div class="py-1">
       <div class="d-flex justify-content-between w-100 flex-wrap">
         <div class="mb-3 mb-lg-0">
@@ -16,21 +16,21 @@
         <div class="d-flex justify-content-center">
           <strong class="h1">Loading...</strong>
           <div
-            class="spinner-border ml-auto"
-            style="width: 3rem; height: 3rem;"
-            role="status"
-            aria-hidden="true"
+              class="spinner-border ml-auto"
+              style="width: 3rem; height: 3rem;"
+              role="status"
+              aria-hidden="true"
           ></div>
         </div>
       </div>
       <!-- End Test Only -->
-      <div v-if="data && data.session">
+      <div v-if="data && data.session && isConnected">
         <employer-presentation
-          :stream-manager="data.mainStreamManager"
-          :data="propsData"
-          :question="question"
-          @updateMainStream="handleUpdateMainStream"
-          @endCallEvent="handleEndCallEvent"
+            :stream-manager="data.mainStreamManager"
+            :data="propsData"
+            :question="question"
+            @updateMainStream="handleUpdateMainStream"
+            @endCallEvent="handleEndCallEvent"
         />
       </div>
     </div>
@@ -38,29 +38,26 @@
 </template>
 
 <script>
-import MainContent from "@/components/MainContent.vue";
 import Header from "@/components/Header.vue";
 
-import { OpenVidu } from "openvidu-browser";
+import {OpenVidu} from "openvidu-browser";
 
-import { useVCService } from "@/util/service/videoChatService";
-import { useBoothService } from "@/util/service/boothService.js";
+import {useVCService} from "@/util/service/videoChatService";
+import {useBoothService} from "@/util/service/boothService.js";
 
-import VideoPlayer from "@/components/ViduComponent/VideoPlayer.vue";
 import EmployerPresentation from "@/components/ViduComponent/EmployerPresentation.vue";
 
-import { ref } from "@vue/reactivity";
-import { useRoute, useRouter } from "vue-router";
-import { computed, onMounted } from "@vue/runtime-core";
+import {ref} from "@vue/reactivity";
+import {useRoute, useRouter} from "vue-router";
+import {computed, onMounted} from "@vue/runtime-core";
 
-import { useStore } from "vuex";
+import {useStore} from "vuex";
+import {getCurrentInstance} from "vue";
 
 export default {
   name: "EmployerCreateBooth",
   components: {
-    MainContent,
     Header,
-    VideoPlayer,
     EmployerPresentation,
   },
   setup() {
@@ -70,13 +67,15 @@ export default {
       mainStreamManager: undefined,
       publisher: undefined,
       subscribers: [],
-      mySessionId: "NyamSed",
-      myUserName: "Participant" + Math.floor(Math.random() * 100),
+      mySessionId: "",
+      myUserName: "",
     });
     const route = useRoute();
     const router = useRouter();
     const fairServive = useBoothService();
     const store = useStore();
+    const {proxy} = getCurrentInstance();
+
 
     const propsData = ref({});
 
@@ -84,11 +83,16 @@ export default {
 
     const question = ref({});
 
+    const isConnected = ref(false);
+
     const boothIdFromRoute = Number(route.params.boothId);
 
-    const getSessionId = async () => {
-      const resp = await fairServive.getBoothById(boothIdFromRoute);
-      data.value.mySessionId = resp.boothSessionUrl;
+    const getSessionId = () => {
+      // if (isNaN(boothIdFromRoute)){
+      //   router.push("/404");
+      // }
+      // const resp = await fairServive.getBoothById(boothIdFromRoute);
+      // data.value.mySessionId = resp.boothSessionUrl;
       // const info = await getCurrEmployerInfo();
       data.value.myUserName = userInfo.name;
     };
@@ -103,14 +107,14 @@ export default {
       // --- Specify the actions when events take place in the session ---
 
       // On every new Stream received...
-      data.value.session.on("streamCreated", ({ stream }) => {
-        console.log("Tao la steram: ", stream);
+      data.value.session.on("streamCreated", ({stream}) => {
+        console.log("Tao la stream: ", stream);
         const subscriber = data.value.session.subscribe(stream);
         data.value.subscribers.push(subscriber);
       });
 
       // On every Stream destroyed...
-      data.value.session.on("streamDestroyed", ({ stream }) => {
+      data.value.session.on("streamDestroyed", ({stream}) => {
         const index = data.value.subscribers.indexOf(stream.streamManager, 0);
         if (index >= 0) {
           data.value.subscribers.splice(index, 1);
@@ -118,8 +122,8 @@ export default {
       });
       data.value.session.on("connectionCreated", (event) => {
         if (
-          event.connection.connectionId ===
-          data.value.session.connection.connectionId
+            event.connection.connectionId ===
+            data.value.session.connection.connectionId
         ) {
           console.warn("YOUR OWN CONNECTION CREATED!");
         } else {
@@ -131,8 +135,8 @@ export default {
       });
       data.value.session.on("connectionDestroyed", (event) => {
         if (
-          !event.connection.connectionId ===
-          data.value.session.connection.connectionId
+            !event.connection.connectionId ===
+            data.value.session.connection.connectionId
         )
           console.warn("OTHER USER'S CONNECTION DESTROYED!");
         console.warn("data is sum event when connectionDestroyed: ", event);
@@ -149,10 +153,31 @@ export default {
 
       // 'getToken' method is simulating what your server-side should do.
       // 'token' parameter should be retrieved and returned by your own backend
-      const token = await getToken2(data.value.mySessionId);
-      const session = await data.value.session.connect(token, {
-        clientData: userInfo.value,
-      });
+      const token = getToken2();
+
+      if (token.length === 0) {
+        const payload = {
+          proxy,
+          msg: "An error occurred!",
+          stt: "error"
+        }
+        store.dispatch("toastMsg", payload);
+
+        router.back();
+      }
+
+      try {
+        await data.value.session.connect(token, {
+          clientData: userInfo.value,
+        });
+        isConnected.value = true;
+      } catch (e) {
+        if (e.code === 202) {
+          store.commit("getFoundBooth");
+          router.back();
+        }
+        console.warn(e.message);
+      }
 
       console.log("Hi there im in here");
       try {
@@ -180,9 +205,9 @@ export default {
         data.value.session.publish(data.value.publisher);
       } catch (error) {
         console.log(
-          "There was an error connecting to the session:",
-          error.code,
-          error.message
+            "There was an error connecting to the session:",
+            error.code,
+            error.message
         );
       }
 
@@ -214,13 +239,17 @@ export default {
       data.value.mainStreamManager = stream;
     };
 
-    const getToken2 = (sessionId) => {
-      const VCService = useVCService();
-      console.log("sessionId: ", sessionId);
-      const req = {
-        sessionId: sessionId,
-      };
-      return VCService.getToken(req);
+    const getToken2 = () => {
+      const toke = store.state.boothToken;
+      if (toke) {
+        return toke;
+      }
+      // const VCService = useVCService();
+      // console.log("sessionId: ", sessionId);
+      // const req = {
+      //   sessionId: sessionId,
+      // };
+      return "";
     };
     const handleUpdateMainStream = (sub) => {
       updateMainVideoStreamManager(sub);
@@ -231,18 +260,24 @@ export default {
     };
 
     onMounted(async () => {
-      await getSessionId();
-      // joinSession();
+      getSessionId();
+      try {
+        await joinSession();
+      } catch (e) {
+        console.warn("Error when join session: ", e.message);
+
+      }
     });
 
     return {
       data,
-      joinSession,
-      leaveSession,
       propsData,
       userInfo,
       question,
+      isConnected,
 
+      joinSession,
+      leaveSession,
       handleUpdateMainStream,
       handleEndCallEvent,
     };

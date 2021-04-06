@@ -39,6 +39,7 @@
     "sweetalert2": "^10.15.5",
     "vanillajs-datepicker": "^1.1.2",
     "vee-validate": "^4.2.3",
+    "video.js": "^7.11.4",
     "videojs-record": "^4.3.0",
     "vue": "3.0.7",
     "vue-flatpickr-component": "^9.0.3",

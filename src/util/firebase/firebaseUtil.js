@@ -22,4 +22,4 @@ const db = firebase.database();
 
 const questionDB = db.ref("/question");
 
-export { questionDB };
+export { questionDB, db };

@@ -4,7 +4,7 @@
       <main>
         <!-- Breadcums -->
         <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4"
         >
           <div class="d-block mb-4 mb-md-0">
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
@@ -22,37 +22,37 @@
             <div class="h5">Current Booths</div>
           </div>
           <button
-            class="btn btn-danger"
-            data-bs-toggle="modal"
-            data-bs-target="#modal-notification"
+              class="btn btn-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#modal-notification"
           >
             Leave
           </button>
         </div>
         <!-- Modal Content -->
         <div
-          class="modal fade"
-          id="modal-notification"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="modal-notification"
-          aria-hidden="true"
+            class="modal fade"
+            id="modal-notification"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="modal-notification"
+            aria-hidden="true"
         >
           <div
-            class="modal-dialog modal-info modal-dialog-centered"
-            role="document"
+              class="modal-dialog modal-info modal-dialog-centered"
+              role="document"
           >
             <div class="modal-content">
               <div class="modal-body bg-gradient-warning">
                 <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
                 ></button>
                 <div class="py-3 text-center">
                   <span class="modal-icon display-1-lg"
-                    ><i class="far fa-times-circle"></i
+                  ><i class="far fa-times-circle"></i
                   ></span>
                   <h2 class="h4 modal-title my-3">
                     Do you really want to unregister?
@@ -63,13 +63,13 @@
                 </div>
               </div>
               <div
-                class="modal-footer bg-gradient-danger justify-content-center"
+                  class="modal-footer bg-gradient-danger justify-content-center"
               >
                 <button
-                  type="button"
-                  @click="handleDelete"
-                  data-bs-dismiss="modal"
-                  class="btn btn-sm btn-white"
+                    type="button"
+                    @click="handleDelete"
+                    data-bs-dismiss="modal"
+                    class="btn btn-sm btn-white"
                 >
                   Yes I Do!
                 </button>
@@ -113,7 +113,7 @@
                     <div class="row">
                       <div class="col-12 col-lg-6">
                         <div
-                          class="card-body d-flex flex-column justify-content-between h-100"
+                            class="card-body d-flex flex-column justify-content-between h-100"
                         >
                           <div class="h2">{{ boothList.boothName }}</div>
                           <!-- <p
@@ -121,25 +121,25 @@
                             class="text-gray mb-4"
                           ></p> -->
                           <a
-                            class="btn btn-sm btn-secondary"
-                            href="#"
-                            @click.prevent="
+                              class="btn btn-sm btn-secondary"
+                              href="#"
+                              @click.prevent="
                               getToken(
                                 fairDetailRef.jobFairId +
                                   `/` +
                                   boothList.boothId
                               )
                             "
-                            >Go to your booth</a
+                          >Go to your booth</a
                           >
                         </div>
                       </div>
                       <div class="col-12 col-lg-6">
                         <img
-                          :src="boothList.boothThumbnail"
-                          class="w-100"
-                          alt="Thumbnail"
-                          srcset=""
+                            :src="boothList.boothThumbnail"
+                            class="w-100"
+                            alt="Thumbnail"
+                            srcset=""
                         />
                       </div>
                     </div>
@@ -148,9 +148,9 @@
                 <div v-else>
                   <div class="card-body text-center">
                     <a
-                      href="#"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modal-form"
+                        href="#"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal-form"
                     >
                       <span class="fas fa-plus-circle fa-7x"></span>
                     </a>
@@ -160,25 +160,25 @@
                     </div>
                   </div>
                   <div
-                    class="modal fade"
-                    id="modal-form"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-labelledby="modal-form"
-                    aria-hidden="true"
+                      class="modal fade"
+                      id="modal-form"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="modal-form"
+                      aria-hidden="true"
                   >
                     <div
-                      class="modal-dialog modal-dialog-centered"
-                      role="document"
+                        class="modal-dialog modal-dialog-centered"
+                        role="document"
                     >
                       <div class="modal-content">
                         <div class="modal-body p-0">
                           <div class="card border-light p-3 p-lg-4">
                             <button
-                              type="button"
-                              class="btn-close ms-auto"
-                              data-bs-dismiss="modal"
-                              aria-label="Close"
+                                type="button"
+                                class="btn-close ms-auto"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
                             ></button>
                             <div class="card-header border-0 text-center pb-0">
                               <h2 class="h4">Create booth</h2>
@@ -190,32 +190,32 @@
                                   <label for="booth_name">Booth Name</label>
                                   <div class="input-group">
                                     <span
-                                      class="input-group-text"
-                                      id="basic-addon1"
-                                      ><span class="fas fa-signature"></span
+                                        class="input-group-text"
+                                        id="basic-addon1"
+                                    ><span class="fas fa-signature"></span
                                     ></span>
                                     <input
-                                      type="text"
-                                      v-model="boothDetail.name"
-                                      class="form-control"
-                                      placeholder="Your Fantasic Title"
-                                      id="booth_name"
-                                      required
+                                        type="text"
+                                        v-model="boothDetail.name"
+                                        class="form-control"
+                                        placeholder="Your Fantasic Title"
+                                        id="booth_name"
+                                        required
                                     />
                                   </div>
                                 </div>
                                 <!-- End of Form -->
                                 <div class="form-group mb-4">
                                   <label for="booth_name"
-                                    >Booth Thumbnail</label
+                                  >Booth Thumbnail</label
                                   >
                                   <div class="input-group">
                                     <div class="mb-3">
                                       <input
-                                        class="form-control"
-                                        id="booth_thumbnail"
-                                        @change="handleFileUpload"
-                                        type="file"
+                                          class="form-control"
+                                          id="booth_thumbnail"
+                                          @change="handleFileUpload"
+                                          type="file"
                                       />
                                     </div>
                                   </div>
@@ -223,21 +223,21 @@
                                 <!-- Form -->
                                 <div class="form-group">
                                   <div class="form-group mb-4">
-                                    <label for="booth_description"
-                                      >Booth Description</label
-                                    >
+                                    <!--                                    <label for="booth_description"-->
+                                    <!--                                      >Booth Description</label-->
+                                    <!--                                    >-->
                                     <div class="input-group">
-                                      <!-- <textarea
-                                        class="form-control"
-                                        id="booth_description"
-                                        v-model="boothDetail.desc"
-                                        rows="3"
-                                        style="resize: none"
-                                      ></textarea> -->
+                                      <!--                                      <textarea-->
+                                      <!--                                        class="form-control"-->
+                                      <!--                                        id="booth_description"-->
+                                      <!--                                        v-model="boothDetail.desc"-->
+                                      <!--                                        rows="3"-->
+                                      <!--                                        style="resize: none"-->
+                                      <!--                                      ></textarea> -->
                                       <ckeditor
-                                        :editor="editor"
-                                        :config="editorConfig"
-                                        v-model="boothDetail.desc"
+                                          :editor="editor"
+                                          :config="editorConfig"
+                                          v-model="boothDetail.desc"
                                       ></ckeditor>
                                     </div>
                                   </div>
@@ -245,10 +245,10 @@
                                 </div>
                                 <div class="d-grid">
                                   <button
-                                    type="submit"
-                                    @click.prevent="handleCreate"
-                                    data-bs-dismiss="modal"
-                                    class="btn btn-info"
+                                      type="submit"
+                                      @click.prevent="handleCreate"
+                                      data-bs-dismiss="modal"
+                                      class="btn btn-info"
                                   >
                                     Create!
                                   </button>
@@ -270,18 +270,18 @@
                   <div class="h4">Others booths</div>
                   <div v-if="fairDetailRef && boothsLength.length">
                     <div
-                      v-for="(item, index) in fairDetailRef.booths"
-                      :key="index"
-                      class="col-12 col-lg-4 flex-grow-1"
+                        v-for="(item, index) in fairDetailRef.booths"
+                        :key="index"
+                        class="col-12 col-lg-4 flex-grow-1"
                     >
                       <div v-if="item.companyId != comId">
                         <div class="card shadow-sm h-100">
                           <div class="card-header">
                             <a href="#">
                               <img
-                                class="avatar-sm me-2 img-fluid rounded-circle"
-                                src="https://picsum.photos/id/237/200/300"
-                                alt="avatar"
+                                  class="avatar-sm me-2 img-fluid rounded-circle"
+                                  src="https://picsum.photos/id/237/200/300"
+                                  alt="avatar"
                               />
                               {{ item.boothName }}
                             </a>
@@ -289,9 +289,9 @@
                           <div class="card-body">
                             <a href="#">
                               <img
-                                src="@/assets/img/fsoft-tuyen-dung.jpg"
-                                class="card-img-top rounded py-2"
-                                alt="blog image"
+                                  src="@/assets/img/fsoft-tuyen-dung.jpg"
+                                  class="card-img-top rounded py-2"
+                                  alt="blog image"
                               />
                             </a>
                             <h5 class="h5">{{ item.boothName }}</h5>
@@ -300,7 +300,7 @@
                             </h6>
                             <div class="small mb-3">
                               <span class="icon icon-small"
-                                ><span class="far fa-clock"></span
+                              ><span class="far fa-clock"></span
                               ></span>
                               10:30 - 11:00
                             </div>
@@ -328,13 +328,13 @@
 import MainContent from "@/components/MainContent.vue";
 import InlineEditor from "@ckeditor/ckeditor5-build-inline";
 
-import { useBoothService } from "@/util/service/boothService.js";
-import { useJobFairService } from "@/util/service/jobFairService.js";
+import {useBoothService} from "@/util/service/boothService.js";
+import {useJobFairService} from "@/util/service/jobFairService.js";
 
-import { useRouter, useRoute } from "vue-router";
-import { ref, onMounted, getCurrentInstance } from "vue";
-import { useStore } from "vuex";
-import { useVCService } from "@/util/service/videoChatService";
+import {useRouter, useRoute, onBeforeRouteUpdate} from "vue-router";
+import {ref, onMounted, getCurrentInstance, watchEffect} from "vue";
+import {useStore} from "vuex";
+import {useVCService} from "@/util/service/videoChatService";
 
 export default {
   name: "EmployerFairDetail",
@@ -346,7 +346,7 @@ export default {
     const jobFairService = useJobFairService();
     const store = useStore();
 
-    const { proxy } = getCurrentInstance();
+    const {proxy} = getCurrentInstance();
 
     const fairDetailRef = ref({});
     const boothsLength = ref([]);
@@ -389,17 +389,20 @@ export default {
     const router = useRouter();
     const fairIdFromRoute = Number(route.params.jobFairId);
 
+    if (isNaN(fairIdFromRoute))
+      router.push("/404");
+
     const parseJwt = () => {
       let token = sessionStorage.getItem("token");
-      var base64Url = token.split(".")[1];
-      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      var jsonPayload = decodeURIComponent(
-        atob(base64)
-          .split("")
-          .map(function(c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
+      const base64Url = token.split(".")[1];
+      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const jsonPayload = decodeURIComponent(
+          atob(base64)
+              .split("")
+              .map(function (c) {
+                return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+              })
+              .join("")
       );
       let id = JSON.parse(jsonPayload);
       return id.sub;
@@ -419,18 +422,18 @@ export default {
     const fetchBoothList = () => {
       // console.log("jwt: ", comId);
       boothService
-        .getBoothByComId(parseInt(comId))
-        .then((resp) => {
-          console.log("booth from comid list: ", resp);
-          boothList.value = resp;
-        })
-        .catch((e) => {
-          const errCode = e.messages[0].status;
-          console.log("err :>> ", errCode);
-          if (errCode === 404) {
-            boothList.value = null;
-          }
-        });
+          .getBoothByComId(parseInt(comId))
+          .then((resp) => {
+            console.log("booth from comid list: ", resp);
+            boothList.value = resp;
+          })
+          .catch((e) => {
+            const errCode = e.messages[0].status;
+            console.log("err :>> ", errCode);
+            if (errCode === 404) {
+              boothList.value = null;
+            }
+          });
     };
     const handleFileUpload = (evt) => {
       const path = evt.target.value;
@@ -471,16 +474,18 @@ export default {
 
         try {
           const res = await vcService.getToken(req);
+          store.commit("getboothToken", res);
+          router.push({path});
         } catch (e) {
-          if (("error: ", e.messages[0].status == 404)) {
-            proxy.$toast.error("Booth cannot be found", {
-              position: "top",
-            });
+          const payload = {
+            proxy,
+            msg: "Booth cannot be found",
+            stt: "error"
+          }
+          if (("error: ", e.messages[0].status === 404)) {
+            store.dispatch("toastMsg", payload);
           }
         }
-
-        // store.commit("getboothToken", res);
-        // router.push({ path });
       }
     };
 
@@ -490,22 +495,38 @@ export default {
         comId: parseInt(parseJwt()),
       };
       console.log("data :>> ", data);
-      // if somethign for febug
+      // if something for Debug
       jobFairService
-        .unregisterFair(data)
-        .then((resp) => {
-          console.log("resp :>> ", resp);
-          if (resp) router.push("/employer/jobfair/");
-        })
-        .catch((err) => {
-          console.log("err :>> ", err);
-        });
+          .unregisterFair(data)
+          .then((resp) => {
+            console.log("resp :>> ", resp);
+            if (resp) router.push("/employer/jobfair/");
+          })
+          .catch((err) => {
+            console.log("err :>> ", err);
+          });
     };
     onMounted(async () => {
       await fetchJobFairDetail();
 
       fetchBoothList();
     });
+
+    watchEffect(() => {
+      const is404 = store.state.isBoothNotFound;
+      if (is404) {
+        const payload = {
+          proxy,
+          msg: "Cannot Establish Connection. Please try again!",
+          stt: "error",
+          duration: 5500
+        }
+        store.dispatch("toastMsg", payload);
+        store.commit("getboothToken",null);
+        store.commit("getFoundBooth");
+      }
+    })
+
 
     return {
       isCreated,

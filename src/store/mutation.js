@@ -26,4 +26,7 @@ export default {
   newCoverLetter(state, newCoverLetter) {
     state.newCoverLetter = newCoverLetter;
   },
+  getFoundBooth(state){
+    state.isBoothNotFound = !state.isBoothNotFound
+  }
 };

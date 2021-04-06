@@ -17,7 +17,7 @@
               <span class="fas fa-bars"></span>
             </button>
           </div>
-          <div class="d-flex" v-else>
+          <div class="d-flex align-self-center" v-else>
             <a href="#" @click.prevent="backPrevious"
               ><span class="fas fa-arrow-left align-self-center"></span
             ></a>
@@ -142,7 +142,7 @@
         </div>
       </div>
     </nav>
-    <Breadcrumb />
+<!--    <Breadcrumb />-->
   </div>
 </template>
 
