@@ -15,7 +15,7 @@
               class="sidebar-toggle me-3 btn btn-icon-only btn-lg btn-circle d-none d-md-inline-block"
             >
               <span class="fas fa-bars"></span>
-            </button> -->
+            </button>
           </div>
           <div class="d-flex" v-else>
             <a href="#" @click.prevent="backPrevious"
@@ -221,7 +221,7 @@ export default {
     //   );
     const isToggled = ref(false);
     const showNoti = () => {
-      console.log('Something :>> ', notibell.value);
+      console.log("Something :>> ", notibell.value);
       isToggled = !isToggled;
       console.log("isToggled :>> ", isToggled);
     };
@@ -232,7 +232,7 @@ export default {
 
     const backPrevious = () => {
       router.back();
-    }
+    };
 
     const userName = ref({});
 
