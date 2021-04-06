@@ -6,8 +6,8 @@ const http = axiosInstance(axiosBase());
 const path = "/interviews";
 
 export default {
-  getInterviews() {
-    return http.get(`${path}`);
+  getInterviews(boothId) {
+    return http.get(`${path}?boothId=${boothId}`);
   },
   getInterviewsById(interviewId) {
     return http.get(`${path}/${interviewId}`);

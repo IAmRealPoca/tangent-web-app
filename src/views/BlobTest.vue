@@ -27,6 +27,33 @@ import { ref } from "@vue/reactivity";
 import { onMounted, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import _ from "lodash";
+import * as dateFns from "date-fns";
+
+const testDateFns = () => {
+  const date = new Date(2014, 8, 1, 10, 19, 50);
+  console.log("date before add: ", date);
+  const result = dateFns.add(date, {
+    years: 2,
+  });
+  console.log("result: ", result);
+  const startDate = new Date(2021, 4, 8, 7, 0, 0);
+  const endDate = new Date(2021, 4, 8, 18, 0, 0);
+  const resultSub = dateFns.sub(endDate, startDate);
+  let intervalBetween = dateFns.differenceInDays(endDate, startDate) + 1;
+  console.log("resultSub: ", resultSub);
+  console.log("intervalBetween: ", intervalBetween);
+
+
+  const days = [];
+  let loopDate = startDate;
+  while(intervalBetween > 0) {
+    days.push(loopDate);
+    dateFns.addDays(loopDate, 1);
+    intervalBetween -= 1;
+  }
+  console.log("looped days: ", days);
+};
+testDateFns();
 
 const store = useStore();
 
@@ -97,11 +124,11 @@ const registerServiceWorker = () => {
       .register("/firebase-messaging-sw.js", {
         scope: "/",
       })
-      .then(function(reg) {
+      .then(function (reg) {
         // registration worked
         console.log("Registration succeeded. Scope is " + reg.scope);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         // registration failed
         console.log("Registration failed with " + error);
       });

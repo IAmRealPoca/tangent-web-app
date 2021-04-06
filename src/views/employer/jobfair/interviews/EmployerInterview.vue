@@ -22,49 +22,99 @@
                 <div class="">
                   <div class="mb-3">
                     <label>Name</label>
-                    <input type="text" class="form-control" v-model="newInterviewData.interviewName"/>
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="newInterviewData.interviewName"
+                    />
                   </div>
                   <div class="mb-3">
-                    <label>When can student book interview?</label>
-                    <div
-                      class="form-check"
-                      v-for="(mode, index) in availableTimeMode"
-                      :key="index"
-                    >
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="exampleRadios"
-                        :id="mode.id"
-                        :value="mode.id"
-                        v-model="availableTimeModeSelected"
-                      />
-                      <label class="form-check-label" :for="mode.id">
-                        {{ mode.text }}
-                      </label>
+                    <div class="row">
+                      <label>When can student book interview?</label>
+                      <div
+                        class="form-check"
+                        v-for="(mode, index) in availableTimeMode"
+                        :key="index"
+                      >
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="exampleRadios"
+                          :id="mode.id"
+                          :value="mode.id"
+                          v-model="availableTimeModeSelected"
+                        />
+                        <label class="form-check-label" :for="mode.id">
+                          {{ mode.text }}
+                        </label>
+                      </div>
                     </div>
 
-                    <div class="input-group">
-                      <div class="mb-3">
-                        <div class="input-group">
-                          <span class="input-group-text">
-                            <span class="far fa-calendar-alt"> </span>
-                          </span>
-                          <flat-pickr
+                    <div class="row">
+                      <div
+                        v-for="(jobFairDay, index) in jobFairDetail.jobFairDays"
+                        :key="index"
+                        style="display: inline-block"
+                      >
+                        <div class="form-check" style="display: inline-block">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            :value="jobFairDay"
+                            :id="index"
                             :disabled="
                               availableTimeModeSelected !== 'onlySelectedDate'
                             "
-                            :config="studentBookTimeConfig"
-                            class="form-control"
-                            placeholder="Select date"
-                            name="date"
-                          ></flat-pickr>
+                            v-model="selectedAvailableDays"
+                          />
+                          <label class="form-check-label" :for="index">
+                            {{ dateFns.format(jobFairDay, "dd/MM/yyyy") }}
+                            <!-- <div v-if="selectedAvailableDays.days.length > 0">{{ selectedAvailableDays.days }}</div> -->
+                          </label>
+                        </div>
+                        <div style="display: inline-block">
+                          <div
+                            class="input-group"
+                            style="display: inline-block"
+                          >
+                            <div class="mb-3" style="display: inline-block">
+                              <flat-pickr
+                                
+                                :disabled="
+                                  availableTimeModeSelected !==
+                                  'onlySelectedDate'
+                                "
+                                :config="flatpickrChooseTimeConfig"
+                                class="form-control"
+                                placeholder="Start time"
+                                name="time"
+                              ></flat-pickr>
+                            </div>
+                          </div>
+                          <div
+                            class="input-group"
+                            style="display: inline-block"
+                          >
+                            <div class="mb-3" style="display: inline-block">
+                              <flat-pickr
+                                
+                                :disabled="
+                                  availableTimeModeSelected !==
+                                  'onlySelectedDate'
+                                "
+                                :config="flatpickrChooseTimeConfig"
+                                class="form-control"
+                                placeholder="End time"
+                                name="time"
+                              ></flat-pickr>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div class="mb-3">
+                  <!-- <div class="mb-3">
                     <label>Start Time</label><br />
                     <label class="text-gray-500">Your availability time</label>
                     <div class="mb-2 input-group">
@@ -107,14 +157,24 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="mb-3">
                     <label>Duration for each interview</label>
-                    <input type="number" min="1" class="form-control" />
+                    <input
+                      type="number"
+                      min="1"
+                      class="form-control"
+                      v-model="newInterviewData.interviewDuration"
+                    />
                   </div>
                   <div class="mb-3">
                     <label>Delay between interview</label>
-                    <input type="number" min="1" class="form-control" />
+                    <input
+                      type="number"
+                      min="1"
+                      class="form-control"
+                      v-model="newInterviewData.delayBetweenInterview"
+                    />
                   </div>
                   <div class="mb-3">
                     <label>Buffer start</label>
@@ -123,6 +183,7 @@
                       min="1"
                       class="form-control"
                       placeholder="minutes"
+                      v-model="newInterviewData.bufferStart"
                     />
                   </div>
                   <div class="mb-3">
@@ -132,6 +193,7 @@
                       min="1"
                       class="form-control"
                       placeholder="minutes"
+                      v-model="newInterviewData.bufferEnd"
                     />
                   </div>
                   <div class="mb-3">
@@ -153,6 +215,7 @@ import { ref, onMounted } from "vue";
 import flatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import "flatpickr/dist/themes/dark.css";
+import * as dateFns from "date-fns";
 import { useRoute } from "vue-router";
 import MainContent from "@/components/MainContent.vue";
 import { useInterviewService } from "@/util/service/interviewService.js";
@@ -179,7 +242,41 @@ export default {
       boothDetail.value = await boothService.getBoothById(
         Number(route.params.boothId)
       );
+      const startDate = new Date(jobFairDetail.value.startDate);
+      const endDate = new Date(jobFairDetail.value.endDate);
+      let jobFairDurationDays =
+        dateFns.differenceInCalendarDays(endDate, startDate) + 1;
+      let loopDate = startDate;
+      const jobFairDays = [];
+      while (jobFairDurationDays > 0) {
+        jobFairDays.push(loopDate);
+        loopDate = dateFns.addDays(loopDate, 1);
+        jobFairDurationDays -= 1;
+      }
+      jobFairDetail.value = {
+        ...jobFairDetail.value,
+        jobFairDays: jobFairDays,
+      };
     };
+
+    const selectedAvailableDays = ref([]);
+    const selectedAvailableTime = ref([]);
+    const testSelectedDays = () => {
+      const vablrer = selectedAvailableDays.value;
+      for (let i = 0; i < vablrer.length; i++) {
+        console.log(vablrer[i]);
+      }
+
+      const vabler2 = selectedAvailableTime.value;
+      for (let i = 0; i < vabler2.length; i++) {
+        console.log(vabler2[i]);
+      }
+      console.log("are ya printing son?");
+    };
+
+    setInterval(() => {
+      testSelectedDays();
+    }, 1000);
 
     const newInterviewData = ref({});
     const handleCreateInterview = async () => {
@@ -202,12 +299,12 @@ export default {
         delayBetweenInterview: 5,
       };
 
-      interviewService.createInterview();
+      interviewService.createInterview(payload);
     };
 
-    const flatpickrConfig = {
+    const flatpickrChooseTimeConfig = {
       wrap: true,
-
+      allowInput: true,
       altInput: true,
       minDate: Date.parse(new Date().toLocaleDateString()),
       timeFormat: "H:i",
@@ -256,16 +353,23 @@ export default {
 
     onMounted(() => {
       fetchInterviews();
+      fetchCurrentJobFairAndBooth();
     });
 
     return {
       interviewList,
       studentBookTimeConfig,
-      flatpickrConfig,
+      flatpickrChooseTimeConfig,
+      selectedAvailableDays,
+      selectedAvailableTime,
       availableTimeMode,
       availableTimeModeSelected,
       newInterviewData,
       dateTimeTest,
+
+      jobFairDetail,
+
+      dateFns,
     };
   },
 };

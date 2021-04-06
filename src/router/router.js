@@ -20,6 +20,7 @@ import EmployerViewFairList from "@/views/employer/jobfair/EmployerViewFairList.
 import EmployerFairDetail from "@/views/employer/jobfair/EmployerFairDetail.vue";
 import EmployerBooth from "@/views/employer/jobfair/EmployerBooth.vue";
 import EmployerInterview from "@/views/employer/jobfair/interviews/EmployerInterview";
+import EmployerInterviewSlot from "@/views/employer/jobfair/interviews/EmployerInterviewSlot";
 //Question related
 import EmployerQuestionManagementMain from "@/views/employer/questionfunctions/EmployerQuestionManagementMain.vue";
 
@@ -226,9 +227,18 @@ const routes = [
     },
   },
   {
-    path: "/employer/jobfair/:jobFairId/:boothId/interview",
+    path: "/employer/jobfair/:jobFairId/:boothId/interview/create",
     name: "EmployerInterview",
     component: EmployerInterview,
+    meta: {
+      requiresAuth: true,
+      role: EmployerRole,
+    },
+  },
+  {
+    path: "/employer/jobfair/:jobFairId/:boothId/interview",
+    name: "EmployerInterviewSlot",
+    component: EmployerInterviewSlot,
     meta: {
       requiresAuth: true,
       role: EmployerRole,

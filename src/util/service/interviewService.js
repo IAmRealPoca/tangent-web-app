@@ -4,8 +4,8 @@ import qs from "query-string";
 const interviewRepo = repoFactory.get("interviewRepo");
 
 const interviewService = () => {
-  const getInterviews = () => {
-    return interviewRepo.getInterviews();
+  const getInterviews = (boothId) => {
+    return interviewRepo.getInterviews(boothId);
   };
 
   const createInterview = (payload) => {
