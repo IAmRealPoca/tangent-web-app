@@ -10,6 +10,7 @@
     <!-- <a :href="sasImg" class="btn btn-primary">Download</a> -->
     <a class="btn btn-primary" @click.prevent="incre">Incre</a>
     <a class="btn btn-primary" @click.prevent="loda">Lodas</a>
+    <a class="btn btn-primary" @click.prevent="toast">Vuex Toast</a>
   </div>
 </template>
 
@@ -79,7 +80,7 @@ const accountname = "namiv";
 
 // const sasImg = baseImgUrl + sasToken;
 
-const { proxy } = getCurrentInstance();
+const {proxy} = getCurrentInstance();
 // var config = {
 //   method: "get",
 //   url: "https://thongtindoanhnghiep.co/api/city",
@@ -156,6 +157,15 @@ const listFiles = async () => {
     console.log(error.message);
   }
 };
+
+const toast = () => {
+  const payload = {
+    proxy,
+    msg: "Hi from Test",
+    stt: "info"
+  }
+  store.dispatch("toastMsg",payload);
+}
 
 onMounted(() => {
   listFiles();

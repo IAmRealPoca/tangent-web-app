@@ -85,9 +85,9 @@ export default {
     // console.log("user", userToken);
 
     onMounted(() => {
-      schoolService.getListOfSchools().then((resp) => {
-        listOfSchools.value = resp;
-      });
+      // getListOfSchools().then((resp) => {
+      //   listOfSchools.value = resp;
+      // });
       if (userToken) {
         // router.push("/dashboard");
         router.go(0);

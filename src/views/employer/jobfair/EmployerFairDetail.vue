@@ -80,34 +80,7 @@
         <!-- End of Modal Content -->
         <!-- The end of Breadcums -->
         <div class="row">
-          <div class="col-12 col-lg-3">
-            <div class="card border-light components-section-mb4">
-              <div class="card shadow-sm mb-4">
-                <div class="card-header border-bottom border-gray-300">
-                  <h2 class="h5 mb-0">Events</h2>
-                </div>
-                <div class="card-body">
-                  <div class="row align-items-center border-gray-300 pb-4 mb-4">
-                    <div class="col-auto">
-                      <div class="calendar d-flex">
-                        <span class="calendar-month">Aug</span
-                        ><span class="calendar-day">40</span>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <a href="#"
-                      ><h3 class="h5">{{ fairDetailRef.jobFairName }}</h3></a
-                      >
-                      <div class="small fw-bold mt-1">
-                        {{ fairDetailRef.startDate }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-9">
+          <div class="col-12 ">
             <div class="card border-light components-section mb-1">
               <div class="card p-0">
                 <div v-if="isCreated || boothList">
@@ -123,15 +96,15 @@
                             :href="
                               fairDetailRef.jobFairId + `/` + boothList.boothId
                             "
-                          >Go to your booth</a
+                            >Go to your booth</a
                           >
                         </div>
                       </div>
                       <div class="col-12 col-lg-6">
                         <img
-                            :src="boothDetail.thumbnail"
-                            alt="Thumbnail"
-                            srcset=""
+                          :src="boothDetail.thumbnail"
+                          alt="Thumbnail"
+                          srcset=""
                         />
                       </div>
                     </div>
@@ -149,8 +122,13 @@
                           ></p> -->
                           <a
                               class="btn btn-sm btn-secondary"
-                              :href="
-                              fairDetailRef.jobFairId + `/` + boothList.boothId
+                              href="#"
+                              @click.prevent="
+                              getToken(
+                                fairDetailRef.jobFairId +
+                                  `/` +
+                                  boothList.boothId
+                              )
                             "
                           >Go to your booth</a
                           >
@@ -159,6 +137,7 @@
                       <div class="col-12 col-lg-6">
                         <img
                             :src="boothList.boothThumbnail"
+                            class="w-100"
                             alt="Thumbnail"
                             srcset=""
                         />
@@ -244,17 +223,17 @@
                                 <!-- Form -->
                                 <div class="form-group">
                                   <div class="form-group mb-4">
-                                    <label for="booth_description"
-                                    >Booth Description</label
-                                    >
-                                    <div class="input-group" id="booth_description">
-                                      <!-- <textarea
-                                        class="form-control"
-                                        id="booth_description"
-                                        v-model="boothDetail.desc"
-                                        rows="3"
-                                        style="resize: none"
-                                      ></textarea> -->
+                                    <!--                                    <label for="booth_description"-->
+                                    <!--                                      >Booth Description</label-->
+                                    <!--                                    >-->
+                                    <div class="input-group">
+                                      <!--                                      <textarea-->
+                                      <!--                                        class="form-control"-->
+                                      <!--                                        id="booth_description"-->
+                                      <!--                                        v-model="boothDetail.desc"-->
+                                      <!--                                        rows="3"-->
+                                      <!--                                        style="resize: none"-->
+                                      <!--                                      ></textarea> -->
                                       <ckeditor
                                           :editor="editor"
                                           :config="editorConfig"
@@ -322,7 +301,7 @@
                             <a href="#">
                               <img
                                   class="avatar-sm me-2 img-fluid rounded-circle"
-                                  :src="item.boothThumbnail"
+                                  src="https://picsum.photos/id/237/200/300"
                                   alt="avatar"
                               />
                               {{ item.boothName }}
@@ -372,11 +351,12 @@ import InlineEditor from "@ckeditor/ckeditor5-build-inline";
 
 import {useBoothService} from "@/util/service/boothService.js";
 import {useJobFairService} from "@/util/service/jobFairService.js";
-import * as employerService from "@/util/service/employerService.js";
-import {useRouter, useRoute} from "vue-router";
-import {ref, onMounted} from "vue";
 
-import {useStore} from 'vuex';
+import {useRouter, useRoute, onBeforeRouteUpdate} from "vue-router";
+import {ref, onMounted, getCurrentInstance, watchEffect} from "vue";
+import {useStore} from "vuex";
+import * as employerService from "@/util/service/employerService.js";
+import {useVCService} from "@/util/service/videoChatService";
 
 export default {
   name: "EmployerFairDetail",
@@ -387,6 +367,8 @@ export default {
     const boothService = useBoothService();
     const jobFairService = useJobFairService();
     const store = useStore();
+
+    const {proxy} = getCurrentInstance();
 
     const fairDetailRef = ref({});
     const boothsLength = ref([]);
@@ -432,11 +414,14 @@ export default {
     const router = useRouter();
     const fairIdFromRoute = Number(route.params.jobFairId);
 
+    if (isNaN(fairIdFromRoute))
+      router.push("/404");
+
     const parseJwt = () => {
       let token = sessionStorage.getItem("token");
-      var base64Url = token.split(".")[1];
-      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      var jsonPayload = decodeURIComponent(
+      const base64Url = token.split(".")[1];
+      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const jsonPayload = decodeURIComponent(
           atob(base64)
               .split("")
               .map(function (c) {
@@ -508,13 +493,43 @@ export default {
 
       boothService.createBooth(payload).then(() => (isCreated.value = true));
     };
+
+    /**
+     *
+     * @param {String} path to somethign
+     */
+    const getToken = async (path) => {
+      const vcService = useVCService();
+      const boothSession = boothList.value?.boothSessionUrl;
+      if (boothSession) {
+        const req = {
+          sessionId: boothSession,
+        };
+
+        try {
+          const res = await vcService.getToken(req);
+          store.commit("getboothToken", res);
+          router.push({path});
+        } catch (e) {
+          const payload = {
+            proxy,
+            msg: "Booth cannot be found",
+            stt: "error"
+          }
+          if (("error: ", e.messages[0].status === 404)) {
+            store.dispatch("toastMsg", payload);
+          }
+        }
+      }
+    };
+
     const handleDelete = () => {
       const data = {
         id: fairIdFromRoute,
         comId: parseInt(parseJwt()),
       };
       console.log("data :>> ", data);
-      // if somethign for febug
+      // if something for Debug
       jobFairService
           .unregisterFair(data)
           .then((resp) => {
@@ -530,9 +545,24 @@ export default {
 
       fetchBoothList();
       fetchJobPostedToSchool();
-
-
     });
+      
+
+    watchEffect(() => {
+      const is404 = store.state.isBoothNotFound;
+      if (is404) {
+        const payload = {
+          proxy,
+          msg: "Cannot Establish Connection. Please try again!",
+          stt: "error",
+          duration: 5500
+        }
+        store.dispatch("toastMsg", payload);
+        store.commit("getboothToken",null);
+        store.commit("getFoundBooth");
+      }
+    })
+
 
     return {
       isCreated,
@@ -549,6 +579,7 @@ export default {
       handleCreate,
       handleDelete,
       handleFileUpload,
+      getToken,
     };
   },
 };

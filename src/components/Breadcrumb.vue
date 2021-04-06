@@ -13,10 +13,10 @@
             <li
               class="breadcrumb-item active"
               aria-current="page"
-              v-for="item in crumbs"
-              :key="item"
+              v-for="(item, index) in pathArr"
+              :key="index"
             >
-              <a href="">{{ item.path }}</a>
+              <a href="">{{ item }}</a>
             </li>
           </ol>
         </nav>
@@ -25,7 +25,10 @@
   </div>
 </template>
 <script>
+import { computed, onMounted, ref, Ref } from "vue";
+// @ts-check
 import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 
 export default {
   name: "Breadcrumb",
@@ -42,14 +45,16 @@ export default {
           to: breadcrumbArray[idx - 1]
             ? "/" + breadcrumbArray[idx - 1].path + "/" + path
             : "/" + path,
+          // @ts-ignore
           text: pathArray[idx].meta || path,
         });
         return breadcrumbArray;
       }, []);
-      // console.log("breadcrumbs", breadcrumbs);
+      console.log("breadcrumbs", breadcrumbs);
       return breadcrumbs;
     },
   },
+
 };
 </script>
 <style scoped>

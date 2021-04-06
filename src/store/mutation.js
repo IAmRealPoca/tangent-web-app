@@ -17,10 +17,16 @@ export default {
   getBoothInfo(state, boothInfo) {
     state.boothInfo = boothInfo;
   },
+  getboothToken(state,boothToken){
+    state.boothToken = boothToken;
+  },
   getSub(state, sub) {
     state.listOfSub = sub;
   },
   newCoverLetter(state, newCoverLetter) {
     state.newCoverLetter = newCoverLetter;
   },
+  getFoundBooth(state){
+    state.isBoothNotFound = !state.isBoothNotFound
+  }
 };

@@ -26,6 +26,8 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -42,7 +44,6 @@ export default {
 /* Slider */
 /* @import "../src/assets/css/owl.carousel.min.css";
 @import "../src/assets/css/owl.theme.default.min.css"; */
-@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
 </style>
 <style>
 :root {

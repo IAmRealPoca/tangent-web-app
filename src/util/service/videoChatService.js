@@ -2,8 +2,16 @@ import repoFactory from "@/util/repoFactory";
 
 const videoRepo = repoFactory.get("videoChatRepo");
 
-//TO BE CHANGED
+/**
+ * Service for OpenVidu
+ * @returns {{getSub: (function(*=): *), getToken: (function(*=): *)}}
+ */
 const service = () => {
+  /**
+   * Get Token to init call
+   * @param {string} sid
+   * @returns {*}
+   */
   const getToken = (sid) => {
     return videoRepo.post(sid);
   };
