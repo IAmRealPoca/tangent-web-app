@@ -154,6 +154,7 @@ export default {
     const employerRole = "employer";
     const employeeRole = "employee";
     const schoolRole = "school";
+    const adminRole = "admin";
     const menuItems = [
       {
         icon: "",
@@ -165,7 +166,24 @@ export default {
           role: [employerRole],
         },
       },
-
+      {
+        title: "Admin",
+        url: "/admin/account",
+        subItem: [
+          {
+            title: "Event",
+            url: "/admin/event",
+          },
+          {
+            title: "Account",
+            url: "/admin/account",
+          },
+        ],
+        meta: {
+          requiresAuth: true,
+          role: [adminRole],
+        },
+      },
       {
         title: "Jobs",
         url: "/employer/jobs",
@@ -317,6 +335,10 @@ export default {
         } else if (parsedToken.role === "school") {
           menuItemsByRole.value = menuItems.filter(
             (e) => e.meta.requiresAuth === true && e.meta.role[0] === schoolRole
+          );
+        } else if (parsedToken.role === "admin") {
+          menuItemsByRole.value = menuItems.filter(
+            (e) => e.meta.requiresAuth === true && e.meta.role[0] === adminRole
           );
         }
         // console.log("menuItems: ", menuItems);

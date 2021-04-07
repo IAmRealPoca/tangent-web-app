@@ -16,5 +16,13 @@ export default {
   approveCompany(companyId) {
     return http.put(`${path}/company/${companyId}`);
   },
-    
+  getEvent(jobFairId) {
+    return http.get(`${path}/job-fair/${jobFairId}`);
+  },
+  approveEvent(jobFairId) {
+    return http.put(`${path}/job-fair/${jobFairId}`)
+  },
+  rejectEvent(jobFairId) {
+    return http.put(`${path}/job-fair/${jobFairId}`)
+  }
 };

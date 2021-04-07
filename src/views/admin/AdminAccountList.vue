@@ -9,14 +9,9 @@
             <h2 class="h4">Account List</h2>
             <p class="mb-0"></p>
           </div>
-          <!-- <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group ms-2 ms-lg-3">
-              
-            </div>
-          </div> -->
         </div>
-
         <div class="row">
+          <!-- Filter -->
           <div class="col-12 col-xl-3">
             <div class="card border-light shadow-sm components-section mb-4">
               <div class="card-header">
@@ -40,7 +35,7 @@
                   <span class="h5">Account type</span>
                 </div>
                 <div class="row form-check form-switch">
-                  <div class="col">
+                  <!-- <div class="col">
                     <input
                       class="form-check-input"
                       type="checkbox"
@@ -48,7 +43,7 @@
                       id="defaultCheck10"
                     />
                     <label for="defaultCheck10"> Student </label>
-                  </div>
+                  </div> -->
                   <div class="col">
                     <input
                       class="form-check-input"
@@ -72,7 +67,7 @@
                       Company
                     </label>
                   </div>
-                  <div class="col">
+                  <!-- <div class="col">
                     <input
                       class="form-check-input"
                       type="checkbox"
@@ -82,7 +77,7 @@
                     <label class="form-check-label" for="defaultCheck10">
                       Admin
                     </label>
-                  </div>
+                  </div> -->
                 </div>
                 <hr />
                 <div class="row">
@@ -94,7 +89,6 @@
                     <input
                       data-datepicker=""
                       class="form-control"
-                      id="birthday"
                       type="text"
                       placeholder="From..."
                       required
@@ -107,7 +101,6 @@
                     <input
                       data-datepicker=""
                       class="form-control"
-                      id="birthday"
                       type="text"
                       placeholder="To..."
                       required
@@ -117,7 +110,8 @@
               </div>
             </div>
           </div>
-
+          <!-- End of Filter -->
+          <!-- Table -->
           <div class="col-12 col-xl-9">
             <div
               class="card card-body shadow-sm table-wrapper table-responsive"
@@ -127,16 +121,16 @@
                   class="form-select fmxw-150"
                   aria-label="Message select example"
                 >
-                  <option selected="selected">Bulk Action</option>
+                  <option selected="selected">Action</option>
                   <option value="1">Approve selected</option>
                   <option value="2">Reject selected</option>
                 </select>
                 <button class="btn btn-sm px-3 btn-secondary ms-3">
                   Apply
                 </button>
-                <button type="button" class="btn btn-sm btn-success ms-3">
+                <!-- <button type="button" class="btn btn-sm btn-success ms-3">
                   Export
-                </button>
+                </button> -->
               </div>
               <table class="table user-table table-hover align-items-center">
                 <thead>
@@ -147,19 +141,15 @@
                           class="form-check-input"
                           type="checkbox"
                           value=""
-                          id="userCheck55"
                         />
-                        <label
-                          class="form-check-label"
-                          for="userCheck55"
-                        ></label>
+                        <label class="form-check-label"></label>
                       </div>
                     </th>
-                    <th class="border-bottom">Name</th>
+                    <th class="border-bottom">Title</th>
                     <th class="border-bottom">Date Joined</th>
                     <th class="border-bottom">Type</th>
                     <th class="border-bottom">Status</th>
-                    <th class="border-bottom"></th>
+                    <th class="border-bottom">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -170,12 +160,8 @@
                           class="form-check-input"
                           type="checkbox"
                           value=""
-                          id="userCheck1"
                         />
-                        <label
-                          class="form-check-label"
-                          for="userCheck1"
-                        ></label>
+                        <label class="form-check-label"></label>
                       </div>
                     </td>
                     <td>
@@ -216,15 +202,15 @@
                       }}</span>
                     </td>
                     <td>
-                      <span class="fw-normal"
-                        >{{ formatRoleName(account.role.roleId) }}</span
-                      >
+                      <span class="fw-normal">{{
+                        formatRoleName(account.role.roleId)
+                      }}</span>
                     </td>
                     <td>
                       <div class="ms-sm-0">
-                        <span :class="account.statusClass">{{
-                          account.statusString
-                        }}</span>
+                        <span :class="account.statusClass">
+                          {{ account.statusString }}
+                        </span>
                       </div>
                     </td>
                     <td>
@@ -235,27 +221,25 @@
                           aria-haspopup="true"
                           aria-expanded="false"
                         >
-                          <span class="icon icon-sm pt-1"
-                            ><span
-                              class="fas fa-ellipsis-h icon-dark"
-                            ></span> </span
-                          ><span class="sr-only">Toggle Dropdown</span>
+                          <span class="icon icon-sm pt-1">
+                            <span class="fas fa-ellipsis-h icon-dark"></span>
+                          </span>
+                          <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu py-0">
-                          <a class="dropdown-item rounded-bottom" href="#"
-                            ><span class="fas fa-user-shield me-2"></span> Reset
-                            Pass</a
-                          >
-                          <a class="dropdown-item" href="#"
-                            ><span class="fas fa-eye me-2"></span>View
-                            Details</a
-                          >
+                          <a class="dropdown-item rounded-bottom" href="#">
+                            <span class="fas fa-user-shield me-2"></span>
+                            Reset Pass
+                          </a>
+                          <a class="dropdown-item" href="#">
+                            <span class="fas fa-eye me-2"></span> View Details
+                          </a>
                           <a
                             class="dropdown-item text-danger rounded-bottom"
                             href="#"
-                            ><span class="fas fa-user-times me-2"></span
-                            >Suspend</a
                           >
+                            <span class="fas fa-user-times me-2"> </span>Suspend
+                          </a>
                         </div>
                       </div>
                     </td>
@@ -376,5 +360,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

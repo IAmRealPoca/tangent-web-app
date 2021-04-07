@@ -1,35 +1,10 @@
 <template>
   <MainContent>
     <main>
-      <div class="py-0">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-            <li class="breadcrumb-item">
-              <a href="#"><span class="fas fa-home"></span></a>
-            </li>
-            <li class="breadcrumb-item"><a href="#">Tangent</a></li>
-            <li class="breadcrumb-item"><a href="#">Company</a></li>
-            <li class="breadcrumb-item active" aria-current="page">
-              {{ companyDetail.companyName }}
-            </li>
-          </ol>
-        </nav>
-        <div class="d-flex justify-content-between w-100 flex-wrap">
-          <div class="mb-3 mb-lg-0">
-            <!-- <h1 class="h4">Create major</h1>
-              <p class="mb-0">Create new major</p> -->
-          </div>
-          <div>
-            <a href="#" class="btn btn-outline-gray"
-              ><i class="far fa-question-circle me-1"></i>
-            </a>
-          </div>
-        </div>
-      </div>
       <div class="row">
         <div class="container-fluid col-lg-12 mt-2">
           <div class="card shadow-lg mb-3">
-            <div class="card-body d-sm-flex">
+            <div class="row card-body d-sm-flex">
               <!-- Images avatar -->
               <div class="float-left col-sm-2">
                 <img
@@ -39,154 +14,164 @@
               </div>
               <div class="float-right col-sm-10 d-flex flex-column px-4">
                 <!-- Div name of company -->
-                <div class="float-right">
-                  <h2 class="h5 ">{{ companyDetail.companyName }}</h2>
-                </div>
-                <!-- Bounce of information in Row 1 -->
-                <div class="d-sm-flex">
-                  <div class="float-left ">
-                    <!-- Location -->
-                    <i class="fas fa-map-marker-alt me-2" />
-                    <label for="exampleFormControlInput1" class="form-label">
-                      {{ companyDetail.address }}</label
+                <div>
+                  <h3 class="h3 title">
+                    {{ companyDetail.companyName }}
+                  </h3>
+                  <div class="float-right">
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      @click="handleClick(`/school/view-jobs`)"
                     >
+                      See All Jobs
+                    </button>
                   </div>
-                  <!-- Country -->
-                  <div class="float-right px-6">
-                    <i class="fas fa-globe-asia me-2" />
-                    <label for="exampleFormControlInput2" class="form-label"
-                      >Vietnam</label
-                    >
+                </div>
+                <!-- End of company name row -->
+                <!-- Bounce of information in Row 1 -->
+                <div class="d-sm-flex row">
+                  <div class="float-left col">
+                    <!-- Location -->
+                    <label class="form-label">Address: </label>
+                    <span class="mb-1 mt-1">
+                      <!-- {{ companyDetail.address }} -->
+                      09 Lô A ,phường Tân Chánh Hiệp, quận 9, TP. HCM, Việt Nam
+                    </span>
+                  </div>
+                  <div class="float-left col">
+                    <label class="form-label">Phone: </label>
+                    <span>
+                      +84 1566 8995
+                    </span>
                   </div>
                 </div>
                 <!-- Bounce of information in Row 2 -->
-                <div class="d-sm-flex">
-                  <!-- Specialize -->
-                  <div class="float-left">
-                    <i class="fas fa-toolbox me-2" />
-                    <label for="exampleFormControlInput3" class="form-label"
-                      >Outsourcing</label
-                    >
+                <div class="d-sm-flex row">
+                  <div class="float-left col">
+                    <label class="form-label">Industry: </label>
+                    <span>
+                      Outsourcing
+                    </span>
                   </div>
-                  <!-- Scale -->
-                  <div class="justify-content-sm-center px-6">
-                    <i class="fas fa-user-plus me-2" />
-                    <label for="exampleFormControlInput3" class="form-label"
-                      >30000</label
-                    >
+                  <div class="float-left col">
+                    <label class="form-label">Founded: </label>
+                    <span>
+                      2005
+                    </span>
                   </div>
-                  <!-- Salary -->
-                  <div class="float-right mx-6">
-                    <i class="fas fa-hand-holding-usd me-2" />
-                    <label for="exampleFormControlInput3" class="form-label"
-                      >Negotiable</label
-                    >
+                </div>
+                <!-- Bounce of information in Row 3 -->
+                <div class="d-sm-flex row">
+                  <div class="float-left col">
+                    <label class="form-label">Company Size:</label>
+                    <span for="exampleFormControlInput3" class="form-label">
+                      30000 employees
+                    </span>
                   </div>
-                  <!-- Description -->
-                  <div>
-                    {{ companyDetail.description }}
+                  <div class="float-left col">
+                    <label class="form-label">Type:</label>
+                    <span for="exampleFormControlInput3" class="form-label">
+                      Public Company
+                    </span>
+                  </div>
+                </div>
+                <!-- Bounce of information in Row 4 -->
+                <div class="d-sm-flex row">
+                  <div class="float-left col">
+                    <label class="form-label">Website: </label>&nbsp;
+                    <span>
+                      <a href="www.google.com">https://www.google.com</a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End of Card Row -->
+          </div>
+          <!-- Div Details -->
+          <div class="row mb-2">
+            <div class="col-sm-8">
+              <div class="card shadow-lg">
+                <div class="card-header">
+                  <h4 class="h4 title-description">About us</h4>
+                </div>
+                <div class="card-body">
+                  ...
+                </div>
+                <hr />
+                <div class="card-header">
+                  <h4 class="h4 title-description">Specialties</h4>
+                </div>
+                <div class="card-body">
+                  Ads, Business Analyst, Business Intelligence, Fresher React,
+                  Junior DevOps,...
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card border-light shadow-sm">
+                <div
+                  class="card-body d-flex flex-row align-items-center flex-0 border-bottom"
+                >
+                  <h4 class="h4 title-description">Communicate Language</h4>
+                </div>
+                <div class="card-body">
+                  <div class="progress-wrapper">
+                    <div class="progress-info">
+                      <span class="h4 progress-tooltip bg-primary">
+                        English
+                      </span>
+                      <div class="progress-percentage">
+                        <span>70%</span>
+                      </div>
+                    </div>
+                    <div class="progress">
+                      <div
+                        class="progress-bar bg-primary"
+                        role="progressbar"
+                        style="width: 70%;"
+                        aria-valuenow="70"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="progress-wrapper">
+                    <div class="progress-info">
+                      <span class="h4 progress-tooltip bg-success">
+                        Vietnamese
+                      </span>
+                      <div class="progress-percentage">
+                        <span>40%</span>
+                      </div>
+                    </div>
+                    <div class="progress">
+                      <div
+                        class="progress-bar bg-success"
+                        role="progressbar"
+                        style="width: 25%;"
+                        aria-valuenow="25"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- List of Job Posts -->
-          <div class="task-wrapper border bg-white shadow-sm rounded">
-            <div
-              class="card hover-state border-bottom rounded-0 rounded-top py-2"
-              v-for="item in companyDetail.recruitmentPosts"
-              :key="item.postId"
-            >
-              <div
-                class="card-body d-sm-flex align-items-center flex-wrap flex-lg-nowrap py-0"
-              >
-                <!-- Div Form Checker -->
-                <div class="col-1 text-left mb-2 mb-sm-0">
-                  <div class="form-check check-lg inbox-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="ckb1"
-                    />
-                  </div>
+          <!-- End of div Details -->
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="card shadow-lg">
+                <div class="card-header">
+                  <h4 class="h4 title-description">Jobs Post</h4>
                 </div>
-                <!-- End of Div Form Checker -->
-                <!-- Div of Level -->
-                <div class="col-2 text-left mb-2 mb-sm-0">
-                  <div class="ms-sm-0 mb-5">
-                    <span class="badge super-badge badge-lg bg-success">{{
-                      item.level
-                    }}</span>
-                  </div>
+                <div class="card-body">
+                <SchoolViewJobList :listPost="companyDetail.recruitmentPosts"/>
                 </div>
-                <!-- End of Div Level -->
-                <!-- Div of Job Contents -->
-                <div class="col-9 col-lg-7 px-0 mb-4 mb-md-0">
-                  <div
-                    class="mb-2"
-                    @click="handleClick(`/school/job-detail/${item.postId}`)"
-                  >
-                    <h3 class="h5">{{ item.title }}</h3>
-                    <div class="d-block d-sm-flex">
-                      <div class="badge super-badge bg-info">
-                        <h4 class="h6 fw-normal text-white mb-3 mb-sm-0">
-                          <span class="icon icon-small">
-                            <span class="fas fa-hand-holding-usd"></span>
-                          </span>
-                          {{ item.minSalary }} - {{ item.maxSalary }}
-                        </h4>
-                      </div>
-                    </div>
-                    <div class="d-block d-sm-flex">
-                      <h4 class="h6 fw-normal text-gray mb-3 mt-1 mb-sm-0">
-                        <span class="icon icon-small">
-                          <span class="fas fa-code"></span>
-                        </span>
-                        {{ item.jobDescription }}
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-                <!-- Div of Dropdown Button -->
-                <div
-                  class="col-10 col-sm-2 col-lg-2 col-xl-2 d-none d-lg-block d-xl-inline-flex align-items-center ms-lg-auto text-right justify-content-end px-md-0"
-                >
-                  <div class="btn-group ms-md-3">
-                    <button
-                      type="button"
-                      class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-                      data-bs-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      <span class="icon icon-sm">
-                        <span class="fas fa-ellipsis-h icon-dark"></span>
-                      </span>
-                      <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div
-                      class="dropdown-menu dropdown-menu-end py-0"
-                      style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(-170px, 26px);"
-                      data-popper-placement="bottom-end"
-                    >
-                      <a class="dropdown-item rounded-top" href="#">
-                        <span class="fas fa-edit"></span>Edit
-                      </a>
-                      <a
-                        class="dropdown-item text-danger rounded-bottom"
-                        href="#"
-                        @click="handleDelete(jobItems)"
-                      >
-                        <span class="fas fa-trash-alt"></span>
-                        Delete
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <!-- End of Dropdown Button -->
               </div>
-              <!-- End of Job Contents -->
             </div>
           </div>
         </div>
@@ -198,18 +183,14 @@
 <script>
 import { ref, onMounted } from "vue";
 import MainContent from "@/components/MainContent.vue";
+import SchoolViewJobList from "@/views/school/companyfunctions/SchoolViewJobList.vue";
 import { useRouter, useRoute } from "vue-router";
 import * as SchoolServices from "@/util/service/schoolService";
 
 export default {
   name: "SchoolViewCompanyDetail",
-  components: { MainContent },
+  components: { MainContent, SchoolViewJobList },
   data: function() {
-    const navItems = [
-      { context: "Job Post", status: "active" },
-      { context: "Unused Tab", status: "unactive" },
-    ];
-
     var jobItems = [
       // {
       //   jobTitle: "Technical Leader",
@@ -243,14 +224,14 @@ export default {
       // },
     ];
     var hover = false;
-    return { navItems, jobItems, hover };
+    return { jobItems, hover };
   },
   setup() {
     const router = useRouter();
     const route = useRoute();
     const companyIdFromRoute = Number(route.params.companyId);
     const companyDetail = ref({});
-
+    
     const handleClick = (url) => {
       router.push(url);
     };
@@ -287,10 +268,27 @@ export default {
 </script>
 
 <style scoped>
-/* .company-bg-img {
-  background: url("~@/assets/img/profile-cover.jpg");
-} */
-/* .d-flex .align-items-center {
-  display: none !important;
-} */
+.sub-title {
+  font-size: medium;
+  color: black;
+}
+.title {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 700;
+  color: #5f2be3;
+  text-shadow: 1px 2px 2px #aaaaaaa2;
+  float: left;
+}
+.title-description {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 700;
+  color: #2e2e2e;
+  text-shadow: 1px 2px 2px #aaaaaaa2;
+  float: left;
+}
+.btn {
+  float: right;
+}
 </style>
