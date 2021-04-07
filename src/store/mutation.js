@@ -26,6 +26,32 @@ export default {
   newCoverLetter(state, newCoverLetter) {
     state.newCoverLetter = newCoverLetter;
   },
+  getDynamicBreadcrumb(state, payload) {
+    console.log('mutations: getDynamicBreadcrumb');
+    state.breadcrumbsData = payload;
+  },
+  // another methods breadcrumb
+  // set(state, breadcrumbs) {
+  //   state.breadcrumbs = breadcrumbs;
+  // },
+  // push(state, breadcrumb) {
+  //   state.breadcrumbs.push(breadcrumb)
+  // },
+  // pop(state) {
+  //   state.breadcrumbs.pop();
+  // },
+  // replace(state, payload) {
+  //   const index = state.breadcrumbs.findIndex((breadcrumb) => {
+  //     return breadcrumb.text === payload.find;
+  //   });
+
+  //   if (index) {
+  //     state.breadcrumbs.splice(index, 1, payload.replace);
+  //   }
+  // },
+  // empty(state) {
+  //   state.breadcrumbs = [];
+  // }
   getFoundBooth(state){
     state.isBoothNotFound = !state.isBoothNotFound
   }

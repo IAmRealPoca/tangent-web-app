@@ -4,7 +4,6 @@ import getters from "./getter";
 import actions from "./action";
 import createPersistedState from "vuex-persistedstate";
 
-
 const store = createStore({
   state() {
     return {
@@ -16,6 +15,7 @@ const store = createStore({
       boothToken: null,
       listOfSub: [],
       newCoverLetter: null,
+      breadcrumbsData: [],
       isBoothNotFound: false,
     };
   },

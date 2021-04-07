@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- {{ crumbs }} -->
     <div
       class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center"
     >
@@ -28,31 +27,38 @@
 import { computed, onMounted, ref, Ref } from "vue";
 // @ts-check
 import { useRoute } from "vue-router";
-import { useStore } from "vuex";
+import { useStore, mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Breadcrumb",
+  mounted() {
+    console.log("crumbv2", this.crumbV2);
+  },
   computed: {
-    crumbs: function() {
-      let pathArray = useRoute().path.split("/");
-      // console.log("pathArray", pathArray);
-      pathArray.shift();
-      // console.log("pathArrayAfterShift", pathArray);
-
-      let breadcrumbs = pathArray.reduce((breadcrumbArray, path, idx) => {
-        breadcrumbArray.push({
-          path: path,
-          to: breadcrumbArray[idx - 1]
-            ? "/" + breadcrumbArray[idx - 1].path + "/" + path
-            : "/" + path,
-          // @ts-ignore
-          text: pathArray[idx].meta || path,
-        });
-        return breadcrumbArray;
-      }, []);
-      console.log("breadcrumbs", breadcrumbs);
-      return breadcrumbs;
+    ...mapGetters(["getBreadCrumb"]),
+    crumbV2() {
+      const abc = useStore().getters.getBreadCrumb();
+      console.log("Breadcrumb Component: crumbV2", abc);
+      return abc;
     },
+    // crumbs: function() {
+    //   let pathArray = useRoute().path.split("/");
+    //   // console.log("pathArray", pathArray);
+    //   pathArray.shift();
+    //   // console.log("pathArrayAfterShift", pathArray);
+
+    //   let breadcrumbs = pathArray.reduce((breadcrumbArray, path, idx) => {
+    //     breadcrumbArray.push({
+    //       path: path,
+    //       to: breadcrumbArray[idx - 1]
+    //         ? "/" + breadcrumbArray[idx - 1].path + "/" + path
+    //         : "/" + path,
+    //       text: pathArray[idx].meta || path,
+    //     });
+    //     return breadcrumbArray;
+    //   }, []);
+    //   return breadcrumbs;
+    // },
   },
 
 };

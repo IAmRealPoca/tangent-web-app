@@ -44,4 +44,8 @@ export default {
   getUser(state) {
     return JSON.parse(state.userInfo);
   },
+  getBreadCrumb: (state) => () => {
+    console.log('getter: getBreadCrumb');
+    return state.breadcrumbsData;
+  },
 };

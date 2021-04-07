@@ -55,5 +55,9 @@ export default {
                 break;
         }
 
-    }
+    },
+  setBreadCrumb({ commit }, breadCrumb) {
+    console.log('action: setBreadCrumb');
+    commit('getDynamicBreadcrumb', breadCrumb)
+  }
 };
