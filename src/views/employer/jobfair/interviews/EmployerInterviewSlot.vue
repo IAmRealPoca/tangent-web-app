@@ -18,24 +18,30 @@
 
         <div class="row justify-content-between">
           <div class="col-12">
-            <div class="card border-light shadow-sm components-section mb-4">
+            <div >
               <div v-if="interviewInfo.length > 0">
                 <div class="row">
                   <div v-for="interview in interviewInfo" :key="interview.interviewId">
-                    <div class="card-body">
-                      <label>Interview: {{ interview.interviewName }}</label>
-                      <div v-if="interview.dividedInterviewSlots">
-                        <div v-for="(oneDay, indexOneDay) in interview.dividedInterviewSlots.days" :key="indexOneDay"
-                             class="row">
-                          <label>{{ dateFns.format(new Date(oneDay.date), "dd/MM/yyy") }}</label>
-                          <div v-for="(slot, indexOneSlot) in oneDay.oneDaySlots" :key="indexOneSlot" class="col-sm-4 col-xl-3">
-                            <div v-if="slot != null">
-                              <div class="card border-light shadow-sm components-section mt-1 mb-1 px-2">
-                                {{ dateFns.format(new Date(slot.startSlot), "HH:mm") }} -
-                                {{ dateFns.format(new Date(slot.endSlot), "HH:mm") }}
+                    <div class="card border-light shadow-sm components-section mb-4">
+                      <div class="card-body">
+                        <label>Interview: {{ interview.interviewName }}</label>
+                        <div v-if="interview.dividedInterviewSlots">
+                          <div v-for="(oneDay, indexOneDay) in interview.dividedInterviewSlots.days" :key="indexOneDay"
+                               class="row">
+                            <label>{{ dateFns.format(new Date(oneDay.date), "dd/MM/yyy") }}</label>
+                            <div v-for="(slot, indexOneSlot) in oneDay.oneDaySlots" :key="indexOneSlot"
+                                 class="col-sm-4 col-xl-3">
+                              <div v-if="slot != null">
+                                <div class="card border-light shadow-sm components-section mt-1 mb-1 px-2">
+                                  {{ dateFns.format(new Date(slot.startSlot), "HH:mm") }} -
+                                  {{ dateFns.format(new Date(slot.endSlot), "HH:mm") }}
+                                </div>
                               </div>
                             </div>
                           </div>
+                        </div>
+                        <div v-else>
+                          <label>No slot here</label>
                         </div>
                       </div>
                     </div>
@@ -102,7 +108,7 @@ export default {
               oneDaySlots = [];
               oneDaySlots.push(interviewSlots[j]);
             }
-            currInterviewDate = interviewStart; //reset oneDayInterview after each slot to determine if the next slot is still belong to current day or to next day
+            currInterviewDate = interviewStart; //reset currInterviewDate after each slot to determine if the next slot is still belong to current day or to next day
           } //end loop slot
 
           const oneInterview = {
