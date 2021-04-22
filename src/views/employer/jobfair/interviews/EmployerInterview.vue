@@ -242,6 +242,7 @@ export default {
       boothDetail.value = await boothService.getBoothById(
         Number(route.params.boothId)
       );
+      //calculate to display checkbox for each  job fair day, from the start date and end date -> list no of date in between
       const startDate = new Date(jobFairDetail.value.startDate);
       const endDate = new Date(jobFairDetail.value.endDate);
       let jobFairDurationDays =
