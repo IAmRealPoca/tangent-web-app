@@ -123,7 +123,7 @@
                   Support
                 </a>
                 <div role="separator" class="dropdown-divider my-0"></div>
-                <a class="dropdown-item rounded-bottom fw-bold" href="#">
+                <a class="dropdown-item rounded-bottom fw-bold" href="#" @click.prevent="logOut">
                   <span class="fas fa-sign-out-alt text-danger"></span>
                   Logout
                 </a>
@@ -234,19 +234,25 @@ export default {
       router.back();
     };
 
+    //Temp
+    const logOut = () => {
+      store.dispatch("logOut");
+      router.push("/login");
+    }
+
     const userName = ref({});
 
     onMounted(() => {});
 
     return {
-      userName,
-      user,
       contracted,
       showNoti,
-
       handleLoginClick,
       backPrevious,
+      logOut,
 
+      userName,
+      user,
       notification,
       bellShake,
       notibell,

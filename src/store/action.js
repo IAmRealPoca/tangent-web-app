@@ -56,8 +56,15 @@ export default {
         }
 
     },
-  setBreadCrumb({ commit }, breadCrumb) {
-    console.log('action: setBreadCrumb');
-    commit('getDynamicBreadcrumb', breadCrumb)
-  }
+    setBreadCrumb({commit}, breadCrumb) {
+        console.log('action: setBreadCrumb');
+        commit('getDynamicBreadcrumb', breadCrumb)
+    },
+    logOut({commit}) {
+        const tok = sessionStorage.getItem("token");
+        const usrInfo = sessionStorage.getItem("userInfo");
+        if (tok && usrInfo) {
+            sessionStorage.clear()
+        }
+    }
 };
